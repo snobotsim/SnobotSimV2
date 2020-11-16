@@ -1,0 +1,10 @@
+plugins {
+    id 'java'
+}
+
+group 'org.snobotv2'
+version '2021.0.0.0'
+
+repositories {
+    mavenCentral()
+}
