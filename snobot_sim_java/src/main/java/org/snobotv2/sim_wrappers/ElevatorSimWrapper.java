@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.simulation.ElevatorSim;
+import org.snobotv2.interfaces.IDigitalWrapper;
 import org.snobotv2.interfaces.IEncoderWrapper;
 import org.snobotv2.interfaces.IMotorControllerWrapper;
 import org.snobotv2.module_wrappers.wpi.WpiEncoderWrapper;
@@ -12,6 +13,8 @@ import org.snobotv2.module_wrappers.wpi.WpiSpeedControllerWrapper;
 public class ElevatorSimWrapper extends BaseSingleGearboxSimWrapper
 {
     private final ElevatorSim mElevatorSim;
+    private IDigitalWrapper mLowerLimitSwitch;
+    private IDigitalWrapper mUpperLimitSwitch;
 
 
     public ElevatorSimWrapper(ElevatorSim elevatorSim, SpeedController motor, Encoder encoderWrapper)
@@ -23,6 +26,16 @@ public class ElevatorSimWrapper extends BaseSingleGearboxSimWrapper
     {
         super(motor, encoderWrapper);
         mElevatorSim = elevatorSim;
+    }
+
+    public void setLowerLimitSwitch(IDigitalWrapper limitSwitch)
+    {
+        mLowerLimitSwitch = limitSwitch;
+    }
+
+    public void setUpperLimitSwitch(IDigitalWrapper limitSwitch)
+    {
+        mUpperLimitSwitch = limitSwitch;
     }
 
     @Override
@@ -43,6 +56,16 @@ public class ElevatorSimWrapper extends BaseSingleGearboxSimWrapper
 
         mMotor.setCurrent(mElevatorSim.getCurrentDrawAmps());
         mPdpSlots.update(mPdpModule, mElevatorSim.getCurrentDrawAmps());
+
+        if (mLowerLimitSwitch != null)
+        {
+            mLowerLimitSwitch.set(mElevatorSim.hasHitLowerLimit());
+        }
+
+        if (mUpperLimitSwitch != null)
+        {
+            mUpperLimitSwitch.set(mElevatorSim.hasHitUpperLimit());
+        }
     }
 
 }

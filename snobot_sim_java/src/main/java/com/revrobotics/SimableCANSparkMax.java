@@ -25,7 +25,9 @@ public class SimableCANSparkMax extends CANSparkMax
         protected final PIDController mBasicPidController;
         protected final ProfiledPIDController mProfiledPidController;
         protected TrapezoidProfile.Constraints mConstraints;
-        public double mF;
+        private double mF;
+        private double mMaxVelocity;
+        private double mMaxAcceleration;
 
         public PIDFConstants()
         {
@@ -35,7 +37,7 @@ public class SimableCANSparkMax extends CANSparkMax
             mF = 0;
         }
 
-        private void refreshValues(int slotId)
+        private void refreshValues(int slotId, SimablePidController simablePid)
         {
             double kp = CANSparkMaxJNI.c_SparkMax_GetP(m_sparkMax, slotId);
             double ki = CANSparkMaxJNI.c_SparkMax_GetI(m_sparkMax, slotId);
@@ -51,10 +53,13 @@ public class SimableCANSparkMax extends CANSparkMax
             mBasicPidController.setD(kd);
             mProfiledPidController.setD(kd);
 
-            double maxVelocity = CANSparkMaxJNI.c_SparkMax_GetSmartMotionMaxVelocity(m_sparkMax, slotId);
-            double maxAcceleration = CANSparkMaxJNI.c_SparkMax_GetSmartMotionMaxAccel(m_sparkMax, slotId);
-            mConstraints = new TrapezoidProfile.Constraints(maxVelocity, maxAcceleration);
-            mProfiledPidController.setConstraints(mConstraints);
+            if (simablePid != null)
+            {
+                mMaxVelocity = simablePid.mMaxVel[slotId];
+                mMaxAcceleration = simablePid.mMaxAccel[slotId];
+                mConstraints = new TrapezoidProfile.Constraints(mMaxVelocity, mMaxAcceleration);
+                mProfiledPidController.setConstraints(mConstraints);
+            }
         }
 
         public void reset()
@@ -64,10 +69,68 @@ public class SimableCANSparkMax extends CANSparkMax
         }
     }
 
+    private static final class SimablePidController extends CANPIDController
+    {
+        private final double[] mMaxAccel = new double[4];
+        private final double[] mMaxVel = new double[4];
+
+        public SimablePidController(CANSparkMax device)
+        {
+            super(device);
+        }
+
+        // These don't seem to work with the provided sim
+
+        @Override
+        public CANError setSmartMotionMaxAccel(double maxAccel, int slotID)
+        {
+            if (RobotBase.isReal())
+            {
+                return super.setSmartMotionMaxAccel(maxAccel, slotID);
+            }
+
+            mMaxAccel[slotID] = maxAccel;
+            return CANError.kOk;
+        }
+
+        @Override
+        public CANError setSmartMotionMaxVelocity(double maxVel, int slotID)
+        {
+            if (RobotBase.isReal())
+            {
+                return super.setSmartMotionMaxVelocity(maxVel, slotID);
+            }
+
+            mMaxVel[slotID] = maxVel;
+            return CANError.kOk;
+        }
+
+        @Override
+        public double getSmartMotionMaxAccel(int slotID)
+        {
+            if (RobotBase.isReal())
+            {
+                return super.getSmartMotionMaxAccel(slotID);
+            }
+            return mMaxAccel[slotID];
+        }
+
+        @Override
+        public double getSmartMotionMaxVelocity(int slotID)
+        {
+            if (RobotBase.isReal())
+            {
+                return super.getSmartMotionMaxVelocity(slotID);
+            }
+            return mMaxVel[slotID];
+        }
+    }
+
     private ControlType mControlType;
     private double mControlGoal;
     private double mArbFFPercentage;
 
+    private SimablePidController mLatchedPidController;
     private final CANEncoder mEncoder;
     private final SimDouble mAppliedOutputSim;
     private final List<SimableCANSparkMax> mFollowers;
@@ -129,6 +192,17 @@ public class SimableCANSparkMax extends CANSparkMax
     }
 
     @Override
+    public CANPIDController getPIDController()
+    {
+        if (RobotBase.isReal())
+        {
+            return super.getPIDController();
+        }
+        mLatchedPidController = new SimablePidController(this);
+        return mLatchedPidController;
+    }
+
+    @Override
     CANError setpointCommand(double value, ControlType ctrl, int pidSlot, double arbFeedforward, int arbFFUnits)
     {
         if (RobotBase.isReal())
@@ -136,24 +210,17 @@ public class SimableCANSparkMax extends CANSparkMax
             return super.setpointCommand(value, ctrl, pidSlot, arbFeedforward, arbFFUnits);
         }
 
-        if (arbFFUnits == CANPIDController.ArbFFUnits.kPercentOut.value)
+        mActivePidSlot = pidSlot;
+        mArbFFPercentage = getArbPercentOutput(arbFeedforward, arbFFUnits);
+        mControlGoal = value;
+
+        if (ctrl == ControlType.kSmartMotion && mControlType != ControlType.kSmartMotion)
         {
-            mArbFFPercentage = arbFeedforward;
-        }
-        else if (arbFFUnits == CANPIDController.ArbFFUnits.kVoltage.value)
-        {
-            mArbFFPercentage = arbFeedforward / RobotController.getBatteryVoltage();
-        }
-        else
-        {
-            mArbFFPercentage = 0;
-            log(Level.SEVERE, "Unknown Arb FF unit: " + arbFFUnits);
+            log(Level.INFO, "Starting motion magic");
+            getActivePid().mProfiledPidController.reset(getPosition(), getVelocity());
         }
 
         mControlType = ctrl;
-        mActivePidSlot = pidSlot;
-
-        mControlGoal = value;
 
         // Give a bare bones sim for non-feedback related mode
         if (ctrl == ControlType.kDutyCycle)
@@ -167,6 +234,25 @@ public class SimableCANSparkMax extends CANSparkMax
 
     //////////////////////////////////////////////////
 
+    private double getArbPercentOutput(double arbFeedforward, int arbFFUnits)
+    {
+        double arbFFPercentage;
+        if (arbFFUnits == CANPIDController.ArbFFUnits.kPercentOut.value)
+        {
+            arbFFPercentage = arbFeedforward;
+        }
+        else if (arbFFUnits == CANPIDController.ArbFFUnits.kVoltage.value)
+        {
+            arbFFPercentage = arbFeedforward / RobotController.getBatteryVoltage();
+        }
+        else
+        {
+            arbFFPercentage = 0;
+            log(Level.SEVERE, "Unknown Arb FF unit: " + arbFFUnits);
+        }
+
+        return arbFFPercentage;
+    }
 
     private void addSimFollower(SimableCANSparkMax simableCANSparkMax)
     {
@@ -219,7 +305,7 @@ public class SimableCANSparkMax extends CANSparkMax
 
     private PIDFConstants getActivePid()
     {
-        mPidConstants[mActivePidSlot].refreshValues(mActivePidSlot);
+        mPidConstants[mActivePidSlot].refreshValues(mActivePidSlot, mLatchedPidController);
         return mPidConstants[mActivePidSlot];
     }
 
@@ -240,7 +326,7 @@ public class SimableCANSparkMax extends CANSparkMax
         PIDFConstants activePid = getActivePid();
         double ff = goal * activePid.mF;
         double pid = activePid.mBasicPidController.calculate(getVelocity(), goal);
-        double output = ff + pid;
+        double output = ff + pid + mArbFFPercentage;
         output = constrainOutput(output);
         log(Level.FINE, "Updating Speed control.... " + getVelocity() + " vs " + goal + " -> " + output + "(" + ff + " + " + pid + ")");
 
@@ -252,6 +338,14 @@ public class SimableCANSparkMax extends CANSparkMax
         double goal = mControlGoal;
 
         PIDFConstants activePid = getActivePid();
+        if (activePid.mMaxAcceleration == 0)
+        {
+            log(Level.WARNING, "Max acceleration has not been set");
+        }
+        if (activePid.mMaxVelocity == 0)
+        {
+            log(Level.WARNING, "Max velocity has not been set");
+        }
 
         double position = getPosition();
 
@@ -259,12 +353,12 @@ public class SimableCANSparkMax extends CANSparkMax
         TrapezoidProfile.State setpoint = activePid.mProfiledPidController.getSetpoint();
 
         double ff = activePid.mF * setpoint.velocity;
-        double output = constrainOutput(ff + pid);
+        double output = constrainOutput(ff + pid + mArbFFPercentage);
         log(Level.FINE, "Updating MM control.... "
                 + "Going to " + goal + "... "
                 + "Position " + position + " vs " + setpoint.position + ", "
                 + "Velocity " + getVelocity() + " vs " + setpoint.velocity + ", "
-                + " -> output " + output + "(" + ff + " + " + pid + ")"
+                + " -> output " + output + "(" + ff + " + " + pid + " + " + mArbFFPercentage + ")"
                 + " constraints: Vel: " + activePid.mConstraints.maxVelocity + ", Accel: " + activePid.mConstraints.maxAcceleration);
 
         return output;

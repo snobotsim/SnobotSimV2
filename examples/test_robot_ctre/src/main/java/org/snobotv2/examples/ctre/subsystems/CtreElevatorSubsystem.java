@@ -32,9 +32,13 @@ public class CtreElevatorSubsystem extends SubsystemBase implements ElevatorSubs
 
         if (RobotBase.isSimulation())
         {
-            mElevatorSim = new ElevatorSimWrapper(ElevatorSimConstants.createSim(),
+            ElevatorSimWrapper elevatorSim = new ElevatorSimWrapper(ElevatorSimConstants.createSim(),
                     new CtreMotorControllerSimWrapper(mLeadTalon),
                     new CtreEncoderSimWrapper(mLeadTalon));
+            // elevatorSim.setLowerLimitSwitch(new CtreDigitalInputWrapper(mLeadTalon, false));
+            // elevatorSim.setUpperLimitSwitch(new CtreDigitalInputWrapper(mLeadTalon, true));
+
+            mElevatorSim = elevatorSim;
         }
     }
 
