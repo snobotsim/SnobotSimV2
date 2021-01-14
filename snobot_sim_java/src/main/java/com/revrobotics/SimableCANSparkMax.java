@@ -66,6 +66,7 @@ public class SimableCANSparkMax extends CANSparkMax
 
     private ControlType mControlType;
     private double mControlGoal;
+    private double mArbFFPercentage;
 
     private final CANEncoder mEncoder;
     private final SimDouble mAppliedOutputSim;
@@ -133,6 +134,20 @@ public class SimableCANSparkMax extends CANSparkMax
         if (RobotBase.isReal())
         {
             return super.setpointCommand(value, ctrl, pidSlot, arbFeedforward, arbFFUnits);
+        }
+
+        if (arbFFUnits == CANPIDController.ArbFFUnits.kPercentOut.value)
+        {
+            mArbFFPercentage = arbFeedforward;
+        }
+        else if (arbFFUnits == CANPIDController.ArbFFUnits.kVoltage.value)
+        {
+            mArbFFPercentage = arbFeedforward / RobotController.getBatteryVoltage();
+        }
+        else
+        {
+            mArbFFPercentage = 0;
+            log(Level.SEVERE, "Unknown Arb FF unit: " + arbFFUnits);
         }
 
         mControlType = ctrl;
@@ -213,6 +228,7 @@ public class SimableCANSparkMax extends CANSparkMax
         double goal = mControlGoal;
         PIDFConstants activePid = getActivePid();
         double output = activePid.mBasicPidController.calculate(getPosition(), goal);
+        output += mArbFFPercentage;
         output = constrainOutput(output);
         log(Level.FINE, "Updating position control.... " + getPosition() + " vs " + goal + " -> " + output);
         return output;
@@ -267,7 +283,7 @@ public class SimableCANSparkMax extends CANSparkMax
 
     protected void log(Level level, String message)
     {
-        LOGGER.log(level, "[" + getDeviceId() + "] - " + message);
+        LOGGER.log(level, "REV Sim [" + getDeviceId() + "] - " + message);
     }
 
 }

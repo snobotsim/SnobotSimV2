@@ -63,7 +63,7 @@ public class WpiElevatorSubsystem extends SubsystemBase implements ElevatorSubsy
     @Override
     public void goToPositionMotionMagic(double inches)
     {
-        // TODO
+        throw new UnsupportedOperationException("WPI example does not support motion magic control");
     }
 
     @Override
