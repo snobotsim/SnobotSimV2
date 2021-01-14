@@ -261,3 +261,9 @@ gradle-app.setting
 **/build/
 
 # End of https://www.toptal.com/developers/gitignore/api/c++,java,gradle,eclipse,intellij,visualstudiocode
+
+bazel-bin
+bazel-out
+bazel-snobotsimv2
+bazel-testlogs
+.ijwb/.idea

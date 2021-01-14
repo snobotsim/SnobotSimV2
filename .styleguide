@@ -1,0 +1,16 @@
+
+modifiableFileExclude {
+}
+
+licenseUpdateExclude {
+ .*
+}
+
+includeGuardRoots {
+
+}
+
+# Used by unit tests
+includeProject {
+
+}

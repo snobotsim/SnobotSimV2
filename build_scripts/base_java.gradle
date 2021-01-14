@@ -1,0 +1,122 @@
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven { url "https://frcmaven.wpi.edu/artifactory/release/" }
+    maven { url 'http://devsite.ctr-electronics.com/maven/release/' }
+    maven { url 'http://raw.githubusercontent.com/snobotsim/maven_repo/master/development/' }
+    maven { url 'http://www.revrobotics.com/content/sw/max/sdk/maven/' }
+}
+
+
+ext.getCurrentArch = {
+    String arch = System.getProperty("os.arch");
+    return (arch.equals("amd64") || arch.equals("x86_64")) ? "x86-64" : "x86";
+}
+
+ext.getCurrentOs = {
+    OperatingSystem os = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.currentOperatingSystem;
+
+    if (os.isWindows())
+    {
+        return "windows"
+    }
+    else if (os.isMacOsX())
+    {
+        return "osx"
+    }
+    else
+    {
+        return "linux";
+    }
+}
+
+ext
+{
+    wpiVersion = '2021.1.2'
+    opencvVersion = '3.4.7-5'
+    ctreVersion = '5.19.4'
+    revVersion = '1.5.4'
+    navxVersion = '3.1.403'
+
+    nativeOs = getCurrentOs() + getCurrentArch()
+}
+
+wpilibTools.deps.wpilibVersion = project.wpiVersion
+
+configurations {
+    nativeDesktopZip
+}
+
+dependencies {
+
+    nativeDesktopZip "edu.wpi.first.hal:hal-cpp:${wpiVersion}:${nativeOs}@zip"
+    nativeDesktopZip "edu.wpi.first.ntcore:ntcore-cpp:${wpiVersion}:${nativeOs}@zip"
+    nativeDesktopZip "edu.wpi.first.cscore:cscore-cpp:${wpiVersion}:${nativeOs}@zip"
+    nativeDesktopZip "edu.wpi.first.wpiutil:wpiutil-cpp:${wpiVersion}:${nativeOs}@zip"
+    nativeDesktopZip "edu.wpi.first.wpimath:wpimath-cpp:${wpiVersion}:${nativeOs}@zip"
+    nativeDesktopZip "edu.wpi.first.thirdparty.frc2021.opencv:opencv-cpp:${opencvVersion}:${nativeOs}@zip"
+
+    nativeDesktopZip "com.ctre.phoenix.sim:cci-sim:${ctreVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix.sim:simTalonSRX:${ctreVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix.sim:simVictorSPX:${ctreVersion}:${nativeOs}@zip"
+
+    nativeDesktopZip "com.revrobotics.frc:SparkMax-driver:${revVersion}:${nativeOs}@zip"
+}
+
+
+task extractJniLibraries() {
+    def nativeZips = project.configurations.getByName('nativeDesktopZip')
+    FileCollection extractedFiles = null as FileCollection
+
+    nativeZips.dependencies
+            .matching { Dependency dep -> dep != null && nativeZips.files(dep).size() > 0 }
+            .all { Dependency dep ->
+                def ziptree = project.zipTree(nativeZips.files(dep).first())
+                ["**/*.so*", "**/*.so", "**/*.dll", "**/*.dylib"].collect { String pattern ->
+                    def fc = ziptree.matching { PatternFilterable pat -> pat.include(pattern) }
+                    if (extractedFiles == null) extractedFiles = fc
+                    else extractedFiles += fc
+                }
+            }
+
+    File dir = new File(project.buildDir, "snobotSimFiles")
+
+    if (!dir.exists())
+    {
+        dir.parentFile.mkdirs()
+    }
+
+    def tree = fileTree("${dir}")
+    tree.include '**/*.so*'
+    tree.include '**/*.so'
+    tree.include '**/*.dll'
+    tree.include '**/*.dylib'
+    tree.each { it.delete() }
+
+    if (extractedFiles != null) {
+        project.copy { CopySpec s ->
+            s.from(project.files { extractedFiles.files })
+            s.into(dir)
+        }
+    }
+}
+
+
+apply from: "${rootDir}/styleguide/styleguide.gradle"
+
+test
+{
+    systemProperty "java.library.path", "${projectDir}/build/snobotSimFiles"
+    environment 'LD_LIBRARY_PATH', "${projectDir}/build/snobotSimFiles"
+    workingDir "${projectDir}/build/snobotSimFiles"
+    dependsOn(extractJniLibraries)
+
+    useJUnitPlatform {
+        excludeTags "flaky"
+    }
+    testLogging {
+        events "failed", "STANDARD_OUT"
+        exceptionFormat "full"
+    }
+    finalizedBy jacocoTestReport
+}
