@@ -33,8 +33,6 @@ public class CtreDrivetrain extends BaseDrivetrainSubsystem
     {
         mLeftLead = new WPI_TalonSRX(BaseConstants.DRIVETRAIN_LEFT_MOTOR_A);
         mRightLead = new WPI_TalonSRX(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_A);
-//        mRightLead.setInverted(true);
-//        mRightLead.setSensorPhase(true);
 
         WPI_TalonSRX leftFollower = new WPI_TalonSRX(BaseConstants.DRIVETRAIN_LEFT_MOTOR_B);
         leftFollower.follow(mLeftLead);
@@ -131,8 +129,8 @@ public class CtreDrivetrain extends BaseDrivetrainSubsystem
     @Override
     public void smartVelocityControlMetersPerSec(double leftVelocityMetersPerSec, double rightVelocityMetersPerSec)
     {
-//        mLeftPidController.setReference(leftVelocityMetersPerSec, ControlType.kVelocity);
-//        mRightPidController.setReference(rightVelocityMetersPerSec, ControlType.kVelocity);
+        mLeftLead.set(ControlMode.Velocity, leftVelocityMetersPerSec);
+        mRightLead.set(ControlMode.Velocity, rightVelocityMetersPerSec);
         mDrive.feed();
     }
 

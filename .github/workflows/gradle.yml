@@ -7,10 +7,18 @@ jobs:
     strategy:
       matrix:
         platform:
-        - ubuntu-latest
-#        - macos-latest
-        - windows-latest
-    runs-on: ${{ matrix.platform }}
+        - os: windows-latest
+          artifact-name: Win64
+          architecture: x64
+        - os: ubuntu-latest
+          artifact-name: Linux
+          architecture: x64
+          build-options: "-x test"
+        - os: macos-latest
+          artifact-name: macOS
+          architecture: x64
+          build-options: "-x test"
+    runs-on: ${{ matrix.platform.os }}
 
     steps:
     - uses: actions/checkout@v1
@@ -19,6 +27,13 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.11
+        architecture: ${{ matrix.platform.architecture }}
 
     - name: Build Simulator
-      run: ./gradlew build publish --continue
+      run: ./gradlew build publish ${{ matrix.platform.build-options }} --continue
+
+    - name: Publish Artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: ${{ matrix.platform.artifact-name }}
+        path: build/maven_output
