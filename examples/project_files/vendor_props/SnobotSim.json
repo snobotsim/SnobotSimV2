@@ -1,0 +1,17 @@
+{
+    "fileName": "SnobotSim.json",
+    "name": "SnobotSim",
+    "version": "2021.0.1.0",
+    "uuid": "",
+    "mavenUrls": [],
+    "jsonUrl": "",
+    "javaDependencies": [
+        {
+            "groupId": "org.snobotv2",
+            "artifactId": "snobot_sim_java",
+            "version": "2021.0.1.0"
+        }
+    ],
+    "jniDependencies": [],
+    "cppDependencies": []
+}

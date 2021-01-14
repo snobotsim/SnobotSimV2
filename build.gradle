@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'edu.wpi.first.wpilib.repositories.WPILibRepositoriesPlugin' version '2020.2'
+    id "com.github.spotbugs" version "4.6.0"
 }
 
 group 'org.snobotv2'
@@ -7,4 +9,8 @@ version '2021.0.0.0'
 
 repositories {
     mavenCentral()
+}
+
+wrapper {
+    gradleVersion = '6.0'
 }
