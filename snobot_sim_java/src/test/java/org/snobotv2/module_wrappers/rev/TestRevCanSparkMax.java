@@ -22,8 +22,19 @@ public class TestRevCanSparkMax extends BaseUnitTest
 
         CANPIDController pidController = sparkMax.getPIDController();
 
-        pidController.setP(.5);
-        assertEquals(.5, pidController.getP());
+        pidController.setP(.4);
+        pidController.setI(.5);
+        pidController.setD(.6);
+        pidController.setFF(.7);
+        pidController.setSmartMotionMaxAccel(.8, 0);
+        pidController.setSmartMotionMaxVelocity(.9, 0);
+
+        assertEquals(.4, pidController.getP(), DEFAULT_EPSILON);
+        assertEquals(.5, pidController.getI(), DEFAULT_EPSILON);
+        assertEquals(.6, pidController.getD(), DEFAULT_EPSILON);
+        assertEquals(.7, pidController.getFF(), DEFAULT_EPSILON);
+        assertEquals(.8, pidController.getSmartMotionMaxAccel(0), DEFAULT_EPSILON);
+        assertEquals(.9, pidController.getSmartMotionMaxVelocity(0), DEFAULT_EPSILON);
 
         RevMotorControllerSimWrapper talonWrapper = new RevMotorControllerSimWrapper(sparkMax);
         RevMotorControllerSimWrapper followerWrapper = new RevMotorControllerSimWrapper(follower);

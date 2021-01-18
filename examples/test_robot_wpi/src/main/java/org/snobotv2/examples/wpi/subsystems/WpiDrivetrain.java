@@ -128,17 +128,13 @@ public class WpiDrivetrain extends BaseDrivetrainSubsystem
     @Override
     public void smartVelocityControlMetersPerSec(double leftVelocityMetersPerSec, double rightVelocityMetersPerSec)
     {
-//        mLeftPidController.setReference(leftVelocityMetersPerSec, ControlType.kVelocity);
-//        mRightPidController.setReference(rightVelocityMetersPerSec, ControlType.kVelocity);
-        mDrive.feed();
+        throw new UnsupportedOperationException("WPI example does not support velocity control");
     }
 
     @Override
     public void driveDistance(double leftPosition, double rightPosition)
     {
-//        mLeftLead.set(ControlMode.Position, leftPosition);
-//        mRightLead.set(ControlMode.Position, rightPosition);
-        mDrive.feed();
+        throw new UnsupportedOperationException("WPI example does not support distance control");
     }
 
     @Override

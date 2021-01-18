@@ -24,10 +24,10 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
     private static final DrivetrainConstants DRIVETRAIN_CONSTANTS = new NeoDrivetrainConstants();
     private static final double ENCODER_CONSTANT = (1.0 / DRIVETRAIN_CONSTANTS.getGearing()) * DRIVETRAIN_CONSTANTS.getkWheelDiameterMeters() * Math.PI;
 
-    private final SimableCANSparkMax mMasterLeft; // NOPMD
+    private final SimableCANSparkMax mLeadLeft; // NOPMD
     private final SimableCANSparkMax mFollowerLeft; // NOPMD
 
-    private final SimableCANSparkMax mMasterRight; // NOPMD
+    private final SimableCANSparkMax mLeadRight; // NOPMD
     private final SimableCANSparkMax mFollowerRight; // NOPMD
 
     private final CANEncoder mRightEncoder;
@@ -45,21 +45,21 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
     @Override
     public void close()
     {
-        mMasterLeft.close();
+        mLeadLeft.close();
         mFollowerLeft.close();
-        mMasterRight.close();
+        mLeadRight.close();
         mFollowerRight.close();
     }
 
     public RevDrivetrain()
     {
-        mMasterLeft = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_LEFT_MOTOR_A, CANSparkMaxLowLevel.MotorType.kBrushless);
+        mLeadLeft = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_LEFT_MOTOR_A, CANSparkMaxLowLevel.MotorType.kBrushless);
         mFollowerLeft = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_LEFT_MOTOR_B, CANSparkMaxLowLevel.MotorType.kBrushless);
-        mMasterRight = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_A, CANSparkMaxLowLevel.MotorType.kBrushless);
+        mLeadRight = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_A, CANSparkMaxLowLevel.MotorType.kBrushless);
         mFollowerRight = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_B, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-        mRightEncoder = mMasterRight.getEncoder();
-        mLeftEncoder = mMasterLeft.getEncoder();
+        mRightEncoder = mLeadRight.getEncoder();
+        mLeftEncoder = mLeadLeft.getEncoder();
 
         mLeftEncoder.setPositionConversionFactor(ENCODER_CONSTANT);
         mRightEncoder.setPositionConversionFactor(ENCODER_CONSTANT);
@@ -67,21 +67,21 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
         mLeftEncoder.setVelocityConversionFactor(ENCODER_CONSTANT / 60.0);
         mRightEncoder.setVelocityConversionFactor(ENCODER_CONSTANT / 60.0);
 
-        mLeftPidController = mMasterLeft.getPIDController();
-        mRightPidController = mMasterRight.getPIDController();
+        mLeftPidController = mLeadLeft.getPIDController();
+        mRightPidController = mLeadRight.getPIDController();
 
         mLeftEncoder.setPosition(0);
         mRightEncoder.setPosition(0);
 
-        mMasterLeft.setInverted(false);
-        mMasterRight.setInverted(true);
+        mLeadLeft.setInverted(false);
+        mLeadRight.setInverted(true);
 
-        mFollowerLeft.follow(mMasterLeft, false);
-        mFollowerRight.follow(mMasterRight, false);
+        mFollowerLeft.follow(mLeadLeft, false);
+        mFollowerRight.follow(mLeadRight, false);
 
         mGyro = new AHRS();
 
-        mDrive = new DifferentialDrive(mMasterLeft, mMasterRight);
+        mDrive = new DifferentialDrive(mLeadLeft, mLeadRight);
         mDrive.setRightSideInverted(false);
 
         for (CANPIDController pidController : new CANPIDController[]{mLeftPidController, mRightPidController})
@@ -93,10 +93,10 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
         {
             mSimulator = new DifferentialDrivetrainSimWrapper(
                     DRIVETRAIN_CONSTANTS.createSim(),
-                    new RevMotorControllerSimWrapper(mMasterLeft),
-                    new RevMotorControllerSimWrapper(mMasterRight),
-                    RevEncoderSimWrapper.create(mMasterLeft),
-                    RevEncoderSimWrapper.create(mMasterRight),
+                    new RevMotorControllerSimWrapper(mLeadLeft),
+                    new RevMotorControllerSimWrapper(mLeadRight),
+                    RevEncoderSimWrapper.create(mLeadLeft),
+                    RevEncoderSimWrapper.create(mLeadRight),
                     new NavxWrapper().getYawGyro());
             mSimulator.setRightInverted(false);
             mSimulator.setLeftPdpChannels(BaseConstants.DRIVETRAIN_LEFT_MOTOR_A_PDP, BaseConstants.DRIVETRAIN_LEFT_MOTOR_B_PDP);
@@ -165,8 +165,8 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
     @Override
     public void tankDriveVolts(double left, double right)
     {
-        mMasterLeft.setVoltage(left);
-        mMasterRight.setVoltage(right);
+        mLeadLeft.setVoltage(left);
+        mLeadRight.setVoltage(right);
         mDrive.feed();
     }
 

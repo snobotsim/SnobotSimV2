@@ -12,7 +12,6 @@ import org.snobotv2.examples.base.subsystems.DrivetrainSubsystem;
 
 public final class DriveTrajectoryCommand
 {
-
     public static Command createWithVoltage(DrivetrainSubsystem drivetrain, Trajectory trajectory)
     {
         return createWithVoltage(drivetrain, trajectory, true);
@@ -37,6 +36,35 @@ public final class DriveTrajectoryCommand
                         new PIDController(TrajectoryFactory.DriveConstants.kPDriveVel, 0, 0),
                         // RamseteCommand passes volts to the callback
                         drivetrain::tankDriveVolts,
+                        drivetrain);
+
+
+        Command runThenStop = ramseteCommand.andThen(() -> drivetrain.stop());
+
+        if (resetOnStart)
+        {
+            Command resetPose  = new InstantCommand(() -> drivetrain.resetOdometry(trajectory.getInitialPose()));
+            return resetPose.andThen(runThenStop);
+        }
+        return runThenStop;
+    }
+
+    public static Command createWithVelocity(DrivetrainSubsystem drivetrain, Trajectory trajectory)
+    {
+        return createWithVelocity(drivetrain, trajectory, true);
+    }
+
+    public static Command createWithVelocity(DrivetrainSubsystem drivetrain, Trajectory trajectory, boolean resetOnStart)
+    {
+        DrivetrainSubsystem.DrivetrainConstants drivetrainConstants = drivetrain.getConstants();
+
+        RamseteCommand ramseteCommand =
+                new RamseteCommand(
+                        trajectory,
+                        drivetrain::getPose,
+                        new RamseteController(TrajectoryFactory.AutoConstants.kRamseteB, TrajectoryFactory.AutoConstants.kRamseteZeta),
+                        drivetrainConstants.getKinematics(),
+                        drivetrain::smartVelocityControlMetersPerSec,
                         drivetrain);
 
 

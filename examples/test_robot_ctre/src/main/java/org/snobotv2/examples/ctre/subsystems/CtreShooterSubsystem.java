@@ -14,6 +14,8 @@ import org.snobotv2.sim_wrappers.ISimWrapper;
 
 public class CtreShooterSubsystem extends SubsystemBase implements ShooterSubsystem
 {
+    private static final double CTRE_VEL_TICKS_PER_RPM = 4096.0 / 100;
+
     private final WPI_TalonSRX mLeadMotor;
     private final WPI_TalonSRX mFollwerMotor; // NOPMD
     private ISimWrapper mSimulator;
@@ -48,14 +50,14 @@ public class CtreShooterSubsystem extends SubsystemBase implements ShooterSubsys
     @Override
     public void spinAtRpm(double rpm)
     {
-        double targetVelocityUnitsPer100ms = rpm * 4096.0 / 600.0;
+        double targetVelocityUnitsPer100ms = rpm * CTRE_VEL_TICKS_PER_RPM;
         mLeadMotor.set(ControlMode.Velocity, targetVelocityUnitsPer100ms);
     }
 
     @Override
     public double getRPM()
     {
-        return 0;
+        return mLeadMotor.getSelectedSensorVelocity() / CTRE_VEL_TICKS_PER_RPM;
     }
 
     @Override

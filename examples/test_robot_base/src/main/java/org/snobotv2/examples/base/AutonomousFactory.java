@@ -26,9 +26,12 @@ public class AutonomousFactory
         mAutonChooser.addOption("Drive Straight Forward Timed", DriveStraightTimedCommand.createCommand(drivetrain, 1, 4));
         mAutonChooser.setDefaultOption("Turn To Angle +90", new TurnToAngle(drivetrain, 90));
         mAutonChooser.addOption("Turn To Angle -90", new TurnToAngle(drivetrain, -90));
-        mAutonChooser.addOption("Ramsete Zig Zag", DriveTrajectoryCommand.createWithVoltage(drivetrain, TrajectoryFactory.createZigZagTrajectoryCommand(drivetrain.getConstants())));
-        mAutonChooser.addOption("Ramsete S-Curve", DriveTrajectoryCommand.createWithVoltage(drivetrain, TrajectoryFactory.createSCurve(drivetrain.getConstants())));
-        mAutonChooser.addOption("Ramsete 6-ball", new SixBallTrench(drivetrain));
+        mAutonChooser.addOption("Ramsete (Voltage) Zig Zag", DriveTrajectoryCommand.createWithVoltage(drivetrain, TrajectoryFactory.createZigZagTrajectoryCommand(drivetrain.getConstants())));
+        mAutonChooser.addOption("Ramsete (Voltage) S-Curve", DriveTrajectoryCommand.createWithVoltage(drivetrain, TrajectoryFactory.createSCurve(drivetrain.getConstants())));
+        mAutonChooser.addOption("Ramsete (Voltage) 6-ball", new SixBallTrench(drivetrain, true));
+        mAutonChooser.addOption("Ramsete (Velocity) Zig Zag", DriveTrajectoryCommand.createWithVelocity(drivetrain, TrajectoryFactory.createZigZagTrajectoryCommand(drivetrain.getConstants())));
+        mAutonChooser.addOption("Ramsete (Velocity) S-Curve", DriveTrajectoryCommand.createWithVelocity(drivetrain, TrajectoryFactory.createSCurve(drivetrain.getConstants())));
+        mAutonChooser.addOption("Ramsete (Velocity) 6-ball", new SixBallTrench(drivetrain, false));
 
         SmartDashboard.putData(mAutonChooser);
     }

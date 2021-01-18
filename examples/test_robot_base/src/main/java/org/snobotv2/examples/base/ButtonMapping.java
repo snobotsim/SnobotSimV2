@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import org.snobotv2.examples.base.commands.DriveWithHaloJoysticksCommand;
 import org.snobotv2.examples.base.commands.ElevatorGoToPositionCommand;
+import org.snobotv2.examples.base.commands.ElevatorManuallyMoveCommand;
 import org.snobotv2.examples.base.commands.MovePunchCommand;
 import org.snobotv2.examples.base.commands.RunShooterAtRpmCommand;
 import org.snobotv2.examples.base.subsystems.DrivetrainSubsystem;
@@ -22,9 +23,12 @@ public class ButtonMapping
         DriveWithHaloJoysticksCommand defaultDriveCommand = new DriveWithHaloJoysticksCommand(drivetrain, driverJoystick);
         drivetrain.setDefaultCommand(defaultDriveCommand);
 
-        new JoystickButton(operatorJoystick, XboxController.Button.kA.value).whileHeld(new ElevatorGoToPositionCommand(elevator, 30));
-        new JoystickButton(operatorJoystick, XboxController.Button.kB.value).whileHeld(new ElevatorGoToPositionCommand(elevator, 45));
-        new JoystickButton(operatorJoystick, XboxController.Button.kY.value).whileHeld(new ElevatorGoToPositionCommand(elevator, 60));
+        ElevatorManuallyMoveCommand defaultElevatorCommand = new ElevatorManuallyMoveCommand(elevator, operatorJoystick);
+        elevator.setDefaultCommand(defaultElevatorCommand);
+
+        new JoystickButton(operatorJoystick, 1).whileHeld(new ElevatorGoToPositionCommand(elevator, 30));
+        new JoystickButton(operatorJoystick, 2).whileHeld(new ElevatorGoToPositionCommand(elevator, 45));
+        new JoystickButton(operatorJoystick, 3).whileHeld(new ElevatorGoToPositionCommand(elevator, 60));
 
         new JoystickButton(operatorJoystick, 4).whenPressed(new MovePunchCommand(punch, true));
         new JoystickButton(operatorJoystick, 5).whenPressed(new MovePunchCommand(punch, false));

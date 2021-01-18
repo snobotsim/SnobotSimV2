@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
-import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import org.snobotv2.interfaces.IEncoderWrapper;
 import org.snobotv2.interfaces.IGyroWrapper;
 import org.snobotv2.interfaces.IMotorControllerWrapper;
@@ -19,7 +18,6 @@ public class DifferentialDrivetrainSimWrapper extends BaseSimWrapper
     private final IEncoderWrapper mLeftEncoderSim;
     private final IEncoderWrapper mRightEncoderSim;
     private final IGyroWrapper mGyroWrapper;
-    private final Field2d mFieldSim;
     private final DifferentialDrivetrainSim mDrivetrainSim;
 
     private final PdpSlots mLeftPdpSlots;
@@ -57,7 +55,6 @@ public class DifferentialDrivetrainSimWrapper extends BaseSimWrapper
         mLeftEncoderSim = leftEncoderSim;
         mRightEncoderSim = rightEncoderSim;
         mGyroWrapper = gyroWrapper;
-        mFieldSim = new Field2d();
 
         mLeftPdpSlots = new PdpSlots();
         mRightPdpSlots = new PdpSlots();
@@ -73,11 +70,6 @@ public class DifferentialDrivetrainSimWrapper extends BaseSimWrapper
     @Override
     public void update()
     {
-        update(mDrivetrainSim.getPose());
-    }
-
-    public void update(Pose2d pose)
-    {
         mLeftMotor.update();
         mRightMotor.update();
 
@@ -90,8 +82,6 @@ public class DifferentialDrivetrainSimWrapper extends BaseSimWrapper
         mRightEncoderSim.setDistance(mDrivetrainSim.getRightPositionMeters());
         mRightEncoderSim.setVelocity(mDrivetrainSim.getRightVelocityMetersPerSecond());
         mGyroWrapper.setAngle(-mDrivetrainSim.getHeading().getDegrees());
-
-        mFieldSim.setRobotPose(pose);
 
         mLeftMotor.setCurrent(mDrivetrainSim.getLeftCurrentDrawAmps());
         mRightMotor.setCurrent(mDrivetrainSim.getRightCurrentDrawAmps());
