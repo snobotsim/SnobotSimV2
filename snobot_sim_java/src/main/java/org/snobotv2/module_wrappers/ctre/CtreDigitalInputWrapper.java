@@ -11,9 +11,9 @@ public class CtreDigitalInputWrapper extends BaseDigitalInputWrapper
     {
         if (isFwd)
         {
-            return state -> talonSrx.getSimCollection().setLimitFwd(!state);
+            return state -> talonSrx.getSimCollection().setLimitFwd(state);
         }
-        return state -> talonSrx.getSimCollection().setLimitRev(!state);
+        return state -> talonSrx.getSimCollection().setLimitRev(state);
     }
 
     public CtreDigitalInputWrapper(WPI_TalonSRX talonSrx, boolean fwd)

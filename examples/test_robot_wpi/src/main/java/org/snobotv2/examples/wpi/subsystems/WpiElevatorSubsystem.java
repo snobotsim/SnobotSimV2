@@ -89,4 +89,16 @@ public class WpiElevatorSubsystem extends SubsystemBase implements ElevatorSubsy
     {
         mMotor.set(0);
     }
+
+    @Override
+    public boolean isAtLowerLimit()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isAtUpperLimit()
+    {
+        return false;
+    }
 }

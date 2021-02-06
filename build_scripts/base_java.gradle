@@ -32,7 +32,7 @@ ext.getCurrentOs = {
 
 ext
 {
-    wpiVersion = '2021.2.1'
+    wpiVersion = '2021.2.2'
     opencvVersion = '3.4.7-5'
     ctreVersion = '5.19.4'
     revVersion = '1.5.4'

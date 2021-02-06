@@ -7,12 +7,13 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public interface ElevatorSubsystem extends Subsystem, AutoCloseable
 {
+
     final class ElevatorSimConstants
     {
         public static final double kElevatorGearing = 10.0;
         public static final double kCarriageMass = 4.0; // kg
         public static final double kMinElevatorHeight = 0.0;
-        public static final double kMaxElevatorHeight = Units.inchesToMeters(50e50);
+        public static final double kMaxElevatorHeight = Units.inchesToMeters(100);
         public static final DCMotor kElevatorGearbox = DCMotor.getVex775Pro(4);
 
         public static final double kElevatorDrumRadius = Units.inchesToMeters(2.0);
@@ -46,6 +47,10 @@ public interface ElevatorSubsystem extends Subsystem, AutoCloseable
     void goToPositionMotionMagic(double inches);
 
     double getHeightInches();
+
+    boolean isAtLowerLimit();
+
+    boolean isAtUpperLimit();
 
     default boolean isAtHeight(double inches)
     {

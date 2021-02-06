@@ -18,6 +18,7 @@ dependencies {
     compile wpilibTools.deps.wpilibJava("hal")
     compile wpilibTools.deps.wpilibJava("wpiutil")
     compile wpilibTools.deps.wpilibJava("wpimath")
+    compile wpilibTools.deps.wpilibJava("ntcore")
 
     compile "com.ctre.phoenix:api-java:${ctreVersion}"
     compile "com.ctre.phoenix:wpiapi-java:${ctreVersion}"
