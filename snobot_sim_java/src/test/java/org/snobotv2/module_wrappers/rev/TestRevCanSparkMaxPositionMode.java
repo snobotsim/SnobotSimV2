@@ -6,7 +6,6 @@ import org.snobotv2.test_utils.BaseUnitTest;
 
 public class TestRevCanSparkMaxPositionMode extends BaseUnitTest
 {
-
     @Test
     public void testGoToPosition()
     {
