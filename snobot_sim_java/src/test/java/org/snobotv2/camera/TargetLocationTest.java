@@ -87,10 +87,10 @@ public class TargetLocationTest
         double maxDistance = Double.MAX_VALUE;
 
         TargetLocation location45 = new TargetLocation(new Pose2d(10, 10, Rotation2d.fromDegrees(180)));
-        assertNull(location45.isInVisiblePosition(pose(0, 10, 0), fov, maxDistance));
-        assertNotNull(location45.isInVisiblePosition(pose(0, 10, 160), fov, maxDistance));
-        assertNotNull(location45.isInVisiblePosition(pose(0, 10, 200), fov, maxDistance));
-        assertNotNull(location45.isInVisiblePosition(pose(0, 10, -179), fov, maxDistance));
+        assertNotNull(location45.isInVisiblePosition(pose(0, 10, 0), fov, maxDistance));
+        assertNull(location45.isInVisiblePosition(pose(0, 10, 160), fov, maxDistance));
+        assertNull(location45.isInVisiblePosition(pose(0, 10, 200), fov, maxDistance));
+        assertNull(location45.isInVisiblePosition(pose(0, 10, -179), fov, maxDistance));
     }
 
     @Test

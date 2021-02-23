@@ -5,6 +5,7 @@ on: [push]
 jobs:
   build_simulator:
     strategy:
+      fail-fast: false
       matrix:
         platform:
         - os: windows-latest

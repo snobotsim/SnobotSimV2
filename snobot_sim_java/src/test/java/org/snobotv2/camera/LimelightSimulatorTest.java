@@ -34,17 +34,21 @@ public class LimelightSimulatorTest
             testInstance.flush();
             assertEquals(0.0, visible.getNumber(-1));
 
+            // Out of FOV
             sim.update(new Pose2d(0, 0, Rotation2d.fromDegrees(0)));
             testInstance.flush();
-            assertEquals(1.0, visible.getNumber(-1));
-            assertEquals(45.0, tx.getNumber(-100));
-            assertEquals(12.16269, ty.getNumber(-100).doubleValue(), 1e-3);
+            assertEquals(0.0, visible.getNumber(-1));
 
+            sim.update(new Pose2d(0, 0, Rotation2d.fromDegrees(40)));
+            testInstance.flush();
+            assertEquals(1.0, visible.getNumber(-1));
+            assertEquals(-5.0, tx.getNumber(-100).doubleValue(), 1e-6);
+            assertEquals(12.16269, ty.getNumber(-100).doubleValue(), 1e-3);
 
             sim.update(new Pose2d(0, 10, Rotation2d.fromDegrees(0)));
             testInstance.flush();
             assertEquals(1.0, visible.getNumber(-1));
-            assertEquals(0.0, tx.getNumber(-100));
+            assertEquals(0.0, tx.getNumber(-100).doubleValue(), 1e-6);
             assertEquals(16.95122, ty.getNumber(-100).doubleValue(), 1e-3);
         }
     }
