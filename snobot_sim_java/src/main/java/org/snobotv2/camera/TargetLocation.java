@@ -107,7 +107,7 @@ public class TargetLocation
     }
 
     @Override
-    public String toString() 
+    public String toString()
     {
         return "TargetLocation [mName=" + mName + ", mPosition=" + mPosition + "]";
     }

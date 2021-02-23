@@ -24,7 +24,7 @@ public class LimelightSimulator extends BaseCameraSimulator
     {
         this(targets, cameraToTargetHeight, Double.MAX_VALUE, NetworkTableInstance.getDefault().getTable("limelight"));
     }
-    
+
     public LimelightSimulator(List<TargetLocation> targets, double cameraToTargetHeight, double maxDistance, NetworkTable limelightTable)
     {
         super(targets, HORIZONTAL_FOV, maxDistance);

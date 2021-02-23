@@ -33,7 +33,7 @@ public final class InfiniteRechargeTargets
                 .setVisibleMaxX(fieldLongDim)
                 .setName("Right Side"));
 
-                
+
 
         return targets;
     }

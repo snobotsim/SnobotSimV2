@@ -43,7 +43,7 @@ public class RamsetePublisher
         double[] data = new double[trajectory.getStates().size() * 5];
 
         int index = 0;
-        for (Trajectory.State state : trajectory.getStates()) 
+        for (Trajectory.State state : trajectory.getStates())
         {
             data[index++] = state.timeSeconds;
             data[index++] = state.velocityMetersPerSecond;

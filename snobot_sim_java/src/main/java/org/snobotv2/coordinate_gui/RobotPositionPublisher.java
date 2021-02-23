@@ -5,14 +5,13 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 
-public class RobotPositionPublisher 
+public class RobotPositionPublisher
 {
-
     private final double[] mData;
     private final NetworkTableEntry mEntry;
     private final int mPublishingFrequency;
     private int mCounter;
-    
+
     public RobotPositionPublisher()
     {
         this(NetworkTableInstance.getDefault().getTable("CoordinateGui"), 5); // Publish every 5 loops, or 100ms
