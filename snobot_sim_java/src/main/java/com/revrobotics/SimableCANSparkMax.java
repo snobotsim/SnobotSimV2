@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.ProfiledPIDController;
 import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
+import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
 import edu.wpi.first.wpilibj.trajectory.TrapezoidProfile;
 
 import java.util.ArrayList;
@@ -29,11 +30,13 @@ public class SimableCANSparkMax extends CANSparkMax
         private double mMaxVelocity;
         private double mMaxAcceleration;
 
-        public PIDFConstants()
+        public PIDFConstants(int slot)
         {
             mConstraints = new TrapezoidProfile.Constraints(0, 0);
             mBasicPidController = new PIDController(0, 0, 0);
             mProfiledPidController = new ProfiledPIDController(0, 0, 0, mConstraints);
+            SendableRegistry.setName(mBasicPidController, "RevSim[" + slot + "] Basic PID");
+            SendableRegistry.setName(mProfiledPidController, "RevSim[" + slot + "] Profiled PID");
             mF = 0;
         }
 
@@ -161,7 +164,7 @@ public class SimableCANSparkMax extends CANSparkMax
         mPidConstants = new PIDFConstants[NUM_PID_SLOTS];
         for (int i = 0; i < NUM_PID_SLOTS; ++i)
         {
-            mPidConstants[i] = new PIDFConstants();
+            mPidConstants[i] = null;
         }
     }
 
@@ -305,6 +308,10 @@ public class SimableCANSparkMax extends CANSparkMax
 
     private PIDFConstants getActivePid()
     {
+        if (mPidConstants[mActivePidSlot] == null)
+        {
+            mPidConstants[mActivePidSlot] = new PIDFConstants(mActivePidSlot);
+        }
         mPidConstants[mActivePidSlot].refreshValues(mActivePidSlot, mLatchedPidController);
         return mPidConstants[mActivePidSlot];
     }

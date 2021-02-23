@@ -98,4 +98,17 @@ public class RevElevatorSubsystem extends SubsystemBase implements ElevatorSubsy
     {
         mLeadMotor.set(0);
     }
+
+    @Override
+    public boolean isAtLowerLimit()
+    {
+        return false;
+    }
+
+    @Override
+    public boolean isAtUpperLimit()
+    {
+        return false;
+    }
+
 }

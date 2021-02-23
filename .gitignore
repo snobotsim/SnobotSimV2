@@ -267,3 +267,6 @@ bazel-out
 bazel-snobotsimv2
 bazel-testlogs
 .ijwb/.idea
+
+.project
+.classpath

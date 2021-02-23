@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.snobotv2.examples.base.BaseConstants;
 import org.snobotv2.examples.base.subsystems.ElevatorSubsystem;
+import org.snobotv2.module_wrappers.ctre.CtreDigitalInputWrapper;
 import org.snobotv2.module_wrappers.ctre.CtreEncoderSimWrapper;
 import org.snobotv2.module_wrappers.ctre.CtreMotorControllerSimWrapper;
 import org.snobotv2.sim_wrappers.ElevatorSimWrapper;
@@ -35,8 +36,8 @@ public class CtreElevatorSubsystem extends SubsystemBase implements ElevatorSubs
             ElevatorSimWrapper elevatorSim = new ElevatorSimWrapper(ElevatorSimConstants.createSim(),
                     new CtreMotorControllerSimWrapper(mLeadTalon),
                     new CtreEncoderSimWrapper(mLeadTalon));
-            // elevatorSim.setLowerLimitSwitch(new CtreDigitalInputWrapper(mLeadTalon, false));
-            // elevatorSim.setUpperLimitSwitch(new CtreDigitalInputWrapper(mLeadTalon, true));
+            elevatorSim.setLowerLimitSwitch(new CtreDigitalInputWrapper(mLeadTalon, false));
+            elevatorSim.setUpperLimitSwitch(new CtreDigitalInputWrapper(mLeadTalon, true));
 
             mElevatorSim = elevatorSim;
         }
@@ -92,5 +93,18 @@ public class CtreElevatorSubsystem extends SubsystemBase implements ElevatorSubs
     public void stop()
     {
         mLeadTalon.set(0);
+    }
+
+
+    @Override
+    public boolean isAtLowerLimit()
+    {
+        return mLeadTalon.getSensorCollection().isRevLimitSwitchClosed();
+    }
+
+    @Override
+    public boolean isAtUpperLimit()
+    {
+        return mLeadTalon.getSensorCollection().isFwdLimitSwitchClosed();
     }
 }
