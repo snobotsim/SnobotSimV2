@@ -7,12 +7,16 @@ jobs:
     name: "wpiformat"
     runs-on: ubuntu-latest
     steps:
+
+      # Checkout
       - uses: actions/checkout@v2
       - name: Fetch all history and metadata
         run: |
           git fetch --prune --unshallow
           git checkout -b pr
           git branch -f master origin/master
+
+      # Setup dependencies
       - name: Set up Python 3.8
         uses: actions/setup-python@v2
         with:
@@ -21,8 +25,24 @@ jobs:
         run: sudo apt-get update -q && sudo apt-get install -y clang-format-10
       - name: Install wpiformat
         run: pip3 install wpiformat
+      - name: Set up Go 1.15.x
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.15.x
+        id: go
+
+      - name: Install Buildifier
+        run: |
+          cd $(mktemp -d)
+          GO111MODULE=on go get github.com/bazelbuild/buildtools/buildifier@4.0.1
+
+      # Run formatters
       - name: Run
         run: wpiformat -clang 10
+      - name: Run buildifier
+        run: buildifier --lint=fix -r .
+
+      # Check the diff
       - name: Check Output
         run: git --no-pager diff --exit-code HEAD
       - name: Generate diff

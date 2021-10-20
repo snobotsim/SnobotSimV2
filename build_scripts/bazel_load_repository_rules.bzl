@@ -1,7 +1,6 @@
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 def load_repository_rules():
-
     # native.local_repository(
     #     name = "wpi_bazel_rules",
     #     # path = "C:/Users/PJ/Documents/GitHub/wpilib/original/bazel_rules/wpi-bazel-rules",
