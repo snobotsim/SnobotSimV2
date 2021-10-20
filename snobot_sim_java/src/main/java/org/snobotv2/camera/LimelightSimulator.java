@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+@SuppressWarnings({"PMD.ShortVariable"})
 public class LimelightSimulator extends BaseCameraSimulator
 {
     private static final double HORIZONTAL_FOV = 59.6 / 2;

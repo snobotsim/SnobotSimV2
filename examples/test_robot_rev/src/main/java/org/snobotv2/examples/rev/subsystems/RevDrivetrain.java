@@ -86,7 +86,7 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
 
         for (CANPIDController pidController : new CANPIDController[]{mLeftPidController, mRightPidController})
         {
-            setupPidController(pidController, .02, 0, 0, .00544, 144, 144);
+            setupPidController(pidController, .02, 0, 0, 0.005_44, 144, 144);
         }
 
         if (RobotBase.isSimulation())

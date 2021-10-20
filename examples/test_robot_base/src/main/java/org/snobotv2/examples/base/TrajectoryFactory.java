@@ -105,16 +105,13 @@ public final class TrajectoryFactory
                         10);
 
         // Create config for trajectory
-        TrajectoryConfig config =
-                new TrajectoryConfig(
+        return new TrajectoryConfig(
                         AutoConstants.kMaxSpeedMetersPerSecond,
                         AutoConstants.kMaxAccelerationMetersPerSecondSquared)
                         // Add kinematics to ensure max speed is actually obeyed
                         .setKinematics(drivetrainConstants.getKinematics())
                         // Apply the voltage constraint
                         .addConstraint(autoVoltageConstraint);
-
-        return config;
     }
 
 }

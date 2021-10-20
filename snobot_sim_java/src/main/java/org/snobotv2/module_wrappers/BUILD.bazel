@@ -1,6 +1,6 @@
-load("@rules_java//java:defs.bzl", "java_library")
+load("//build_scripts:java_rules.bzl", "snobot_sim_java_library")
 
-java_library(
+snobot_sim_java_library(
     name = "module_wrappers",
     srcs = glob(["*.java"]),
     visibility = ["//visibility:public"],

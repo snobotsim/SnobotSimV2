@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LimelightSimulatorTest
 {
+    @SuppressWarnings("PMD.ShortVariable")
     @Test
     public void bestTargetTest()
     {
@@ -43,13 +44,13 @@ public class LimelightSimulatorTest
             testInstance.flush();
             assertEquals(1.0, visible.getNumber(-1));
             assertEquals(-5.0, tx.getNumber(-100).doubleValue(), 1e-6);
-            assertEquals(12.16269, ty.getNumber(-100).doubleValue(), 1e-3);
+            assertEquals(12.162_69, ty.getNumber(-100).doubleValue(), 1e-3);
 
             sim.update(new Pose2d(0, 10, Rotation2d.fromDegrees(0)));
             testInstance.flush();
             assertEquals(1.0, visible.getNumber(-1));
             assertEquals(0.0, tx.getNumber(-100).doubleValue(), 1e-6);
-            assertEquals(16.95122, ty.getNumber(-100).doubleValue(), 1e-3);
+            assertEquals(16.951_22, ty.getNumber(-100).doubleValue(), 1e-3);
         }
     }
 }

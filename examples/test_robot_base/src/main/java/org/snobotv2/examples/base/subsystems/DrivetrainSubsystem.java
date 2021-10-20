@@ -135,11 +135,12 @@ public interface DrivetrainSubsystem extends Subsystem, AutoCloseable
         }
     }
 
+    
     final class NeoDrivetrainConstants implements DrivetrainConstants
     {
         private static final double ksVolts = 0.22;
-        private static final double kvVoltSecondsPerMeter = Units.metersToInches(0.0653);
-        private static final double kaVoltSecondsSquaredPerMeter = Units.metersToInches(0.00754);
+        private static final double kvVoltSecondsPerMeter = Units.metersToInches(0.065_3);
+        private static final double kaVoltSecondsSquaredPerMeter = Units.metersToInches(0.007_54);
         private static final double kvVoltSecondsPerRadian = 1.5;
         private static final double kaVoltSecondsSquaredPerRadian = 0.3;
 
@@ -150,7 +151,7 @@ public interface DrivetrainSubsystem extends Subsystem, AutoCloseable
         public static final DCMotor kDriveGearbox = DCMotor.getNEO(2);
         private static final double kDriveGearing = 40.0 / 10.0 * 34.0 / 20.0;
 
-        private static final double kTrackwidthMeters = 1.1554881713809029;
+        private static final double kTrackwidthMeters = 1.155_488_171_380_903;
         private static final double kWheelDiameterInches = 4.0;
         private static final double kWheelDiameterMeters = Units.inchesToMeters(kWheelDiameterInches);
 

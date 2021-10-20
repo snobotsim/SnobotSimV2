@@ -1,4 +1,4 @@
-load("@wpi_bazel_deps//rules:wpilibj_robot.bzl", "wpilibj_robot")
+load("//build_scripts:java_rules.bzl", "snobot_sim_java_robot")
 
 MAIN_CLASS = "org.snobotv2.examples.wpi.Main"
 
@@ -8,7 +8,7 @@ halsim_projects_info["gui"] = ["@local_allwpilib//:halsim_gui"]
 
 halsim_projects_info["ws_server"] = ["@local_allwpilib//:halsim_ws_server"]
 
-wpilibj_robot(
+snobot_sim_java_robot(
     name = "test_robot_wpi",
     halsim_projects_info = halsim_projects_info,
     main_class = MAIN_CLASS,
