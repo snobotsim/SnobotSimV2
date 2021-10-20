@@ -14,7 +14,6 @@ public class ElevatorSimWrapperTest extends BaseUnitTest
     {
         try (WpiElevatorSubsystem elevatorSubsystem = new WpiElevatorSubsystem())
         {
-
             for (int i = 0; i < 100; ++i)
             {
                 elevatorSubsystem.goToPosition(30);

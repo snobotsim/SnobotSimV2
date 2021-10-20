@@ -17,7 +17,6 @@ public class DifferentialDrivetrainSimWrapperTest extends BaseUnitTest
     {
         try (WpiDrivetrain drivetrainSim = new WpiDrivetrain())
         {
-
             // It takes about 2 seconds to get up to speed
             for (int i = 0; i <= 500; ++i)
             {
@@ -40,7 +39,6 @@ public class DifferentialDrivetrainSimWrapperTest extends BaseUnitTest
     {
         try (WpiDrivetrain drivetrainSim = new WpiDrivetrain())
         {
-
             // It takes about 2 seconds to get up to speed
             for (int i = 0; i < 100; ++i)
             {

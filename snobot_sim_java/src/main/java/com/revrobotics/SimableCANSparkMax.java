@@ -180,7 +180,6 @@ public class SimableCANSparkMax extends CANSparkMax
     @Override
     public CANError follow(final CANSparkMax leader)
     {
-
         if (RobotBase.isReal())
         {
             return super.follow(leader);

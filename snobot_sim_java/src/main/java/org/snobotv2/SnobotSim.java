@@ -11,7 +11,6 @@ public final class SnobotSim
 
     private SnobotSim()
     {
-
     }
 
     public static void update()

@@ -1,0 +1,12 @@
+load("@rules_java//java:defs.bzl", "java_library")
+
+java_library(
+    name = "infinite_recharge",
+    srcs = ["InfiniteRechargeTargets.java"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//snobot_sim_java/src/main/java/org/snobotv2/camera",
+        "@local_allwpilib//:ntcore-java",
+        "@local_allwpilib//:wpimath-java",
+    ],
+)

@@ -1,0 +1,17 @@
+try-import %workspace%/user.bazelrc
+
+build --java_toolchain=@bazel_tools//tools/jdk:toolchain_java11
+build --host_java_toolchain=@bazel_tools//tools/jdk:toolchain_java11
+build --strict_java_deps=OFF
+build --javacopt="-XepDisableAllChecks"
+
+test --test_output=errors
+
+import .bazelrc-roborio
+import .bazelrc-buildbuddy
+
+# CTRE are currently not deterministic
+test --test_arg="--exclude-tag=ctre"
+
+# Don't run flaky tests
+test --test_arg="--exclude-tag=flaky"

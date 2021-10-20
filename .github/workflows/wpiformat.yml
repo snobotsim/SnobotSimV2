@@ -25,12 +25,11 @@ jobs:
         run: wpiformat -clang 10
       - name: Check Output
         run: git --no-pager diff --exit-code HEAD
-      - name: Get failure patch
+      - name: Generate diff
+        run: git diff HEAD > wpiformat-fixes.patch
         if: ${{ failure() }}
-        run: |
-          echo "Fix the failure by applying this patch:"
-          echo ""
-          echo "git apply << 'EOF'";
-          git --no-pager diff
-          echo "EOF"
-          echo ""
+      - uses: actions/upload-artifact@v2
+        with:
+          name: wpiformat fixes
+          path: wpiformat-fixes.patch
+        if: ${{ failure() }}

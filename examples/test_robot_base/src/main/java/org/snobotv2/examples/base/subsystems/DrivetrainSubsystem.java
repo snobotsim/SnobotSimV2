@@ -84,7 +84,6 @@ public interface DrivetrainSubsystem extends Subsystem, AutoCloseable
 
         public CimDrivetrainConstants()
         {
-
         }
 
         @Override
@@ -172,7 +171,6 @@ public interface DrivetrainSubsystem extends Subsystem, AutoCloseable
 
         public NeoDrivetrainConstants()
         {
-
         }
 
         @Override

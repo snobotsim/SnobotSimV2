@@ -80,6 +80,5 @@ public final class DriveTrajectoryCommand
 
     private DriveTrajectoryCommand()
     {
-
     }
 }

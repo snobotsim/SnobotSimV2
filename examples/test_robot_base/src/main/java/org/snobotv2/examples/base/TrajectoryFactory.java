@@ -34,7 +34,6 @@ public final class TrajectoryFactory
 
     private TrajectoryFactory()
     {
-
     }
 
     public static Trajectory createZigZagTrajectoryCommand(DrivetrainSubsystem.DrivetrainConstants drivetrainConstants)
@@ -95,7 +94,6 @@ public final class TrajectoryFactory
 
     public static TrajectoryConfig getTrajectoryConfig(DrivetrainSubsystem.DrivetrainConstants drivetrainConstants)
     {
-
         // Create a voltage constraint to ensure we don't accelerate too fast
         var autoVoltageConstraint =
                 new DifferentialDriveVoltageConstraint(

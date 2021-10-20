@@ -1,0 +1,12 @@
+load("@rules_java//java:defs.bzl", "java_library")
+
+java_library(
+    name = "navx",
+    srcs = glob(["*.java"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers",
+        "@local_allwpilib//:wpilibj-java",
+        "@local_navx//:navx-java",
+    ],
+)
