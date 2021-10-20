@@ -26,7 +26,6 @@ public class RobotContainer
 
     public RobotContainer()
     {
-
         mDrivetrain = new CtreDrivetrain();
         mElevatorSubsystem = new CtreElevatorSubsystem();
         mShooter = new CtreShooterSubsystem();

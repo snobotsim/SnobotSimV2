@@ -1,0 +1,12 @@
+load("@wpi_bazel_rules//rules:java.bzl", "wpilib_junit5_test")
+
+wpilib_junit5_test(
+    name = "test",
+    srcs = glob(["*.java"]),
+    package = "org",
+    visibility = ["//visibility:public"],
+    wpi_shared_deps = ["@local_allwpilib//:wpilibj-jni_deps"],
+    deps = [
+        "//snobot_sim_java/src/main/java/org/snobotv2/camera",
+    ],
+)

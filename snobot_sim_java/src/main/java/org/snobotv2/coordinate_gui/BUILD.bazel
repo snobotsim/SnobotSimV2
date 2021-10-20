@@ -1,0 +1,12 @@
+load("@rules_java//java:defs.bzl", "java_library")
+
+java_library(
+    name = "coordinate_gui",
+    srcs = glob(["*.java"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        "@local_allwpilib//:ntcore-java",
+        "@local_allwpilib//:wpilibj-java",
+        "@local_allwpilib//:wpimath-java",
+    ],
+)

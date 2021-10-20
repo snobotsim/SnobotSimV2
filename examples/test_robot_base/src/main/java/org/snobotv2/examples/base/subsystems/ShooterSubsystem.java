@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public interface ShooterSubsystem extends Subsystem, AutoCloseable
 {
-
     final class FlywheelSimConstants
     {
         public static final DCMotor kGearbox = DCMotor.getVex775Pro(2);
@@ -20,7 +19,6 @@ public interface ShooterSubsystem extends Subsystem, AutoCloseable
 
         private FlywheelSimConstants()
         {
-
         }
     }
 

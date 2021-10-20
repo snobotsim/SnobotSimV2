@@ -26,7 +26,6 @@ public class RobotContainer
 
     public RobotContainer()
     {
-
         mDrivetrain = new RevDrivetrain();
         mElevatorSubsystem = new RevElevatorSubsystem();
         mShooter = new RevShooterSubsystem();

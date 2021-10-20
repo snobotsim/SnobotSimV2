@@ -1,0 +1,24 @@
+load("@wpi_bazel_deps//rules:wpilibj_robot.bzl", "wpilibj_robot")
+
+MAIN_CLASS = "org.snobotv2.examples.wpi.Main"
+
+halsim_projects_info = {}
+
+halsim_projects_info["gui"] = ["@local_allwpilib//:halsim_gui"]
+
+halsim_projects_info["ws_server"] = ["@local_allwpilib//:halsim_ws_server"]
+
+wpilibj_robot(
+    name = "test_robot_wpi",
+    halsim_projects_info = halsim_projects_info,
+    main_class = MAIN_CLASS,
+    non_wpi_deps = [
+        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers",
+        "//snobot_sim_java/src/main/java/org/snobotv2/sim_wrappers",
+        "//examples/test_robot_base",
+    ],
+    test_deps = [
+        "//snobot_sim_java_test_utils",
+    ],
+    test_package = "org",
+)

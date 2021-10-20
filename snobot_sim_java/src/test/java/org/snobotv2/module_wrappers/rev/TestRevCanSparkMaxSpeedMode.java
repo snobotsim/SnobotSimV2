@@ -16,7 +16,6 @@ public class TestRevCanSparkMaxSpeedMode extends BaseUnitTest
     {
         try (RevShooterSubsystem shooterSubsystem = new RevShooterSubsystem())
         {
-
             for (int i = 0; i < 100; ++i)
             {
                 shooterSubsystem.spinAtRpm(2500);
@@ -40,7 +39,6 @@ public class TestRevCanSparkMaxSpeedMode extends BaseUnitTest
     {
         try (RevDrivetrain drivetrain = new RevDrivetrain())
         {
-
             for (int i = 0; i < 50; ++i)
             {
                 drivetrain.smartVelocityControlMetersPerSec(-2.1, -2.1);

@@ -12,7 +12,6 @@ public final class InfiniteRechargeTargets
 {
     private InfiniteRechargeTargets()
     {
-
     }
 
     public static List<TargetLocation> getTargets()

@@ -1,0 +1,67 @@
+name: Bazel
+
+on: [pull_request, push]
+
+jobs:
+  build-native:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            architecture: x64
+            config: ""
+          - os: macos-latest
+            architecture: x64
+            config: ""
+    name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: bazelbuild/setup-bazelisk@v1
+
+      - name: Build
+        run: bazel test ... --nojava_header_compilation -k ${{ matrix.config }}
+        shell: bash
+
+  build-native-testless:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            architecture: x64
+            config: "--config=roborio"
+    name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: bazelbuild/setup-bazelisk@v1
+
+      - name: Build
+        run: bazel build ... --nojava_header_compilation -k ${{ matrix.config }}
+        shell: bash
+
+  build-docker:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - container: wpilib/ubuntu-base:18.04
+            artifact-name: Linux Release
+    runs-on: ubuntu-latest
+    name: "Build - ${{ matrix.artifact-name }}${{ matrix.architecture }}"
+    container: ${{ matrix.container }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: bazelbuild/setup-bazelisk@v1
+
+      - name: Bazel Info
+        run: bazel info
+
+      - name: Build and Test
+        run: bazel test ... --nojava_header_compilation -k

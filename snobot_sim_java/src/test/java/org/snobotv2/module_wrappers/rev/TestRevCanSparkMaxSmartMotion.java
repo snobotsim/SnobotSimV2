@@ -15,7 +15,6 @@ public class TestRevCanSparkMaxSmartMotion extends BaseUnitTest
     {
         try (RevDrivetrain drivetrain = new RevDrivetrain())
         {
-
             double goal = 16.5;
 
 //        System.out.println("Starting");
