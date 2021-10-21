@@ -13,7 +13,7 @@ import org.snobotv2.module_wrappers.wpi.WpiSpeedControllerWrapper;
 public class ElevatorSimWrapper extends BaseSingleGearboxSimWrapper
 {
     // TODO(pj.reiniger) The "is at lower/upper limit" logic does not work for equals
-    private static final double LIMIT_SWITCH_HEIGHT_DIFF = 1e-4; 
+    private static final double LIMIT_SWITCH_HEIGHT_DIFF = 1e-4;
 
     private final ElevatorSim mElevatorSim;
     private IDigitalWrapper mLowerLimitSwitch;

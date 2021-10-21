@@ -77,7 +77,7 @@ public class TargetLocation
         double dx = robotPose.getX() - mPosition.getX();
         double dy = robotPose.getY() - mPosition.getY();
         double angleDelta = 0;
-        
+
         if (mPosition.getRotation() != null)
         {
             Transform2d diff = mPosition.minus(robotPose);

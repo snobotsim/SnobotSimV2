@@ -6,7 +6,7 @@ import java.util.function.DoubleSupplier;
 
 public class BaseMotorControllerWrapper implements IMotorControllerWrapper
 {
-    private final DoubleSupplier mVoltagePercentageGetter; 
+    private final DoubleSupplier mVoltagePercentageGetter;
     private final int mId;
 
     @SuppressWarnings({"PMD.ShortVariable"})

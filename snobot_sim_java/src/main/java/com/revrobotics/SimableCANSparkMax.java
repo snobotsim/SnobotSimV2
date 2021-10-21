@@ -25,7 +25,7 @@ public class SimableCANSparkMax extends CANSparkMax
     private double mControlGoal;
     private double mArbFFPercentage;
 
-    private SimablePidController mLatchedPidController; 
+    private SimablePidController mLatchedPidController;
     private final CANEncoder mEncoder;
     private final SimDouble mAppliedOutputSim;
     private final List<SimableCANSparkMax> mFollowers;
@@ -258,7 +258,7 @@ public class SimableCANSparkMax extends CANSparkMax
         return arbFFPercentage;
     }
 
-    
+
     private void addSimFollower(SimableCANSparkMax simableCANSparkMax)
     {
         mFollowers.add(simableCANSparkMax);

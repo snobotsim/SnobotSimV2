@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 public interface ElevatorSubsystem extends Subsystem, AutoCloseable
 {
     double DEFAULT_ALLOWABLE_HEIGHT_ERROR_INCHES = 1;
-    
+
     final class ElevatorSimConstants
     {
         public static final double kElevatorGearing = 10.0;

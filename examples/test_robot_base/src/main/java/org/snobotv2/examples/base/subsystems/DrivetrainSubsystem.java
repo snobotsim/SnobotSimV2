@@ -135,7 +135,7 @@ public interface DrivetrainSubsystem extends Subsystem, AutoCloseable
         }
     }
 
-    
+
     final class NeoDrivetrainConstants implements DrivetrainConstants
     {
         private static final double ksVolts = 0.22;

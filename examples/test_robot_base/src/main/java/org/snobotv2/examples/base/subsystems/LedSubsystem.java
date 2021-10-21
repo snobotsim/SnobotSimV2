@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class LedSubsystem extends SubsystemBase implements AutoCloseable
 {
     private final Relay mRelay;
-    private final AnalogOutput mVariableBrightnessLeds; 
+    private final AnalogOutput mVariableBrightnessLeds;
     private final AddressableLED mAddressableLeds;
     private final AddressableLEDBuffer mLedBuffer;
     private int mRainbowFirstPixelHue;
