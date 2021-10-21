@@ -15,7 +15,9 @@ snobot_sim_java_robot(
     non_wpi_deps = [
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers",
         "//snobot_sim_java/src/main/java/org/snobotv2/sim_wrappers",
+        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/wpi",
         "//examples/test_robot_base",
+        "@local_allwpilib//:wpilibNewCommands-java",
     ],
     test_deps = [
         "//snobot_sim_java_test_utils",

@@ -10,5 +10,6 @@ snobot_sim_java_test(
         "//examples/test_robot_ctre:lib",
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/ctre",
         "//snobot_sim_java_test_utils",
+        "@local_ctre//:ctre-java",
     ],
 )

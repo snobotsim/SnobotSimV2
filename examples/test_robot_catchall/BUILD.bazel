@@ -13,12 +13,16 @@ snobot_sim_java_robot(
     halsim_projects_info = halsim_projects_info,
     main_class = MAIN_CLASS,
     non_wpi_deps = [
+        "@local_allwpilib//:wpilibNewCommands-java",
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers",
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/rev",
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/navx",
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/ctre",
         "//snobot_sim_java/src/main/java/org/snobotv2/sim_wrappers",
         "//examples/test_robot_base",
+        "@local_navx//:navx-java",
+        "@local_ctre//:ctre-java",
+        "@local_rev//:rev-java",
     ],
     non_wpi_raw_jni_deps = [
         "@local_rev//:jni_deps",

@@ -7,6 +7,7 @@ snobot_sim_java_test(
     visibility = ["//visibility:public"],
     wpi_shared_deps = ["@local_allwpilib//:wpilibj-jni_deps"],
     deps = [
+        "//examples/test_robot_base",
         "//examples/test_robot_wpi:lib",
         "//snobot_sim_java/src/main/java/org/snobotv2/sim_wrappers",
         "//snobot_sim_java_test_utils",

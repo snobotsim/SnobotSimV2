@@ -14,15 +14,21 @@ snobot_sim_java_robot(
     main_class = MAIN_CLASS,
     non_wpi_deps = [
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers",
+        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/wpi",
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/ctre",
         "//snobot_sim_java/src/main/java/org/snobotv2/sim_wrappers",
+        "@local_allwpilib//:wpimath-java",
+        "@local_allwpilib//:wpilibNewCommands-java",
+        "@local_ctre//:ctre-java",
         "//examples/test_robot_base",
     ],
     non_wpi_raw_jni_deps = [
         "@local_ctre//:jni_deps",
     ],
     test_deps = [
+        "//examples/test_robot_base",
         "//snobot_sim_java_test_utils",
+        "@local_allwpilib//:wpimath-java",
     ],
     test_package = "org",
 )

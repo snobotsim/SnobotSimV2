@@ -11,7 +11,9 @@ snobot_sim_java_test(
     wpi_shared_deps = ["@local_allwpilib//:wpilibj-jni_deps"],
     deps = [
         "//examples/test_robot_rev:lib",
+        "//snobot_sim_java/src/main/java/com/revrobotics:simmable_rev",
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/rev",
         "//snobot_sim_java_test_utils",
+        "@local_rev//:rev-java",
     ],
 )

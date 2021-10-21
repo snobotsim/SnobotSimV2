@@ -14,10 +14,14 @@ snobot_sim_java_robot(
     main_class = MAIN_CLASS,
     non_wpi_deps = [
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers",
+        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/wpi",
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/rev",
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/navx",
+        "//snobot_sim_java/src/main/java/com/revrobotics:simmable_rev",
         "//snobot_sim_java/src/main/java/org/snobotv2/sim_wrappers",
+        "@local_allwpilib//:wpilibNewCommands-java",
         "//examples/test_robot_base",
+        "@local_rev//:rev-java",
         "@local_navx//:navx-java",
     ],
     non_wpi_raw_jni_deps = [
