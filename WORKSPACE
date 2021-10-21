@@ -45,7 +45,6 @@ load("@maven//:defs.bzl", "pinned_maven_install")
 
 pinned_maven_install()
 
-
 # PMD
 
 rules_pmd_version = "0.1.0"

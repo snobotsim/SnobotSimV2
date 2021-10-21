@@ -4,7 +4,6 @@ load("@wpi_bazel_rules//rules:java.bzl", "wpilib_junit5_test")
 load("@wpi_bazel_deps//rules:wpilibj_robot.bzl", "wpilibj_robot")
 
 def __styleguide(name, srcs):
-
     pmd(
         name = name + "-pmd_analysis",
         srcs = srcs,
