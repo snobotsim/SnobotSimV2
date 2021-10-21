@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TargetLocationTest
 {
+    @SuppressWarnings("PMD.ShortVariable")
     private Pose2d pose(double x, double y, double angle)
     {
         return new Pose2d(x, y, Rotation2d.fromDegrees(angle));

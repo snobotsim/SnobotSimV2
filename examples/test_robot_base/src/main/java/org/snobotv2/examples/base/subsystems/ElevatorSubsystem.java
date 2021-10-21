@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public interface ElevatorSubsystem extends Subsystem, AutoCloseable
 {
+    double DEFAULT_ALLOWABLE_HEIGHT_ERROR_INCHES = 1;
+
     final class ElevatorSimConstants
     {
         public static final double kElevatorGearing = 10.0;
@@ -19,23 +21,19 @@ public interface ElevatorSubsystem extends Subsystem, AutoCloseable
 
         public static ElevatorSim createSim()
         {
-            ElevatorSim elevatorSim = new ElevatorSim(
+            return new ElevatorSim(
                     ElevatorSimConstants.kElevatorGearbox,
                     ElevatorSimConstants.kElevatorGearing,
                     ElevatorSimConstants.kCarriageMass,
                     ElevatorSimConstants.kElevatorDrumRadius,
                     ElevatorSimConstants.kMinElevatorHeight,
                     ElevatorSimConstants.kMaxElevatorHeight);
-
-            return elevatorSim;
         }
 
         private ElevatorSimConstants()
         {
         }
     }
-
-    double DEFAULT_ALLOWABLE_HEIGHT_ERROR_INCHES = 1;
 
     void moveManually(double speed);
 

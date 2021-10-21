@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.simulation.RoboRioSim;
 
 public final class SnobotSim
 {
-    private static final PowerDistributionPanel pdp = new PowerDistributionPanel();
+    private static final PowerDistributionPanel PDP = new PowerDistributionPanel();
 
     private SnobotSim()
     {
@@ -18,7 +18,7 @@ public final class SnobotSim
         double[] currents = new double[16];
         for (int i = 0; i < 16; ++i)
         {
-            currents[i] = pdp.getCurrent(i);
+            currents[i] = PDP.getCurrent(i);
         }
         double batteryVoltage = BatterySim.calculateDefaultBatteryLoadedVoltage(currents);
         RoboRioSim.setVInVoltage(batteryVoltage);

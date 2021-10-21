@@ -21,6 +21,20 @@ public class SimableCANSparkMax extends CANSparkMax
     private static final Logger LOGGER = Logger.getLogger(SimableCANSparkMax.class.getName());
     private static final int NUM_PID_SLOTS = 4;
 
+    private ControlType mControlType;
+    private double mControlGoal;
+    private double mArbFFPercentage;
+
+    private SimablePidController mLatchedPidController;
+    private final CANEncoder mEncoder;
+    private final SimDouble mAppliedOutputSim;
+    private final List<SimableCANSparkMax> mFollowers;
+
+
+    private final SimableCANSparkMax.PIDFConstants[] mPidConstants;
+    private int mActivePidSlot;
+
+    @SuppressWarnings({"PMD.ShortVariable"})
     protected class PIDFConstants
     {
         protected final PIDController mBasicPidController;
@@ -40,6 +54,7 @@ public class SimableCANSparkMax extends CANSparkMax
             mF = 0;
         }
 
+        @SuppressWarnings("PMD.ShortVariable")
         private void refreshValues(int slotId, SimablePidController simablePid)
         {
             double kp = CANSparkMaxJNI.c_SparkMax_GetP(m_sparkMax, slotId);
@@ -129,19 +144,6 @@ public class SimableCANSparkMax extends CANSparkMax
         }
     }
 
-    private ControlType mControlType;
-    private double mControlGoal;
-    private double mArbFFPercentage;
-
-    private SimablePidController mLatchedPidController;
-    private final CANEncoder mEncoder;
-    private final SimDouble mAppliedOutputSim;
-    private final List<SimableCANSparkMax> mFollowers;
-
-
-    private final PIDFConstants[] mPidConstants;
-    private int mActivePidSlot;
-
     /**
      * Create a new SPARK MAX Controller
      *
@@ -205,7 +207,7 @@ public class SimableCANSparkMax extends CANSparkMax
     }
 
     @Override
-    CANError setpointCommand(double value, ControlType ctrl, int pidSlot, double arbFeedforward, int arbFFUnits)
+    /* default */ CANError setpointCommand(double value, ControlType ctrl, int pidSlot, double arbFeedforward, int arbFFUnits)
     {
         if (RobotBase.isReal())
         {
@@ -255,6 +257,7 @@ public class SimableCANSparkMax extends CANSparkMax
 
         return arbFFPercentage;
     }
+
 
     private void addSimFollower(SimableCANSparkMax simableCANSparkMax)
     {
@@ -326,6 +329,7 @@ public class SimableCANSparkMax extends CANSparkMax
         return output;
     }
 
+    @SuppressWarnings("PMD.ShortVariable")
     private double calculateSpeedControl()
     {
         double goal = mControlGoal;
@@ -358,7 +362,7 @@ public class SimableCANSparkMax extends CANSparkMax
         double pid = activePid.mProfiledPidController.calculate(position, goal);
         TrapezoidProfile.State setpoint = activePid.mProfiledPidController.getSetpoint();
 
-        double ff = activePid.mF * setpoint.velocity;
+        double ff = activePid.mF * setpoint.velocity; // NOPMD(ShortVariable)
         double output = constrainOutput(ff + pid + mArbFFPercentage);
         log(Level.FINE, "Updating MM control.... "
                 + "Going to " + goal + "... "

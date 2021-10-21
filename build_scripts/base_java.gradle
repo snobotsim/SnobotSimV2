@@ -16,22 +16,18 @@ ext.getCurrentArch = {
 ext.getCurrentOs = {
     OperatingSystem os = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.currentOperatingSystem;
 
-    if (os.isWindows())
-    {
+    if (os.isWindows()) {
         return "windows"
     }
-    else if (os.isMacOsX())
-    {
+    else if (os.isMacOsX()) {
         return "osx"
     }
-    else
-    {
+    else {
         return "linux";
     }
 }
 
-ext
-{
+ext {
     wpiVersion = '2021.2.2'
     opencvVersion = '3.4.7-5'
     ctreVersion = '5.19.4'
@@ -72,7 +68,12 @@ task extractJniLibraries() {
             .matching { Dependency dep -> dep != null && nativeZips.files(dep).size() > 0 }
             .all { Dependency dep ->
                 def ziptree = project.zipTree(nativeZips.files(dep).first())
-                ["**/*.so*", "**/*.so", "**/*.dll", "**/*.dylib"].collect { String pattern ->
+                [
+                    "**/*.so*",
+                    "**/*.so",
+                    "**/*.dll",
+                    "**/*.dylib"
+                ].collect { String pattern ->
                     def fc = ziptree.matching { PatternFilterable pat -> pat.include(pattern) }
                     if (extractedFiles == null) extractedFiles = fc
                     else extractedFiles += fc
@@ -81,8 +82,7 @@ task extractJniLibraries() {
 
     File dir = new File(project.buildDir, "snobotSimFiles")
 
-    if (!dir.exists())
-    {
+    if (!dir.exists()) {
         dir.parentFile.mkdirs()
     }
 
@@ -104,8 +104,7 @@ task extractJniLibraries() {
 
 apply from: "${rootDir}/styleguide/styleguide.gradle"
 
-test
-{
+test {
     systemProperty "java.library.path", "${projectDir}/build/snobotSimFiles"
     environment 'LD_LIBRARY_PATH', "${projectDir}/build/snobotSimFiles"
     workingDir "${projectDir}/build/snobotSimFiles"

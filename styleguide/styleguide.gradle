@@ -17,13 +17,13 @@ jacocoTestReport {
 
 
 checkstyle {
-    toolVersion = "8.37"
+    toolVersion = "9.0"
     configDir = file("${project.rootDir}/styleguide")
     config = resources.text.fromFile(new File(configDir, "checkstyle.xml"))
 }
 
 pmd {
-    toolVersion = '6.29.0'
+    toolVersion = '6.39.0'
     consoleOutput  = true
     reportsDir = file("${project.buildDir}/reports/pmd")
     ruleSetFiles = files(file("$rootDir/styleguide/pmd-ruleset.xml"))
@@ -48,5 +48,52 @@ spotbugsTest {
         html {
             enabled = true
         }
+    }
+}
+
+
+apply plugin: 'com.diffplug.spotless'
+
+spotless {
+    java {
+        target fileTree('.') {
+            include '**/*.java'
+            exclude '**/build/**', '**/build-*/**', 'bazel-*/**'
+        }
+        toggleOffOn()
+        indentWithSpaces(4)
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    groovyGradle {
+        target fileTree('.') {
+            include '**/*.gradle'
+            exclude '**/build/**', '**/build-*/**', 'bazel-*/**'
+        }
+        greclipse()
+        indentWithSpaces(4)
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    format 'xml', {
+        target fileTree('.') {
+            include '**/*.xml'
+            include '**/*.fxml'
+            exclude '**/build/**', '**/build-*/**', 'bazel-*/**', '.idea/**'
+        }
+        eclipseWtp('xml')
+        trimTrailingWhitespace()
+        indentWithSpaces(4)
+        endWithNewline()
+    }
+    format 'misc', {
+        target fileTree('.') {
+            include '**/*.md', '**/.gitignore', "**/*.yml", "**/*.yaml"
+            exclude '**/build/**', '**/build-*/**', 'bazel-*/**'
+        }
+        trimTrailingWhitespace()
+        indentWithSpaces(4)
+        endWithNewline()
     }
 }

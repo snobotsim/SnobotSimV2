@@ -1,6 +1,6 @@
-load("@wpi_bazel_rules//rules:java.bzl", "wpilib_junit5_test")
+load("//build_scripts:java_rules.bzl", "snobot_sim_java_test")
 
-wpilib_junit5_test(
+snobot_sim_java_test(
     name = "test",
     srcs = glob(["*.java"]),
     package = "org",

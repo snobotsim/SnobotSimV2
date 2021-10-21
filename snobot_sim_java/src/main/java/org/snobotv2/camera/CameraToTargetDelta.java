@@ -25,6 +25,7 @@ public class CameraToTargetDelta implements Comparable<CameraToTargetDelta>
         return Double.compare(mDeltaAngle, other.mDeltaAngle);
     }
 
+    @SuppressWarnings("PMD.ShortVariable")
     @Override
     public boolean equals(Object o)
     {

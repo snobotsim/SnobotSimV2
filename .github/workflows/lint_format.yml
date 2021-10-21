@@ -37,10 +37,12 @@ jobs:
           GO111MODULE=on go get github.com/bazelbuild/buildtools/buildifier@4.0.1
 
       # Run formatters
-      - name: Run
+      - name: Run wpiformat
         run: wpiformat -clang 10
       - name: Run buildifier
         run: buildifier --lint=fix -r .
+      - name: Run Spotless
+        run: ./gradlew spotlessApply
 
       # Check the diff
       - name: Check Output

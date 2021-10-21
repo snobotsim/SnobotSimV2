@@ -1,0 +1,11 @@
+filegroup(
+    name = "pmd_rules",
+    srcs = ["pmd-ruleset.xml"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "checkstyle",
+    srcs = ["checkstyle.xml"],
+    visibility = ["//visibility:public"],
+)

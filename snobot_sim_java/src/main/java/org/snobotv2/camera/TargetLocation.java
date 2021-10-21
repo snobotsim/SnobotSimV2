@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Transform2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 
+@SuppressWarnings({"PMD.LinguisticNaming", "PMD.PrematureDeclaration", "PMD.ShortVariable"})
 public class TargetLocation
 {
     private final Pose2d mPosition;
@@ -62,7 +63,6 @@ public class TargetLocation
         // Alias for readability
         double robotX = robotPose.getX();
         double robotY = robotPose.getY();
-        double angleDelta = 0;
 
         if (robotX > mVisibleMaxX || robotX < mVisibleMinX)
         {
@@ -76,6 +76,7 @@ public class TargetLocation
 
         double dx = robotPose.getX() - mPosition.getX();
         double dy = robotPose.getY() - mPosition.getY();
+        double angleDelta = 0;
 
         if (mPosition.getRotation() != null)
         {
