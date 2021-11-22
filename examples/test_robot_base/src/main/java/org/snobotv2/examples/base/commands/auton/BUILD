@@ -1,13 +1,13 @@
 load("//build_scripts/bazel:java_rules.bzl", "snobot_sim_java_library")
 
 snobot_sim_java_library(
-    name = "sim_wrappers",
+    name = "auton",
     srcs = glob(["*.java"]),
     visibility = ["//visibility:public"],
     deps = [
-        "//snobot_sim_java/src/main/java/org/snobotv2/interfaces",
-        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/wpi",
-        "@local_allwpilib//:hal-java",
+        "//examples/test_robot_base/src/main/java/org/snobotv2/examples/base/subsystems",
+        "//examples/test_robot_base/src/main/java/org/snobotv2/examples/base/trajectories",
+        "@local_allwpilib//:wpilibNewCommands-java",
         "@local_allwpilib//:wpilibj-java",
         "@local_allwpilib//:wpimath-java",
     ],

@@ -1,6 +1,34 @@
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-def load_repository_rules():
+def download_external_archives():
+    # Download Extra java rules
+    RULES_JVM_EXTERNAL_TAG = "4.1"
+    RULES_JVM_EXTERNAL_SHA = "f36441aa876c4f6427bfb2d1f2d723b48e9d930b62662bf723ddfb8fc80f0140"
+    http_archive(
+        name = "rules_jvm_external",
+        sha256 = RULES_JVM_EXTERNAL_SHA,
+        strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
+        url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
+    )
+
+    # Download Setup python
+    http_archive(
+        name = "rules_python",
+        url = "https://github.com/bazelbuild/rules_python/releases/download/0.5.0/rules_python-0.5.0.tar.gz",
+        sha256 = "cd6730ed53a002c56ce4e2f396ba3b3be262fd7cb68339f0377a45e8227fe332",
+    )
+
+    # Download PMD
+    rules_pmd_version = "0.1.0"
+    rules_pmd_sha = "c8839b8e4fb76884632ee001e18a2c311363e208410f1cdd30c78e80aaee25e3"
+    http_archive(
+        name = "rules_pmd",
+        sha256 = rules_pmd_sha,
+        strip_prefix = "bazel_rules_pmd-{v}".format(v = rules_pmd_version),
+        url = "https://github.com/buildfoundation/bazel_rules_pmd/archive/v{v}.tar.gz".format(v = rules_pmd_version),
+    )
+
     # native.local_repository(
     #     name = "wpi_bazel_rules",
     #     # path = "C:/Users/PJ/Documents/GitHub/wpilib/original/bazel_rules/wpi-bazel-rules",

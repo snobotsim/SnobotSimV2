@@ -2,7 +2,7 @@ package org.snobotv2.examples.ctre;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj2.command.Command;
-import org.snobotv2.examples.base.AutonomousFactory;
+import org.snobotv2.examples.base.auton_modes.AutonomousFactory;
 import org.snobotv2.examples.base.ButtonMapping;
 import org.snobotv2.examples.ctre.subsystems.CtreDrivetrain;
 import org.snobotv2.examples.ctre.subsystems.CtreElevatorSubsystem;

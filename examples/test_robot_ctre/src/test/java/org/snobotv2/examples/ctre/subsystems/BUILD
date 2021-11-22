@@ -1,15 +1,12 @@
 load("//build_scripts/bazel:java_rules.bzl", "snobot_sim_java_test")
 
 snobot_sim_java_test(
-    name = "test",
+    name = "tests",
     srcs = glob(["*.java"]),
-    package = "org",
-    visibility = ["//visibility:public"],
-    wpi_shared_deps = ["@local_allwpilib//:wpilibj-jni_deps"],
     deps = [
+        "//examples/test_robot_base/src/main/java/org/snobotv2/examples/base/subsystems",
         "//examples/test_robot_ctre/src/main/java/org/snobotv2/examples/ctre/subsystems",
-        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/ctre",
         "//snobot_sim_java_test_utils/src/main/java/org/snobotv2/test_utils",
-        "@local_ctre//:ctre-java",
+        "@local_allwpilib//:wpimath-java",
     ],
 )

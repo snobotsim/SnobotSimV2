@@ -3,13 +3,19 @@ load("@wpi_bazel_deps//allwpilib:load_allwpilib_from_source.bzl", "load_allwpili
 load("@ctre_bazel_rules//Phoenix:load_ctre_from_maven.bzl", "load_ctre_from_maven")
 load("@rev_bazel_rules//REVRobotics:load_rev_from_maven.bzl", "load_rev_from_maven")
 load("@navx_bazel_rules//navx_frc:load_navx_from_maven.bzl", "load_navx_from_maven")
+load("@wpi_bazel_rules//toolchains:load_toolchains.bzl", "load_toolchains")
+load("@rules_pmd//pmd:dependencies.bzl", "rules_pmd_dependencies")
 
-def load_repositories(build_from_source):
+def setup_dependencies(build_from_source = False):
+    rules_pmd_dependencies()
+
     load_ctre_from_maven(version = "5.19.4")
 
     load_rev_from_maven(version = "1.5.4")
 
     load_navx_from_maven(version = "4.0.425")
+
+    load_toolchains()
 
     WPILIB_VERSION = "2021.3.1"
 

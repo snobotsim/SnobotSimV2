@@ -1,4 +1,4 @@
-load("//build_scripts:java_rules.bzl", "snobot_sim_java_test")
+load("//build_scripts/bazel:java_rules.bzl", "snobot_sim_java_test")
 
 snobot_sim_java_test(
     name = "test",
@@ -8,5 +8,7 @@ snobot_sim_java_test(
     wpi_shared_deps = ["@local_allwpilib//:wpilibj-jni_deps"],
     deps = [
         "//snobot_sim_java/src/main/java/org/snobotv2/camera",
+        "@local_allwpilib//:ntcore-java",
+        "@local_allwpilib//:wpimath-java",
     ],
 )

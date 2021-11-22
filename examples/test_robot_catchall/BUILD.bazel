@@ -1,32 +1,9 @@
-load("//build_scripts:java_rules.bzl", "snobot_sim_java_robot")
-
-MAIN_CLASS = "org.snobotv2.examples.catchall.Main"
-
-halsim_projects_info = {}
-
-halsim_projects_info["gui"] = ["@local_allwpilib//:halsim_gui"]
-
-halsim_projects_info["ws_server"] = ["@local_allwpilib//:halsim_ws_server"]
-
-snobot_sim_java_robot(
+alias(
     name = "test_robot_catchall",
-    halsim_projects_info = halsim_projects_info,
-    main_class = MAIN_CLASS,
-    non_wpi_deps = [
-        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers",
-        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/rev",
-        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/navx",
-        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/ctre",
-        "//snobot_sim_java/src/main/java/org/snobotv2/sim_wrappers",
-        "//examples/test_robot_base",
-    ],
-    non_wpi_raw_jni_deps = [
-        "@local_rev//:jni_deps",
-        "@local_ctre//:jni_deps",
-    ],
-    test_deps = [
-        "//snobot_sim_java_test_utils",
-        "//snobot_sim_java/src/main/java/org/snobotv2",
-    ],
-    test_package = "org",
+    actual = "//examples/test_robot_catchall/src/main/java/org/snobotv2/examples/catchall:Main",
+)
+
+alias(
+    name = "sim",
+    actual = "//examples/test_robot_catchall/src/main/java/org/snobotv2/examples/catchall:Main.simulation.gui",
 )
