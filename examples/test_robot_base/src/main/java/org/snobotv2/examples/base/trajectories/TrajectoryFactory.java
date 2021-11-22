@@ -1,4 +1,4 @@
-package org.snobotv2.examples.base;
+package org.snobotv2.examples.base.trajectories;
 
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;

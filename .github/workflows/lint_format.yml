@@ -36,6 +36,11 @@ jobs:
           cd $(mktemp -d)
           GO111MODULE=on go get github.com/bazelbuild/buildtools/buildifier@4.0.1
 
+      - name: Install Unused Deps
+        run: |
+          cd $(mktemp -d)
+          GO111MODULE=on go get github.com/bazelbuild/buildtools/unused_deps@4.0.1
+
       # Run formatters
       - name: Run wpiformat
         run: wpiformat -clang 10
@@ -43,6 +48,8 @@ jobs:
         run: buildifier --lint=fix -r .
       - name: Run Spotless
         run: ./gradlew spotlessApply
+      - name: Run unused deps
+        run: unused_deps //...
 
       # Check the diff
       - name: Check Output

@@ -1,10 +1,10 @@
-package org.snobotv2.examples.base;
+package org.snobotv2.examples.base.auton_modes;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import org.snobotv2.examples.base.auton_modes.SixBallTrench;
+import org.snobotv2.examples.base.trajectories.TrajectoryFactory;
 import org.snobotv2.examples.base.commands.auton.DriveStraightTimedCommand;
 import org.snobotv2.examples.base.commands.auton.DriveTrajectoryCommand;
 import org.snobotv2.examples.base.commands.auton.TurnToAngle;

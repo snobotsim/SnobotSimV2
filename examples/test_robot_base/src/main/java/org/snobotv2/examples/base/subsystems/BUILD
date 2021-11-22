@@ -1,9 +1,8 @@
-load("//build_scripts:java_rules.bzl", "snobot_sim_java_library")
-#load("@wpilib//rules:java.bzl", "wpilib_java_library", "wpilib_java_test")
+load("//build_scripts/bazel:java_rules.bzl", "snobot_sim_java_library")
 
 snobot_sim_java_library(
-    name = "test_robot_base",
-    srcs = glob(["src/main/java/**/*.java"]),
+    name = "subsystems",
+    srcs = glob(["*.java"]),
     visibility = ["//visibility:public"],
     deps = [
         "@local_allwpilib//:wpilibNewCommands-java",

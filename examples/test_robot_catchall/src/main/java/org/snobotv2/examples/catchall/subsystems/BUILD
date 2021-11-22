@@ -1,12 +1,14 @@
 load("//build_scripts/bazel:java_rules.bzl", "snobot_sim_java_library")
 
 snobot_sim_java_library(
-    name = "ctre",
+    name = "subsystems",
     srcs = glob(["*.java"]),
-    visibility = ["//visibility:public"],
+    visibility = ["//examples/test_robot_catchall:__subpackages__"],
     deps = [
-        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers",
+        "@local_allwpilib//:wpilibNewCommands-java",
         "@local_allwpilib//:wpilibj-java",
         "@local_ctre//:ctre-java",
+        "@local_navx//:navx-java",
+        "@local_rev//:rev-java",
     ],
 )
