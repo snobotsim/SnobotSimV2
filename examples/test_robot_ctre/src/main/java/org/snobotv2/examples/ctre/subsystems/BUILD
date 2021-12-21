@@ -13,9 +13,9 @@ snobot_sim_java_library(
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/ctre",
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/wpi",
         "//snobot_sim_java/src/main/java/org/snobotv2/sim_wrappers",
-        "@local_allwpilib//:wpilibNewCommands-java",
-        "@local_allwpilib//:wpilibj-java",
-        "@local_allwpilib//:wpimath-java",
-        "@local_ctre//:ctre-java",
+        "@bazelrio//libraries/java/ctre/phoenix",
+        "@bazelrio//libraries/java/wpilib/new_commands",
+        "@bazelrio//libraries/java/wpilib/wpilibj",
+        "@bazelrio//libraries/java/wpilib/wpimath",
     ],
 )

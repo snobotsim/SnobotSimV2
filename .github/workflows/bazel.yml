@@ -14,6 +14,9 @@ jobs:
           - os: macos-latest
             architecture: x64
             config: ""
+          - os: ubuntu-latest
+            architecture: x64
+            config: ""
     name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
     runs-on: ${{ matrix.os }}
     steps:
@@ -23,7 +26,7 @@ jobs:
       - uses: bazelbuild/setup-bazelisk@v1
 
       - name: Build
-        run: bazel test ... --nojava_header_compilation -k ${{ matrix.config }}
+        run: bazel build ... -k ${{ matrix.config }}
         shell: bash
 
   build-native-testless:
@@ -33,7 +36,7 @@ jobs:
         include:
           - os: ubuntu-latest
             architecture: x64
-            config: "--config=roborio"
+            config: "--config=for-roborio"
     name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
     runs-on: ${{ matrix.os }}
     steps:
@@ -45,23 +48,3 @@ jobs:
       - name: Build
         run: bazel build ... --nojava_header_compilation -k ${{ matrix.config }}
         shell: bash
-
-  build-docker:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - container: wpilib/ubuntu-base:18.04
-            artifact-name: Linux Release
-    runs-on: ubuntu-latest
-    name: "Build - ${{ matrix.artifact-name }}${{ matrix.architecture }}"
-    container: ${{ matrix.container }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: bazelbuild/setup-bazelisk@v1
-
-      - name: Bazel Info
-        run: bazel info
-
-      - name: Build and Test
-        run: bazel test ... --nojava_header_compilation -k

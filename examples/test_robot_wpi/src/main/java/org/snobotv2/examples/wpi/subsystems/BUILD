@@ -12,9 +12,9 @@ snobot_sim_java_library(
         "//examples/test_robot_base/src/main/java/org/snobotv2/examples/base/subsystems",
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/wpi",
         "//snobot_sim_java/src/main/java/org/snobotv2/sim_wrappers",
-        "@local_allwpilib//:wpilibNewCommands-java",
-        "@local_allwpilib//:wpilibj-java",
-        "@local_allwpilib//:wpimath-java",
-        "@local_navx//:navx-java",
+        "@bazelrio//libraries/java/kauailabs/navx",
+        "@bazelrio//libraries/java/wpilib/new_commands",
+        "@bazelrio//libraries/java/wpilib/wpilibj",
+        "@bazelrio//libraries/java/wpilib/wpimath",
     ],
 )

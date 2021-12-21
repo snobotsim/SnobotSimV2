@@ -7,8 +7,8 @@ snobot_sim_java_library(
     deps = [
         "//examples/test_robot_base/src/main/java/org/snobotv2/examples/base/subsystems",
         "//examples/test_robot_base/src/main/java/org/snobotv2/examples/base/trajectories",
-        "@local_allwpilib//:wpilibNewCommands-java",
-        "@local_allwpilib//:wpilibj-java",
-        "@local_allwpilib//:wpimath-java",
+        "@bazelrio//libraries/java/wpilib/new_commands",
+        "@bazelrio//libraries/java/wpilib/wpilibj",
+        "@bazelrio//libraries/java/wpilib/wpimath",
     ],
 )

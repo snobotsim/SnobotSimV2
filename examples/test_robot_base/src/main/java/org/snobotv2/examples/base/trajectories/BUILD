@@ -6,7 +6,7 @@ snobot_sim_java_library(
     visibility = ["//visibility:public"],
     deps = [
         "//examples/test_robot_base/src/main/java/org/snobotv2/examples/base/subsystems",
-        "@local_allwpilib//:wpilibNewCommands-java",
-        "@local_allwpilib//:wpimath-java",
+        "@bazelrio//libraries/java/wpilib/new_commands",
+        "@bazelrio//libraries/java/wpilib/wpimath",
     ],
 )
