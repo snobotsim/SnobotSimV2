@@ -2,14 +2,14 @@ package org.snobotv2.sim_wrappers;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import org.snobotv2.interfaces.IEncoderWrapper;
 import org.snobotv2.interfaces.IGyroWrapper;
 import org.snobotv2.interfaces.IMotorControllerWrapper;
 import org.snobotv2.module_wrappers.wpi.WpiEncoderWrapper;
-import org.snobotv2.module_wrappers.wpi.WpiSpeedControllerWrapper;
+import org.snobotv2.module_wrappers.wpi.WpiMotorControllerWrapper;
 
 public class DifferentialDrivetrainSimWrapper extends BaseSimWrapper
 {
@@ -27,15 +27,15 @@ public class DifferentialDrivetrainSimWrapper extends BaseSimWrapper
 
     public DifferentialDrivetrainSimWrapper(
         DifferentialDrivetrainSim drivetrainSim,
-        SpeedController leftMotor,
-        SpeedController rightMotor,
+        MotorController leftMotor,
+        MotorController rightMotor,
         Encoder leftEncoder,
         Encoder rightEncoder,
         IGyroWrapper gyro)
     {
         this(drivetrainSim,
-            new WpiSpeedControllerWrapper(leftMotor),
-            new WpiSpeedControllerWrapper(rightMotor),
+            new WpiMotorControllerWrapper(leftMotor),
+            new WpiMotorControllerWrapper(rightMotor),
             new WpiEncoderWrapper(leftEncoder),
             new WpiEncoderWrapper(rightEncoder),
             gyro);

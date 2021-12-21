@@ -2,13 +2,13 @@ package org.snobotv2.sim_wrappers;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.simulation.ElevatorSim;
 import org.snobotv2.interfaces.IDigitalWrapper;
 import org.snobotv2.interfaces.IEncoderWrapper;
 import org.snobotv2.interfaces.IMotorControllerWrapper;
 import org.snobotv2.module_wrappers.wpi.WpiEncoderWrapper;
-import org.snobotv2.module_wrappers.wpi.WpiSpeedControllerWrapper;
+import org.snobotv2.module_wrappers.wpi.WpiMotorControllerWrapper;
 
 public class ElevatorSimWrapper extends BaseSingleGearboxSimWrapper
 {
@@ -20,9 +20,9 @@ public class ElevatorSimWrapper extends BaseSingleGearboxSimWrapper
     private IDigitalWrapper mUpperLimitSwitch;
 
 
-    public ElevatorSimWrapper(ElevatorSim elevatorSim, SpeedController motor, Encoder encoderWrapper)
+    public ElevatorSimWrapper(ElevatorSim elevatorSim, MotorController motor, Encoder encoderWrapper)
     {
-        this(elevatorSim, new WpiSpeedControllerWrapper(motor), new WpiEncoderWrapper(encoderWrapper));
+        this(elevatorSim, new WpiMotorControllerWrapper(motor), new WpiEncoderWrapper(encoderWrapper));
     }
 
     public ElevatorSimWrapper(ElevatorSim elevatorSim, IMotorControllerWrapper motor, IEncoderWrapper encoderWrapper)

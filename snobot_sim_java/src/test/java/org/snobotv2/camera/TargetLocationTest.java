@@ -1,7 +1,7 @@
 package org.snobotv2.camera;
 
-import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNull;

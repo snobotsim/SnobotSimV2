@@ -22,7 +22,7 @@ dependencies {
 
     compile "com.ctre.phoenix:api-java:${ctreVersion}"
     compile "com.ctre.phoenix:wpiapi-java:${ctreVersion}"
-    compile "com.revrobotics.frc:SparkMax-java:${revVersion}"
+    compile "com.revrobotics.frc:REVLib-java:${revVersion}"
 
 
     runtime "org.ejml:ejml-simple:0.38"

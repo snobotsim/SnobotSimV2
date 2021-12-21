@@ -1,7 +1,7 @@
 package org.snobotv2.examples.base.subsystems;
 
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
-import edu.wpi.first.wpilibj.system.plant.DCMotor;
+import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public interface ShooterSubsystem extends Subsystem, AutoCloseable

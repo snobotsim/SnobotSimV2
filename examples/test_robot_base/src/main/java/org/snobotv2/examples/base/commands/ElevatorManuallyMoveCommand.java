@@ -1,6 +1,5 @@
 package org.snobotv2.examples.base.commands;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import org.snobotv2.examples.base.subsystems.ElevatorSubsystem;
@@ -20,6 +19,6 @@ public class ElevatorManuallyMoveCommand extends CommandBase
     @Override
     public void execute()
     {
-        mElevator.moveManually(-mJoystick.getY(GenericHID.Hand.kLeft));
+        mElevator.moveManually(-mJoystick.getLeftY());
     }
 }

@@ -1,6 +1,6 @@
 package org.snobotv2.examples.base.auton_modes;
 
-import edu.wpi.first.wpilibj.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import org.snobotv2.examples.base.trajectories.TrajectoryFactory;
 import org.snobotv2.examples.base.commands.auton.DriveTrajectoryCommand;

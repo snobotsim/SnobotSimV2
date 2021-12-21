@@ -44,7 +44,7 @@ public class BaseUnitTest
 
         try
         {
-            Thread.sleep(150);
+            Thread.sleep(250);
         } catch (InterruptedException e)
         {
             e.printStackTrace(); // NOPMD
@@ -59,21 +59,19 @@ public class BaseUnitTest
         }
     }
 
-    protected void testVoltagePercentage(double expected, WPI_TalonSRX... speedControllers)
+    protected void testVoltagePercentage(double expected, WPI_TalonSRX... motorControllers)
     {
-        for (WPI_TalonSRX speedController : speedControllers)
+        for (WPI_TalonSRX motorController : motorControllers)
         {
-            assertEquals(expected, speedController.getMotorOutputPercent(), DEFAULT_EPSILON, () -> "For " + speedController.getDeviceID());
+            assertEquals(expected, motorController.getMotorOutputPercent(), DEFAULT_EPSILON, () -> "For " + motorController.getDeviceID());
         }
     }
 
-    protected void testVoltagePercentage(double expected, CANSparkMax... speedControllers)
+    protected void testVoltagePercentage(double expected, CANSparkMax... motorControllers)
     {
-        for (CANSparkMax speedController : speedControllers) // NOPMD
+        for (CANSparkMax motorController : motorControllers) // NOPMD
         {
-            assertEquals(expected, speedController.getAppliedOutput(), DEFAULT_EPSILON, () -> "For " + speedController.getDeviceId());
-            // This doesn't work for the simple SpeedController Interface unless you set it directly
-            assertEquals(expected, speedController.get(), DEFAULT_EPSILON, () -> "For " + speedController.getDeviceId());
+            assertEquals(expected, motorController.getAppliedOutput(), DEFAULT_EPSILON, () -> "For " + motorController.getDeviceId());
         }
     }
 

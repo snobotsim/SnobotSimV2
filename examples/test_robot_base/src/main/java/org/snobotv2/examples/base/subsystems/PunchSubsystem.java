@@ -2,6 +2,7 @@ package org.snobotv2.examples.base.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class PunchSubsystem extends SubsystemBase implements AutoCloseable
@@ -11,7 +12,7 @@ public class PunchSubsystem extends SubsystemBase implements AutoCloseable
 
     public PunchSubsystem()
     {
-        mSolenoid = new DoubleSolenoid(0, 1);
+        mSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
         mPressureSensor = new AnalogInput(0);
     }
 

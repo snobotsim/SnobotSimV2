@@ -2,13 +2,13 @@ package org.snobotv2.sim_wrappers;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import org.snobotv2.interfaces.IDigitalWrapper;
 import org.snobotv2.interfaces.IEncoderWrapper;
 import org.snobotv2.interfaces.IMotorControllerWrapper;
 import org.snobotv2.module_wrappers.wpi.WpiEncoderWrapper;
-import org.snobotv2.module_wrappers.wpi.WpiSpeedControllerWrapper;
+import org.snobotv2.module_wrappers.wpi.WpiMotorControllerWrapper;
 
 public class SingleJointedArmSimWrapper extends BaseSingleGearboxSimWrapper
 {
@@ -16,9 +16,9 @@ public class SingleJointedArmSimWrapper extends BaseSingleGearboxSimWrapper
     private IDigitalWrapper mLowerLimitSwitch;
     private IDigitalWrapper mUpperLimitSwitch;
 
-    public SingleJointedArmSimWrapper(SingleJointedArmSim armSim, SpeedController motor, Encoder encoderWrapper)
+    public SingleJointedArmSimWrapper(SingleJointedArmSim armSim, MotorController motor, Encoder encoderWrapper)
     {
-        this(armSim, new WpiSpeedControllerWrapper(motor), new WpiEncoderWrapper(encoderWrapper));
+        this(armSim, new WpiMotorControllerWrapper(motor), new WpiEncoderWrapper(encoderWrapper));
     }
 
     public SingleJointedArmSimWrapper(SingleJointedArmSim armSim, IMotorControllerWrapper motor, IEncoderWrapper encoderWrapper)

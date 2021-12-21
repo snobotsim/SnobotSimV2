@@ -12,7 +12,7 @@ public class RobotContainer
     {
         mCatchallSubsystem = new CatchallSubsystem();
 
-        CameraServer.getInstance().startAutomaticCapture();
+        CameraServer.startAutomaticCapture();
     }
 
     public Command getAutonomousCommand()

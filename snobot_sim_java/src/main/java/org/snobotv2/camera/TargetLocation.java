@@ -1,9 +1,9 @@
 package org.snobotv2.camera;
 
-import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.geometry.Transform2d;
-import edu.wpi.first.wpilibj.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Transform2d;
+import edu.wpi.first.math.geometry.Translation2d;
 
 @SuppressWarnings({"PMD.LinguisticNaming", "PMD.PrematureDeclaration", "PMD.ShortVariable"})
 public class TargetLocation

@@ -3,15 +3,15 @@ package org.snobotv2.examples.rev.subsystems;
 //import com.kauailabs.navx.frc.AHRS;
 
 import com.kauailabs.navx.frc.AHRS;
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANPIDController;
+import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel;
-import com.revrobotics.ControlType;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SimableCANSparkMax;
+import com.revrobotics.SparkMaxPIDController;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.util.Units;
 import org.snobotv2.examples.base.BaseConstants;
 import org.snobotv2.examples.base.subsystems.BaseDrivetrainSubsystem;
 import org.snobotv2.module_wrappers.navx.NavxWrapper;
@@ -30,11 +30,11 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
     private final SimableCANSparkMax mLeadRight; // NOPMD
     private final SimableCANSparkMax mFollowerRight; // NOPMD
 
-    private final CANEncoder mRightEncoder;
-    private final CANEncoder mLeftEncoder;
+    private final RelativeEncoder mRightEncoder;
+    private final RelativeEncoder mLeftEncoder;
 
-    private final CANPIDController mLeftPidController;
-    private final CANPIDController mRightPidController;
+    private final SparkMaxPIDController mLeftPidController;
+    private final SparkMaxPIDController mRightPidController;
 
     private final AHRS mGyro;
 
@@ -82,9 +82,8 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
         mGyro = new AHRS();
 
         mDrive = new DifferentialDrive(mLeadLeft, mLeadRight);
-        mDrive.setRightSideInverted(false);
 
-        for (CANPIDController pidController : new CANPIDController[]{mLeftPidController, mRightPidController})
+        for (SparkMaxPIDController pidController : new SparkMaxPIDController[]{mLeftPidController, mRightPidController})
         {
             setupPidController(pidController, .02, 0, 0, 0.005_44, 144, 144);
         }
@@ -104,7 +103,7 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
         }
     }
 
-    private void setupPidController(CANPIDController pidController, double kp, double ki, double kd, double kff, double maxVelocity, double maxAcceleration)
+    private void setupPidController(SparkMaxPIDController pidController, double kp, double ki, double kd, double kff, double maxVelocity, double maxAcceleration)
     {
         pidController.setP(Units.metersToInches(kp));
         pidController.setI(ki);

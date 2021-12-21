@@ -1,13 +1,13 @@
 package org.snobotv2;
 
-import edu.wpi.first.hal.simulation.PDPDataJNI;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.hal.simulation.PowerDistributionDataJNI;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.simulation.BatterySim;
 import edu.wpi.first.wpilibj.simulation.RoboRioSim;
 
 public final class SnobotSim
 {
-    private static final PowerDistributionPanel PDP = new PowerDistributionPanel();
+    private static final PowerDistribution PDP = new PowerDistribution();
 
     private SnobotSim()
     {
@@ -22,6 +22,6 @@ public final class SnobotSim
         }
         double batteryVoltage = BatterySim.calculateDefaultBatteryLoadedVoltage(currents);
         RoboRioSim.setVInVoltage(batteryVoltage);
-        PDPDataJNI.setVoltage(0, batteryVoltage);
+        PowerDistributionDataJNI.setVoltage(0, batteryVoltage);
     }
 }

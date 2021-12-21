@@ -36,7 +36,7 @@ public class RobotContainer
         mAutonFactory = new AutonomousFactory(mDrivetrain, mElevatorSubsystem, mPunch, mShooter, mLeds);
 
         configureButtonBindings();
-        CameraServer.getInstance().startAutomaticCapture();
+        CameraServer.startAutomaticCapture();
     }
 
     private void configureButtonBindings()

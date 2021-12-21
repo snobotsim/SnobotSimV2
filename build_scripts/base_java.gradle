@@ -4,7 +4,7 @@ repositories {
     maven { url "https://frcmaven.wpi.edu/artifactory/release/" }
     maven { url 'http://devsite.ctr-electronics.com/maven/release/' }
     maven { url 'http://raw.githubusercontent.com/snobotsim/maven_repo/master/development/' }
-    maven { url 'http://www.revrobotics.com/content/sw/max/sdk/maven/' }
+    maven { url 'https://maven.revrobotics.com/' }
 }
 
 
@@ -28,11 +28,12 @@ ext.getCurrentOs = {
 }
 
 ext {
-    wpiVersion = '2021.2.2'
-    opencvVersion = '3.4.7-5'
-    ctreVersion = '5.19.4'
-    revVersion = '1.5.4'
-    navxVersion = '3.1.403'
+    wpiVersion = '2022.1.1-beta-2'
+    opencvYear = '2022'
+    opencvVersion = '4.5.2-1'
+    ctreVersion = '5.20.0-beta-1'
+    revVersion = '2022.0.0'
+    navxVersion = '4.0.435'
 
     nativeOs = getCurrentOs() + getCurrentArch()
 }
@@ -50,15 +51,21 @@ dependencies {
     nativeDesktopZip "edu.wpi.first.cscore:cscore-cpp:${wpiVersion}:${nativeOs}@zip"
     nativeDesktopZip "edu.wpi.first.wpiutil:wpiutil-cpp:${wpiVersion}:${nativeOs}@zip"
     nativeDesktopZip "edu.wpi.first.wpimath:wpimath-cpp:${wpiVersion}:${nativeOs}@zip"
-    nativeDesktopZip "edu.wpi.first.thirdparty.frc2021.opencv:opencv-cpp:${opencvVersion}:${nativeOs}@zip"
+    nativeDesktopZip "edu.wpi.first.thirdparty.frc${opencvYear}.opencv:opencv-cpp:${opencvVersion}:${nativeOs}@zip"
 
     nativeDesktopZip "com.ctre.phoenix.sim:cci-sim:${ctreVersion}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix.sim:simTalonSRX:${ctreVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix.sim:simTalonFX:${ctreVersion}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix.sim:simVictorSPX:${ctreVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix.sim:simPigeonIMU:${ctreVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix.sim:simCANCoder:${ctreVersion}:${nativeOs}@zip"
 
-    nativeDesktopZip "com.revrobotics.frc:SparkMax-driver:${revVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.revrobotics.frc:REVLib-driver:${revVersion}:${nativeOs}@zip"
 }
 
+tasks.withType(JavaCompile) {
+    options.deprecation = true
+}
 
 task extractJniLibraries() {
     def nativeZips = project.configurations.getByName('nativeDesktopZip')
@@ -69,10 +76,10 @@ task extractJniLibraries() {
             .all { Dependency dep ->
                 def ziptree = project.zipTree(nativeZips.files(dep).first())
                 [
-                    "**/*.so*",
-                    "**/*.so",
-                    "**/*.dll",
-                    "**/*.dylib"
+                        "**/*.so*",
+                        "**/*.so",
+                        "**/*.dll",
+                        "**/*.dylib"
                 ].collect { String pattern ->
                     def fc = ziptree.matching { PatternFilterable pat -> pat.include(pattern) }
                     if (extractedFiles == null) extractedFiles = fc

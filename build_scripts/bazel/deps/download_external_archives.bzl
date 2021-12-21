@@ -14,10 +14,15 @@ def download_external_archives():
     # Download BazelRio <3
     http_archive(
         name = "bazelrio",
-        url = "https://github.com/bazelRio/bazelRio/archive/refs/tags/0.3.0.zip",
-        sha256 = "f48dd081ccbca0f63d7577e68399d30ecbf85e935cad08dfa24f56691f4e8c85",
-        strip_prefix = "bazelRio-0.3.0/bazelrio",
+        url = "https://github.com/bazelRio/bazelRio/archive/6dca41c732c637c0f6800ceba8301cf32e6fdec3.tar.gz",
+        sha256 = "58e40ae188945997460d372857ab799ac8712a68b9bfc383e713c31a3daf9ce3",
+        strip_prefix = "bazelRio-6dca41c732c637c0f6800ceba8301cf32e6fdec3/bazelrio",
     )
+
+    #    native.local_repository(
+    #        name = "bazelrio",
+    #        path = "C:/Users/PJ/Documents/GitHub/bazelRio/bazelrio/bazelrio"
+    #    )
 
     # Download Setup python
     http_archive(
