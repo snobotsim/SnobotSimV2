@@ -7,8 +7,8 @@ snobot_sim_java_library(
     deps = [
         "//snobot_sim_java/src/main/java/com/revrobotics:simmable_rev",
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers",
-        "@local_allwpilib//:hal-java",
-        "@local_allwpilib//:wpilibj-java",
-        "@local_rev//:rev-java",
+        "@bazelrio//libraries/java/rev/sparkmax",
+        "@bazelrio//libraries/java/wpilib/hal",
+        "@bazelrio//libraries/java/wpilib/wpilibj",
     ],
 )

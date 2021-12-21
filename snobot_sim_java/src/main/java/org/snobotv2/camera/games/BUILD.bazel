@@ -6,7 +6,7 @@ snobot_sim_java_library(
     visibility = ["//visibility:public"],
     deps = [
         "//snobot_sim_java/src/main/java/org/snobotv2/camera",
-        "@local_allwpilib//:ntcore-java",
-        "@local_allwpilib//:wpimath-java",
+        "@bazelrio//libraries/java/wpilib/ntcore",
+        "@bazelrio//libraries/java/wpilib/wpimath",
     ],
 )

@@ -6,6 +6,6 @@ snobot_sim_java_library(
     visibility = ["//visibility:public"],
     deps = [
         "//snobot_sim_java/src/main/java/org/snobotv2/interfaces",
-        "@local_allwpilib//:hal-java",
+        "@bazelrio//libraries/java/wpilib/hal",
     ],
 )

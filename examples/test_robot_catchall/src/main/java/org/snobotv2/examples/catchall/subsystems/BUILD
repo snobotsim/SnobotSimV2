@@ -5,10 +5,10 @@ snobot_sim_java_library(
     srcs = glob(["*.java"]),
     visibility = ["//examples/test_robot_catchall:__subpackages__"],
     deps = [
-        "@local_allwpilib//:wpilibNewCommands-java",
-        "@local_allwpilib//:wpilibj-java",
-        "@local_ctre//:ctre-java",
-        "@local_navx//:navx-java",
-        "@local_rev//:rev-java",
+        "@bazelrio//libraries/java/ctre/phoenix",
+        "@bazelrio//libraries/java/kauailabs/navx",
+        "@bazelrio//libraries/java/rev/sparkmax",
+        "@bazelrio//libraries/java/wpilib/new_commands",
+        "@bazelrio//libraries/java/wpilib/wpilibj",
     ],
 )

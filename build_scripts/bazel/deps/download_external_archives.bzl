@@ -1,4 +1,3 @@
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 def download_external_archives():
@@ -10,6 +9,14 @@ def download_external_archives():
         sha256 = RULES_JVM_EXTERNAL_SHA,
         strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
         url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
+    )
+
+    # Download BazelRio <3
+    http_archive(
+        name = "bazelrio",
+        url = "https://github.com/bazelRio/bazelRio/archive/refs/tags/0.3.0.zip",
+        sha256 = "f48dd081ccbca0f63d7577e68399d30ecbf85e935cad08dfa24f56691f4e8c85",
+        strip_prefix = "bazelRio-0.3.0/bazelrio",
     )
 
     # Download Setup python
@@ -29,64 +36,12 @@ def download_external_archives():
         url = "https://github.com/buildfoundation/bazel_rules_pmd/archive/v{v}.tar.gz".format(v = rules_pmd_version),
     )
 
-    # native.local_repository(
-    #     name = "wpi_bazel_rules",
-    #     # path = "C:/Users/PJ/Documents/GitHub/wpilib/original/bazel_rules/wpi-bazel-rules",
-    #     path = "/wpi-bazel-rules",
-    # )
-
-    git_repository(
-        name = "wpi_bazel_rules",
-        commit = "c69cbd8788f7ddf7ab06e01f1d8a2ce54bae9073",
-        remote = "https://github.com/bazelRio/wpi-bazel-rules",
-        shallow_since = "1627349829 -0400",
-    )
-
-    # native.local_repository(
-    #     name = "wpi_bazel_deps",
-    #     # path = "C:/Users/PJ/Documents/GitHub/wpilib/original/bazel_rules/wpi-bazel-deps-rules",
-    #     path = "/wpi-bazel-deps-rules",
-    # )
-
-    git_repository(
-        name = "wpi_bazel_deps",
-        commit = "f73b4513e93f23fe507d26e436e9352cd087cf87",
-        remote = "https://github.com/bazelRio/wpi-bazel-deps-rules",
-        shallow_since = "1627277567 -0400",
-    )
-
-    # native.local_repository(
-    #     name = "ctre_bazel_rules",
-    #     path = "C:/Users/PJ/Documents/GitHub/wpilib/original/bazel_rules/ctre-bazel-rules",
-    # )
-
-    git_repository(
-        name = "ctre_bazel_rules",
-        commit = "ee9252eda2bb081c8693806643d84dbefa57fe49",
-        shallow_since = "1627263792 -0400",
-        remote = "https://github.com/bazelRio/ctre-bazel-rules",
-    )
-
-    # native.local_repository(
-    #     name = "rev_bazel_rules",
-    #     path = "C:/Users/PJ/Documents/GitHub/wpilib/original/bazel_rules/rev-bazel-rules",
-    # )
-
-    git_repository(
-        name = "rev_bazel_rules",
-        remote = "https://github.com/bazelRio/rev-bazel-rules",
-        commit = "7aea610272a03817d00fdbd23c83ad303c53a1b3",
-        shallow_since = "1627264581 -0400",
-    )
-
-    # native.local_repository(
-    #     name = "navx_bazel_rules",
-    #     path = "C:/Users/PJ/Documents/GitHub/wpilib/original/bazel_rules/navx-bazel-rules",
-    # )
-
-    git_repository(
-        name = "navx_bazel_rules",
-        commit = "d37b13b87de22b41a2112549a75413d267d7dd17",
-        shallow_since = "1627267733 -0400",
-        remote = "https://github.com/bazelRio/navx-bazel-rules",
+    # Download java_rules, Since bazel 5.0 broke backwards compatibility and PMD won't load otherwise
+    RULES_JAVA_COMMITISH = "7a3c520737581f13691ad94a0f798a3518d869d1"
+    RULES_JAVA_SHA = "bb9c842258f6365edc43c1dda40fc4aa28afa407ba4f6765b784d52f8902dd20"
+    http_archive(
+        name = "rules_java",
+        sha256 = RULES_JAVA_SHA,
+        strip_prefix = "rules_java-{}".format(RULES_JAVA_COMMITISH),
+        url = "https://github.com/bazelbuild/rules_java/archive/{}.tar.gz".format(RULES_JAVA_COMMITISH),
     )

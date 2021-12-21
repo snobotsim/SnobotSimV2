@@ -7,8 +7,8 @@ snobot_sim_java_library(
     deps = [
         "//snobot_sim_java/src/main/java/org/snobotv2/interfaces",
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/wpi",
-        "@local_allwpilib//:hal-java",
-        "@local_allwpilib//:wpilibj-java",
-        "@local_allwpilib//:wpimath-java",
+        "@bazelrio//libraries/java/wpilib/hal",
+        "@bazelrio//libraries/java/wpilib/wpilibj",
+        "@bazelrio//libraries/java/wpilib/wpimath",
     ],
 )

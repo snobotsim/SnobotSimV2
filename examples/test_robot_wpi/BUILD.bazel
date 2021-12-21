@@ -1,9 +1,9 @@
 alias(
-    name = "test_robot_wpi",
+    name = "test_robot_rev",
     actual = "//examples/test_robot_wpi/src/main/java/org/snobotv2/examples/wpi:Main",
 )
 
-alias(
-    name = "sim",
-    actual = "//examples/test_robot_wpi/src/main/java/org/snobotv2/examples/wpi:Main.simulation.gui",
-)
+#alias(
+#    name = "sim",
+#    actual = "//examples/test_robot_wpi/src/main/java/org/snobotv2/examples/wpi:Main.simulation.gui",
+#)
