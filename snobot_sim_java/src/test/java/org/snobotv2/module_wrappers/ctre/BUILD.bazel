@@ -4,7 +4,6 @@ snobot_sim_java_test(
     name = "test",
     srcs = glob(["*.java"]),
     deps = [
-        "//examples/test_robot_ctre/src/main/java/org/snobotv2/examples/ctre",
         "//examples/test_robot_ctre/src/main/java/org/snobotv2/examples/ctre/subsystems",
         "//snobot_sim_java/src/main/java/org/snobotv2/interfaces",
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/ctre",

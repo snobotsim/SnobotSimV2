@@ -7,6 +7,5 @@ snobot_sim_java_library(
     deps = [
         "@bazelrio//libraries/java/wpilib/ntcore",
         "@bazelrio//libraries/java/wpilib/wpimath",
-        "@bazelrio//libraries/java/wpilib/wpiutil",
     ],
 )
