@@ -4,11 +4,11 @@ import com.revrobotics.jni.CANSparkMaxJNI;
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.controller.ProfiledPIDController;
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
-import edu.wpi.first.wpilibj.smartdashboard.SendableRegistry;
-import edu.wpi.first.wpilibj.trajectory.TrapezoidProfile;
+import edu.wpi.first.util.sendable.SendableRegistry;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +26,15 @@ public class SimableCANSparkMax extends CANSparkMax
     private double mArbFFPercentage;
 
     private SimablePidController mLatchedPidController;
-    private final CANEncoder mEncoder;
     private final SimDouble mAppliedOutputSim;
     private final List<SimableCANSparkMax> mFollowers;
 
 
     private final SimableCANSparkMax.PIDFConstants[] mPidConstants;
     private int mActivePidSlot;
+
+    // Encoder helpers that are private in the base class
+    private RelativeEncoder mLatchedEncoder;
 
     @SuppressWarnings({"PMD.ShortVariable"})
     protected class PIDFConstants
@@ -57,10 +59,10 @@ public class SimableCANSparkMax extends CANSparkMax
         @SuppressWarnings("PMD.ShortVariable")
         private void refreshValues(int slotId, SimablePidController simablePid)
         {
-            double kp = CANSparkMaxJNI.c_SparkMax_GetP(m_sparkMax, slotId);
-            double ki = CANSparkMaxJNI.c_SparkMax_GetI(m_sparkMax, slotId);
-            double kd = CANSparkMaxJNI.c_SparkMax_GetD(m_sparkMax, slotId);
-            mF = CANSparkMaxJNI.c_SparkMax_GetFF(m_sparkMax, slotId);
+            double kp = CANSparkMaxJNI.c_SparkMax_GetP(sparkMaxHandle, slotId);
+            double ki = CANSparkMaxJNI.c_SparkMax_GetI(sparkMaxHandle, slotId);
+            double kd = CANSparkMaxJNI.c_SparkMax_GetD(sparkMaxHandle, slotId);
+            mF = CANSparkMaxJNI.c_SparkMax_GetFF(sparkMaxHandle, slotId);
 
             mBasicPidController.setP(kp);
             mProfiledPidController.setP(kp);
@@ -87,7 +89,7 @@ public class SimableCANSparkMax extends CANSparkMax
         }
     }
 
-    private static final class SimablePidController extends CANPIDController
+    private static final class SimablePidController extends SparkMaxPIDController
     {
         private final double[] mMaxAccel = new double[4];
         private final double[] mMaxVel = new double[4];
@@ -100,7 +102,7 @@ public class SimableCANSparkMax extends CANSparkMax
         // These don't seem to work with the provided sim
 
         @Override
-        public CANError setSmartMotionMaxAccel(double maxAccel, int slotID)
+        public REVLibError setSmartMotionMaxAccel(double maxAccel, int slotID)
         {
             if (RobotBase.isReal())
             {
@@ -108,11 +110,11 @@ public class SimableCANSparkMax extends CANSparkMax
             }
 
             mMaxAccel[slotID] = maxAccel;
-            return CANError.kOk;
+            return REVLibError.kOk;
         }
 
         @Override
-        public CANError setSmartMotionMaxVelocity(double maxVel, int slotID)
+        public REVLibError setSmartMotionMaxVelocity(double maxVel, int slotID)
         {
             if (RobotBase.isReal())
             {
@@ -120,7 +122,7 @@ public class SimableCANSparkMax extends CANSparkMax
             }
 
             mMaxVel[slotID] = maxVel;
-            return CANError.kOk;
+            return REVLibError.kOk;
         }
 
         @Override
@@ -161,8 +163,6 @@ public class SimableCANSparkMax extends CANSparkMax
         mFollowers = new ArrayList<>();
         mControlType = ControlType.kDutyCycle;
 
-        mEncoder = getEncoder();
-
         mPidConstants = new PIDFConstants[NUM_PID_SLOTS];
         for (int i = 0; i < NUM_PID_SLOTS; ++i)
         {
@@ -174,13 +174,7 @@ public class SimableCANSparkMax extends CANSparkMax
     // Base class hijacking
 
     @Override
-    public void close()
-    {
-        CANSparkMaxJNI.c_SparkMax_Destroy(m_sparkMax);
-    }
-
-    @Override
-    public CANError follow(final CANSparkMax leader)
+    public REVLibError follow(final CANSparkMax leader)
     {
         if (RobotBase.isReal())
         {
@@ -192,11 +186,11 @@ public class SimableCANSparkMax extends CANSparkMax
             ((SimableCANSparkMax) leader).addSimFollower(this);
         }
 
-        return CANError.kOk;
+        return REVLibError.kOk;
     }
 
     @Override
-    public CANPIDController getPIDController()
+    public SparkMaxPIDController getPIDController()
     {
         if (RobotBase.isReal())
         {
@@ -207,7 +201,7 @@ public class SimableCANSparkMax extends CANSparkMax
     }
 
     @Override
-    /* default */ CANError setpointCommand(double value, ControlType ctrl, int pidSlot, double arbFeedforward, int arbFFUnits)
+    /* default */ REVLibError setpointCommand(double value, ControlType ctrl, int pidSlot, double arbFeedforward, int arbFFUnits)
     {
         if (RobotBase.isReal())
         {
@@ -233,7 +227,14 @@ public class SimableCANSparkMax extends CANSparkMax
             updateFollowers(value);
         }
 
-        return CANError.kOk;
+        return REVLibError.kOk;
+    }
+
+    @Override
+    public RelativeEncoder getEncoder(SparkMaxRelativeEncoder.Type encoderType, int countsPerRev)
+    {
+        mLatchedEncoder = super.getEncoder(encoderType, countsPerRev);
+        return mLatchedEncoder;
     }
 
     //////////////////////////////////////////////////
@@ -241,11 +242,11 @@ public class SimableCANSparkMax extends CANSparkMax
     private double getArbPercentOutput(double arbFeedforward, int arbFFUnits)
     {
         double arbFFPercentage;
-        if (arbFFUnits == CANPIDController.ArbFFUnits.kPercentOut.value)
+        if (arbFFUnits == SparkMaxPIDController.ArbFFUnits.kPercentOut.value)
         {
             arbFFPercentage = arbFeedforward;
         }
-        else if (arbFFUnits == CANPIDController.ArbFFUnits.kVoltage.value)
+        else if (arbFFUnits == SparkMaxPIDController.ArbFFUnits.kVoltage.value)
         {
             arbFFPercentage = arbFeedforward / RobotController.getBatteryVoltage();
         }
@@ -376,12 +377,12 @@ public class SimableCANSparkMax extends CANSparkMax
 
     private double getVelocity()
     {
-        return mEncoder.getVelocity();
+        return mLatchedEncoder.getVelocity();
     }
 
     private double getPosition()
     {
-        return mEncoder.getPosition();
+        return mLatchedEncoder.getPosition();
     }
 
 

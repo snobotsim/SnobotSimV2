@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose2d;
 import org.snobotv2.examples.base.BaseConstants;
 import org.snobotv2.examples.base.subsystems.BaseDrivetrainSubsystem;
 import org.snobotv2.module_wrappers.ctre.CtreEncoderSimWrapper;
@@ -22,7 +22,9 @@ public class CtreDrivetrain extends BaseDrivetrainSubsystem
     private static final double RAW_TO_RPM = 1.0 / 100;
 
     private final WPI_TalonSRX mLeftLead;
+    private final WPI_TalonSRX mLeftFollower;
     private final WPI_TalonSRX mRightLead;
+    private final WPI_TalonSRX mRightFollower;
     private final DifferentialDrive mDrive;
 
     private final ADXRS450_Gyro mGyro;
@@ -34,14 +36,13 @@ public class CtreDrivetrain extends BaseDrivetrainSubsystem
         mLeftLead = new WPI_TalonSRX(BaseConstants.DRIVETRAIN_LEFT_MOTOR_A);
         mRightLead = new WPI_TalonSRX(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_A);
 
-        WPI_TalonSRX leftFollower = new WPI_TalonSRX(BaseConstants.DRIVETRAIN_LEFT_MOTOR_B);
-        leftFollower.follow(mLeftLead);
+        mLeftFollower = new WPI_TalonSRX(BaseConstants.DRIVETRAIN_LEFT_MOTOR_B);
+        mLeftFollower.follow(mLeftLead);
 
-        WPI_TalonSRX rightFollower = new WPI_TalonSRX(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_B);
-        rightFollower.follow(mRightLead);
+        mRightFollower = new WPI_TalonSRX(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_B);
+        mRightFollower.follow(mRightLead);
 
         mDrive = new DifferentialDrive(mLeftLead, mRightLead);
-        mDrive.setRightSideInverted(false);
 
         mGyro = new ADXRS450_Gyro();
 
@@ -62,8 +63,10 @@ public class CtreDrivetrain extends BaseDrivetrainSubsystem
     @Override
     public void close()
     {
-        mLeftLead.free();
-        mRightLead.free();
+        mLeftLead.close();
+        mLeftFollower.close();
+        mRightLead.close();
+        mRightFollower.close();
         mDrive.close();
         mGyro.close();
     }

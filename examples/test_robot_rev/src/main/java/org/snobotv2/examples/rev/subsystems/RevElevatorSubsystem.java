@@ -1,12 +1,12 @@
 package org.snobotv2.examples.rev.subsystems;
 
-import com.revrobotics.CANEncoder;
-import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMaxLowLevel;
-import com.revrobotics.ControlType;
+import com.revrobotics.CANSparkMax.ControlType;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SimableCANSparkMax;
+import com.revrobotics.SparkMaxPIDController;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.snobotv2.examples.base.BaseConstants;
 import org.snobotv2.examples.base.subsystems.ElevatorSubsystem;
@@ -24,8 +24,8 @@ public class RevElevatorSubsystem extends SubsystemBase implements ElevatorSubsy
 
     private final SimableCANSparkMax mLeadMotor; // NOPMD
     private final SimableCANSparkMax mFollowerMotor; // NOPMD
-    private final CANEncoder mEncoder;
-    private final CANPIDController mPidController;
+    private final RelativeEncoder mEncoder;
+    private final SparkMaxPIDController mPidController;
     private ISimWrapper mElevatorSim;
 
     public RevElevatorSubsystem()
@@ -65,7 +65,7 @@ public class RevElevatorSubsystem extends SubsystemBase implements ElevatorSubsy
     public void goToPosition(double inches)
     {
         double meters = Units.inchesToMeters(inches);
-        mPidController.setReference(meters, ControlType.kPosition, POSITION_SLOT, GRAVITY_COMPENSATION_VOLTS, CANPIDController.ArbFFUnits.kVoltage);
+        mPidController.setReference(meters, ControlType.kPosition, POSITION_SLOT, GRAVITY_COMPENSATION_VOLTS, SparkMaxPIDController.ArbFFUnits.kVoltage);
     }
 
     @Override

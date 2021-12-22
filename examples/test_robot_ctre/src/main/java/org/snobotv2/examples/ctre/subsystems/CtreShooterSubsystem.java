@@ -43,8 +43,8 @@ public class CtreShooterSubsystem extends SubsystemBase implements ShooterSubsys
     @Override
     public void close()
     {
-        mLeadMotor.free();
-        mFollwerMotor.free();
+        mLeadMotor.close();
+        mFollwerMotor.close();
     }
 
     @Override

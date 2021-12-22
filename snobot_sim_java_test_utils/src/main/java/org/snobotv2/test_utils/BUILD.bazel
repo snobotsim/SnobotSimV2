@@ -8,7 +8,7 @@ snobot_sim_java_library(
     deps = [
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers",
         "@bazelrio//libraries/java/ctre/phoenix",
-        "@bazelrio//libraries/java/rev/sparkmax",
+        "@bazelrio//libraries/java/rev/revlib",
         "@bazelrio//libraries/java/wpilib/hal",
         "@bazelrio//libraries/java/wpilib/wpilibj",
         "@maven//:org_junit_jupiter_junit_jupiter_api",

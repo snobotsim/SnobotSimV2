@@ -1,6 +1,6 @@
 package org.snobotv2.sim_wrappers;
 
-import edu.wpi.first.hal.simulation.PDPDataJNI;
+import edu.wpi.first.hal.simulation.PowerDistributionDataJNI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ public class PdpSlots
     {
         for (int pdpChannel : mPdpSlots)
         {
-            PDPDataJNI.setCurrent(pdpModule, pdpChannel, current);
+            PowerDistributionDataJNI.setCurrent(pdpModule, pdpChannel, current);
         }
     }
 

@@ -10,11 +10,8 @@ snobot_sim_java_library(
     deps = [
         "//examples/test_robot_catchall/src/main/java/org/snobotv2/examples/catchall/subsystems",
         "@bazelrio//libraries/java/wpilib/cameraserver",
-        "@bazelrio//libraries/java/wpilib/cscore",
         "@bazelrio//libraries/java/wpilib/new_commands",
-        "@bazelrio//libraries/java/wpilib/ntcore",
         "@bazelrio//libraries/java/wpilib/wpilibj",
-        "@bazelrio//libraries/java/wpilib/wpiutil",
     ],
 )
 

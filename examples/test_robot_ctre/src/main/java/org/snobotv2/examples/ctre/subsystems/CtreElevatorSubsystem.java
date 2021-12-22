@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.util.Units;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.snobotv2.examples.base.BaseConstants;
 import org.snobotv2.examples.base.subsystems.ElevatorSubsystem;
@@ -46,8 +46,8 @@ public class CtreElevatorSubsystem extends SubsystemBase implements ElevatorSubs
     @Override
     public void close()
     {
-        mLeadTalon.free();
-        mFollowerTalon.free();
+        mLeadTalon.close();
+        mFollowerTalon.close();
     }
 
     @Override

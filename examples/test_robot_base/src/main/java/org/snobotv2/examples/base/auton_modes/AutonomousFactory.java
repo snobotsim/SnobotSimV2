@@ -1,6 +1,6 @@
 package org.snobotv2.examples.base.auton_modes;
 
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -21,7 +21,7 @@ public class AutonomousFactory
     @SuppressWarnings("PMD.UnusedFormalParameter")
     public AutonomousFactory(DrivetrainSubsystem drivetrain, ElevatorSubsystem elevator, PunchSubsystem punch, ShooterSubsystem shooter, LedSubsystem leds)
     {
-        new PowerDistributionPanel(); // TODO move
+        new PowerDistribution(); // TODO move
         mAutonChooser = new SendableChooser<>();
         mAutonChooser.addOption("Drive Straight Forward Timed", DriveStraightTimedCommand.createCommand(drivetrain, 1, 4));
         mAutonChooser.setDefaultOption("Turn To Angle +90", new TurnToAngle(drivetrain, 90));

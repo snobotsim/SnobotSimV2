@@ -2,11 +2,11 @@ package org.snobotv2.examples.wpi.subsystems;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
+import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose2d;
 import org.snobotv2.examples.base.BaseConstants;
 import org.snobotv2.examples.base.subsystems.BaseDrivetrainSubsystem;
 import org.snobotv2.module_wrappers.wpi.ADXRS450GyroWrapper;
@@ -20,8 +20,8 @@ public class WpiDrivetrain extends BaseDrivetrainSubsystem
     private final PWMVictorSPX mDriveLeftB;
     private final PWMVictorSPX mDriveRightA;
     private final PWMVictorSPX mDriveRightB;
-    private final SpeedControllerGroup mLeftMotors;
-    private final SpeedControllerGroup mRightMotors;
+    private final MotorControllerGroup mLeftMotors;
+    private final MotorControllerGroup mRightMotors;
     private final DifferentialDrive mDrive;
 
     private final Encoder mLeftEncoder;
@@ -37,11 +37,11 @@ public class WpiDrivetrain extends BaseDrivetrainSubsystem
         mDriveRightA = new PWMVictorSPX(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_A);
         mDriveRightB = new PWMVictorSPX(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_B);
 
-        mLeftMotors = new SpeedControllerGroup(mDriveLeftA, mDriveLeftB);
-        mRightMotors = new SpeedControllerGroup(mDriveRightA, mDriveRightB);
+        mLeftMotors = new MotorControllerGroup(mDriveLeftA, mDriveLeftB);
+        mRightMotors = new MotorControllerGroup(mDriveRightA, mDriveRightB);
         mRightMotors.setInverted(true);
 
-        mDrive = new DifferentialDrive(new SpeedControllerGroup(mDriveLeftA, mDriveLeftB), new SpeedControllerGroup(mDriveRightA, mDriveRightB));
+        mDrive = new DifferentialDrive(mLeftMotors, mRightMotors);
 
         mLeftEncoder = new Encoder(BaseConstants.DRIVETRAIN_LEFT_ENCODER_A, BaseConstants.DRIVETRAIN_LEFT_ENCODER_B, false);
         mRightEncoder = new Encoder(BaseConstants.DRIVETRAIN_RIGHT_ENCODER_A, BaseConstants.DRIVETRAIN_RIGHT_ENCODER_B, true);
