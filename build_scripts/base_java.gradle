@@ -28,12 +28,12 @@ ext.getCurrentOs = {
 }
 
 ext {
-    wpiVersion = '2022.1.1-beta-2'
+    wpiVersion = '2022.1.1'
     opencvYear = '2022'
     opencvVersion = '4.5.2-1'
-    ctreVersion = '5.20.0-beta-1'
-    revVersion = '2022.0.0'
-    navxVersion = '4.0.435'
+    ctreVersion = '5.20.2'
+    revVersion = '2022.1.0'
+    navxVersion = '4.0.442'
 
     nativeOs = getCurrentOs() + getCurrentArch()
 }

@@ -2,6 +2,7 @@ package org.snobotv2.module_wrappers.ctre;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.sensors.WPI_PigeonIMU;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.snobotv2.interfaces.IGyroWrapper;
 import org.snobotv2.test_utils.BaseUnitTest;
@@ -21,6 +22,7 @@ public class TestPigeonImu extends BaseUnitTest
         }
     }
 
+    @Disabled("Ribbon cable pigeons have a sim bug in the CTRE library")
     @Test
     public void testBasicAttached()
     {
