@@ -17,6 +17,8 @@ public class InstantaneousMotorSim extends BaseSingleGearboxSimWrapper
     @Override
     public void update()
     {
+        mMotor.update();
+
         double velocity = mMotor.getVoltagePercentage() * mMaxSpeed;
         mPosition += velocity * mUpdatePeriod;
 

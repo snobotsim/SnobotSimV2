@@ -40,6 +40,8 @@ public class SingleJointedArmSimWrapper extends BaseSingleGearboxSimWrapper
     @Override
     public void update()
     {
+        mMotor.update();
+
         // In this method, we update our simulation of what our elevator is doing
         // First, we set our "inputs" (voltages)
         mArmSim.setInput(mMotor.getVoltagePercentage() * RobotController.getBatteryVoltage());
@@ -47,8 +49,10 @@ public class SingleJointedArmSimWrapper extends BaseSingleGearboxSimWrapper
         // Next, we update it. The standard loop time is 20ms.
         mArmSim.update(mUpdatePeriod);
 
+
         // Finally, we set our simulated encoder's readings and simulated battery voltage
         mEncoderWrapper.setDistance(mArmSim.getAngleRads());
+        mEncoderWrapper.setVelocity(mArmSim.getVelocityRadPerSec());
 
         mMotor.setCurrent(mArmSim.getCurrentDrawAmps());
         mPdpSlots.update(mPdpModule, mArmSim.getCurrentDrawAmps());
