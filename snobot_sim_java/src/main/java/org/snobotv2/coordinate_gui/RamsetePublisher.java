@@ -1,12 +1,12 @@
 package org.snobotv2.coordinate_gui;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.math.trajectory.Trajectory;
 
 public class RamsetePublisher
 {
@@ -40,19 +40,19 @@ public class RamsetePublisher
         mTimer.reset();
         mTimer.start();
 
-        double[] data = new double[trajectory.getStates().size() * 5];
+        StringBuilder output = new StringBuilder();
 
-        int index = 0;
         for (Trajectory.State state : trajectory.getStates())
         {
-            data[index++] = state.timeSeconds;
-            data[index++] = state.velocityMetersPerSecond;
-            data[index++] = state.poseMeters.getTranslation().getX();
-            data[index++] = state.poseMeters.getTranslation().getY();
-            data[index++] = state.poseMeters.getRotation().getDegrees();
+            output
+                    .append(state.timeSeconds).append(',')
+                    .append(state.velocityMetersPerSecond).append(',')
+                    .append(state.poseMeters.getTranslation().getX()).append(',')
+                    .append(state.poseMeters.getTranslation().getY()).append(',')
+                    .append(state.poseMeters.getRotation().getDegrees()).append(',');
         }
 
-        mIdealTableEntry.setDoubleArray(data);
+        mIdealTableEntry.forceSetString(output.toString());
     }
 
     public void addMeasurement(Pose2d pose, DifferentialDriveWheelSpeeds goalVelocity, DifferentialDriveWheelSpeeds measuredVelocity)

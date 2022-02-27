@@ -9,3 +9,13 @@ snobot_sim_java_library(
         "@bazelrio//libraries/java/wpilib/wpimath",
     ],
 )
+
+snobot_sim_java_library(
+    name = "rapid_react",
+    srcs = ["RapidReactTargets.java"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//snobot_sim_java/src/main/java/org/snobotv2/camera",
+        "@bazelrio//libraries/java/wpilib/wpimath",
+    ],
+)
