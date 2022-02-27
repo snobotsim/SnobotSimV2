@@ -1,5 +1,6 @@
 package org.snobotv2.camera;
 
+import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -30,7 +31,7 @@ public class LimelightSimulatorTest
             NetworkTableEntry tx = networkTable.getEntry("tx");
             NetworkTableEntry ty = networkTable.getEntry("ty");
 
-            LimelightSimulator sim = new LimelightSimulator(targets, Units.feetToMeters(10), Double.MAX_VALUE, networkTable);
+            LimelightSimulator sim = new LimelightSimulator(targets, new Transform2d(), Units.feetToMeters(10), Double.MAX_VALUE, networkTable);
 
             testInstance.flush();
             assertEquals(0.0, visible.getNumber(-1));

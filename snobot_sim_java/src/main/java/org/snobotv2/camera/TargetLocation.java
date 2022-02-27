@@ -8,7 +8,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 @SuppressWarnings({"PMD.LinguisticNaming", "PMD.PrematureDeclaration", "PMD.ShortVariable"})
 public class TargetLocation
 {
-    private final Pose2d mPosition;
+    private Pose2d mPosition;
 
     private String mName;
     private double mVisibleMinX;
@@ -30,6 +30,12 @@ public class TargetLocation
     public TargetLocation setName(String name)
     {
         mName = name;
+        return this;
+    }
+
+    public TargetLocation setPosition(Pose2d pose)
+    {
+        mPosition = pose;
         return this;
     }
 

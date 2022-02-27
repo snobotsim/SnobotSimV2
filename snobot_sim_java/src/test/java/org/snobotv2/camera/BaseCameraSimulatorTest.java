@@ -2,6 +2,7 @@ package org.snobotv2.camera;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Transform2d;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class BaseCameraSimulatorTest
         targets.add(new TargetLocation(new Pose2d(10, 10, Rotation2d.fromDegrees(0))));
         targets.add(new TargetLocation(new Pose2d(10, 20, Rotation2d.fromDegrees(0))));
 
-        BaseCameraSimulator sim = new BaseCameraSimulator(targets, 50, Double.MAX_VALUE);
+        BaseCameraSimulator sim = new BaseCameraSimulator(targets, new Transform2d(), 50, Double.MAX_VALUE);
 
         TreeMap<CameraToTargetDelta, TargetLocation> visibleTargets;
         Map.Entry<CameraToTargetDelta, TargetLocation> firstEntry;

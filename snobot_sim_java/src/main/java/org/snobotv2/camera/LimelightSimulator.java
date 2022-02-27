@@ -1,5 +1,6 @@
 package org.snobotv2.camera;
 
+import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -23,12 +24,17 @@ public class LimelightSimulator extends BaseCameraSimulator
 
     public LimelightSimulator(List<TargetLocation> targets, double cameraToTargetHeight)
     {
-        this(targets, cameraToTargetHeight, Double.MAX_VALUE, NetworkTableInstance.getDefault().getTable("limelight"));
+        this(targets, new Transform2d(), cameraToTargetHeight, Double.MAX_VALUE, NetworkTableInstance.getDefault().getTable("limelight"));
     }
 
-    public LimelightSimulator(List<TargetLocation> targets, double cameraToTargetHeight, double maxDistance, NetworkTable limelightTable)
+    public LimelightSimulator(List<TargetLocation> targets, Transform2d cameraToRobot, double cameraToTargetHeight, double maxDistance, String limelightTable)
     {
-        super(targets, HORIZONTAL_FOV, maxDistance);
+        this(targets, cameraToRobot, cameraToTargetHeight, maxDistance, NetworkTableInstance.getDefault().getTable(limelightTable));
+    }
+
+    public LimelightSimulator(List<TargetLocation> targets, Transform2d cameraToRobot, double cameraToTargetHeight, double maxDistance, NetworkTable limelightTable)
+    {
+        super(targets, cameraToRobot, HORIZONTAL_FOV, maxDistance);
 
         mCameraToTargetHeight = cameraToTargetHeight;
         mTV = limelightTable.getEntry("tv");
@@ -46,11 +52,11 @@ public class LimelightSimulator extends BaseCameraSimulator
         mTargetArea = targetArea;
     }
 
-    public TargetLocation update(Pose2d pose)
+    public TargetLocation update(Pose2d robotPose)
     {
         TargetLocation bestTarget = null;
 
-        TreeMap<CameraToTargetDelta, TargetLocation> targets = getValidTargets(pose);
+        TreeMap<CameraToTargetDelta, TargetLocation> targets = getValidTargets(robotPose);
         if (targets.isEmpty())
         {
             mTV.setNumber(0);
