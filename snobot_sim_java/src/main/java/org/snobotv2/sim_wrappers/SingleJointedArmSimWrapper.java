@@ -60,7 +60,8 @@ public class SingleJointedArmSimWrapper extends BaseSingleGearboxSimWrapper
         // Finally, we set our simulated encoder's readings and simulated battery voltage
         double position = mArmSim.getAngleRads();
         double velocity = mArmSim.getVelocityRadPerSec();
-        if (mUseDegrees) {
+        if (mUseDegrees)
+        {
             position = Math.toDegrees(position);
             velocity = Math.toDegrees(velocity);
         }
