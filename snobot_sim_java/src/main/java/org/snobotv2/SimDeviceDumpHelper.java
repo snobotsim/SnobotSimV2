@@ -26,8 +26,8 @@ public final class SimDeviceDumpHelper
                 builder
                     .append("    ")
                     .append(valueInfo.name)
-                    .append(", readonly: ")
-                    .append(valueInfo.readonly)
+                    .append(", direction: ")
+                    .append(valueInfo.direction)
                     .append(", type: ")
                     .append(valueInfo.value.getType())
                     .append(" -> ")

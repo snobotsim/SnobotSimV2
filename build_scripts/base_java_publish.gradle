@@ -33,7 +33,7 @@ publishing {
 
         snobot_sim_java(MavenPublication) {
             groupId 'org.snobotv2'
-            version '2022.2.0.0'
+            version '2022.2.1.0'
 
             artifact jar
             artifact javadocJar

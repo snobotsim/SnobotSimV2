@@ -15,6 +15,7 @@ public class SingleJointedArmSimWrapper extends BaseSingleGearboxSimWrapper
     private final SingleJointedArmSim mArmSim;
     private IDigitalWrapper mLowerLimitSwitch;
     private IDigitalWrapper mUpperLimitSwitch;
+    private final boolean mUseDegrees;
 
     public SingleJointedArmSimWrapper(SingleJointedArmSim armSim, MotorController motor, Encoder encoderWrapper)
     {
@@ -23,8 +24,14 @@ public class SingleJointedArmSimWrapper extends BaseSingleGearboxSimWrapper
 
     public SingleJointedArmSimWrapper(SingleJointedArmSim armSim, IMotorControllerWrapper motor, IEncoderWrapper encoderWrapper)
     {
+        this(armSim, motor, encoderWrapper, false);
+    }
+
+    public SingleJointedArmSimWrapper(SingleJointedArmSim armSim, IMotorControllerWrapper motor, IEncoderWrapper encoderWrapper, boolean useDegrees)
+    {
         super(motor, encoderWrapper);
         mArmSim = armSim;
+        mUseDegrees = useDegrees;
     }
 
     public void setLowerLimitSwitch(IDigitalWrapper limitSwitch)
@@ -51,8 +58,16 @@ public class SingleJointedArmSimWrapper extends BaseSingleGearboxSimWrapper
 
 
         // Finally, we set our simulated encoder's readings and simulated battery voltage
-        mEncoderWrapper.setDistance(mArmSim.getAngleRads());
-        mEncoderWrapper.setVelocity(mArmSim.getVelocityRadPerSec());
+        double position = mArmSim.getAngleRads();
+        double velocity = mArmSim.getVelocityRadPerSec();
+        if (mUseDegrees)
+        {
+            position = Math.toDegrees(position);
+            velocity = Math.toDegrees(velocity);
+        }
+
+        mEncoderWrapper.setDistance(position);
+        mEncoderWrapper.setVelocity(velocity);
 
         mMotor.setCurrent(mArmSim.getCurrentDrawAmps());
         mPdpSlots.update(mPdpModule, mArmSim.getCurrentDrawAmps());
