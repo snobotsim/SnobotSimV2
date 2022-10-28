@@ -1,0 +1,9 @@
+alias(
+    name = "test_robot_rev_swerve",
+    actual = "//examples/test_robot_rev_swerve/src/main/java/org/snobotv2/examples/rev_swerve:Main",
+)
+
+#alias(
+#    name = "sim",
+#    actual = "//examples/test_robot_rev/src/main/java/org/snobotv2/examples/rev:Main.simulation.gui",
+#)

@@ -1,0 +1,9 @@
+load("//build_scripts/bazel:java_rules.bzl", "snobot_sim_java_library")
+
+snobot_sim_java_library(
+    name = "drive",
+    srcs = glob(["*.java"]),
+    visibility = ["//visibility:public"],
+    deps = [
+    ],
+)

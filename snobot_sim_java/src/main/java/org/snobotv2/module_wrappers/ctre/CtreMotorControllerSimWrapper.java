@@ -1,23 +1,32 @@
 package org.snobotv2.module_wrappers.ctre;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.RobotController;
 import org.snobotv2.module_wrappers.BaseMotorControllerWrapper;
 
+import java.util.function.DoubleConsumer;
+
 public class CtreMotorControllerSimWrapper extends BaseMotorControllerWrapper
 {
-    private final WPI_TalonSRX mTalon;
+    private final DoubleConsumer mBusVoltageSetter;
 
     public CtreMotorControllerSimWrapper(WPI_TalonSRX motorController)
     {
         super(motorController.getDeviceID(), motorController::getMotorOutputPercent);
-        mTalon = motorController;
+        mBusVoltageSetter = voltage -> motorController.getSimCollection().setBusVoltage(voltage);
+    }
+
+    public CtreMotorControllerSimWrapper(WPI_TalonFX motorController)
+    {
+        super(motorController.getDeviceID(), motorController::getMotorOutputPercent);
+        mBusVoltageSetter = voltage -> motorController.getSimCollection().setBusVoltage(voltage);
     }
 
     @Override
     public void update()
     {
-        mTalon.getSimCollection().setBusVoltage(RobotController.getBatteryVoltage());
+        mBusVoltageSetter.accept(RobotController.getBatteryVoltage());
     }
 
     @Override

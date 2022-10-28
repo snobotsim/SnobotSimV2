@@ -30,7 +30,7 @@ public class CtreEncoderSimWrapper extends BaseEncoderWrapper
         super(
                 () -> talonFx.getSelectedSensorPosition() * ticksToPosition,
                 (double position) -> talonFx.getSimCollection().setIntegratedSensorRawPosition((int) (position / ticksToPosition)),
-                (double velocity) -> talonFx.getSimCollection().setIntegratedSensorVelocity((int) (velocity * 100))
+                (double velocity) -> talonFx.getSimCollection().setIntegratedSensorVelocity((int) (velocity / ticksToPosition * 100))
         );
     }
 }

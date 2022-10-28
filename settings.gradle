@@ -1,10 +1,14 @@
 rootProject.name = 'SnobotSimV2'
 
 include 'snobot_sim_java'
+include 'snobot_swerve_sim'
 
 include 'examples:test_robot_base'
+include 'examples:test_robot_base_swerve'
 include 'examples:test_robot_catchall'
 include 'examples:test_robot_ctre'
+include 'examples:test_robot_ctre_swerve'
 include 'examples:test_robot_rev'
+include 'examples:test_robot_rev_swerve'
 include 'examples:test_robot_wpi'
 include 'snobot_sim_java_test_utils'
