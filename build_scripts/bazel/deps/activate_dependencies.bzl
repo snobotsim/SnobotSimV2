@@ -19,7 +19,8 @@ def activate_dependencies():
             "org.junit.platform:junit-platform-engine:" + platform_version,
             "org.junit.platform:junit-platform-launcher:" + platform_version,
             "org.junit.platform:junit-platform-suite-api:" + platform_version,
+            "org.ejml:ejml-simple:0.38",
         ],
         repositories = ["https://repo1.maven.org/maven2"],
-        #        maven_install_json = "//build_scripts/bazel/deps:maven_install.json",
+        maven_install_json = "//build_scripts/bazel/deps:maven_install.json",
     )

@@ -10,6 +10,6 @@ load("//build_scripts/bazel/deps:activate_dependencies.bzl", "activate_dependenc
 
 activate_dependencies()
 
-#load("@maven//:defs.bzl", "pinned_maven_install")
-#
-#pinned_maven_install()
+load("@maven//:defs.bzl", "pinned_maven_install")
+
+pinned_maven_install()
