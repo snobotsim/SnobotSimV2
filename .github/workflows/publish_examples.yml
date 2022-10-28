@@ -22,7 +22,7 @@ jobs:
         run: mkdir build && python examples/create_standalone_projects.py --output_directory=build
 
       - name: Publish Projects
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: ExampleProjects
           path: build
