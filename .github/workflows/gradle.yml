@@ -22,16 +22,35 @@ jobs:
     runs-on: ${{ matrix.platform.os }}
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
 
     - name: Set up Java
-      uses: actions/setup-java@v1
+      uses: actions/setup-java@v3
       with:
-        java-version: 1.11
+        distribution: 'zulu'
+        java-version: 11
         architecture: ${{ matrix.platform.architecture }}
 
+    - name: Get current time
+      uses: josStorer/get-current-time@v2.0.2
+      id: current-time
+      with:
+        format: YYYY.MM.DD-HH
+
     - name: Build Simulator
-      run: ./gradlew build publish ${{ matrix.platform.build-options }} --continue
+      run: ./gradlew build publish -Pversion="${{ steps.current-time.outputs.formattedTime }}" ${{ matrix.platform.build-options }} --continue
+
+    - name: Create vendordep UUID
+      id: generate-uuid
+      uses: filipstefansson/uuid-action@v1
+      if: runner.os == 'Linux'
+
+    - name: Generate Vendor Dep template
+      run: |
+        export VERSION=${{ steps.current-time.outputs.formattedTime }}
+        export GUID=${{ steps.generate-uuid.outputs.uuid }}
+        envsubst < snobotsim_vendordep_template.json > build/maven_output/SnobotSim.json
+      if: runner.os == 'Linux'
 
     - name: Publish Artifacts
       uses: actions/upload-artifact@v1

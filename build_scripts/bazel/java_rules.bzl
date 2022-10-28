@@ -9,16 +9,17 @@ def __styleguide(name, srcs):
         rulesets = ["//styleguide:pmd_rules"],
     )
 
-def snobot_sim_java_library(name, srcs, **kwargs):
+def snobot_sim_java_library(name, srcs, disable_pmd = True, **kwargs):
     java_library(
         name = name,
         srcs = srcs,
         **kwargs
     )
 
-    __styleguide(name, srcs)
+    if not disable_pmd:
+        __styleguide(name, srcs)
 
-def snobot_sim_java_test(name, srcs, deps = [], runtime_deps = [], **kwargs):
+def snobot_sim_java_test(name, srcs, deps = [], runtime_deps = [], disable_pmd = True, **kwargs):
     junit_deps = [
         "@maven//:org_junit_jupiter_junit_jupiter_api",
         "@maven//:org_junit_jupiter_junit_jupiter_params",
@@ -48,9 +49,10 @@ def snobot_sim_java_test(name, srcs, deps = [], runtime_deps = [], **kwargs):
     #        **kwargs
     #    )
 
-    __styleguide(name, srcs)
+    if not disable_pmd:
+        __styleguide(name, srcs)
 
-def snobot_sim_java_robot(name, srcs = [], **kwargs):
+def snobot_sim_java_robot(name, srcs = [], disable_pmd = True, **kwargs):
     robot_java_binary(
         name = name,
         team_number = 174,
@@ -58,4 +60,5 @@ def snobot_sim_java_robot(name, srcs = [], **kwargs):
         **kwargs
     )
 
-    __styleguide(name, srcs = srcs)
+    if not disable_pmd:
+        __styleguide(name, srcs = srcs)

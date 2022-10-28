@@ -20,7 +20,7 @@ jobs:
     name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - uses: bazelbuild/setup-bazelisk@v1
@@ -40,7 +40,7 @@ jobs:
     name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - uses: bazelbuild/setup-bazelisk@v1
@@ -48,3 +48,17 @@ jobs:
       - name: Build
         run: bazel build ... --nojava_header_compilation -k ${{ matrix.config }}
         shell: bash
+
+  repin-maven:
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: bazelbuild/setup-bazelisk@v1
+      - run:  bazel run @unpinned_maven//:pin
+      - run:  git diff HEAD
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Re-pinned maven
+          path: build_scripts/bazel/deps/maven_install.json
