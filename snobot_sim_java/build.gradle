@@ -20,6 +20,7 @@ dependencies {
     compile wpilibTools.deps.wpilibJava("wpimath")
     compile wpilibTools.deps.wpilibJava("ntcore")
     compile wpilibTools.deps.wpilibJava("wpilibNewCommands")
+    compile project(":snobot_swerve_sim")
 
     compile "com.ctre.phoenix:api-java:${ctreVersion}"
     compile "com.ctre.phoenix:wpiapi-java:${ctreVersion}"

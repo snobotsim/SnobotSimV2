@@ -10,6 +10,11 @@
       "groupId": "org.snobotv2",
       "artifactId": "snobot_sim_java",
       "version": "$VERSION"
+    },
+    {
+      "groupId": "org.snobotv2",
+      "artifactId": "snobot_swerve_sim",
+      "version": "$VERSION"
     }
   ],
   "jniDependencies": [],

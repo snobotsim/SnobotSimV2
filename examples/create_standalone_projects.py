@@ -4,6 +4,16 @@ import argparse
 import os
 
 
+class ExampleConfig:
+    def __init__(
+        self, package_name, output_project, vendor_props, base_project="test_robot_base"
+    ):
+        self.package_name = package_name
+        self.output_project = output_project
+        self.vendor_props = vendor_props
+        self.base_project = base_project
+
+
 def run():
 
     parser = argparse.ArgumentParser()
@@ -14,20 +24,35 @@ def run():
     default_vendor_props = ["SnobotSim.json", "WPILibNewCommands.json"]
 
     projects = []
-    projects.append(("rev", "Rev", ["navx_frc.json", "REVRobotics.json"]))
-    projects.append(("ctre", "Ctre", ["Phoenix.json"]))
-    projects.append(("wpi", "Wpi", []))
+    projects.append(ExampleConfig("rev", "Rev", ["navx_frc.json", "REVLib.json"]))
+    projects.append(ExampleConfig("ctre", "Ctre", ["Phoenix.json"]))
+    projects.append(ExampleConfig("wpi", "Wpi", []))
     projects.append(
-        ("catchall", "Catchall", ["navx_frc.json", "REVRobotics.json", "Phoenix.json"])
+        ExampleConfig(
+            "catchall", "Catchall", ["navx_frc.json", "REVLib.json", "Phoenix.json"]
+        )
+    )
+    projects.append(
+        ExampleConfig(
+            "ctre_swerve", "CtreSwerve", ["Phoenix.json"], "test_robot_base_swerve"
+        )
+    )
+    projects.append(
+        ExampleConfig(
+            "rev_swerve",
+            "RevSwerve",
+            ["REVLib.json", "Phoenix.json"],
+            "test_robot_base_swerve",
+        )
     )
 
     this_dir = os.path.dirname(os.path.abspath(__file__))
 
-    for package_name, output_project, vendor_props in projects:
-        base_project = os.path.join(this_dir, "test_robot_base")
-        local_project = os.path.join(this_dir, f"test_robot_{package_name}")
+    for config in projects:
+        base_project = os.path.join(this_dir, config.base_project)
+        local_project = os.path.join(this_dir, f"test_robot_{config.package_name}")
         output_project = os.path.join(
-            args.output_directory, f"RobotForBasicSimTesting{output_project}"
+            args.output_directory, f"RobotForBasicSimTesting{config.output_project}"
         )
 
         print("Copying")
@@ -45,7 +70,7 @@ def run():
             template_contents = template_file.read()
 
             with open(os.path.join(output_project, "build.gradle"), "w") as of:
-                of.write(template_contents.replace("$(SIMTYPE)", package_name))
+                of.write(template_contents.replace("$(SIMTYPE)", config.package_name))
 
         # Copy the source from this project and the base
         distutils.dir_util.copy_tree(local_project + "/src", output_project + "/src")
@@ -57,7 +82,7 @@ def run():
             shutil.rmtree(dest_vendordeps)
         os.mkdir(dest_vendordeps)
 
-        all_vendor_props = vendor_props + default_vendor_props
+        all_vendor_props = config.vendor_props + default_vendor_props
         for vp in all_vendor_props:
             shutil.copy(
                 os.path.join(this_dir, "project_files", "vendor_props", vp),
