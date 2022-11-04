@@ -6,7 +6,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Twist2d;
-import edu.wpi.first.wpilibj.drive.Vector2d;
+import edu.wpi.first.wpilibj.shim.Vector2d;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -167,12 +167,12 @@ public class QuadSwerveSim {
         Vector2d accel = robotForceInFieldRefFrame.times(1 / m_robotMasskg).getVector2d();
 
         //Trapezoidal integration
-        Vector2d velocity = new Vector2d( m_velPrev.x + (accel.x + m_accelPrev.x) / 2 * dtSeconds,
-                                          m_velPrev.y + (accel.y + m_accelPrev.y) / 2 * dtSeconds);
+        Vector2d velocity = new Vector2d( m_velPrev.getX() + (accel.getX() + m_accelPrev.getX()) / 2 * dtSeconds,
+                                          m_velPrev.getY() + (accel.getY() + m_accelPrev.getY()) / 2 * dtSeconds);
 
         //Trapezoidal integration
-        Translation2d posChange = new Translation2d( (velocity.x + m_velPrev.x) / 2 * dtSeconds,
-                                                     (velocity.y + m_velPrev.y) / 2 * dtSeconds);
+        Translation2d posChange = new Translation2d( (velocity.getX() + m_velPrev.getX()) / 2 * dtSeconds,
+                                                     (velocity.getY() + m_velPrev.getY()) / 2 * dtSeconds);
 
         //Twist needs to be relative to robot reference frame
         posChange = posChange.rotateBy(m_curPose.getRotation().unaryMinus());

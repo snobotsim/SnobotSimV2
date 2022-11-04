@@ -20,7 +20,7 @@ public class RobotContainer
 
     public RobotContainer()
     {
-        mDrivetrain = new DriveSubsystem();
+        mDrivetrain = new DriveSubsystem(true);
         configureButtonBindings();
         addTestCommands();
     }

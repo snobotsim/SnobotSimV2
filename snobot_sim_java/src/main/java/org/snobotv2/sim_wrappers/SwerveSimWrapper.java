@@ -1,5 +1,6 @@
 package org.snobotv2.sim_wrappers;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.simulation.swerve.QuadSwerveSim;
 import edu.wpi.first.wpilibj.simulation.swerve.SwerveModuleSim;
 import org.snobotv2.interfaces.IGyroWrapper;
@@ -40,5 +41,10 @@ public class SwerveSimWrapper extends BaseSimWrapper
         }
         mSwerveSim.update(mUpdatePeriod);
         mGyro.setAngle(-mSwerveSim.getCurPose().getRotation().getDegrees());
+    }
+
+    public Pose2d getPose()
+    {
+        return mSwerveSim.getCurPose();
     }
 }
