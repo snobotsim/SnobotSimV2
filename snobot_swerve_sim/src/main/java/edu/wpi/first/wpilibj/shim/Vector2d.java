@@ -1,5 +1,6 @@
 package edu.wpi.first.wpilibj.shim;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 
 public class Vector2d extends Translation2d
@@ -24,10 +25,9 @@ public class Vector2d extends Translation2d
         return getX() * vec.getX() + getY() * vec.getY();
     }
 
-    public Vector2d rotate(double degrees)
+    public Vector2d rotateBy(Rotation2d other)
     {
-        edu.wpi.first.wpilibj.drive.Vector2d vector = new edu.wpi.first.wpilibj.drive.Vector2d(getX(), getY());
-        vector.rotate(degrees);
-        return new Vector2d(vector.x, vector.y);
+        Translation2d rotated = super.rotateBy(other);
+        return new Vector2d(rotated.getX(), rotated.getY());
     }
 }

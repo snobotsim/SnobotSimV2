@@ -27,7 +27,7 @@ dependencies {
     compile "com.revrobotics.frc:REVLib-java:${revVersion}"
 
 
-    runtime "org.ejml:ejml-simple:0.38"
+    runtime "org.ejml:ejml-simple:0.41"
 
     testRuntime wpilibTools.deps.wpilibJava("ntcore")
 

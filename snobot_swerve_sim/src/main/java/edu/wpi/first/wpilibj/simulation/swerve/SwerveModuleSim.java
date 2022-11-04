@@ -150,7 +150,7 @@ public class SwerveModuleSim {
 
     public void update(double dtSeconds) {
         Vector2d azimuthUnitVec = new Vector2d(1 , 0);
-        azimuthUnitVec = azimuthUnitVec.rotate(m_curAzmthAngle.getDegrees());
+        azimuthUnitVec = azimuthUnitVec.rotateBy(m_curAzmthAngle);
 
         // Assume the wheel does not lose traction along its wheel direction (on-tread)
         double velocityAlongAzimuth = getModRelTransVel(dtSeconds).dot(azimuthUnitVec);
@@ -172,7 +172,7 @@ public class SwerveModuleSim {
         double yvel = (m_curModulePose.getTranslation().getY()
                        - m_prevModulePose.getTranslation().getY()) / dtSeconds;
         Vector2d moduleTranslationVec = new Vector2d(xvel , yvel);
-        moduleTranslationVec = moduleTranslationVec.rotate(-1.0 * m_curModulePose.getRotation().getDegrees());
+        moduleTranslationVec = moduleTranslationVec.rotateBy(m_curModulePose.getRotation().unaryMinus());
         return moduleTranslationVec;
     }
 
@@ -185,7 +185,7 @@ public class SwerveModuleSim {
     ForceAtPose2d getCrossTreadFricForce(Force2d netForce, double dtSeconds) {
         //Project net force onto cross-tread vector
         Vector2d crossTreadUnitVector = new Vector2d(0 , 1);
-        crossTreadUnitVector = crossTreadUnitVector.rotate(m_curAzmthAngle.getDegrees());
+        crossTreadUnitVector = crossTreadUnitVector.rotateBy(m_curAzmthAngle);
         m_crossTreadVelMag = getModRelTransVel(dtSeconds).dot(crossTreadUnitVector);
         m_crossTreadForceMag = netForce.getVector2d().dot(crossTreadUnitVector);
 

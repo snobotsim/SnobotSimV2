@@ -19,7 +19,7 @@ dependencies {
     compile wpilibTools.deps.wpilibJava("ntcore")
     compile wpilibTools.deps.wpilibJava("wpilibNewCommands")
 
-    runtime "org.ejml:ejml-simple:0.38"
+    runtime "org.ejml:ejml-simple:0.41"
 
 
     compile project(":snobot_sim_java")
