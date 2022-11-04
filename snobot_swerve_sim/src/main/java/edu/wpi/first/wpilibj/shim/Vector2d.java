@@ -7,7 +7,6 @@ public class Vector2d extends Translation2d
 {
     public Vector2d()
     {
-
     }
 
     public Vector2d(double x, double y)
