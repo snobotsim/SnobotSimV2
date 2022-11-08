@@ -107,6 +107,14 @@ public class SwerveModule implements BaseSwerveModule
         }
     }
 
+    @Override
+    public void close()
+    {
+        mAbsoluteEncoder.close();
+        mDriveMotor.close();
+        mAzimuthMotor.close();
+    }
+
     /**
      * Returns the current state of the module.
      *
@@ -159,7 +167,6 @@ public class SwerveModule implements BaseSwerveModule
             mDriveController.setReference(mDesiredState.speedMetersPerSecond, CANSparkMax.ControlType.kVelocity);
         }
         mAzimuthController.setReference(mDesiredState.angle.getDegrees(), CANSparkMax.ControlType.kPosition);
-
     }
 
     @Override

@@ -1,6 +1,5 @@
 package org.snobotv2.examples.base_swerve.subsystems;
 
-import com.ctre.phoenix.sensors.WPI_PigeonIMU;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -10,19 +9,20 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.util.sendable.SendableBuilder;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.snobotv2.examples.base_swerve.Constants;
-import org.snobotv2.module_wrappers.ctre.CtrePigeonImuWrapper;
+import org.snobotv2.module_wrappers.wpi.ADXRS450GyroWrapper;
 import org.snobotv2.sim_wrappers.SwerveModuleSimWrapper;
 import org.snobotv2.sim_wrappers.SwerveSimWrapper;
 
 import java.util.List;
 
-public class BaseSwerveDriveSubsystem extends SubsystemBase
+public class BaseSwerveDriveSubsystem extends SubsystemBase implements AutoCloseable
 {
     // Distance between centers of right and left wheels on robot
     private static final double kTrackWidth = Units.inchesToMeters(20.733);
@@ -48,7 +48,7 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase
 
     private final BaseSwerveModule[] mModules;
 
-    private final WPI_PigeonIMU mGyro;
+    private final ADXRS450_Gyro mGyro;
 
     private final Field2d mField;
     private final SwerveDriveOdometry mOdometry;
@@ -74,9 +74,9 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase
         REAR_RIGHT
     }
 
-    protected BaseSwerveDriveSubsystem(ModuleFactory factory)
+    protected BaseSwerveDriveSubsystem(ModuleFactory factory, boolean addDebugTab)
     {
-        mGyro = new WPI_PigeonIMU(Constants.GYRO_PORT);
+        mGyro = new ADXRS450_Gyro();
         mOdometry = new SwerveDriveOdometry(kDriveKinematics, mGyro.getRotation2d());
 
         mFrontLeft = factory.createModule(
@@ -114,15 +114,20 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase
             mRearRight
         };
 
-        // Shuffleboard debugging
-        ShuffleboardTab debugTab = Shuffleboard.getTab("Drivetrain");
-        debugTab.add("SwerveState", new SwerveModuleSendable());
-        for (BaseSwerveModule module : mModules)
-        {
-            debugTab.add(module.getName() + " Module", module);
-        }
         mField = new Field2d();
-        debugTab.add(mField);
+
+        // Shuffleboard debugging
+        if (addDebugTab)
+        {
+            ShuffleboardTab debugTab = Shuffleboard.getTab("Drivetrain");
+
+            debugTab.add("SwerveState", new SwerveModuleSendable());
+            for (BaseSwerveModule module : mModules) // NOPMD(CloseResource)
+            {
+                debugTab.add(module.getName() + " Module", module);
+            }
+            debugTab.add(mField);
+        }
 
         // Simulation
         if (RobotBase.isSimulation())
@@ -132,13 +137,34 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase
                     mFrontRight.getSimWrapper(),
                     mRearLeft.getSimWrapper(),
                     mRearRight.getSimWrapper());
-            mSimulator = new SwerveSimWrapper(kWheelBase, kTrackWidth, 64.0, 1.0, moduleSims, new CtrePigeonImuWrapper(mGyro));
+            mSimulator = new SwerveSimWrapper(kWheelBase, kTrackWidth, 64.0, 1.0, moduleSims, new ADXRS450GyroWrapper(mGyro));
         }
+    }
+
+    @Override
+    public void close()
+    {
+        for (BaseSwerveModule module : mModules) // NOPMD(CloseResource)
+        {
+            module.close();
+        }
+
+        mGyro.close();
+    }
+
+
+    public List<SwerveModuleState> getModuleStates()
+    {
+        return List.of(
+                mFrontLeft.getState(),
+                mFrontRight.getState(),
+                mRearLeft.getState(),
+                mRearRight.getState());
     }
 
     public void stop()
     {
-        for (BaseSwerveModule module : mModules)
+        for (BaseSwerveModule module : mModules) // NOPMD(CloseResource)
         {
             module.stop();
         }
@@ -157,7 +183,7 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase
         public void initSendable(SendableBuilder builder)
         {
             builder.setSmartDashboardType("SwerveDrive");
-            for (BaseSwerveModule module : mModules)
+            for (BaseSwerveModule module : mModules) // NOPMD(CloseResource)
             {
                 builder.addDoubleProperty(module.getName() + "/CurrentStateAngle", () -> module.getState().angle.getDegrees(), null);
                 builder.addDoubleProperty(module.getName() + "/CurrentStateSpeed", () -> module.getState().speedMetersPerSecond, null);
@@ -177,18 +203,24 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase
     @Override
     public void periodic()
     {
-        for (BaseSwerveModule module : mModules)
+        for (BaseSwerveModule module : mModules) // NOPMD(CloseResource)
         {
             module.periodic();
         }
 
         // Update the odometry in the periodic block
-        mOdometry.update(
-                mGyro.getRotation2d(),
-                mFrontLeft.getState(),
-                mFrontRight.getState(),
-                mRearLeft.getState(),
-                mRearRight.getState());
+        if (RobotBase.isSimulation())
+        {
+            mOdometry.resetPosition(mSimulator.getPose(), mGyro.getRotation2d());
+        } else
+        {
+            mOdometry.update(
+                    mGyro.getRotation2d(),
+                    mFrontLeft.getState(),
+                    mFrontRight.getState(),
+                    mRearLeft.getState(),
+                    mRearRight.getState());
+        }
 
         mField.setRobotPose(mOdometry.getPoseMeters());
     }
@@ -270,7 +302,7 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase
      */
     public void resetEncoders()
     {
-        for (BaseSwerveModule module : mModules)
+        for (BaseSwerveModule module : mModules) // NOPMD(CloseResource)
         {
             module.resetEncoders();
         }

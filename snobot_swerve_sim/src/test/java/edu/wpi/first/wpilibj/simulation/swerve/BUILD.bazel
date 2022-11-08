@@ -1,0 +1,13 @@
+load("//build_scripts/bazel:java_rules.bzl", "snobot_sim_java_test")
+
+snobot_sim_java_test(
+    name = "test",
+    srcs = glob(["*.java"]),
+    deps = [
+        "//snobot_swerve_sim/src/main/java/edu/wpi/first/wpilibj/shim",
+        "//snobot_swerve_sim/src/main/java/edu/wpi/first/wpilibj/simulation/swerve",
+        "//snobot_swerve_sim/src/test/java/edu/wpi/first/wpilibj/utils",
+        "@bazelrio//libraries/java/wpilib/wpilibj",
+        "@bazelrio//libraries/java/wpilib/wpimath",
+    ],
+)

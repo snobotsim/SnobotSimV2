@@ -10,6 +10,11 @@ public class DriveSubsystem extends BaseSwerveDriveSubsystem
 {
     public DriveSubsystem()
     {
-        super(SwerveModule::new);
+        this(false);
+    }
+
+    public DriveSubsystem(boolean addDebugTab)
+    {
+        super(SwerveModule::new, addDebugTab);
     }
 }

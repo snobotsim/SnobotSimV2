@@ -4,7 +4,7 @@ import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N2;
-import edu.wpi.first.wpilibj.drive.Vector2d;
+import edu.wpi.first.wpilibj.shim.Vector2d;
 import org.ejml.simple.SimpleMatrix;
 
 public class Force2d {
@@ -56,7 +56,7 @@ public class Force2d {
    * @param forceVec vector which represents some force in two dimensions
    */
   public Force2d(Vector2d forceVec) {
-    this(forceVec.x, forceVec.y);
+    this(forceVec.getX(), forceVec.getY());
   }
 
   /**

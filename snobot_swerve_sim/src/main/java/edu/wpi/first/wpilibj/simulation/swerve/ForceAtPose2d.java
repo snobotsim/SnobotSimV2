@@ -2,7 +2,7 @@ package edu.wpi.first.wpilibj.simulation.swerve;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Transform2d;
-import edu.wpi.first.wpilibj.drive.Vector2d;
+import edu.wpi.first.wpilibj.shim.Vector2d;
 import java.util.Objects;
 
 public class ForceAtPose2d {
@@ -42,7 +42,7 @@ public class ForceAtPose2d {
   }
 
   public double vector2dCross(Vector2d left, Vector2d other) {
-    return left.x * other.y - left.y * other.x;
+    return left.getX() * other.getY() - left.getY() * other.getX();
   }
 
   public Force2d getForceInRefFrame(Pose2d refFrame) {

@@ -17,7 +17,7 @@ dependencies {
     compile wpilibTools.deps.wpilibJava("wpimath")
     compile wpilibTools.deps.wpilibJava("wpiutil")
     compile wpilibTools.deps.wpilibJava("wpilibj")
-    compile "org.ejml:ejml-simple:0.38"
+    compile "org.ejml:ejml-simple:0.41"
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.4.2'

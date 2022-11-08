@@ -11,7 +11,7 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.drive.Vector2d;
+import edu.wpi.first.wpilibj.shim.Vector2d;
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj.simulation.EncoderSim;
 import edu.wpi.first.wpilibj.utils.SimpleCSVWriter;
@@ -103,7 +103,7 @@ public class SwerveModuleSimTest {
       var u_azmth = azmthMotor.get() * currentBatteryVoltage;
       sim.setInputVoltages(u_wheel, u_azmth);
 
-      var modulePose = new Pose2d(TEST_DIR_XHAT.x * wheelPosRad * WHEEL_RAD_M, 0, new Rotation2d());
+      var modulePose = new Pose2d(TEST_DIR_XHAT.getX() * wheelPosRad * WHEEL_RAD_M, 0, new Rotation2d());
       sim.setModulePose(modulePose);
 
       sim.update(SIM_TS);
@@ -180,8 +180,8 @@ public class SwerveModuleSimTest {
       var u_azmth = azmthMotor.get() * currentBatteryVoltage;
       sim.setInputVoltages(u_wheel, u_azmth);
 
-      var modulePose = new Pose2d(TEST_DIR_XHAT.x * wheelPosRad * WHEEL_RAD_M,
-          TEST_DIR_XHAT.y * wheelPosRad * WHEEL_RAD_M, new Rotation2d());
+      var modulePose = new Pose2d(TEST_DIR_XHAT.getX() * wheelPosRad * WHEEL_RAD_M,
+          TEST_DIR_XHAT.getY() * wheelPosRad * WHEEL_RAD_M, new Rotation2d());
       sim.setModulePose(modulePose);
 
       sim.update(SIM_TS);

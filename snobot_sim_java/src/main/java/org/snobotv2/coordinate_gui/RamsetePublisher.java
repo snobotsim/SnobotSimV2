@@ -52,7 +52,7 @@ public class RamsetePublisher
                     .append(state.poseMeters.getRotation().getDegrees()).append(',');
         }
 
-        mIdealTableEntry.forceSetString(output.toString());
+        mIdealTableEntry.setString(output.toString());
     }
 
     public void addMeasurement(Pose2d pose, DifferentialDriveWheelSpeeds goalVelocity, DifferentialDriveWheelSpeeds measuredVelocity)
