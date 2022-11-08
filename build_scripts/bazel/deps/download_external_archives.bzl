@@ -12,17 +12,22 @@ def download_external_archives():
     )
 
     # Download BazelRio <3
+    # http_archive(
+    #     name = "bazelrio",
+    #     url = "https://github.com/bazelRio/bazelRio/archive/refs/tags/0.10.0.zip",
+    #     sha256 = "18b109dbd5204910600823e6c9ff405fa7ed7c43d0a78f24077f8187311745a9",
+    #     strip_prefix = "bazelRio-0.10.0/bazelrio",
+    # )
     http_archive(
         name = "bazelrio",
-        url = "https://github.com/bazelRio/bazelRio/archive/refs/tags/0.10.0.zip",
-        sha256 = "18b109dbd5204910600823e6c9ff405fa7ed7c43d0a78f24077f8187311745a9",
-        strip_prefix = "bazelRio-0.10.0/bazelrio",
+        url = "https://github.com/pjreiniger/bazelRio/archive/8bf0ff887158bf1d5552c9dde417ff01c6203672.tar.gz",
+        sha256 = "228a200c85b50564b5ef50de49bdbd6d75e84038c1ef05c61c09070d5ffd2b1e",
+        strip_prefix = "bazelrio-8bf0ff887158bf1d5552c9dde417ff01c6203672/bazelrio",
     )
-
-    #    native.local_repository(
-    #        name = "bazelrio",
-    #        path = "C:/Users/PJ/Documents/GitHub/bazelRio/bazelrio/bazelrio"
-    #    )
+    # native.local_repository(
+    #     name = "bazelrio",
+    #     path = "C:/Users/PJ/Documents/GitHub/bazelRio/bazelrio/bazelrio"
+    # )
 
     # Download Setup python
     http_archive(

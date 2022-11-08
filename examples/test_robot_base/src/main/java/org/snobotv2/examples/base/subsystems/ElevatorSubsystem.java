@@ -27,7 +27,8 @@ public interface ElevatorSubsystem extends Subsystem, AutoCloseable
                     ElevatorSimConstants.kCarriageMass,
                     ElevatorSimConstants.kElevatorDrumRadius,
                     ElevatorSimConstants.kMinElevatorHeight,
-                    ElevatorSimConstants.kMaxElevatorHeight);
+                    ElevatorSimConstants.kMaxElevatorHeight,
+                    true);
         }
 
         private ElevatorSimConstants()

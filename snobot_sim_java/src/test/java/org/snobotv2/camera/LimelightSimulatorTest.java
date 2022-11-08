@@ -27,31 +27,32 @@ public class LimelightSimulatorTest
         try (NetworkTableInstance testInstance = NetworkTableInstance.create())
         {
             NetworkTable networkTable = testInstance.getTable("limelight");
-            NetworkTableEntry visible = networkTable.getEntry("tv");
-            NetworkTableEntry tx = networkTable.getEntry("tx");
-            NetworkTableEntry ty = networkTable.getEntry("ty");
+            try (NetworkTableEntry visible = networkTable.getEntry("tv");
+                NetworkTableEntry tx = networkTable.getEntry("tx");
+                NetworkTableEntry ty = networkTable.getEntry("ty"))
+            {
+                LimelightSimulator sim = new LimelightSimulator(targets, new Transform2d(), Units.feetToMeters(10), Double.MAX_VALUE, networkTable);
 
-            LimelightSimulator sim = new LimelightSimulator(targets, new Transform2d(), Units.feetToMeters(10), Double.MAX_VALUE, networkTable);
+                testInstance.flush();
+                assertEquals(0.0, visible.getNumber(-1));
 
-            testInstance.flush();
-            assertEquals(0.0, visible.getNumber(-1));
+                // Out of FOV
+                sim.update(new Pose2d(0, 0, Rotation2d.fromDegrees(0)));
+                testInstance.flush();
+                assertEquals(0.0, visible.getNumber(-1));
 
-            // Out of FOV
-            sim.update(new Pose2d(0, 0, Rotation2d.fromDegrees(0)));
-            testInstance.flush();
-            assertEquals(0.0, visible.getNumber(-1));
+                sim.update(new Pose2d(0, 0, Rotation2d.fromDegrees(40)));
+                testInstance.flush();
+                assertEquals(1.0, visible.getNumber(-1));
+                assertEquals(-5.0, tx.getNumber(-100).doubleValue(), 1e-6);
+                assertEquals(12.162_69, ty.getNumber(-100).doubleValue(), 1e-3);
 
-            sim.update(new Pose2d(0, 0, Rotation2d.fromDegrees(40)));
-            testInstance.flush();
-            assertEquals(1.0, visible.getNumber(-1));
-            assertEquals(-5.0, tx.getNumber(-100).doubleValue(), 1e-6);
-            assertEquals(12.162_69, ty.getNumber(-100).doubleValue(), 1e-3);
-
-            sim.update(new Pose2d(0, 10, Rotation2d.fromDegrees(0)));
-            testInstance.flush();
-            assertEquals(1.0, visible.getNumber(-1));
-            assertEquals(0.0, tx.getNumber(-100).doubleValue(), 1e-6);
-            assertEquals(16.951_22, ty.getNumber(-100).doubleValue(), 1e-3);
+                sim.update(new Pose2d(0, 10, Rotation2d.fromDegrees(0)));
+                testInstance.flush();
+                assertEquals(1.0, visible.getNumber(-1));
+                assertEquals(0.0, tx.getNumber(-100).doubleValue(), 1e-6);
+                assertEquals(16.951_22, ty.getNumber(-100).doubleValue(), 1e-3);
+            }
         }
     }
 }

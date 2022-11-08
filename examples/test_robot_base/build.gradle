@@ -20,7 +20,7 @@ dependencies {
     compile "com.ctre.phoenix:api-java:${ctreVersion}"
     compile "com.ctre.phoenix:wpiapi-java:${ctreVersion}"
     compile "com.revrobotics.frc:REVLib-java:${revVersion}"
-    compile "com.kauailabs.navx.frc:navx-java:${navxVersion}"
+    compile "com.kauailabs.navx.frc:navx-frc-java:${navxVersion}"
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.4.2'

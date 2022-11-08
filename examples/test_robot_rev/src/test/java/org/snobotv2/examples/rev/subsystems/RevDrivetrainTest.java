@@ -67,7 +67,7 @@ public class RevDrivetrainTest extends BaseUnitTest
 
             for (int i = 0; i < LOOPS_TO_TEST; ++i)
             {
-                drivetrainSubsystem.arcadeDrive(0, .5);
+                drivetrainSubsystem.arcadeDrive(0, -.5);
                 drivetrainSubsystem.simulationPeriodic();
                 drivetrainSubsystem.getHeadingDegrees();
                 Thread.sleep(NAVX_LOOP_TIME_MS);
@@ -90,7 +90,7 @@ public class RevDrivetrainTest extends BaseUnitTest
 
             for (int i = 0; i < LOOPS_TO_TEST; ++i)
             {
-                drivetrainSubsystem.arcadeDrive(0, -.5);
+                drivetrainSubsystem.arcadeDrive(0, .5);
                 drivetrainSubsystem.simulationPeriodic();
                 drivetrainSubsystem.getHeadingDegrees();
                 Thread.sleep(NAVX_LOOP_TIME_MS);

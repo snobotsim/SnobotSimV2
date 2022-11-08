@@ -11,6 +11,7 @@ import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import com.ctre.phoenix.sensors.WPI_CANCoder;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.util.Units;
@@ -41,6 +42,7 @@ public class SwerveModule implements BaseSwerveModule
 
     private SwerveModuleState mCurrentState;
     private SwerveModuleState mDesiredState;
+    private SwerveModulePosition mCurrentPosition;
     private double mTurnGoalTicks;
     private double mDriveGoalTicks;
 
@@ -118,6 +120,12 @@ public class SwerveModule implements BaseSwerveModule
     public SwerveModuleState getState()
     {
         return mCurrentState;
+    }
+
+    @Override
+    public SwerveModulePosition getPosition()
+    {
+        return mCurrentPosition;
     }
 
     public Rotation2d getCancoderCurrentAngle()
@@ -225,6 +233,16 @@ public class SwerveModule implements BaseSwerveModule
         mCurrentState = new SwerveModuleState(
                 getDriveSpeedMps(),
                 getTurningMotorAngle());
+
+        mCurrentPosition = new SwerveModulePosition(
+                getDriveDistance(),
+                getTurningMotorAngle()
+        );
+    }
+
+    private double getDriveDistance()
+    {
+        return mDriveMotor.getSelectedSensorPosition();
     }
 
     @Override
