@@ -3,7 +3,9 @@ repositories {
     mavenLocal()
     maven { url "https://frcmaven.wpi.edu/artifactory/release/" }
     maven { url 'http://devsite.ctr-electronics.com/maven/release/' }
+//    maven { url 'https://maven.ctr-electronics.com/release/' }
     maven { url 'http://raw.githubusercontent.com/snobotsim/maven_repo/master/development/' }
+    maven { url 'https://raw.githubusercontent.com/rzblue/navx-frc/maven/maven/release/' }
     maven { url 'https://maven.revrobotics.com/' }
 }
 
@@ -28,12 +30,13 @@ ext.getCurrentOs = {
 }
 
 ext {
-    wpiVersion = '2022.4.1'
-    opencvYear = '2022'
-    opencvVersion = '4.5.2-1'
-    ctreVersion = '5.20.2'
-    revVersion = '2022.1.0'
-    navxVersion = '4.0.442'
+    wpiVersion = '2023.1.1-beta-2'
+    opencvYear = '2023'
+    opencvVersion = '4.6.0-2'
+    ctreVersion = '5.30.1-beta-1'
+    ctreSimVersion = "23.0.0-alpha-1"
+    revVersion = '2023.0.0'
+    navxVersion = '2023.1.0-beta-2'
 
     nativeOs = getCurrentOs() + getCurrentArch()
 }
@@ -48,17 +51,19 @@ dependencies {
 
     nativeDesktopZip "edu.wpi.first.hal:hal-cpp:${wpiVersion}:${nativeOs}@zip"
     nativeDesktopZip "edu.wpi.first.ntcore:ntcore-cpp:${wpiVersion}:${nativeOs}@zip"
+    nativeDesktopZip "edu.wpi.first.wpinet:wpinet-cpp:${wpiVersion}:${nativeOs}@zip"
     nativeDesktopZip "edu.wpi.first.cscore:cscore-cpp:${wpiVersion}:${nativeOs}@zip"
     nativeDesktopZip "edu.wpi.first.wpiutil:wpiutil-cpp:${wpiVersion}:${nativeOs}@zip"
     nativeDesktopZip "edu.wpi.first.wpimath:wpimath-cpp:${wpiVersion}:${nativeOs}@zip"
     nativeDesktopZip "edu.wpi.first.thirdparty.frc${opencvYear}.opencv:opencv-cpp:${opencvVersion}:${nativeOs}@zip"
 
     nativeDesktopZip "com.ctre.phoenix.sim:cci-sim:${ctreVersion}:${nativeOs}@zip"
-    nativeDesktopZip "com.ctre.phoenix.sim:simTalonSRX:${ctreVersion}:${nativeOs}@zip"
-    nativeDesktopZip "com.ctre.phoenix.sim:simTalonFX:${ctreVersion}:${nativeOs}@zip"
-    nativeDesktopZip "com.ctre.phoenix.sim:simVictorSPX:${ctreVersion}:${nativeOs}@zip"
-    nativeDesktopZip "com.ctre.phoenix.sim:simPigeonIMU:${ctreVersion}:${nativeOs}@zip"
-    nativeDesktopZip "com.ctre.phoenix.sim:simCANCoder:${ctreVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenixpro.sim:tools-sim:${ctreSimVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenixpro.sim:simTalonSRX:${ctreSimVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenixpro.sim:simTalonFX:${ctreSimVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenixpro.sim:simVictorSPX:${ctreSimVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenixpro.sim:simPigeonIMU:${ctreSimVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenixpro.sim:simCANCoder:${ctreSimVersion}:${nativeOs}@zip"
 
     nativeDesktopZip "com.revrobotics.frc:REVLib-driver:${revVersion}:${nativeOs}@zip"
 }
@@ -118,7 +123,9 @@ test {
     dependsOn(extractJniLibraries)
 
     useJUnitPlatform {
-        excludeTags "flaky"
+        // TODO ctre exclusion is temporary while they fix up their beta
+        excludeTags "flaky", "ctre"
+
     }
     testLogging {
         events "failed", "STANDARD_OUT"

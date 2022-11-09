@@ -1,5 +1,6 @@
 package org.snobotv2.examples.base_swerve.subsystems;
 
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.util.sendable.Sendable;
 import org.snobotv2.sim_wrappers.SwerveModuleSimWrapper;
@@ -14,6 +15,8 @@ public interface BaseSwerveModule extends Sendable, AutoCloseable
     void close();
 
     String getName();
+
+    SwerveModulePosition getPosition();
 
     SwerveModuleState getState();
 

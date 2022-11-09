@@ -42,7 +42,7 @@ public class DifferentialDrivetrainSimWrapperTest extends BaseUnitTest
             // It takes about 2 seconds to get up to speed
             for (int i = 0; i < 100; ++i)
             {
-                drivetrainSim.arcadeDrive(0, 1);
+                drivetrainSim.arcadeDrive(0, -1);
                 drivetrainSim.simulationPeriodic();
 //            System.out.println(i + " - " + drivetrainSim.mLeftEncoder.getDistance() + ", " + drivetrainSim.mRightEncoder.getDistance() + ", " + drivetrainSim.mGyro.getAngle());
             }

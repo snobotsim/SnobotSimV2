@@ -56,7 +56,7 @@ public class WpiDrivetrainTest extends BaseUnitTest
         {
             for (int i = 0; i < 5; ++i)
             {
-                drivetrainSubsystem.arcadeDrive(0, 1);
+                drivetrainSubsystem.arcadeDrive(0, -1);
                 drivetrainSubsystem.simulationPeriodic();
             }
 
@@ -75,7 +75,7 @@ public class WpiDrivetrainTest extends BaseUnitTest
         {
             for (int i = 0; i < 5; ++i)
             {
-                drivetrainSubsystem.arcadeDrive(0, -1);
+                drivetrainSubsystem.arcadeDrive(0, 1);
                 drivetrainSubsystem.simulationPeriodic();
             }
 

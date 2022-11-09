@@ -26,14 +26,14 @@ public class ButtonMapping
         ElevatorManuallyMoveCommand defaultElevatorCommand = new ElevatorManuallyMoveCommand(elevator, operatorJoystick);
         elevator.setDefaultCommand(defaultElevatorCommand);
 
-        new JoystickButton(operatorJoystick, 1).whileHeld(new ElevatorGoToPositionCommand(elevator, 30));
-        new JoystickButton(operatorJoystick, 2).whileHeld(new ElevatorGoToPositionCommand(elevator, 45));
-        new JoystickButton(operatorJoystick, 3).whileHeld(new ElevatorGoToPositionCommand(elevator, 60));
+        new JoystickButton(operatorJoystick, 1).whileTrue(new ElevatorGoToPositionCommand(elevator, 30));
+        new JoystickButton(operatorJoystick, 2).whileTrue(new ElevatorGoToPositionCommand(elevator, 45));
+        new JoystickButton(operatorJoystick, 3).whileTrue(new ElevatorGoToPositionCommand(elevator, 60));
 
-        new JoystickButton(operatorJoystick, 4).whenPressed(new MovePunchCommand(punch, true));
-        new JoystickButton(operatorJoystick, 5).whenPressed(new MovePunchCommand(punch, false));
+        new JoystickButton(operatorJoystick, 4).onTrue(new MovePunchCommand(punch, true));
+        new JoystickButton(operatorJoystick, 5).onTrue(new MovePunchCommand(punch, false));
 
-        new JoystickButton(operatorJoystick, 6).whileHeld(new RunShooterAtRpmCommand(shooter, 2500));
-        new JoystickButton(operatorJoystick, 7).whileHeld(new RunShooterAtRpmCommand(shooter, 3500));
+        new JoystickButton(operatorJoystick, 6).whileTrue(new RunShooterAtRpmCommand(shooter, 2500));
+        new JoystickButton(operatorJoystick, 7).whileTrue(new RunShooterAtRpmCommand(shooter, 3500));
     }
 }

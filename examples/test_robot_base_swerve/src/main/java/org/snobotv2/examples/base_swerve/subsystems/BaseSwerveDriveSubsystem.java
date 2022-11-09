@@ -216,10 +216,10 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase implements AutoClose
         {
             mOdometry.update(
                     mGyro.getRotation2d(),
-                    mFrontLeft.getState(),
-                    mFrontRight.getState(),
-                    mRearLeft.getState(),
-                    mRearRight.getState());
+                    mFrontLeft.getPosition(),
+                    mFrontRight.getPosition(),
+                    mRearLeft.getPosition(),
+                    mRearRight.getPosition());
         }
 
         mField.setRobotPose(mOdometry.getPoseMeters());

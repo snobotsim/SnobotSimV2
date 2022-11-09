@@ -13,6 +13,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SimableCANSparkMax;
 import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.util.Units;
@@ -47,6 +48,7 @@ public class SwerveModule implements BaseSwerveModule
 
     private SwerveModuleState mCurrentState;
     private SwerveModuleState mDesiredState;
+    private SwerveModulePosition mCurrentPosition;
 
     private SwerveModuleSimWrapper mSimWrapper;
 
@@ -124,6 +126,12 @@ public class SwerveModule implements BaseSwerveModule
     public SwerveModuleState getState()
     {
         return mCurrentState;
+    }
+
+    @Override
+    public SwerveModulePosition getPosition()
+    {
+        return mCurrentPosition;
     }
 
     public Rotation2d getCancoderCurrentAngle()
@@ -220,6 +228,14 @@ public class SwerveModule implements BaseSwerveModule
         mCurrentState = new SwerveModuleState(
                 getDriveSpeedMps(),
                 getTurningMotorAngle());
+        mCurrentPosition = new SwerveModulePosition(
+                getDrivePosition(),
+                getTurningMotorAngle());
+    }
+
+    private double getDrivePosition()
+    {
+        return mDriveEncoder.getPosition();
     }
 
     @Override
