@@ -7,11 +7,11 @@ import org.snobotv2.examples.base_swerve.subsystems.BaseSwerveDriveSubsystem;
 public class ManualMoveSwerveModuleCommand extends CommandBase
 {
     private final BaseSwerveDriveSubsystem mDriveSubsystem;
-    private final BaseSwerveDriveSubsystem.SwerveModulePosition mModulePosition;
+    private final BaseSwerveDriveSubsystem.SwerveModulePositionTypes mModulePosition;
     private static final double TURNING_SPEED = 1;
     private static final double DRIVING_SPEED = 0;
 
-    public ManualMoveSwerveModuleCommand(BaseSwerveDriveSubsystem driveSubsystem, BaseSwerveDriveSubsystem.SwerveModulePosition modulePosition)
+    public ManualMoveSwerveModuleCommand(BaseSwerveDriveSubsystem driveSubsystem, BaseSwerveDriveSubsystem.SwerveModulePositionTypes modulePosition)
     {
         mDriveSubsystem = driveSubsystem;
         mModulePosition = modulePosition;

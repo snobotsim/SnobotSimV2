@@ -28,10 +28,10 @@ public class RobotContainer
     private void addTestCommands()
     {
         ShuffleboardTab debugTab = Shuffleboard.getTab("Test Commands");
-        debugTab.add("Move FL", new ManualMoveSwerveModuleCommand(mDrivetrain, DriveSubsystem.SwerveModulePosition.FRONT_LEFT));
-        debugTab.add("Move FR", new ManualMoveSwerveModuleCommand(mDrivetrain, DriveSubsystem.SwerveModulePosition.FRONT_RIGHT));
-        debugTab.add("Move RL", new ManualMoveSwerveModuleCommand(mDrivetrain, DriveSubsystem.SwerveModulePosition.REAR_LEFT));
-        debugTab.add("Move RR", new ManualMoveSwerveModuleCommand(mDrivetrain, DriveSubsystem.SwerveModulePosition.REAR_RIGHT));
+        debugTab.add("Move FL", new ManualMoveSwerveModuleCommand(mDrivetrain, DriveSubsystem.SwerveModulePositionTypes.FRONT_LEFT));
+        debugTab.add("Move FR", new ManualMoveSwerveModuleCommand(mDrivetrain, DriveSubsystem.SwerveModulePositionTypes.FRONT_RIGHT));
+        debugTab.add("Move RL", new ManualMoveSwerveModuleCommand(mDrivetrain, DriveSubsystem.SwerveModulePositionTypes.REAR_LEFT));
+        debugTab.add("Move RR", new ManualMoveSwerveModuleCommand(mDrivetrain, DriveSubsystem.SwerveModulePositionTypes.REAR_RIGHT));
 
         debugTab.add("Reset Position", new SetStartingPosition(mDrivetrain, new Pose2d(0, 0, Rotation2d.fromDegrees(0))));
     }

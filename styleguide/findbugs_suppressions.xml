@@ -1,4 +1,25 @@
 <FindBugsFilter>
-
-
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP" />
+        <Class name="com.revrobotics.SimableCANSparkMax" />
+    </Match>
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP" />
+        <Class name="org.snobotv2.module_wrappers.navx.NavxWrapper" />
+    </Match>
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP" />
+        <Class name="org.snobotv2.examples.ctre_swerve.subsystems.SwerveModule" />
+    </Match>
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP" />
+        <Class name="org.snobotv2.examples.rev_swerve.subsystems.SwerveModule" />
+    </Match>
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP" />
+        <Class name="org.snobotv2.sim_wrappers.SwerveModuleSimWrapper" />
+    </Match>
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP2" />
+    </Match>
 </FindBugsFilter>

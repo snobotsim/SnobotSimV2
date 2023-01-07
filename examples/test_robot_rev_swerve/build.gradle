@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'edu.wpi.first.WpilibTools' version '0.7.1'
+    id 'edu.wpi.first.WpilibTools' version '1.1.0'
 }
 
 group 'org.snobotv2'
@@ -9,19 +9,25 @@ ext.baseId = "test_robot_rev_swerve"
 apply from: "${rootDir}/build_scripts/base_java.gradle"
 dependencies {
 
-    compile wpilibTools.deps.wpilibJava("wpimath")
-    compile wpilibTools.deps.wpilibJava("hal")
-    compile wpilibTools.deps.wpilibJava("wpiutil")
-    compile wpilibTools.deps.wpilibJava("cscore")
-    compile wpilibTools.deps.wpilibJava("cameraserver")
-    compile wpilibTools.deps.wpilibJava("wpilibNewCommands")
+    implementation wpilibTools.deps.wpilibJava("wpimath")
+    implementation wpilibTools.deps.wpilibJava("hal")
+    implementation wpilibTools.deps.wpilibJava("wpilibj")
+    implementation wpilibTools.deps.wpilibJava("wpiutil")
+    implementation wpilibTools.deps.wpilibJava("cscore")
+    implementation wpilibTools.deps.wpilibJava("ntcore")
+    implementation wpilibTools.deps.wpilibJava("cameraserver")
+    implementation wpilibTools.deps.wpilibJava("wpilibNewCommands")
+    implementation project(":snobot_swerve_sim")
 
-    compile project(":snobot_sim_java")
-    compile project(":examples:test_robot_base_swerve")
+    implementation project(":snobot_sim_java")
+    implementation project(":examples:test_robot_base_swerve")
+    implementation "com.revrobotics.frc:REVLib-java:${revVersion}"
+    implementation "com.ctre.phoenix:api-java:${ctreVersion}"
+    implementation "com.ctre.phoenix:wpiapi-java:${ctreVersion}"
 
-    testCompile project(":snobot_sim_java_test_utils")
+    testImplementation project(":snobot_sim_java_test_utils")
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.4.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 }

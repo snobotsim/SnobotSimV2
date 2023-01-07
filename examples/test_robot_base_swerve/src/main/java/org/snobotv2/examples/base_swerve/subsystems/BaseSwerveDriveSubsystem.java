@@ -5,6 +5,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.util.sendable.Sendable;
@@ -54,7 +55,9 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase implements AutoClose
     private final SwerveDriveOdometry mOdometry;
     private boolean mFieldRelative;
 
-    private SwerveSimWrapper mSimulator;
+    private SwerveSimWrapper mSimulator; // NOPMD(ImmutableField)
+
+    private final SwerveModulePosition[] mModulePositions;
 
     public interface ModuleFactory
     {
@@ -66,7 +69,7 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase implements AutoClose
                 String name);
     }
 
-    public enum SwerveModulePosition
+    public enum SwerveModulePositionTypes
     {
         FRONT_LEFT,
         FRONT_RIGHT,
@@ -77,7 +80,6 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase implements AutoClose
     protected BaseSwerveDriveSubsystem(ModuleFactory factory, boolean addDebugTab)
     {
         mGyro = new ADXRS450_Gyro();
-        mOdometry = new SwerveDriveOdometry(kDriveKinematics, mGyro.getRotation2d());
 
         mFrontLeft = factory.createModule(
                 Constants.FRONT_LEFT_DRIVE_MOTOR_PORT,
@@ -107,6 +109,13 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase implements AutoClose
                 0,
                 "RR");
 
+        mModulePositions = new SwerveModulePosition[]{
+                mFrontLeft.getPosition(),
+                mFrontRight.getPosition(),
+                mRearLeft.getPosition(),
+                mRearLeft.getPosition(),
+        };
+
         mModules = new BaseSwerveModule[]{
             mFrontLeft,
             mFrontRight,
@@ -114,6 +123,7 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase implements AutoClose
             mRearRight
         };
 
+        mOdometry = new SwerveDriveOdometry(kDriveKinematics, mGyro.getRotation2d(), mModulePositions, new Pose2d());
         mField = new Field2d();
 
         // Shuffleboard debugging
@@ -195,7 +205,7 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase implements AutoClose
         }
     }
 
-    public void manuallyMoveModule(SwerveModulePosition modulePosition, double turnSpeed, double driveSpeed)
+    public void manuallyMoveModule(SwerveModulePositionTypes modulePosition, double turnSpeed, double driveSpeed)
     {
         mModules[modulePosition.ordinal()].setOpenLoop(turnSpeed, driveSpeed);
     }
@@ -203,23 +213,21 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase implements AutoClose
     @Override
     public void periodic()
     {
-        for (BaseSwerveModule module : mModules) // NOPMD(CloseResource)
+        for (int i = 0; i < mModules.length; ++i) // NOPMD(CloseResource)
         {
-            module.periodic();
+            mModules[i].periodic();
+            mModulePositions[i] = mModules[i].getPosition();
         }
 
         // Update the odometry in the periodic block
         if (RobotBase.isSimulation())
         {
-            mOdometry.resetPosition(mSimulator.getPose(), mGyro.getRotation2d());
+            mOdometry.resetPosition(mGyro.getRotation2d(), mModulePositions, mSimulator.getPose());
         } else
         {
             mOdometry.update(
                     mGyro.getRotation2d(),
-                    mFrontLeft.getPosition(),
-                    mFrontRight.getPosition(),
-                    mRearLeft.getPosition(),
-                    mRearRight.getPosition());
+                    mModulePositions);
         }
 
         mField.setRobotPose(mOdometry.getPoseMeters());
@@ -248,7 +256,7 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase implements AutoClose
      */
     public void resetOdometry(Pose2d pose)
     {
-        mOdometry.resetPosition(pose, mGyro.getRotation2d());
+        mOdometry.resetPosition(mGyro.getRotation2d(), mModulePositions, pose);
     }
 
     public void setTeleDriveFieldRelative(boolean fieldRelative)

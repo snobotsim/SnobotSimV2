@@ -86,6 +86,10 @@ public class SwerveModule implements BaseSwerveModule
         mCurrentState = new SwerveModuleState(0, Rotation2d.fromDegrees(0));
         mName = name;
 
+        mCurrentPosition = new SwerveModulePosition(
+                getDrivePosition(),
+                getTurningMotorAngle());
+
 
         SmartDashboard.putNumber("FF", DEFAULT_FF);
         SmartDashboard.putNumber("P", DEFAULT_P);
@@ -139,7 +143,7 @@ public class SwerveModule implements BaseSwerveModule
         return new Rotation2d(Units.degreesToRadians(mAbsoluteEncoder.getAbsolutePosition()));
     }
 
-    public Rotation2d getTurningMotorAngle()
+    public final Rotation2d getTurningMotorAngle()
     {
         return Rotation2d.fromDegrees(mAzimuthEncoder.getPosition());
     }

@@ -2,13 +2,15 @@ repositories {
     mavenCentral()
     mavenLocal()
     maven { url "https://frcmaven.wpi.edu/artifactory/release/" }
-    maven { url 'http://devsite.ctr-electronics.com/maven/release/' }
+    maven { url 'https://devsite.ctr-electronics.com/maven/release/' }
 //    maven { url 'https://maven.ctr-electronics.com/release/' }
-    maven { url 'http://raw.githubusercontent.com/snobotsim/maven_repo/master/development/' }
-    maven { url 'https://raw.githubusercontent.com/rzblue/navx-frc/maven/maven/release/' }
+    maven { url 'https://dev.studica.com/maven/release/2023/' }
     maven { url 'https://maven.revrobotics.com/' }
 }
 
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
 ext.getCurrentArch = {
     String arch = System.getProperty("os.arch");
@@ -30,13 +32,13 @@ ext.getCurrentOs = {
 }
 
 ext {
-    wpiVersion = '2023.1.1-beta-2'
+    wpiVersion = '2023.1.1'
     opencvYear = '2023'
     opencvVersion = '4.6.0-2'
     ctreVersion = '5.30.1-beta-1'
     ctreSimVersion = "23.0.0-alpha-1"
-    revVersion = '2023.0.0'
-    navxVersion = '2023.1.0-beta-2'
+    revVersion = '2023.1.1'
+    navxVersion = '2023.0.0'
 
     nativeOs = getCurrentOs() + getCurrentArch()
 }

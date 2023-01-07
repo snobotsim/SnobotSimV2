@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'edu.wpi.first.WpilibTools' version '0.7.1'
+    id 'edu.wpi.first.WpilibTools' version '1.1.0'
 }
 
 group 'org.snobotv2'
@@ -10,19 +10,10 @@ ext.baseId = "test_robot_base"
 apply from: "${rootDir}/build_scripts/base_java.gradle"
 
 dependencies {
-    compile wpilibTools.deps.wpilibJava("wpilibj")
-    compile wpilibTools.deps.wpilibJava("wpimath")
-    compile wpilibTools.deps.wpilibJava("hal")
-    compile wpilibTools.deps.wpilibJava("ntcore")
-    compile wpilibTools.deps.wpilibJava("wpiutil")
-    compile wpilibTools.deps.wpilibJava("wpilibNewCommands")
-
-    compile "com.ctre.phoenix:api-java:${ctreVersion}"
-    compile "com.ctre.phoenix:wpiapi-java:${ctreVersion}"
-    compile "com.revrobotics.frc:REVLib-java:${revVersion}"
-    compile "com.kauailabs.navx.frc:navx-frc-java:${navxVersion}"
-
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.4.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+    implementation wpilibTools.deps.wpilibJava("wpilibj")
+    implementation wpilibTools.deps.wpilibJava("wpimath")
+    implementation wpilibTools.deps.wpilibJava("hal")
+    implementation wpilibTools.deps.wpilibJava("ntcore")
+    implementation wpilibTools.deps.wpilibJava("wpiutil")
+    implementation wpilibTools.deps.wpilibJava("wpilibNewCommands")
 }

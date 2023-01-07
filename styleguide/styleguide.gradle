@@ -5,7 +5,7 @@ apply plugin: 'pmd'
 apply plugin: 'com.github.spotbugs'
 
 jacoco {
-    toolVersion = "0.8.6"
+    toolVersion = "0.8.8"
 }
 jacocoTestReport {
     dependsOn test
@@ -17,9 +17,9 @@ jacocoTestReport {
 
 
 checkstyle {
-    toolVersion = "9.0"
-    configDir = file("${project.rootDir}/styleguide")
-    config = resources.text.fromFile(new File(configDir, "checkstyle.xml"))
+    toolVersion = "10.1"
+    configDirectory = file("${project.rootDir}/styleguide")
+    config = resources.text.fromFile(new File(configDirectory.get().getAsFile(), "checkstyle.xml"))
 }
 
 pmd {
@@ -31,7 +31,7 @@ pmd {
 }
 
 spotbugs {
-    toolVersion = '4.1.4'
+    toolVersion = '4.7.3'
     excludeFilter = file("$rootDir/styleguide/findbugs_suppressions.xml")
     effort = "max"
 }

@@ -15,7 +15,7 @@ public abstract class BaseDrivetrainSubsystem extends SubsystemBase implements D
 
     public BaseDrivetrainSubsystem()
     {
-        mOdometry = new DifferentialDriveOdometry(new Rotation2d());
+        mOdometry = new DifferentialDriveOdometry(new Rotation2d(), 0, 0);
         mField = new Field2d();
         SmartDashboard.putData(mField);
     }
@@ -73,8 +73,7 @@ public abstract class BaseDrivetrainSubsystem extends SubsystemBase implements D
     @Override
     public void resetOdometry(Pose2d pose)
     {
-        resetEncoders();
-        mOdometry.resetPosition(pose, getRotation2d());
+        mOdometry.resetPosition(getRotation2d(), getLeftDistance(), getRightDistance(), pose);
         resetSimOdometry(pose);
     }
 
