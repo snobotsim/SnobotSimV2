@@ -44,7 +44,7 @@ ext.getCurrentOs = {
 ext {
     wpiVersion = '2023.1.1'
     opencvYear = '2023'
-    opencvVersion = '4.6.0-2'
+    opencvVersion = '4.6.0-3'
     ctreVersion = '5.30.2'
     ctreSimVersion = "23.0.1"
     revVersion = '2023.1.1'
