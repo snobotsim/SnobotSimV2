@@ -20,9 +20,9 @@ def download_external_archives():
     # )
     http_archive(
         name = "bazelrio",
-        url = "https://github.com/pjreiniger/bazelRio/archive/8bf0ff887158bf1d5552c9dde417ff01c6203672.tar.gz",
-        sha256 = "228a200c85b50564b5ef50de49bdbd6d75e84038c1ef05c61c09070d5ffd2b1e",
-        strip_prefix = "bazelrio-8bf0ff887158bf1d5552c9dde417ff01c6203672/bazelrio",
+        url = "https://github.com/pjreiniger/bazelRio/archive/e1519838743bab8eb1c16cfa4331c95848664ce2.tar.gz",
+        sha256 = "4ddbac21a195a35e955cc4bc2a66bf7cee0d691dd84a4c00e45c771d1c72d2f1",
+        strip_prefix = "bazelrio-e1519838743bab8eb1c16cfa4331c95848664ce2/bazelrio",
     )
     # native.local_repository(
     #     name = "bazelrio",

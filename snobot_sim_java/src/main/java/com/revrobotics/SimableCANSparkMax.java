@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+@SuppressWarnings({"PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods"})
 public class SimableCANSparkMax extends CANSparkMax
 {
     private static final Logger LOGGER = Logger.getLogger(SimableCANSparkMax.class.getName());
