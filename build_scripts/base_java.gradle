@@ -13,13 +13,23 @@ sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
 
 ext.getCurrentArch = {
+    OperatingSystem os = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.currentOperatingSystem;
+
     String arch = System.getProperty("os.arch");
-    return (arch.equals("amd64") || arch.equals("x86_64")) ? "x86-64" : "x86";
+    println(arch)
+
+    if (os.isMacOsX()) {
+        return "universal"
+    }
+    if (arch.equals("amd64") || arch.equals("x86_64")) {
+        return "x86-64"
+    }
+    return "x86"
 }
 
 ext.getCurrentOs = {
     OperatingSystem os = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.currentOperatingSystem;
-
+    println(os)
     if (os.isWindows()) {
         return "windows"
     }
