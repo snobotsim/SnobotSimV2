@@ -60,12 +60,16 @@ dependencies {
     nativeDesktopZip "edu.wpi.first.thirdparty.frc${opencvYear}.opencv:opencv-cpp:${opencvVersion}:${nativeOs}@zip"
 
     nativeDesktopZip "com.ctre.phoenix.sim:cci-sim:${ctreVersion}:${nativeOs}@zip"
+
     nativeDesktopZip "com.ctre.phoenixpro.sim:tools-sim:${ctreSimVersion}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenixpro.sim:simTalonSRX:${ctreSimVersion}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenixpro.sim:simTalonFX:${ctreSimVersion}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenixpro.sim:simVictorSPX:${ctreSimVersion}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenixpro.sim:simPigeonIMU:${ctreSimVersion}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenixpro.sim:simCANCoder:${ctreSimVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenixpro.sim:simProTalonFX:${ctreSimVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenixpro.sim:simProCANcoder:${ctreSimVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenixpro.sim:simProPigeon2:${ctreSimVersion}:${nativeOs}@zip"
 
     nativeDesktopZip "com.revrobotics.frc:REVLib-driver:${revVersion}:${nativeOs}@zip"
 }
