@@ -15,9 +15,9 @@ snobot_sim_java_library(
         "//examples/test_robot_base/src/main/java/org/snobotv2/examples/base/auton_modes",
         "//examples/test_robot_base/src/main/java/org/snobotv2/examples/base/subsystems",
         "//examples/test_robot_wpi/src/main/java/org/snobotv2/examples/wpi/subsystems",
-        "@bazelrio//libraries/java/wpilib/cameraserver",
-        "@bazelrio//libraries/java/wpilib/new_commands",
-        "@bazelrio//libraries/java/wpilib/wpilibj",
+        "@bzlmodrio-allwpilib//libraries/java/cameraserver",
+        "@bzlmodrio-allwpilib//libraries/java/wpilibNewCommands",
+        "@bzlmodrio-allwpilib//libraries/java/wpilibj",
     ],
 )
 
@@ -28,6 +28,6 @@ snobot_sim_java_robot(
     visibility = ["//examples/test_robot_wpi:__subpackages__"],
     deps = [
         ":wpi",
-        "@bazelrio//libraries/java/wpilib/wpilibj",
+        "@bzlmodrio-allwpilib//libraries/java/wpilibj",
     ],
 )

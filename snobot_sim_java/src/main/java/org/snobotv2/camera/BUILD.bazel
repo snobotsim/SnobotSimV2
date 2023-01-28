@@ -5,7 +5,7 @@ snobot_sim_java_library(
     srcs = glob(["*.java"]),
     visibility = ["//visibility:public"],
     deps = [
-        "@bazelrio//libraries/java/wpilib/ntcore",
-        "@bazelrio//libraries/java/wpilib/wpimath",
+        "@bzlmodrio-allwpilib//libraries/java/ntcore",
+        "@bzlmodrio-allwpilib//libraries/java/wpimath",
     ],
 )

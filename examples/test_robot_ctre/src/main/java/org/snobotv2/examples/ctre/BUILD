@@ -15,10 +15,11 @@ snobot_sim_java_library(
         "//examples/test_robot_base/src/main/java/org/snobotv2/examples/base/auton_modes",
         "//examples/test_robot_base/src/main/java/org/snobotv2/examples/base/subsystems",
         "//examples/test_robot_ctre/src/main/java/org/snobotv2/examples/ctre/subsystems",
-        "@bazelrio//libraries/java/ctre/phoenix",
-        "@bazelrio//libraries/java/wpilib/cameraserver",
-        "@bazelrio//libraries/java/wpilib/new_commands",
-        "@bazelrio//libraries/java/wpilib/wpilibj",
+        "@bzlmodrio-allwpilib//libraries/java/cameraserver",
+        "@bzlmodrio-allwpilib//libraries/java/wpilibNewCommands",
+        "@bzlmodrio-allwpilib//libraries/java/wpilibj",
+        "@bzlmodrio-phoenix//libraries/java/api-java",
+        "@bzlmodrio-phoenix//libraries/java/wpiapi-java",
     ],
 )
 
@@ -29,6 +30,6 @@ snobot_sim_java_robot(
     visibility = ["//examples/test_robot_ctre:__subpackages__"],
     deps = [
         ":ctre",
-        "@bazelrio//libraries/java/wpilib/wpilibj",
+        "@bzlmodrio-allwpilib//libraries/java/wpilibj",
     ],
 )

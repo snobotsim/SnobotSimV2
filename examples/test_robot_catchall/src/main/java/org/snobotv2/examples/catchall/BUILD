@@ -9,9 +9,9 @@ snobot_sim_java_library(
     visibility = ["//examples/test_robot_catchall:__subpackages__"],
     deps = [
         "//examples/test_robot_catchall/src/main/java/org/snobotv2/examples/catchall/subsystems",
-        "@bazelrio//libraries/java/wpilib/cameraserver",
-        "@bazelrio//libraries/java/wpilib/new_commands",
-        "@bazelrio//libraries/java/wpilib/wpilibj",
+        "@bzlmodrio-allwpilib//libraries/java/cameraserver",
+        "@bzlmodrio-allwpilib//libraries/java/wpilibNewCommands",
+        "@bzlmodrio-allwpilib//libraries/java/wpilibj",
     ],
 )
 
@@ -22,6 +22,6 @@ snobot_sim_java_robot(
     visibility = ["//examples/test_robot_catchall:__subpackages__"],
     deps = [
         ":catchall",
-        "@bazelrio//libraries/java/wpilib/wpilibj",
+        "@bzlmodrio-allwpilib//libraries/java/wpilibj",
     ],
 )
