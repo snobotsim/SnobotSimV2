@@ -13,11 +13,6 @@ snobot_sim_java_library(
         "//examples/test_robot_rev_swerve:__subpackages__",
     ],
     deps = [
-        "//snobot_sim_java/src/main/java/com/revrobotics:simmable_rev",
-        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/ctre",
-        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/rev",
-        "//snobot_sim_java/src/main/java/org/snobotv2/sim_wrappers",
-        "//snobot_swerve_sim/src/main/java/edu/wpi/first/wpilibj/simulation/swerve",
         "@bazelrio//libraries/cpp/wpilib/wpiutil:jni",
         "@bazelrio//libraries/java/ctre/phoenix",
         "@bazelrio//libraries/java/rev/revlib",

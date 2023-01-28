@@ -2,8 +2,8 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 def download_external_archives():
     # Download Extra java rules
-    RULES_JVM_EXTERNAL_TAG = "4.1"
-    RULES_JVM_EXTERNAL_SHA = "f36441aa876c4f6427bfb2d1f2d723b48e9d930b62662bf723ddfb8fc80f0140"
+    RULES_JVM_EXTERNAL_TAG = "4.4.2"
+    RULES_JVM_EXTERNAL_SHA = "735602f50813eb2ea93ca3f5e43b1959bd80b213b836a07a62a29d757670b77b"
     http_archive(
         name = "rules_jvm_external",
         sha256 = RULES_JVM_EXTERNAL_SHA,
@@ -30,8 +30,8 @@ def download_external_archives():
     # )
 
     # Download java_rules, Since bazel 5.0 broke backwards compatibility and PMD won't load otherwise
-    RULES_JAVA_COMMITISH = "5.4.0"
-    RULES_JAVA_SHA = "f90111a597b2aa77b7104dbdc685fd35ea0cca3b7c3f807153765e22319cbd88"
+    RULES_JAVA_COMMITISH = "5.3.5"
+    RULES_JAVA_SHA = "7df0811e29830e79be984f9d5bf6839ce151702d694038126d7c23296785bf97"
     http_archive(
         name = "rules_java",
         sha256 = RULES_JAVA_SHA,

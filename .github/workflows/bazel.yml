@@ -8,15 +8,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: windows-latest
-            architecture: x64
-            config: ""
-          - os: macos-latest
-            architecture: x64
-            config: ""
-          - os: ubuntu-latest
-            architecture: x64
-            config: ""
+          - { os: windows-latest, architecture: x64, config: "" }
+          - { os: windows-latest, architecture: x64, config: "--enable_bzlmod" }
+          - { os: macos-latest,   architecture: x64, config: "" }
+          - { os: macos-latest,   architecture: x64, config: "--enable_bzlmod" }
+          - { os: ubuntu-latest,  architecture: x64, config: "" }
+          - { os: ubuntu-latest,  architecture: x64, config: "--enable_bzlmod" }
     name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
     runs-on: ${{ matrix.os }}
     steps:
@@ -34,9 +31,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-latest
-            architecture: x64
-            config: "--config=for-roborio"
+          - { os: ubuntu-latest, architecture: x64, config: "--config=for-roborio" }
+          - { os: ubuntu-latest, architecture: x64, config: "--config=for-roborio --enable_bzlmod" }
     name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
     runs-on: ${{ matrix.os }}
     steps:

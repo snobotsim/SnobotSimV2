@@ -13,3 +13,6 @@ test --test_arg="--exclude-tag=ctre"
 
 # Don't run flaky tests
 test --test_arg="--exclude-tag=flaky"
+
+
+build --registry=https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/megadiff/
