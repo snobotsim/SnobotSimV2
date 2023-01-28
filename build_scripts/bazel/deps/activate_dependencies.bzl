@@ -1,7 +1,6 @@
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 load("@rules_pmd//pmd:toolchains.bzl", "rules_pmd_toolchains")
-load("@bazelrio//:defs.bzl", "setup_bazelrio")
-load("@bazelrio//private/non_bzlmod:setup_dependencies.bzl", "get_java_dependenicies")
+load("@bzlmodrio//:bzlmodrio_setup.bzl", "bzlmodrio_setup", "get_bzlmodrio_java_dependencies")
 
 def activate_dependencies():
     PMD_VERSION = "6.39.0"
@@ -10,9 +9,9 @@ def activate_dependencies():
     jupiter_version = "5.6.1"
     platform_version = "1.6.1"
 
-    setup_bazelrio()
+    bzlmodrio_setup()
 
-    maven_artifacts, maven_repositories = get_java_dependenicies()
+    maven_artifacts, maven_repositories = get_bzlmodrio_java_dependencies()
     maven_artifacts += [
         "org.junit.jupiter:junit-jupiter-api:" + jupiter_version,
         "org.junit.jupiter:junit-jupiter-params:" + jupiter_version,

@@ -11,22 +11,16 @@ def download_external_archives():
         url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
     )
 
-    # Download BazelRio <3
-    # http_archive(
-    #     name = "bazelrio",
-    #     url = "https://github.com/bazelRio/bazelRio/archive/refs/tags/0.10.0.zip",
-    #     sha256 = "18b109dbd5204910600823e6c9ff405fa7ed7c43d0a78f24077f8187311745a9",
-    #     strip_prefix = "bazelRio-0.10.0/bazelrio",
-    # )
+    # Download bzlmodRio <3
     http_archive(
-        name = "bazelrio",
-        url = "https://github.com/bzlmodRio/bzlmodRio/archive/6472523adf3bc9570410079028762bc207842beb.tar.gz",
-        sha256 = "fda87eed3225b048eff5c045b6aea7e8373dd5cadefd85f934b0b5409c720a94",
-        strip_prefix = "bzlmodRio-6472523adf3bc9570410079028762bc207842beb",
+        name = "bzlmodrio",
+        url = "https://github.com/bzlmodRio/bzlmodRio/archive/6145f3f8e26590740cce628aba10348c1f64c3bd.tar.gz",
+        sha256 = "4d2fab5423f47df9bb7f2b697104f1cf1794823de9b8501e50aa14d4338bd3a4",
+        strip_prefix = "bzlmodRio-6145f3f8e26590740cce628aba10348c1f64c3bd",
     )
     # native.local_repository(
-    #     name = "bazelrio",
-    #     path = "../../bzlmodRio/bzlmodRio"
+    #     name = "bzlmodrio",
+    #     path = "../../bzlmodRio/bzlmodRio",
     # )
 
     # Download java_rules, Since bazel 5.0 broke backwards compatibility and PMD won't load otherwise

@@ -1,9 +1,13 @@
-bazel_dep(name = "bzlmodrio", version = "", repo_name = "bazelrio")
 bazel_dep(name = "rules_jvm_external", version = "4.4.2")
 bazel_dep(name = "rules_java", version = "5.3.5")
 bazel_dep(name = "rules_bazelrio", version = "0.0.9")
 bazel_dep(name = "rules_roborio_toolchain", version = "2023-7")
 bazel_dep(name = "rules_pmd", version = "0.2.0")
+
+bazel_dep(name = "bzlmodrio-allwpilib", version = "2023.2.1")
+bazel_dep(name = "bzlmodrio-navx", version = "2023.0.3")
+bazel_dep(name = "bzlmodrio-phoenix", version = "5.30.3-23.0.4")
+bazel_dep(name = "bzlmodrio-revlib", version = "2023.1.2")
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 maven.install(
@@ -22,13 +26,6 @@ maven.install(
 use_repo(
     maven,
     "maven",
-)
-
-archive_override(
-    module_name = "bzlmodrio",
-    integrity = "sha256-PjZ3jYzjCN2OPLZnDXh49BQy14AHoBJJGI4/hDpHLGA=",
-    strip_prefix = "bzlmodRio-fac310c0b62fb393d113a8fb6c659cc1952ca6a2",
-    urls = "https://github.com/bzlmodRio/bzlmodRio/archive/fac310c0b62fb393d113a8fb6c659cc1952ca6a2.tar.gz",
 )
 
 archive_override(
