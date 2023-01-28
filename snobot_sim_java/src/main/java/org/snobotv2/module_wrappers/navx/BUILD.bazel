@@ -7,6 +7,6 @@ snobot_sim_java_library(
     deps = [
         "//snobot_sim_java/src/main/java/org/snobotv2/interfaces",
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers",
-        "@bazelrio//libraries/java/wpilib/wpilibj",
+        "@bzlmodrio-allwpilib//libraries/java/wpilibj",
     ],
 )

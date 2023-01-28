@@ -20,13 +20,14 @@ snobot_sim_java_library(
         "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/ctre",
         "//snobot_sim_java/src/main/java/org/snobotv2/sim_wrappers",
         "//snobot_swerve_sim/src/main/java/edu/wpi/first/wpilibj/simulation/swerve",
-        "@bazelrio//libraries/cpp/wpilib/wpiutil:jni",
-        "@bazelrio//libraries/java/ctre/phoenix",
-        "@bazelrio//libraries/java/wpilib/cameraserver",
-        "@bazelrio//libraries/java/wpilib/new_commands",
-        "@bazelrio//libraries/java/wpilib/wpilibj",
-        "@bazelrio//libraries/java/wpilib/wpimath",
-        "@bazelrio//libraries/java/wpilib/wpiutil",
+        "@bzlmodrio-allwpilib//libraries/cpp/wpiutil:jni",
+        "@bzlmodrio-allwpilib//libraries/java/cameraserver",
+        "@bzlmodrio-allwpilib//libraries/java/wpilibNewCommands",
+        "@bzlmodrio-allwpilib//libraries/java/wpilibj",
+        "@bzlmodrio-allwpilib//libraries/java/wpimath",
+        "@bzlmodrio-allwpilib//libraries/java/wpiutil",
+        "@bzlmodrio-phoenix//libraries/java/api-java",
+        "@bzlmodrio-phoenix//libraries/java/wpiapi-java",
     ],
 )
 
@@ -37,6 +38,6 @@ snobot_sim_java_robot(
     visibility = ["//examples/test_robot_ctre_swerve:__subpackages__"],
     deps = [
         ":ctre_swerve",
-        "@bazelrio//libraries/java/wpilib/wpilibj",
+        "@bzlmodrio-allwpilib//libraries/java/wpilibj",
     ],
 )

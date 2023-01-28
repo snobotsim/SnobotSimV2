@@ -7,6 +7,6 @@ snobot_sim_java_test(
         "//examples/test_robot_base/src/main/java/org/snobotv2/examples/base/subsystems",
         "//examples/test_robot_ctre/src/main/java/org/snobotv2/examples/ctre/subsystems",
         "//snobot_sim_java_test_utils/src/main/java/org/snobotv2/test_utils",
-        "@bazelrio//libraries/java/wpilib/wpimath",
+        "@bzlmodrio-allwpilib//libraries/java/wpimath",
     ],
 )
