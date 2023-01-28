@@ -29,11 +29,14 @@ def download_external_archives():
     #     path = "../../bzlmodRio/bzlmodRio"
     # )
 
-    # Download Setup python
+    # Download java_rules, Since bazel 5.0 broke backwards compatibility and PMD won't load otherwise
+    RULES_JAVA_COMMITISH = "5.4.0"
+    RULES_JAVA_SHA = "f90111a597b2aa77b7104dbdc685fd35ea0cca3b7c3f807153765e22319cbd88"
     http_archive(
-        name = "rules_python",
-        url = "https://github.com/bazelbuild/rules_python/releases/download/0.5.0/rules_python-0.5.0.tar.gz",
-        sha256 = "cd6730ed53a002c56ce4e2f396ba3b3be262fd7cb68339f0377a45e8227fe332",
+        name = "rules_java",
+        sha256 = RULES_JAVA_SHA,
+        strip_prefix = "rules_java-{}".format(RULES_JAVA_COMMITISH),
+        url = "https://github.com/bazelbuild/rules_java/archive/{}.tar.gz".format(RULES_JAVA_COMMITISH),
     )
 
     # Download PMD
@@ -44,14 +47,4 @@ def download_external_archives():
         sha256 = rules_pmd_sha,
         strip_prefix = "bazel_rules_pmd-{v}".format(v = rules_pmd_version),
         url = "https://github.com/buildfoundation/bazel_rules_pmd/archive/v{v}.tar.gz".format(v = rules_pmd_version),
-    )
-
-    # Download java_rules, Since bazel 5.0 broke backwards compatibility and PMD won't load otherwise
-    RULES_JAVA_COMMITISH = "7a3c520737581f13691ad94a0f798a3518d869d1"
-    RULES_JAVA_SHA = "bb9c842258f6365edc43c1dda40fc4aa28afa407ba4f6765b784d52f8902dd20"
-    http_archive(
-        name = "rules_java",
-        sha256 = RULES_JAVA_SHA,
-        strip_prefix = "rules_java-{}".format(RULES_JAVA_COMMITISH),
-        url = "https://github.com/bazelbuild/rules_java/archive/{}.tar.gz".format(RULES_JAVA_COMMITISH),
     )
