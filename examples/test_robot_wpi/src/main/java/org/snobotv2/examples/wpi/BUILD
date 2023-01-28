@@ -2,10 +2,7 @@ load("//build_scripts/bazel:java_rules.bzl", "snobot_sim_java_library", "snobot_
 
 snobot_sim_java_library(
     name = "wpi",
-    srcs = glob(
-        ["*.java"],
-        exclude = ["Main.java"],
-    ),
+    srcs = glob(["*.java"]),
     visibility = [
         "//examples/test_robot_wpi:__subpackages__",
         "//snobot_sim_java/src/test:__subpackages__",
@@ -23,11 +20,7 @@ snobot_sim_java_library(
 
 snobot_sim_java_robot(
     name = "Main",
-    srcs = ["Main.java"],
     main_class = "org.snobotv2.examples.wpi.Main",
     visibility = ["//examples/test_robot_wpi:__subpackages__"],
-    deps = [
-        ":wpi",
-        "@bzlmodrio-allwpilib//libraries/java/wpilibj",
-    ],
+    runtime_deps = [":wpi"],
 )
