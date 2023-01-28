@@ -20,13 +20,13 @@ def download_external_archives():
     # )
     http_archive(
         name = "bazelrio",
-        url = "https://github.com/pjreiniger/bazelRio/archive/e1519838743bab8eb1c16cfa4331c95848664ce2.tar.gz",
-        sha256 = "4ddbac21a195a35e955cc4bc2a66bf7cee0d691dd84a4c00e45c771d1c72d2f1",
-        strip_prefix = "bazelrio-e1519838743bab8eb1c16cfa4331c95848664ce2/bazelrio",
+        url = "https://github.com/bzlmodRio/bzlmodRio/archive/6472523adf3bc9570410079028762bc207842beb.tar.gz",
+        sha256 = "fda87eed3225b048eff5c045b6aea7e8373dd5cadefd85f934b0b5409c720a94",
+        strip_prefix = "bzlmodRio-6472523adf3bc9570410079028762bc207842beb",
     )
     # native.local_repository(
     #     name = "bazelrio",
-    #     path = "C:/Users/PJ/Documents/GitHub/bazelRio/bazelrio/bazelrio"
+    #     path = "../../bzlmodRio/bzlmodRio"
     # )
 
     # Download Setup python
