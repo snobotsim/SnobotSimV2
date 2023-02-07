@@ -42,7 +42,7 @@ public class SwerveModule implements BaseSwerveModule
 
     private SwerveModuleState mCurrentState;
     private SwerveModuleState mDesiredState;
-    private SwerveModulePosition mCurrentPosition;
+    private SwerveModulePosition mCurrentPosition = new SwerveModulePosition();
     private double mTurnGoalTicks;
     private double mDriveGoalTicks;
 
