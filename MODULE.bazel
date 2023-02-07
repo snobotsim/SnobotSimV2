@@ -3,7 +3,6 @@ bazel_dep(name = "rules_java", version = "5.3.5")
 bazel_dep(name = "rules_bazelrio", version = "0.0.9")
 bazel_dep(name = "rules_roborio_toolchain", version = "2023-7")
 bazel_dep(name = "rules_pmd", version = "0.2.0")
-
 bazel_dep(name = "bzlmodrio-allwpilib", version = "2023.2.1")
 bazel_dep(name = "bzlmodrio-navx", version = "2023.0.3")
 bazel_dep(name = "bzlmodrio-phoenix", version = "5.30.3-23.0.4")
