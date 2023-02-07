@@ -2,12 +2,7 @@ load("//build_scripts/bazel:java_rules.bzl", "snobot_sim_java_library", "snobot_
 
 snobot_sim_java_library(
     name = "ctre_swerve",
-    srcs = glob(
-        [
-            "**/*.java",
-        ],
-        exclude = ["Main.java"],
-    ),
+    srcs = glob(["**/*.java"]),
     visibility = [
         "//examples/test_robot_ctre_swerve:__subpackages__",
     ],
@@ -33,11 +28,7 @@ snobot_sim_java_library(
 
 snobot_sim_java_robot(
     name = "Main",
-    srcs = ["Main.java"],
     main_class = "org.snobotv2.examples.ctre_swerve.Main",
     visibility = ["//examples/test_robot_ctre_swerve:__subpackages__"],
-    deps = [
-        ":ctre_swerve",
-        "@bzlmodrio-allwpilib//libraries/java/wpilibj",
-    ],
+    runtime_deps = [":ctre_swerve"],
 )
