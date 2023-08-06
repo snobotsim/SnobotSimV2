@@ -17,6 +17,7 @@ public class BaseGyroWrapper implements IGyroWrapper
     public BaseGyroWrapper(DoubleConsumer setter)
     {
         mSetter = setter;
+        mSetter.accept(0.0);
     }
 
 
