@@ -1,10 +1,9 @@
 package org.snobotv2.examples.base.commands.auton;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import org.snobotv2.examples.base.subsystems.DrivetrainSubsystem;
 
-public final class DriveStraightTimedCommand extends CommandBase
+public final class DriveStraightTimedCommand extends Command
 {
     private final DrivetrainSubsystem mDrivetrain;
     private final double mSpeed;

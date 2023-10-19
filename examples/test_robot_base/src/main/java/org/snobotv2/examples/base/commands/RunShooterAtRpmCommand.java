@@ -1,9 +1,9 @@
 package org.snobotv2.examples.base.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import org.snobotv2.examples.base.subsystems.ShooterSubsystem;
 
-public class RunShooterAtRpmCommand extends CommandBase
+public class RunShooterAtRpmCommand extends Command
 {
     private final double mRpm;
     private final ShooterSubsystem mShooter;

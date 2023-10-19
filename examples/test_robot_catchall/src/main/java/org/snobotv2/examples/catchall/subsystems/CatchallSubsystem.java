@@ -43,7 +43,6 @@ import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.motorcontrol.Victor;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
-import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 @SuppressWarnings("PMD")
@@ -94,9 +93,9 @@ public class CatchallSubsystem extends SubsystemBase
 
     public CatchallSubsystem()
     {
-        mI2cAccelerometer = new ADXL345_I2C(I2C.Port.kMXP, Accelerometer.Range.k2G);
-        mSpiAccelerometer = new ADXL345_SPI(SPI.Port.kMXP, Accelerometer.Range.k2G);
-        mM362Accelerometer = new ADXL362(SPI.Port.kMXP, Accelerometer.Range.k2G);
+        mI2cAccelerometer = new ADXL345_I2C(I2C.Port.kMXP, ADXL345_I2C.Range.k2G);
+        mSpiAccelerometer = new ADXL345_SPI(SPI.Port.kMXP, ADXL345_SPI.Range.k2G);
+        mM362Accelerometer = new ADXL362(SPI.Port.kMXP, ADXL362.Range.k2G);
         mAdxGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS3);
         mCustomSpi = new SPI(SPI.Port.kOnboardCS3);
         mCustomI2c = new I2C(I2C.Port.kOnboard, 0x20);

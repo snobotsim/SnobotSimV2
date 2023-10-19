@@ -15,4 +15,4 @@ test --test_arg="--exclude-tag=ctre"
 test --test_arg="--exclude-tag=flaky"
 
 
-build --registry=https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/megadiff/
+build --registry=https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/

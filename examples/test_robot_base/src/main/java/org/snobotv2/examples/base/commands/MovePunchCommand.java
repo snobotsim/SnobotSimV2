@@ -1,9 +1,9 @@
 package org.snobotv2.examples.base.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import org.snobotv2.examples.base.subsystems.PunchSubsystem;
 
-public class MovePunchCommand extends CommandBase
+public class MovePunchCommand extends Command
 {
     private final boolean mExtend;
     private final PunchSubsystem mPunch;

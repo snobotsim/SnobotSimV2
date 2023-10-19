@@ -18,6 +18,9 @@ public class TestPigeonImu extends BaseUnitTest
     {
         try (WPI_PigeonIMU pigeon = new WPI_PigeonIMU(3))
         {
+            pigeon.reset();
+            ctreSimLoop();
+
             runTests(pigeon);
         }
     }
@@ -29,6 +32,9 @@ public class TestPigeonImu extends BaseUnitTest
         try (WPI_TalonSRX talon = new WPI_TalonSRX(1);
              WPI_PigeonIMU pigeon = new WPI_PigeonIMU(talon))
         {
+            pigeon.reset();
+            ctreSimLoop();
+
             runTests(pigeon);
         }
 
