@@ -5,13 +5,13 @@ apply plugin: 'pmd'
 apply plugin: 'com.github.spotbugs'
 
 jacoco {
-    toolVersion = "0.8.8"
+    toolVersion = "0.8.10"
 }
 jacocoTestReport {
     dependsOn test
     reports {
-        xml.enabled true
-        html.enabled true
+        xml.required = true
+        html.required = true
     }
 }
 
