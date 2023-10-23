@@ -1,9 +1,9 @@
 package org.snobotv2.examples.base.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import org.snobotv2.examples.base.subsystems.ElevatorSubsystem;
 
-public class ElevatorGoToPositionCommand extends CommandBase
+public class ElevatorGoToPositionCommand extends Command
 {
     private final double mHeight;
     private final ElevatorSubsystem mElevator;

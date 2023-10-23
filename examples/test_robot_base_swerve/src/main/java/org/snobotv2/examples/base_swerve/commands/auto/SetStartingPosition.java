@@ -1,10 +1,10 @@
 package org.snobotv2.examples.base_swerve.commands.auto;
 
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import org.snobotv2.examples.base_swerve.subsystems.BaseSwerveDriveSubsystem;
 
-public class SetStartingPosition extends CommandBase
+public class SetStartingPosition extends Command
 {
     private final BaseSwerveDriveSubsystem mDriveSubsystem;
     private final Pose2d mPose;

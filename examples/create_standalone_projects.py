@@ -15,7 +15,6 @@ class ExampleConfig:
 
 
 def run():
-
     parser = argparse.ArgumentParser()
     parser.add_argument("--output_directory", type=str, required=True)
 

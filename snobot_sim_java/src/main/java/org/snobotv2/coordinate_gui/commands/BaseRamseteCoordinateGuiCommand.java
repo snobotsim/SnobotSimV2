@@ -7,7 +7,7 @@ import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import org.snobotv2.coordinate_gui.RamsetePublisher;
 
@@ -24,7 +24,7 @@ import static edu.wpi.first.util.ErrorMessages.requireNonNullParam;
  * CoordinateGui network tables
  */
 @SuppressWarnings({"PMD.FieldNamingConventions", "checkstyle:LeftCurly", "checkstyle:MemberName"}) // To make this as similar as possible to wpilib version, use their styleguide
-public abstract class BaseRamseteCoordinateGuiCommand extends CommandBase {
+public abstract class BaseRamseteCoordinateGuiCommand extends Command {
     protected final Timer m_timer = new Timer();
     protected final Trajectory m_trajectory;
     protected final RamseteController m_follower;

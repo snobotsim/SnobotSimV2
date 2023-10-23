@@ -1,2 +1,2 @@
 
-build:for-roborio --platforms=@rules_roborio_toolchain//platforms/roborio
+build:for-roborio --platforms=@rules_bzlmodrio_toolchains//platforms/roborio

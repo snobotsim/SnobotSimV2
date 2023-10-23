@@ -1,10 +1,10 @@
 package org.snobotv2.examples.base_swerve.commands.tuning;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import org.snobotv2.examples.base_swerve.subsystems.BaseSwerveDriveSubsystem;
 
 
-public class ManualMoveSwerveModuleCommand extends CommandBase
+public class ManualMoveSwerveModuleCommand extends Command
 {
     private final BaseSwerveDriveSubsystem mDriveSubsystem;
     private final BaseSwerveDriveSubsystem.SwerveModulePositionTypes mModulePosition;

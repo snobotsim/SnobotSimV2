@@ -16,6 +16,9 @@ public class TestPigeon2 extends BaseUnitTest
     {
         try (WPI_Pigeon2 pigeon = new WPI_Pigeon2(3))
         {
+            pigeon.reset();
+            ctreSimLoop();
+
             runTests(pigeon);
         }
     }
