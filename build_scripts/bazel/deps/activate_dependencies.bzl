@@ -1,11 +1,7 @@
 load("@rules_jvm_external//:defs.bzl", "maven_install")
-load("@rules_pmd//pmd:toolchains.bzl", "rules_pmd_toolchains")
 load("@bzlmodrio//:bzlmodrio_setup.bzl", "bzlmodrio_setup", "get_bzlmodrio_java_dependencies")
 
 def activate_dependencies():
-    PMD_VERSION = "6.39.0"
-    rules_pmd_toolchains(pmd_version = PMD_VERSION)
-
     jupiter_version = "5.6.1"
     platform_version = "1.6.1"
 

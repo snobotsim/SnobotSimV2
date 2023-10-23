@@ -1,8 +1,6 @@
-load("@rules_pmd//pmd:dependencies.bzl", "rules_pmd_dependencies")
 load("@bzlmodrio//:bzlmodrio_dependencies.bzl", "bzlmodrio_dependencies")
 
 def setup_dependencies():
-    rules_pmd_dependencies()
     bzlmodrio_dependencies(
         # toolchain_versions = "2024-1",
         allwpilib_version = "2024.1.1-beta-1",
