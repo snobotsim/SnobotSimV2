@@ -1,3 +1,5 @@
+load("@rules_java//java:defs.bzl", "java_library")
+
 # Basically an alias for all of the build files underneath
 java_library(
     name = "snobot_sim_java",

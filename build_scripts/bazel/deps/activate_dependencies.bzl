@@ -1,5 +1,5 @@
-load("@rules_jvm_external//:defs.bzl", "maven_install")
 load("@bzlmodrio//:bzlmodrio_setup.bzl", "bzlmodrio_setup", "get_bzlmodrio_java_dependencies")
+load("@rules_jvm_external//:defs.bzl", "maven_install")
 
 def activate_dependencies():
     jupiter_version = "5.6.1"

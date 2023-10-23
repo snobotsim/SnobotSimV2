@@ -1,8 +1,7 @@
+load("@rules_bazelrio//:java_rules.bzl", "bazelrio_java_test")
+load("@rules_bazelrio//:robot_rules.bzl", "robot_java_binary")
 load("@rules_java//java:defs.bzl", "java_library")
 load("@rules_pmd//pmd:defs.bzl", "pmd")
-load("@rules_bazelrio//:robot_rules.bzl", "robot_java_binary")
-load("@rules_bazelrio//:java_rules.bzl", "bazelrio_java_test")
-
 
 def __styleguide(name, srcs, disable_pmd):
     if not disable_pmd:
