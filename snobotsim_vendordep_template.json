@@ -3,8 +3,8 @@
   "name": "SnobotSim",
   "version": "$VERSION",
   "uuid": "$GUID",
-  "mavenUrls": ["https://raw.githubusercontent.com/snobotsim/maven_repo/master/development"],
-  "jsonUrl": "http://raw.githubusercontent.com/snobotsim/maven_repo/master/development/SnobotSim.json",
+  "mavenUrls": ["https://raw.githubusercontent.com/snobotsim/maven_repo/master/release"],
+  "jsonUrl": "http://raw.githubusercontent.com/snobotsim/maven_repo/master/release/SnobotSim.json",
   "javaDependencies": [
     {
       "groupId": "org.snobotv2",

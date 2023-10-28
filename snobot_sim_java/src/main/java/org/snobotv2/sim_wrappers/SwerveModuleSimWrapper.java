@@ -15,14 +15,16 @@ public class SwerveModuleSimWrapper extends BaseSimWrapper
     private final SwerveModuleSim mModuleSim;
 
     private final boolean mUseDegrees;
+    private final double mWheelCircumferenceMeters;
 
     public SwerveModuleSimWrapper(SwerveModuleSim moduleSim,
                                   IMotorControllerWrapper driveMotor,
                                   IMotorControllerWrapper turnMotor,
                                   IEncoderWrapper driveEncoder,
-                                  IEncoderWrapper turnEncoder)
+                                  IEncoderWrapper turnEncoder,
+                                  double wheelCircumferenceMeters)
     {
-        this(moduleSim, driveMotor, turnMotor, driveEncoder, turnEncoder, true);
+        this(moduleSim, driveMotor, turnMotor, driveEncoder, turnEncoder, wheelCircumferenceMeters, true);
     }
 
     public SwerveModuleSimWrapper(SwerveModuleSim moduleSim,
@@ -30,6 +32,7 @@ public class SwerveModuleSimWrapper extends BaseSimWrapper
                                   IMotorControllerWrapper turnMotor,
                                   IEncoderWrapper driveEncoder,
                                   IEncoderWrapper turnEncoder,
+                                  double wheelCircumferenceMeters,
                                   boolean useDegrees)
     {
         mModuleSim = moduleSim;
@@ -38,6 +41,7 @@ public class SwerveModuleSimWrapper extends BaseSimWrapper
         mTurnMotor = turnMotor;
         mDriveEncoder = driveEncoder;
         mTurnEncoder = turnEncoder;
+        mWheelCircumferenceMeters = wheelCircumferenceMeters;
         mUseDegrees = useDegrees;
     }
 
@@ -51,7 +55,7 @@ public class SwerveModuleSimWrapper extends BaseSimWrapper
                 mDriveMotor.getVoltagePercentage() * RobotController.getBatteryVoltage(),
                 mTurnMotor.getVoltagePercentage() * RobotController.getBatteryVoltage());
 
-        mDriveEncoder.setDistance(mModuleSim.getWheelEncoderPositionRev());
+        mDriveEncoder.setDistance(mModuleSim.getWheelEncoderPositionRev() * mWheelCircumferenceMeters);
         mDriveEncoder.setVelocity(mModuleSim.getWheelEncoderMetersPerSecond());
 
         double azimuthPosition = mModuleSim.getAzimuthEncoderPositionRads();

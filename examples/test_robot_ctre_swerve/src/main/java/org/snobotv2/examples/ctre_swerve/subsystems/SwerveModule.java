@@ -99,7 +99,8 @@ public class SwerveModule implements BaseSwerveModule
                     new CtreMotorControllerSimWrapper(mDriveMotor),
                     new CtreMotorControllerSimWrapper(mAzimuthMotor),
                     new CtreEncoderSimWrapper(mDriveMotor, CtreUtils.falconToDegrees(1, DRIVE_GEAR_RATION) / 360 / DriveSubsystem.kWheelCircumfranceMeters),
-                    new CtreEncoderSimWrapper(mAzimuthMotor, CtreUtils.falconToDegrees(1, TURNING_GEAR_RATION)));
+                    new CtreEncoderSimWrapper(mAzimuthMotor, CtreUtils.falconToDegrees(1, TURNING_GEAR_RATION)),
+                    DriveSubsystem.kWheelDiameterMeters * Math.PI);
         }
     }
 

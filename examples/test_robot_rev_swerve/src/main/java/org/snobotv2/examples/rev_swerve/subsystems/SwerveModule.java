@@ -109,7 +109,8 @@ public class SwerveModule implements BaseSwerveModule
                     new RevMotorControllerSimWrapper(mDriveMotor),
                     new RevMotorControllerSimWrapper(mAzimuthMotor),
                     RevEncoderSimWrapper.create(mDriveMotor),
-                    RevEncoderSimWrapper.create(mAzimuthMotor));
+                    RevEncoderSimWrapper.create(mAzimuthMotor),
+                    DriveSubsystem.kWheelDiameterMeters * Math.PI);
         }
     }
 
