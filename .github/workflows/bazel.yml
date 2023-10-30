@@ -22,6 +22,11 @@ jobs:
           fetch-depth: 0
       - uses: bazelbuild/setup-bazelisk@v2
 
+      # Unix systems sometimes fail to create the symlink the first time around
+      - name: Build (Allow failure)
+        run: bazel build ... --nojava_header_compilation -k ${{ matrix.config }} || true
+        shell: bash
+
       - name: Build
         run: bazel build ... -k ${{ matrix.config }}
         shell: bash
