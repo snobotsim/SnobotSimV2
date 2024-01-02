@@ -11,6 +11,7 @@ apply from: "${rootDir}/build_scripts/base_java.gradle"
 
 dependencies {
     implementation wpilibTools.deps.wpilibJava("wpilibj")
+    implementation wpilibTools.deps.wpilibJava("wpiunits")
     implementation wpilibTools.deps.wpilibJava("wpimath")
     implementation wpilibTools.deps.wpilibJava("hal")
     implementation wpilibTools.deps.wpilibJava("ntcore")

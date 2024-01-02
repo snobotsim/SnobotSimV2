@@ -22,7 +22,7 @@ dependencies {
     implementation project(":snobot_sim_java")
     implementation project(":examples:test_robot_base")
 
-    implementation "com.ctre.phoenix:api-java:${ctreVersion}"
+    implementation "com.ctre.phoenix:api-java:${phoenix5Version}"
     implementation "com.revrobotics.frc:REVLib-java:${revVersion}"
     implementation "com.kauailabs.navx.frc:navx-frc-java:${navxVersion}"
 
