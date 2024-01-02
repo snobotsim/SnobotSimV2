@@ -9,7 +9,22 @@
   "javaDependencies": [
     {
       "groupId": "org.snobotv2",
-      "artifactId": "snobot_sim_java",
+      "artifactId": "snobot_sim_java_base",
+      "version": "$VERSION"
+    },
+    {
+      "groupId": "org.snobotv2",
+      "artifactId": "snobot_sim_java_navx",
+      "version": "$VERSION"
+    },
+    {
+      "groupId": "org.snobotv2",
+      "artifactId": "snobot_sim_java_phoenix5",
+      "version": "$VERSION"
+    },
+    {
+      "groupId": "org.snobotv2",
+      "artifactId": "snobot_sim_java_revlib",
       "version": "$VERSION"
     },
     {
