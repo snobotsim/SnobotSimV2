@@ -33,7 +33,10 @@ def run():
     )
     projects.append(
         ExampleConfig(
-            "phoenix5_swerve", "Phoenix5Swerve", ["Phoenix.json"], "test_robot_base_swerve"
+            "phoenix5_swerve",
+            "Phoenix5Swerve",
+            ["Phoenix.json"],
+            "test_robot_base_swerve",
         )
     )
     projects.append(
