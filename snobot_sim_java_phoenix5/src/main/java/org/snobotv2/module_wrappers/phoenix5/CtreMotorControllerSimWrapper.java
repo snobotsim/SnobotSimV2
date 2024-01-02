@@ -7,6 +7,7 @@ import org.snobotv2.module_wrappers.BaseMotorControllerWrapper;
 
 import java.util.function.DoubleConsumer;
 
+@SuppressWarnings("removal")
 public class CtreMotorControllerSimWrapper extends BaseMotorControllerWrapper
 {
     private final DoubleConsumer mBusVoltageSetter;
