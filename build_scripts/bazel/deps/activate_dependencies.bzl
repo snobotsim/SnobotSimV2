@@ -23,5 +23,5 @@ def activate_dependencies():
         name = "maven",
         artifacts = maven_artifacts,
         repositories = maven_repositories,
-        # maven_install_json = "//build_scripts/bazel/deps:maven_install.json",
+        maven_install_json = "//build_scripts/bazel/deps:maven_install.json",
     )
