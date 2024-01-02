@@ -19,7 +19,7 @@ dependencies {
     implementation wpilibTools.deps.wpilibJava("ntcore")
     implementation wpilibTools.deps.wpilibJava("wpilibNewCommands")
 
-    implementation project(":snobot_sim_java")
+    implementation project(":snobot_sim_java_base")
     implementation project(":examples:test_robot_base")
 
     testImplementation project(":snobot_sim_java_test_utils")

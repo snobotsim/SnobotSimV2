@@ -3,13 +3,12 @@ package org.snobotv2.examples.phoenix5.subsystems;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.snobotv2.test_utils.BaseUnitTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("ctre")
 @Tag("flaky") // TODO CTRE is acting weird, likely because of the lack of determinism
-public class CtreDrivetrainTest extends BaseUnitTest
+public class CtreDrivetrainTest extends BasePhoenix5UnitTest
 {
     @Test
     public void testDriveForwards() throws InterruptedException

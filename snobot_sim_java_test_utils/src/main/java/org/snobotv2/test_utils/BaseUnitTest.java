@@ -1,8 +1,5 @@
 package org.snobotv2.test_utils;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.unmanaged.Unmanaged;
-import com.revrobotics.CANSparkMax;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.hal.simulation.SimulatorJNI;
 import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
@@ -13,7 +10,6 @@ import org.snobotv2.module_wrappers.BaseMotorControllerWrapper;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SuppressWarnings("PMD") // TODO temp
 public class BaseUnitTest
 {
     protected static final double DEFAULT_EPSILON = 1e-3;
@@ -36,42 +32,11 @@ public class BaseUnitTest
         HAL.shutdown();
     }
 
-    protected void ctreSimLoop()
-    {
-        HAL.simPeriodicBefore();
-        Unmanaged.feedEnable(1000);
-        HAL.simPeriodicAfter();
-
-        try
-        {
-            Thread.sleep(250);
-        } catch (InterruptedException e)
-        {
-            e.printStackTrace(); // NOPMD
-        }
-    }
-
     protected void testVoltagePercentage(double expected, BaseMotorControllerWrapper... wrappers)
     {
         for (BaseMotorControllerWrapper wrapper : wrappers)
         {
             assertEquals(expected, wrapper.getVoltagePercentage(), DEFAULT_EPSILON, () -> "For " + wrapper.getId());
-        }
-    }
-
-    protected void testVoltagePercentage(double expected, WPI_TalonSRX... motorControllers)
-    {
-        for (WPI_TalonSRX motorController : motorControllers)
-        {
-            assertEquals(expected, motorController.getMotorOutputPercent(), DEFAULT_EPSILON, () -> "For " + motorController.getDeviceID());
-        }
-    }
-
-    protected void testVoltagePercentage(double expected, CANSparkMax... motorControllers)
-    {
-        for (CANSparkMax motorController : motorControllers) // NOPMD
-        {
-            assertEquals(expected, motorController.getAppliedOutput(), DEFAULT_EPSILON, () -> "For " + motorController.getDeviceId());
         }
     }
 

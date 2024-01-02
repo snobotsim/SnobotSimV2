@@ -13,14 +13,14 @@ ext {
 apply from: "${rootDir}/build_scripts/base_java.gradle"
 
 dependencies {
-    implementation project(":snobot_sim_java")
+    implementation project(":snobot_sim_java_base")
     implementation wpilibTools.deps.wpilibJava("hal")
     implementation wpilibTools.deps.wpilibJava("wpilibj")
     implementation wpilibTools.deps.wpilibJava("wpiutil")
 
-    implementation "com.ctre.phoenix:api-java:${phoenix5Version}"
-    implementation "com.ctre.phoenix:wpiapi-java:${phoenix5Version}"
-    implementation "com.revrobotics.frc:REVLib-java:${revVersion}"
+    //    implementation "com.ctre.phoenix:api-java:${phoenix5Version}"
+    //    implementation "com.ctre.phoenix:wpiapi-java:${phoenix5Version}"
+    //    implementation "com.revrobotics.frc:REVLib-java:${revVersion}"
 
     implementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     implementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
