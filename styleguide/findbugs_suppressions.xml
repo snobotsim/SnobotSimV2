@@ -9,7 +9,7 @@
     </Match>
     <Match>
         <Bug pattern="EI_EXPOSE_REP" />
-        <Class name="org.snobotv2.examples.ctre_swerve.subsystems.SwerveModule" />
+        <Class name="org.snobotv2.examples.phoenix5_swerve.subsystems.SwerveModule" />
     </Match>
     <Match>
         <Bug pattern="EI_EXPOSE_REP" />

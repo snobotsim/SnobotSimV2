@@ -1,0 +1,9 @@
+alias(
+    name = "test_robot_phoenix5",
+    actual = "//examples/test_robot_phoenix5/src/main/java/org/snobotv2/examples/phoenix5:Main",
+)
+
+alias(
+    name = "sim",
+    actual = "//examples/test_robot_phoenix5/src/main/java/org/snobotv2/examples/phoenix5:Main.sim",
+)

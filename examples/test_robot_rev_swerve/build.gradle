@@ -9,6 +9,7 @@ ext.baseId = "test_robot_rev_swerve"
 apply from: "${rootDir}/build_scripts/base_java.gradle"
 dependencies {
 
+    implementation wpilibTools.deps.wpilibJava("wpiunits")
     implementation wpilibTools.deps.wpilibJava("wpimath")
     implementation wpilibTools.deps.wpilibJava("hal")
     implementation wpilibTools.deps.wpilibJava("wpilibj")
@@ -22,8 +23,8 @@ dependencies {
     implementation project(":snobot_sim_java")
     implementation project(":examples:test_robot_base_swerve")
     implementation "com.revrobotics.frc:REVLib-java:${revVersion}"
-    implementation "com.ctre.phoenix:api-java:${ctreVersion}"
-    implementation "com.ctre.phoenix:wpiapi-java:${ctreVersion}"
+    implementation "com.ctre.phoenix:api-java:${phoenix5Version}"
+    implementation "com.ctre.phoenix:wpiapi-java:${phoenix5Version}"
 
     testImplementation project(":snobot_sim_java_test_utils")
 

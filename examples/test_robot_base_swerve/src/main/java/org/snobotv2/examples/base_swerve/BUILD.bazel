@@ -9,7 +9,7 @@ snobot_sim_java_library(
     ),
     visibility = [
         "//examples/test_robot_base_swerve:__subpackages__",
-        "//examples/test_robot_ctre_swerve:__subpackages__",
+        "//examples/test_robot_phoenix5_swerve:__subpackages__",
         "//examples/test_robot_rev_swerve:__subpackages__",
     ],
     deps = [

@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'edu.wpi.first.WpilibTools' version '1.1.0'
+}
+
+group 'org.snobotv2'
+
+ext.baseId = "test_robot_ctre_swerve"
+apply from: "${rootDir}/build_scripts/base_java.gradle"
+dependencies {
+
+    implementation wpilibTools.deps.wpilibJava("wpiunits")
+    implementation wpilibTools.deps.wpilibJava("wpimath")
+    implementation wpilibTools.deps.wpilibJava("hal")
+    implementation wpilibTools.deps.wpilibJava("wpiutil")
+    implementation wpilibTools.deps.wpilibJava("wpilibj")
+    implementation wpilibTools.deps.wpilibJava("cscore")
+    implementation wpilibTools.deps.wpilibJava("ntcore")
+    implementation wpilibTools.deps.wpilibJava("cameraserver")
+    implementation wpilibTools.deps.wpilibJava("wpilibNewCommands")
+
+    implementation "com.ctre.phoenix:api-java:${phoenix5Version}"
+    implementation "com.ctre.phoenix:wpiapi-java:${phoenix5Version}"
+
+    implementation project(":snobot_sim_java")
+    implementation project(":snobot_swerve_sim")
+    implementation project(":examples:test_robot_base_swerve")
+
+    testImplementation project(":snobot_sim_java_test_utils")
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
+}

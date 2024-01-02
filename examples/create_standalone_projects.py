@@ -24,7 +24,7 @@ def run():
 
     projects = []
     projects.append(ExampleConfig("rev", "Rev", ["navx_frc.json", "REVLib.json"]))
-    projects.append(ExampleConfig("ctre", "Ctre", ["Phoenix.json"]))
+    projects.append(ExampleConfig("phoenix5", "Phoenix5", ["Phoenix.json"]))
     projects.append(ExampleConfig("wpi", "Wpi", []))
     projects.append(
         ExampleConfig(
@@ -33,7 +33,10 @@ def run():
     )
     projects.append(
         ExampleConfig(
-            "ctre_swerve", "CtreSwerve", ["Phoenix.json"], "test_robot_base_swerve"
+            "phoenix5_swerve",
+            "Phoenix5Swerve",
+            ["Phoenix.json"],
+            "test_robot_base_swerve",
         )
     )
     projects.append(

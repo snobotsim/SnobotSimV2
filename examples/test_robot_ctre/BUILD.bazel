@@ -1,9 +1,0 @@
-alias(
-    name = "test_robot_ctre",
-    actual = "//examples/test_robot_ctre/src/main/java/org/snobotv2/examples/ctre:Main",
-)
-
-alias(
-    name = "sim",
-    actual = "//examples/test_robot_ctre/src/main/java/org/snobotv2/examples/ctre:Main.sim",
-)
