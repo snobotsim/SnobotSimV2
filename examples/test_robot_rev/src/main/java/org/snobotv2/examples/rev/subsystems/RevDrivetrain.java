@@ -3,11 +3,11 @@ package org.snobotv2.examples.rev.subsystems;
 //import com.kauailabs.navx.frc.AHRS;
 
 import com.kauailabs.navx.frc.AHRS;
-import com.revrobotics.CANSparkMax.ControlType;
-import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkBase.ControlType;
+import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SimableCANSparkMax;
-import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotBase;
@@ -33,8 +33,8 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
     private final RelativeEncoder mRightEncoder;
     private final RelativeEncoder mLeftEncoder;
 
-    private final SparkMaxPIDController mLeftPidController;
-    private final SparkMaxPIDController mRightPidController;
+    private final SparkPIDController mLeftPidController;
+    private final SparkPIDController mRightPidController;
 
     private final AHRS mGyro;
 
@@ -53,10 +53,10 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
 
     public RevDrivetrain()
     {
-        mLeadLeft = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_LEFT_MOTOR_A, CANSparkMaxLowLevel.MotorType.kBrushless);
-        mFollowerLeft = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_LEFT_MOTOR_B, CANSparkMaxLowLevel.MotorType.kBrushless);
-        mLeadRight = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_A, CANSparkMaxLowLevel.MotorType.kBrushless);
-        mFollowerRight = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_B, CANSparkMaxLowLevel.MotorType.kBrushless);
+        mLeadLeft = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_LEFT_MOTOR_A, CANSparkLowLevel.MotorType.kBrushless);
+        mFollowerLeft = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_LEFT_MOTOR_B, CANSparkLowLevel.MotorType.kBrushless);
+        mLeadRight = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_A, CANSparkLowLevel.MotorType.kBrushless);
+        mFollowerRight = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_B, CANSparkLowLevel.MotorType.kBrushless);
 
         mRightEncoder = mLeadRight.getEncoder();
         mLeftEncoder = mLeadLeft.getEncoder();
@@ -83,7 +83,7 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
 
         mDrive = new DifferentialDrive(mLeadLeft, mLeadRight);
 
-        for (SparkMaxPIDController pidController : new SparkMaxPIDController[]{mLeftPidController, mRightPidController})
+        for (SparkPIDController pidController : new SparkPIDController[]{mLeftPidController, mRightPidController})
         {
             setupPidController(pidController, .02, 0, 0, 0.005_44, 144, 144);
         }
@@ -103,7 +103,7 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
         }
     }
 
-    private void setupPidController(SparkMaxPIDController pidController, double kp, double ki, double kd, double kff, double maxVelocity, double maxAcceleration)
+    private void setupPidController(SparkPIDController pidController, double kp, double ki, double kd, double kff, double maxVelocity, double maxAcceleration)
     {
         pidController.setP(Units.metersToInches(kp));
         pidController.setI(ki);

@@ -1,10 +1,10 @@
 package org.snobotv2.examples.rev.subsystems;
 
-import com.revrobotics.CANSparkMaxLowLevel;
-import com.revrobotics.CANSparkMax.ControlType;
+import com.revrobotics.CANSparkLowLevel;
+import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SimableCANSparkMax;
-import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkPIDController;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -25,13 +25,13 @@ public class RevElevatorSubsystem extends SubsystemBase implements ElevatorSubsy
     private final SimableCANSparkMax mLeadMotor; // NOPMD
     private final SimableCANSparkMax mFollowerMotor; // NOPMD
     private final RelativeEncoder mEncoder;
-    private final SparkMaxPIDController mPidController;
+    private final SparkPIDController mPidController;
     private ISimWrapper mElevatorSim;
 
     public RevElevatorSubsystem()
     {
-        mLeadMotor = new SimableCANSparkMax(BaseConstants.ELEVATOR_MOTOR_A, CANSparkMaxLowLevel.MotorType.kBrushless);
-        mFollowerMotor = new SimableCANSparkMax(BaseConstants.ELEVATOR_MOTOR_B, CANSparkMaxLowLevel.MotorType.kBrushless);
+        mLeadMotor = new SimableCANSparkMax(BaseConstants.ELEVATOR_MOTOR_A, CANSparkLowLevel.MotorType.kBrushless);
+        mFollowerMotor = new SimableCANSparkMax(BaseConstants.ELEVATOR_MOTOR_B, CANSparkLowLevel.MotorType.kBrushless);
         mFollowerMotor.follow(mLeadMotor);
         mEncoder = mLeadMotor.getEncoder();
         mPidController = mLeadMotor.getPIDController();
@@ -65,7 +65,7 @@ public class RevElevatorSubsystem extends SubsystemBase implements ElevatorSubsy
     public void goToPosition(double inches)
     {
         double meters = Units.inchesToMeters(inches);
-        mPidController.setReference(meters, ControlType.kPosition, POSITION_SLOT, GRAVITY_COMPENSATION_VOLTS, SparkMaxPIDController.ArbFFUnits.kVoltage);
+        mPidController.setReference(meters, ControlType.kPosition, POSITION_SLOT, GRAVITY_COMPENSATION_VOLTS, SparkPIDController.ArbFFUnits.kVoltage);
     }
 
     @Override

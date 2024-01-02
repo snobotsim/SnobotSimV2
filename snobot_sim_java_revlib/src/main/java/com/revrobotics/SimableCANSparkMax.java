@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @SuppressWarnings({"PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods"})
-public class SimableCANSparkMax extends CANSparkMax
+public class SimableCANSparkMax extends CANSparkMax implements SimableRevDevice
 {
     private static final Logger LOGGER = Logger.getLogger(SimableCANSparkMax.class.getName());
     private static final int NUM_PID_SLOTS = 4;
@@ -89,63 +89,6 @@ public class SimableCANSparkMax extends CANSparkMax
         }
     }
 
-    private static final class SimablePidController extends SparkMaxPIDController
-    {
-        private final double[] mMaxAccel = new double[4];
-        private final double[] mMaxVel = new double[4];
-
-        public SimablePidController(CANSparkMax device)
-        {
-            super(device);
-        }
-
-        // These don't seem to work with the provided sim
-
-        @Override
-        public REVLibError setSmartMotionMaxAccel(double maxAccel, int slotID)
-        {
-            if (RobotBase.isReal())
-            {
-                return super.setSmartMotionMaxAccel(maxAccel, slotID);
-            }
-
-            mMaxAccel[slotID] = maxAccel;
-            return REVLibError.kOk;
-        }
-
-        @Override
-        public REVLibError setSmartMotionMaxVelocity(double maxVel, int slotID)
-        {
-            if (RobotBase.isReal())
-            {
-                return super.setSmartMotionMaxVelocity(maxVel, slotID);
-            }
-
-            mMaxVel[slotID] = maxVel;
-            return REVLibError.kOk;
-        }
-
-        @Override
-        public double getSmartMotionMaxAccel(int slotID)
-        {
-            if (RobotBase.isReal())
-            {
-                return super.getSmartMotionMaxAccel(slotID);
-            }
-            return mMaxAccel[slotID];
-        }
-
-        @Override
-        public double getSmartMotionMaxVelocity(int slotID)
-        {
-            if (RobotBase.isReal())
-            {
-                return super.getSmartMotionMaxVelocity(slotID);
-            }
-            return mMaxVel[slotID];
-        }
-    }
-
     /**
      * Create a new SPARK MAX Controller
      *
@@ -174,7 +117,7 @@ public class SimableCANSparkMax extends CANSparkMax
     // Base class hijacking
 
     @Override
-    public REVLibError follow(final CANSparkMax leader)
+    public REVLibError follow(final CANSparkBase leader)
     {
         if (RobotBase.isReal())
         {
@@ -190,7 +133,7 @@ public class SimableCANSparkMax extends CANSparkMax
     }
 
     @Override
-    public SparkMaxPIDController getPIDController()
+    public SparkPIDController getPIDController()
     {
         if (RobotBase.isReal())
         {
@@ -231,7 +174,7 @@ public class SimableCANSparkMax extends CANSparkMax
     }
 
     @Override
-    public RelativeEncoder getEncoder(SparkMaxRelativeEncoder.Type encoderType, int countsPerRev)
+    public RelativeEncoder getEncoder(SparkRelativeEncoder.Type encoderType, int countsPerRev)
     {
         mLatchedEncoder = super.getEncoder(encoderType, countsPerRev);
         return mLatchedEncoder;
@@ -242,11 +185,11 @@ public class SimableCANSparkMax extends CANSparkMax
     private double getArbPercentOutput(double arbFeedforward, int arbFFUnits)
     {
         double arbFFPercentage;
-        if (arbFFUnits == SparkMaxPIDController.ArbFFUnits.kPercentOut.value)
+        if (arbFFUnits == SparkPIDController.ArbFFUnits.kPercentOut.value)
         {
             arbFFPercentage = arbFeedforward;
         }
-        else if (arbFFUnits == SparkMaxPIDController.ArbFFUnits.kVoltage.value)
+        else if (arbFFUnits == SparkPIDController.ArbFFUnits.kVoltage.value)
         {
             arbFFPercentage = arbFeedforward / RobotController.getBatteryVoltage();
         }
@@ -265,6 +208,7 @@ public class SimableCANSparkMax extends CANSparkMax
         mFollowers.add(simableCANSparkMax);
     }
 
+    @Override
     public void updateSim()
     {
         double voltagePercentage = 0;

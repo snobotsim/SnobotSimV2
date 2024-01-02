@@ -6,7 +6,7 @@ package org.snobotv2.examples.rev_swerve.subsystems;
 
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SimableCANSparkMax;
 import com.revrobotics.SparkMaxAbsoluteEncoder;
@@ -59,7 +59,7 @@ public class SwerveModule implements BaseSwerveModule
             double encoderOffset,
             String name)
     {
-        mAzimuthMotor = new SimableCANSparkMax(turningMotorChannel, CANSparkMaxLowLevel.MotorType.kBrushless);
+        mAzimuthMotor = new SimableCANSparkMax(turningMotorChannel, CANSparkLowLevel.MotorType.kBrushless);
         mAzimuthMotor.setInverted(false);
         mAzimuthEncoder = mAzimuthMotor.getEncoder();
         mAzimuthEncoder.setPositionConversionFactor(360 / TURNING_GEAR_RATION);
@@ -70,7 +70,7 @@ public class SwerveModule implements BaseSwerveModule
 
         mAbsoluteEncoder = mAzimuthMotor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle);
 
-        mDriveMotor = new SimableCANSparkMax(driveMotorChannel, CANSparkMaxLowLevel.MotorType.kBrushless);
+        mDriveMotor = new SimableCANSparkMax(driveMotorChannel, CANSparkLowLevel.MotorType.kBrushless);
         mDriveMotor.setInverted(false);
         mDriveEncoder = mDriveMotor.getEncoder();
         mDriveEncoder.setPositionConversionFactor(DRIVE_ENCODER_CONSTANT);
