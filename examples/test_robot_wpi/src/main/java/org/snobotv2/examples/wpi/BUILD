@@ -5,7 +5,7 @@ snobot_sim_java_library(
     srcs = glob(["*.java"]),
     visibility = [
         "//examples/test_robot_wpi:__subpackages__",
-        "//snobot_sim_java/src/test:__subpackages__",
+        "//snobot_sim_java_base/src/test:__subpackages__",
     ],
     deps = [
         "//examples/test_robot_base/src/main/java/org/snobotv2/examples/base",

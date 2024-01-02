@@ -4,7 +4,7 @@ snobot_sim_java_test(
     name = "test",
     srcs = glob(["*.java"]),
     deps = [
-        "//snobot_sim_java/src/main/java/org/snobotv2/camera",
+        "//snobot_sim_java_base/src/main/java/org/snobotv2/camera",
         "@bzlmodrio-allwpilib//libraries/java/ntcore",
         "@bzlmodrio-allwpilib//libraries/java/wpimath",
     ],

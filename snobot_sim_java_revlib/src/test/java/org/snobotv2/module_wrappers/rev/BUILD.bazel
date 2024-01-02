@@ -5,8 +5,8 @@ snobot_sim_java_test(
     srcs = glob(["*.java"]),
     deps = [
         "//examples/test_robot_rev/src/main/java/org/snobotv2/examples/rev/subsystems",
-        "//snobot_sim_java/src/main/java/com/revrobotics:simmable_rev",
-        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/rev",
+        "//snobot_sim_java_revlib/src/main/java/com/revrobotics:simmable_rev",
+        "//snobot_sim_java_revlib/src/main/java/org/snobotv2/module_wrappers/rev",
         "//snobot_sim_java_test_utils/src/main/java/org/snobotv2/test_utils",
         "@bzlmodrio-revlib//libraries/java/revlib-java",
     ],

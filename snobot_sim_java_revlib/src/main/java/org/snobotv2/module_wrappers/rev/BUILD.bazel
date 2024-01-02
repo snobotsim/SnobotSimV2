@@ -5,8 +5,8 @@ snobot_sim_java_library(
     srcs = glob(["*.java"]),
     visibility = ["//visibility:public"],
     deps = [
-        "//snobot_sim_java/src/main/java/com/revrobotics:simmable_rev",
-        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers",
+        "//snobot_sim_java_base/src/main/java/org/snobotv2/module_wrappers",
+        "//snobot_sim_java_revlib/src/main/java/com/revrobotics:simmable_rev",
         "@bzlmodrio-allwpilib//libraries/java/hal",
         "@bzlmodrio-allwpilib//libraries/java/wpilibj",
         "@bzlmodrio-revlib//libraries/java/revlib-java",

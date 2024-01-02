@@ -5,7 +5,7 @@ snobot_sim_java_library(
     srcs = glob(["*.java"]),
     visibility = ["//visibility:public"],
     deps = [
-        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers",
+        "//snobot_sim_java_base/src/main/java/org/snobotv2/module_wrappers",
         "@bzlmodrio-allwpilib//libraries/java/wpilibj",
     ],
 )

@@ -5,7 +5,7 @@ snobot_sim_java_library(
     srcs = ["InfiniteRechargeTargets.java"],
     visibility = ["//visibility:public"],
     deps = [
-        "//snobot_sim_java/src/main/java/org/snobotv2/camera",
+        "//snobot_sim_java_base/src/main/java/org/snobotv2/camera",
         "@bzlmodrio-allwpilib//libraries/java/wpimath",
     ],
 )
@@ -15,7 +15,7 @@ snobot_sim_java_library(
     srcs = ["RapidReactTargets.java"],
     visibility = ["//visibility:public"],
     deps = [
-        "//snobot_sim_java/src/main/java/org/snobotv2/camera",
+        "//snobot_sim_java_base/src/main/java/org/snobotv2/camera",
         "@bzlmodrio-allwpilib//libraries/java/wpimath",
     ],
 )

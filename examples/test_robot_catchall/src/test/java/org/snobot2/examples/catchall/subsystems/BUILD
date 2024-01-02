@@ -5,6 +5,6 @@ snobot_sim_java_test(
     srcs = glob(["*.java"]),
     deps = [
         "//examples/test_robot_catchall/src/main/java/org/snobotv2/examples/catchall/subsystems",
-        "//snobot_sim_java/src/main/java/org/snobotv2",
+        "//snobot_sim_java_base/src/main/java/org/snobotv2",
     ],
 )
