@@ -1,0 +1,14 @@
+load("//build_scripts/bazel:java_rules.bzl", "snobot_sim_java_library")
+
+snobot_sim_java_library(
+    name = "commands",
+    srcs = glob(["*.java"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        "//snobot_sim_java_base/src/main/java/org/snobotv2/coordinate_gui",
+        "@bzlmodrio-allwpilib//libraries/java/wpilibNewCommands",
+        "@bzlmodrio-allwpilib//libraries/java/wpilibj",
+        "@bzlmodrio-allwpilib//libraries/java/wpimath",
+        "@bzlmodrio-allwpilib//libraries/java/wpiutil",
+    ],
+)

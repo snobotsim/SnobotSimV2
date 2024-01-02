@@ -1,0 +1,18 @@
+load("@rules_java//java:defs.bzl", "java_library")
+
+# Basically an alias for all of the build files underneath
+java_library(
+    name = "snobot_sim_java",
+    visibility = ["//visibility:public"],
+    exports = [
+        "//snobot_sim_java_base/src/main/java/org/snobotv2",
+        "//snobot_sim_java_base/src/main/java/org/snobotv2/camera",
+        "//snobot_sim_java_base/src/main/java/org/snobotv2/camera/games:infinite_recharge",
+        "//snobot_sim_java_base/src/main/java/org/snobotv2/camera/games:rapid_react",
+        "//snobot_sim_java_base/src/main/java/org/snobotv2/coordinate_gui",
+        "//snobot_sim_java_base/src/main/java/org/snobotv2/interfaces",
+        "//snobot_sim_java_base/src/main/java/org/snobotv2/module_wrappers",
+        "//snobot_sim_java_base/src/main/java/org/snobotv2/module_wrappers/wpi",
+        "//snobot_sim_java_base/src/main/java/org/snobotv2/sim_wrappers",
+    ],
+)

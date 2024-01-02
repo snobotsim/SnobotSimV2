@@ -4,13 +4,12 @@
 
 package org.snobotv2.examples.rev_swerve.subsystems;
 
-import com.ctre.phoenix.sensors.AbsoluteSensorRange;
-import com.ctre.phoenix.sensors.SensorInitializationStrategy;
-import com.ctre.phoenix.sensors.WPI_CANCoder;
+import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SimableCANSparkMax;
+import com.revrobotics.SparkMaxAbsoluteEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
@@ -36,7 +35,7 @@ public class SwerveModule implements BaseSwerveModule
 
     private final String mName;
 
-    private final WPI_CANCoder mAbsoluteEncoder;
+    private final AbsoluteEncoder mAbsoluteEncoder;
 
     private final SimableCANSparkMax mDriveMotor;
     private final SparkMaxPIDController mDriveController;
@@ -52,6 +51,7 @@ public class SwerveModule implements BaseSwerveModule
 
     private SwerveModuleSimWrapper mSimWrapper;
 
+    @SuppressWarnings("PMD.UnusedFormalParameter")
     public SwerveModule(
             int driveMotorChannel,
             int turningMotorChannel,
@@ -59,13 +59,6 @@ public class SwerveModule implements BaseSwerveModule
             double encoderOffset,
             String name)
     {
-        mAbsoluteEncoder = new WPI_CANCoder(turningEncoderChannels);
-        mAbsoluteEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);
-        mAbsoluteEncoder.configSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
-        mAbsoluteEncoder.configMagnetOffset(encoderOffset);
-        mAbsoluteEncoder.configSensorDirection(false);
-        mAbsoluteEncoder.setPositionToAbsolute();
-
         mAzimuthMotor = new SimableCANSparkMax(turningMotorChannel, CANSparkMaxLowLevel.MotorType.kBrushless);
         mAzimuthMotor.setInverted(false);
         mAzimuthEncoder = mAzimuthMotor.getEncoder();
@@ -74,6 +67,8 @@ public class SwerveModule implements BaseSwerveModule
         mAzimuthController = mAzimuthMotor.getPIDController();
         mAzimuthController.setP(0.01);
         mAzimuthController.setD(0.0);
+
+        mAbsoluteEncoder = mAzimuthMotor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle);
 
         mDriveMotor = new SimableCANSparkMax(driveMotorChannel, CANSparkMaxLowLevel.MotorType.kBrushless);
         mDriveMotor.setInverted(false);
@@ -117,7 +112,6 @@ public class SwerveModule implements BaseSwerveModule
     @Override
     public void close()
     {
-        mAbsoluteEncoder.close();
         mDriveMotor.close();
         mAzimuthMotor.close();
     }
@@ -141,7 +135,7 @@ public class SwerveModule implements BaseSwerveModule
 
     public Rotation2d getCancoderCurrentAngle()
     {
-        return new Rotation2d(Units.degreesToRadians(mAbsoluteEncoder.getAbsolutePosition()));
+        return new Rotation2d(Units.degreesToRadians(mAbsoluteEncoder.getPosition()));
     }
 
     public final Rotation2d getTurningMotorAngle()
@@ -201,7 +195,6 @@ public class SwerveModule implements BaseSwerveModule
     public void resetEncoders()
     {
         mDriveEncoder.setPosition(0);
-        mAbsoluteEncoder.setPosition(0);
     }
 
     @Override

@@ -5,14 +5,13 @@ import edu.wpi.first.math.util.Units;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.snobotv2.examples.base.subsystems.ElevatorSubsystem;
-import org.snobotv2.test_utils.BaseUnitTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Tag("ctre")
-public class CtreElevatorTest extends BaseUnitTest
+public class CtreElevatorTest extends BasePhoenix5UnitTest
 {
     @Test
     public void testManuallyMoveUp() throws InterruptedException

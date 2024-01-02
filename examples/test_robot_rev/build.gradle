@@ -19,10 +19,11 @@ dependencies {
     implementation wpilibTools.deps.wpilibJava("cameraserver")
     implementation wpilibTools.deps.wpilibJava("wpilibNewCommands")
 
-    implementation project(":snobot_sim_java")
+    implementation project(":snobot_sim_java_base")
+    implementation project(":snobot_sim_java_navx")
+    implementation project(":snobot_sim_java_revlib")
     implementation project(":examples:test_robot_base")
 
-    implementation "com.ctre.phoenix:api-java:${phoenix5Version}"
     implementation "com.revrobotics.frc:REVLib-java:${revVersion}"
     implementation "com.kauailabs.navx.frc:navx-frc-java:${navxVersion}"
 

@@ -13,9 +13,9 @@ snobot_sim_java_library(
     deps = [
         "//examples/test_robot_base_swerve/src/main/java/org/snobotv2/examples/base_swerve",
         "//examples/test_robot_base_swerve/src/main/java/org/snobotv2/examples/base_swerve/subsystems",
-        "//snobot_sim_java/src/main/java/com/revrobotics:simmable_rev",
-        "//snobot_sim_java/src/main/java/org/snobotv2/module_wrappers/rev",
-        "//snobot_sim_java/src/main/java/org/snobotv2/sim_wrappers",
+        "//snobot_sim_java_base/src/main/java/org/snobotv2/sim_wrappers",
+        "//snobot_sim_java_revlib/src/main/java/com/revrobotics:simmable_rev",
+        "//snobot_sim_java_revlib/src/main/java/org/snobotv2/module_wrappers/rev",
         "//snobot_swerve_sim/src/main/java/edu/wpi/first/wpilibj/simulation/swerve",
         "@bzlmodrio-allwpilib//libraries/cpp/wpiutil:jni",
         "@bzlmodrio-allwpilib//libraries/java/cameraserver",

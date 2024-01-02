@@ -19,5 +19,5 @@ dependencies {
     implementation wpilibTools.deps.wpilibJava("cameraserver")
     implementation wpilibTools.deps.wpilibJava("wpilibNewCommands")
 
-    implementation project(":snobot_sim_java")
+    implementation project(":snobot_sim_java_base")
 }

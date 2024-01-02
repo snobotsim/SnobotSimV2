@@ -22,7 +22,8 @@ dependencies {
     implementation "com.ctre.phoenix:api-java:${phoenix5Version}"
     implementation "com.ctre.phoenix:wpiapi-java:${phoenix5Version}"
 
-    implementation project(":snobot_sim_java")
+    implementation project(":snobot_sim_java_base")
+    implementation project(":snobot_sim_java_phoenix5")
     implementation project(":snobot_swerve_sim")
     implementation project(":examples:test_robot_base_swerve")
 
