@@ -5,7 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkLowLevel;
 import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.ADXL345_SPI;
 import edu.wpi.first.wpilibj.ADXL362;
@@ -45,7 +45,7 @@ import edu.wpi.first.wpilibj.motorcontrol.Victor;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-@SuppressWarnings("PMD")
+@SuppressWarnings({"PMD", "removal"})
 public class CatchallSubsystem extends SubsystemBase
 {
     protected final ADXL345_I2C mI2cAccelerometer;
@@ -134,7 +134,7 @@ public class CatchallSubsystem extends SubsystemBase
         mPwmVictorSPX = new PWMVictorSPX(13);
         mSd540 = new SD540(14);
 
-        mCanSparkMax = new CANSparkMax(15, CANSparkMaxLowLevel.MotorType.kBrushed);
+        mCanSparkMax = new CANSparkMax(15, CANSparkLowLevel.MotorType.kBrushed);
         mTalonSrx = new WPI_TalonSRX(16);
         mTalonFx = new WPI_TalonFX(17);
         mVictorSpx = new WPI_VictorSPX(18);

@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import org.snobotv2.module_wrappers.BaseEncoderWrapper;
 
+@SuppressWarnings("removal")
 public class CtreEncoderSimWrapper extends BaseEncoderWrapper
 {
     public CtreEncoderSimWrapper(WPI_TalonSRX talonSrx)

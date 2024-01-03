@@ -6,6 +6,7 @@ import org.snobotv2.interfaces.IGyroWrapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SuppressWarnings("removal")
 public class TestPigeon2 extends BasePhoenix5UnitTest
 {
     private static final double PIGEON_EPSILON = 1e-2;

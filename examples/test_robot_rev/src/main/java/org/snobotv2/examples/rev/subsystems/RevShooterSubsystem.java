@@ -1,11 +1,11 @@
 package org.snobotv2.examples.rev.subsystems;
 
-import com.revrobotics.CANSparkMaxLowLevel;
-import com.revrobotics.CANSparkMax.ControlType;
+import com.revrobotics.CANSparkLowLevel;
+import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SimableCANSparkMax;
-import com.revrobotics.SparkMaxPIDController;
-import com.revrobotics.SparkMaxRelativeEncoder;
+import com.revrobotics.SparkPIDController;
+import com.revrobotics.SparkRelativeEncoder;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.snobotv2.examples.base.BaseConstants;
@@ -20,17 +20,17 @@ public class RevShooterSubsystem extends SubsystemBase implements ShooterSubsyst
     private final SimableCANSparkMax mLeadMotor; // NOPMD
     private final SimableCANSparkMax mFollower; // NOPMD
     private final RelativeEncoder mEncoder;
-    private final SparkMaxPIDController mPidController;
+    private final SparkPIDController mPidController;
     private ISimWrapper mSimulator;
 
     public RevShooterSubsystem()
     {
-        mLeadMotor = new SimableCANSparkMax(BaseConstants.SHOOTER_MOTOR_A, CANSparkMaxLowLevel.MotorType.kBrushed);
-        mFollower = new SimableCANSparkMax(BaseConstants.SHOOTER_MOTOR_B, CANSparkMaxLowLevel.MotorType.kBrushed);
+        mLeadMotor = new SimableCANSparkMax(BaseConstants.SHOOTER_MOTOR_A, CANSparkLowLevel.MotorType.kBrushed);
+        mFollower = new SimableCANSparkMax(BaseConstants.SHOOTER_MOTOR_B, CANSparkLowLevel.MotorType.kBrushed);
 
         mFollower.follow(mLeadMotor);
 
-        mEncoder = mLeadMotor.getEncoder(SparkMaxRelativeEncoder.Type.kQuadrature, 8192);
+        mEncoder = mLeadMotor.getEncoder(SparkRelativeEncoder.Type.kQuadrature, 8192);
         mPidController = mLeadMotor.getPIDController();
 
         mPidController.setP(0.0005);

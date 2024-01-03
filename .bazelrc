@@ -3,6 +3,9 @@ try-import %workspace%/user.bazelrc
 build --java_language_version=17
 #build --java_runtime_version=roboriojdk_11
 
+# build --javacopt=-Werror
+# build --javacopt=-Xlint:all,-try,-serial
+
 test --test_output=errors
 
 import .bazelrc-roborio

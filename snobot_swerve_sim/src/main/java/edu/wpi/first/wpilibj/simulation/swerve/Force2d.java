@@ -7,6 +7,7 @@ import edu.wpi.first.math.numbers.N2;
 import edu.wpi.first.wpilibj.shim.Vector2d;
 import org.ejml.simple.SimpleMatrix;
 
+@SuppressWarnings("overrides")
 public class Force2d {
   Matrix<N2, N1> m_matrix;
 

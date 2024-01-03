@@ -26,6 +26,7 @@ import org.snobotv2.module_wrappers.phoenix5.CtreEncoderSimWrapper;
 import org.snobotv2.module_wrappers.phoenix5.CtreMotorControllerSimWrapper;
 import org.snobotv2.sim_wrappers.SwerveModuleSimWrapper;
 
+@SuppressWarnings("removal")
 public class SwerveModule implements BaseSwerveModule
 {
     private static final double DEFAULT_TFF = 0.0;

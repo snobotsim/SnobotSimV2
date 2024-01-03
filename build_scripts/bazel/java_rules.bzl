@@ -46,7 +46,14 @@ def snobot_sim_java_test(name, srcs, deps = [], runtime_deps = [], disable_pmd =
         main_class = "org.junit.platform.console.ConsoleLauncher",
         args = [
             "--select-package",
-            "com",
+            "org",
+        ],
+        env = {
+            "LD_LIBRARY_PATH": ".",
+            "PATH": ".",
+        },  # TODO fishy
+        jvm_flags = [
+            "-Djava.library.path=.",
         ],
         **kwargs
     )
