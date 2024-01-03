@@ -8,7 +8,7 @@ public class SimablePidController extends SparkPIDController
     protected final double[] mMaxAccel = new double[4];
     protected final double[] mMaxVel = new double[4];
 
-    public SimablePidController(CANSparkMax device)
+    public SimablePidController(CANSparkBase device)
     {
         super(device);
     }

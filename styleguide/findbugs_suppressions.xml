@@ -5,6 +5,10 @@
     </Match>
     <Match>
         <Bug pattern="EI_EXPOSE_REP" />
+        <Class name="com.revrobotics.SparkSimHelper" />
+    </Match>
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP" />
         <Class name="org.snobotv2.module_wrappers.navx.NavxWrapper" />
     </Match>
     <Match>

@@ -4,9 +4,9 @@ def download_external_archives():
     # Download bzlmodRio <3
     http_archive(
         name = "bzlmodrio",
-        url = "https://github.com/bzlmodRio/bzlmodRio/archive/03b41cfcece36d7bcbb984a441803f99f3641e2e.tar.gz",
-        sha256 = "c9aae913cd118e79df1b4e9d1387d50f7e47e116330cc281c39e6c0089d3b09d",
-        strip_prefix = "bzlmodRio-03b41cfcece36d7bcbb984a441803f99f3641e2e",
+        url = "https://github.com/bzlmodRio/bzlmodRio/archive/5f40922b4a2abb9d1c31fc1e688e336eaca4ac79.tar.gz",
+        sha256 = "60cdd1a8e4abd8a903cc6f07be0cea5687b45ad28ebdbf2f35cb625b33c66a0e",
+        strip_prefix = "bzlmodRio-5f40922b4a2abb9d1c31fc1e688e336eaca4ac79",
     )
     # native.local_repository(
     #     name = "bzlmodrio",

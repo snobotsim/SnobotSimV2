@@ -1,13 +1,13 @@
 bazel_dep(name = "rules_jvm_external", version = "5.3")
 bazel_dep(name = "rules_java", version = "6.4.0")
-bazel_dep(name = "rules_bazelrio", version = "0.0.13")
+bazel_dep(name = "rules_bazelrio", version = "0.0.14")
 bazel_dep(name = "rules_bzlmodrio_toolchains", version = "2024-1")
 bazel_dep(name = "rules_pmd", version = "6.43.0")
 bazel_dep(name = "bzlmodrio-allwpilib", version = "2024.1.1-beta-4")
 bazel_dep(name = "bzlmodrio-navx", version = "2024.0.1-beta-4")
-bazel_dep(name = "bzlmodrio-phoenix", version = "5.32.0-beta-4")
-bazel_dep(name = "bzlmodrio-phoenix6", version = "24.0.0-beta-5")
-bazel_dep(name = "bzlmodrio-revlib", version = "2024.0.0")
+bazel_dep(name = "bzlmodrio-phoenix", version = "5.32.0-beta-4.bcr1")
+bazel_dep(name = "bzlmodrio-phoenix6", version = "24.0.0-beta-7")
+bazel_dep(name = "bzlmodrio-revlib", version = "2024.1.1")
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 maven.install(

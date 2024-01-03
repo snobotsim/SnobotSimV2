@@ -2,6 +2,7 @@ package org.snobotv2.module_wrappers.rev;
 
 import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkLowLevel;
+import com.revrobotics.SimableCANSparkFlex;
 import com.revrobotics.SimableCANSparkMax;
 import com.revrobotics.SimableRevDevice;
 import com.revrobotics.SparkPIDController;
@@ -23,15 +24,15 @@ public class TestRevCanSpark extends BaseRevlibUnitTest
         }
     }
 
-    //    @Test
-    //    public void testBasicFlex()
-    //    {
-    //        try (SimableCANSparkFlex sparkMax = new SimableCANSparkFlex(1, CANSparkLowLevel.MotorType.kBrushless);
-    //             SimableCANSparkFlex follower = new SimableCANSparkFlex(11, CANSparkLowLevel.MotorType.kBrushless))
-    //        {
-    //            runTest(sparkMax, follower);
-    //        }
-    //    }
+    @Test
+    public void testBasicFlex()
+    {
+        try (SimableCANSparkFlex sparkMax = new SimableCANSparkFlex(1, CANSparkLowLevel.MotorType.kBrushless);
+             SimableCANSparkFlex follower = new SimableCANSparkFlex(11, CANSparkLowLevel.MotorType.kBrushless))
+        {
+            runTest(sparkMax, follower);
+        }
+    }
 
     private <T extends CANSparkBase & SimableRevDevice> void runTest(T sparkMax, T follower)
     {

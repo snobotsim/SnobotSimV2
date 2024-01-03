@@ -9,8 +9,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SimableCANSparkMax;
-import com.revrobotics.SparkMaxAbsoluteEncoder;
-import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkAbsoluteEncoder;
+import com.revrobotics.SparkPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -38,11 +38,11 @@ public class SwerveModule implements BaseSwerveModule
     private final AbsoluteEncoder mAbsoluteEncoder;
 
     private final SimableCANSparkMax mDriveMotor;
-    private final SparkMaxPIDController mDriveController;
+    private final SparkPIDController mDriveController;
     private final RelativeEncoder mDriveEncoder;
 
     private final SimableCANSparkMax mAzimuthMotor;
-    private final SparkMaxPIDController mAzimuthController;
+    private final SparkPIDController mAzimuthController;
     private final RelativeEncoder mAzimuthEncoder;
 
     private SwerveModuleState mCurrentState;
@@ -68,7 +68,7 @@ public class SwerveModule implements BaseSwerveModule
         mAzimuthController.setP(0.01);
         mAzimuthController.setD(0.0);
 
-        mAbsoluteEncoder = mAzimuthMotor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle);
+        mAbsoluteEncoder = mAzimuthMotor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle);
 
         mDriveMotor = new SimableCANSparkMax(driveMotorChannel, CANSparkLowLevel.MotorType.kBrushless);
         mDriveMotor.setInverted(false);
