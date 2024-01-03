@@ -16,3 +16,5 @@ include 'examples:test_robot_phoenix5_swerve'
 include 'examples:test_robot_rev'
 include 'examples:test_robot_rev_swerve'
 include 'examples:test_robot_wpi'
+include 'snobot_sim_java_phoenix6'
+

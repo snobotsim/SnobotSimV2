@@ -24,6 +24,11 @@
     },
     {
       "groupId": "org.snobotv2",
+      "artifactId": "snobot_sim_java_phoenix6",
+      "version": "$VERSION"
+    },
+    {
+      "groupId": "org.snobotv2",
       "artifactId": "snobot_sim_java_revlib",
       "version": "$VERSION"
     },
