@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.RobotBase;
 
 public class SimablePidController extends SparkPIDController
 {
-
     protected final double[] mMaxAccel = new double[4];
     protected final double[] mMaxVel = new double[4];
 
