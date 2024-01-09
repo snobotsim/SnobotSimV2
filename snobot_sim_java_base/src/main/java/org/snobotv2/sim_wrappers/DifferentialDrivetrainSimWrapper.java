@@ -59,7 +59,7 @@ public class DifferentialDrivetrainSimWrapper extends BaseSimWrapper
         mLeftPdpSlots = new PdpSlots();
         mRightPdpSlots = new PdpSlots();
 
-        mRightMultiplier = -1;
+        mRightMultiplier = 1;
     }
 
     public void setRightInverted(boolean inverted)

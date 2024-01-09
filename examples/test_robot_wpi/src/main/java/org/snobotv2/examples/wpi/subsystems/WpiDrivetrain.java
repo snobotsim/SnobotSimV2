@@ -2,9 +2,9 @@ package org.snobotv2.examples.wpi.subsystems;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.math.geometry.Pose2d;
 import org.snobotv2.examples.base.BaseConstants;
@@ -20,8 +20,8 @@ public class WpiDrivetrain extends BaseDrivetrainSubsystem
     private final PWMVictorSPX mDriveLeftB;
     private final PWMVictorSPX mDriveRightA;
     private final PWMVictorSPX mDriveRightB;
-    private final MotorControllerGroup mLeftMotors;
-    private final MotorControllerGroup mRightMotors;
+    private final MotorController mLeftMotors;
+    private final MotorController mRightMotors;
     private final DifferentialDrive mDrive;
 
     private final Encoder mLeftEncoder;
@@ -37,8 +37,8 @@ public class WpiDrivetrain extends BaseDrivetrainSubsystem
         mDriveRightA = new PWMVictorSPX(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_A);
         mDriveRightB = new PWMVictorSPX(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_B);
 
-        mLeftMotors = new MotorControllerGroup(mDriveLeftA, mDriveLeftB);
-        mRightMotors = new MotorControllerGroup(mDriveRightA, mDriveRightB);
+        mLeftMotors = mDriveLeftA;
+        mRightMotors = mDriveRightA;
         mRightMotors.setInverted(true);
 
         mDrive = new DifferentialDrive(mLeftMotors, mRightMotors);
@@ -54,7 +54,7 @@ public class WpiDrivetrain extends BaseDrivetrainSubsystem
         if (RobotBase.isSimulation())
         {
             mSimulator = new DifferentialDrivetrainSimWrapper(DRIVETRAIN_CONSTANTS.createSim(),
-                    mDriveLeftA, mDriveRightA,
+                    mLeftMotors, mDriveRightA,
                     mLeftEncoder, mRightEncoder,
                     new ADXRS450GyroWrapper(mGyro));
         }
