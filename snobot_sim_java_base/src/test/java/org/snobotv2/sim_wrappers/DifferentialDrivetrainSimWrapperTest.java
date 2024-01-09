@@ -23,7 +23,7 @@ public class DifferentialDrivetrainSimWrapperTest extends BaseUnitTest
                 drivetrainSim.arcadeDrive(1, 0);
                 drivetrainSim.simulationPeriodic();
 
-//            System.out.println(i + " - " + drivetrainSim.mLeftEncoder.getRate() + ", " + drivetrainSim.mRightEncoder.getRate() + ", " + drivetrainSim.mGyro.getAngle());
+                // System.out.println(i + " - " + drivetrainSim.getLeftRate() + ", " + drivetrainSim.getRightRate() + ", " + drivetrainSim.getRotation2d());
             }
 //        System.out.println(drivetrainSim.getLeftRate() + ", " + drivetrainSim.getRightRate() + ", " + drivetrainSim.getHeadingDegrees());
 //        System.out.println(drivetrainSim.getLeftDistance() + ", " + drivetrainSim.getRightDistance() + ", " + drivetrainSim.getHeadingDegrees());

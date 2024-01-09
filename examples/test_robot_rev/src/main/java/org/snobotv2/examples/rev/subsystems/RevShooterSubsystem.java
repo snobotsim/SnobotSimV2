@@ -5,7 +5,6 @@ import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SimableCANSparkMax;
 import com.revrobotics.SparkPIDController;
-import com.revrobotics.SparkRelativeEncoder;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.snobotv2.examples.base.BaseConstants;
@@ -25,12 +24,12 @@ public class RevShooterSubsystem extends SubsystemBase implements ShooterSubsyst
 
     public RevShooterSubsystem()
     {
-        mLeadMotor = new SimableCANSparkMax(BaseConstants.SHOOTER_MOTOR_A, CANSparkLowLevel.MotorType.kBrushed);
-        mFollower = new SimableCANSparkMax(BaseConstants.SHOOTER_MOTOR_B, CANSparkLowLevel.MotorType.kBrushed);
+        mLeadMotor = new SimableCANSparkMax(BaseConstants.SHOOTER_MOTOR_A, CANSparkLowLevel.MotorType.kBrushless);
+        mFollower = new SimableCANSparkMax(BaseConstants.SHOOTER_MOTOR_B, CANSparkLowLevel.MotorType.kBrushless);
 
         mFollower.follow(mLeadMotor);
 
-        mEncoder = mLeadMotor.getEncoder(SparkRelativeEncoder.Type.kQuadrature, 8192);
+        mEncoder = mLeadMotor.getEncoder();
         mPidController = mLeadMotor.getPIDController();
 
         mPidController.setP(0.0005);
