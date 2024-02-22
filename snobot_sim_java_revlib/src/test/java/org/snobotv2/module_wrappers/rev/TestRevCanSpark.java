@@ -27,10 +27,10 @@ public class TestRevCanSpark extends BaseRevlibUnitTest
     @Test
     public void testBasicFlex()
     {
-        try (SimableCANSparkFlex sparkMax = new SimableCANSparkFlex(1, CANSparkLowLevel.MotorType.kBrushless);
+        try (SimableCANSparkFlex sparkFlex = new SimableCANSparkFlex(1, CANSparkLowLevel.MotorType.kBrushless);
              SimableCANSparkFlex follower = new SimableCANSparkFlex(11, CANSparkLowLevel.MotorType.kBrushless))
         {
-            runTest(sparkMax, follower);
+            runTest(sparkFlex, follower);
         }
     }
 
