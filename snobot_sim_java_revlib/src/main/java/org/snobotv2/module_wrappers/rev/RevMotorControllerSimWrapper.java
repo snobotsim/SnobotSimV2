@@ -1,5 +1,6 @@
 package org.snobotv2.module_wrappers.rev;
 
+import com.revrobotics.CANSparkBase;
 import com.revrobotics.SimableRevDevice;
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.wpilibj.RobotController;
@@ -12,15 +13,19 @@ public class RevMotorControllerSimWrapper extends BaseMotorControllerWrapper
     private final SimDouble mBusVoltage;
     private final SimDouble mMotorCurrent;
 
-    public RevMotorControllerSimWrapper(SimableRevDevice motorController)
+    public RevMotorControllerSimWrapper(CANSparkBase motorController)
     {
         super(motorController.getDeviceId(), motorController::getAppliedOutput);
+        if (!(motorController instanceof SimableRevDevice))
+        {
+            throw new IllegalArgumentException("The provided motor controller is not simmable!");
+        }
 
         SimDeviceSim deviceSim = new SimDeviceSim("SPARK MAX [" + motorController.getDeviceId() + "]");
         mBusVoltage = deviceSim.getDouble("Bus Voltage");
         mMotorCurrent = deviceSim.getDouble("Motor Current");
 
-        mMotorController = motorController;
+        mMotorController = (SimableRevDevice) motorController;
     }
 
     @Override
