@@ -1,13 +1,13 @@
 package org.snobotv2.module_wrappers.rev;
 
-import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase;
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
 import org.snobotv2.module_wrappers.BaseEncoderWrapper;
 
 public final class RevEncoderSimWrapper extends BaseEncoderWrapper
 {
-    public static RevEncoderSimWrapper create(CANSparkMax motorController)
+    public static RevEncoderSimWrapper create(CANSparkBase motorController)
     {
         SimDeviceSim deviceSim = new SimDeviceSim("SPARK MAX [" + motorController.getDeviceId() + "]");
         SimDouble position = deviceSim.getDouble("Position");
