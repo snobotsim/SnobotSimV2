@@ -44,6 +44,17 @@ public class SimableCANSparkFlex extends CANSparkFlex implements SimableRevDevic
     }
 
     @Override
+    public SparkPIDController getPIDController()
+    {
+        if (RobotBase.isReal())
+        {
+            return super.getPIDController();
+        }
+
+        return mSimHelper.getPIDController();
+    }
+
+    @Override
     /* default */ REVLibError setpointCommand(double value, ControlType ctrl, int pidSlot, double arbFeedforward, int arbFFUnits)
     {
         if (RobotBase.isReal())
@@ -53,4 +64,13 @@ public class SimableCANSparkFlex extends CANSparkFlex implements SimableRevDevic
 
         return mSimHelper.setpointCommand(value, ctrl, pidSlot, arbFeedforward, arbFFUnits);
     }
+
+    @Override
+    public RelativeEncoder getEncoder(SparkRelativeEncoder.Type encoderType, int countsPerRev)
+    {
+        return mSimHelper.setLatchedEncoder(super.getEncoder(encoderType, countsPerRev));
+    }
+
+    //////////////////////////////////////////////////
+
 }
