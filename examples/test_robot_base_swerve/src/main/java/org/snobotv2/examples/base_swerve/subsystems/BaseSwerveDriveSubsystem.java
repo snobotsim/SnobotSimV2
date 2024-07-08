@@ -195,9 +195,9 @@ public class BaseSwerveDriveSubsystem extends SubsystemBase implements AutoClose
             builder.setSmartDashboardType("SwerveDrive");
             for (BaseSwerveModule module : mModules) // NOPMD(CloseResource)
             {
-                builder.addDoubleProperty(module.getName() + "/CurrentStateAngle", () -> module.getState().angle.getDegrees(), null);
+                builder.addDoubleProperty(module.getName() + "/CurrentStateAngle", module.getState().angle::getDegrees, null);
                 builder.addDoubleProperty(module.getName() + "/CurrentStateSpeed", () -> module.getState().speedMetersPerSecond, null);
-                builder.addDoubleProperty(module.getName() + "/DesiredStateAngle", () -> module.getDesiredState().angle.getDegrees(), null);
+                builder.addDoubleProperty(module.getName() + "/DesiredStateAngle", module.getDesiredState().angle::getDegrees, null);
                 builder.addDoubleProperty(module.getName() + "/DesiredStateSpeed", () -> module.getDesiredState().speedMetersPerSecond, null);
                 builder.addDoubleProperty(module.getName() + "/DrivePercentage", module::getDriveMotorPercentage, null);
                 builder.addDoubleProperty(module.getName() + "/TurningPercentage", module::getTurningMotorPercentage, null);

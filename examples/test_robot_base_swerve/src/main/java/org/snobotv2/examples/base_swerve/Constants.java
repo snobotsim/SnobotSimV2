@@ -1,5 +1,6 @@
 package org.snobotv2.examples.base_swerve;
 
+@SuppressWarnings("PMD.DataClass")
 public class Constants
 {
     public static final int FRONT_LEFT_DRIVE_MOTOR_PORT = 3;

@@ -212,7 +212,7 @@ public class SwerveModule implements BaseSwerveModule
         builder.addDoubleProperty("MotorAngle", () -> getTurningMotorAngle().getDegrees(), null);
 
         builder.addDoubleProperty("TurnTicks", mAzimuthMotor::getSelectedSensorPosition, null);
-        builder.addDoubleProperty("TurnGoalDegrees", () -> mDesiredState.angle.getDegrees(), null);
+        builder.addDoubleProperty("TurnGoalDegrees", mDesiredState.angle::getDegrees, null);
         builder.addDoubleProperty("TurnGoalTicks", () -> mTurnGoalTicks, null);
 
         builder.addDoubleProperty("DriveVelTicks", mDriveMotor::getSelectedSensorVelocity, null);

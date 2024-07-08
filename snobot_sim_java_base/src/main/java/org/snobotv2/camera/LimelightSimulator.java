@@ -56,7 +56,7 @@ public class LimelightSimulator extends BaseCameraSimulator
     {
         TargetLocation bestTarget = null;
 
-        TreeMap<CameraToTargetDelta, TargetLocation> targets = getValidTargets(robotPose);
+        TreeMap<CameraToTargetDelta, TargetLocation> targets = getValidTargets(robotPose); // NOPMD
         if (targets.isEmpty())
         {
             mTV.setNumber(0);

@@ -6,6 +6,7 @@ import org.snobotv2.examples.base.subsystems.DrivetrainSubsystem;
 
 public class TurnToAngle extends PIDCommand
 {
+    @SuppressWarnings("PMD.ConstructorCallsOverridableMethod")
     public TurnToAngle(DrivetrainSubsystem drivetrain, double goal)
     {
         super(new PIDController(.02, 0, 0.001),

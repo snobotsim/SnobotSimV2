@@ -23,7 +23,7 @@ public class BaseCameraSimulatorTest
 
         BaseCameraSimulator sim = new BaseCameraSimulator(targets, new Transform2d(), 50, Double.MAX_VALUE);
 
-        TreeMap<CameraToTargetDelta, TargetLocation> visibleTargets;
+        TreeMap<CameraToTargetDelta, TargetLocation> visibleTargets; // NOPMD
         Map.Entry<CameraToTargetDelta, TargetLocation> firstEntry;
         Map.Entry<CameraToTargetDelta, TargetLocation> secondEntry;
 

@@ -52,13 +52,13 @@ public final class CtreUtils
 
     public static double mpsToFalcon(double velocity, double circumference, double gearRatio)
     {
-        double wheelRPM = (velocity * 60) / circumference;
+        double wheelRPM = velocity * 60 / circumference;
         return rpmToFalcon(wheelRPM, gearRatio);
     }
 
     public static double falconToMps(double velocityCounts, double circumference, double gearRatio)
     {
         double wheelRPM = falconToRpm(velocityCounts, gearRatio);
-        return (wheelRPM * circumference) / 60;
+        return wheelRPM * circumference / 60;
     }
 }

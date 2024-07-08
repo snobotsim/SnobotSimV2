@@ -22,12 +22,12 @@ public interface ElevatorSubsystem extends Subsystem, AutoCloseable
         public static ElevatorSim createSim()
         {
             return new ElevatorSim(
-                    ElevatorSimConstants.kElevatorGearbox,
-                    ElevatorSimConstants.kElevatorGearing,
-                    ElevatorSimConstants.kCarriageMass,
-                    ElevatorSimConstants.kElevatorDrumRadius,
-                    ElevatorSimConstants.kMinElevatorHeight,
-                    ElevatorSimConstants.kMaxElevatorHeight,
+                    kElevatorGearbox,
+                    kElevatorGearing,
+                    kCarriageMass,
+                    kElevatorDrumRadius,
+                    kMinElevatorHeight,
+                    kMaxElevatorHeight,
                     true,
                     0);
         }

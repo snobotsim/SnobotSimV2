@@ -81,11 +81,6 @@ public interface DrivetrainSubsystem extends Subsystem, AutoCloseable
         public static final DifferentialDriveKinematics kDriveKinematics =
                 new DifferentialDriveKinematics(kTrackwidthMeters);
 
-
-        public CimDrivetrainConstants()
-        {
-        }
-
         @Override
         public DifferentialDrivetrainSim createSim()
         {
@@ -168,10 +163,6 @@ public interface DrivetrainSubsystem extends Subsystem, AutoCloseable
                     kTrackwidthMeters,
                     kWheelDiameterMeters / 2.0,
                     null);
-        }
-
-        public NeoDrivetrainConstants()
-        {
         }
 
         @Override

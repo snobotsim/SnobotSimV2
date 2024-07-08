@@ -1,7 +1,9 @@
 try-import %workspace%/user.bazelrc
 
 build --java_language_version=17
-#build --java_runtime_version=roboriojdk_11
+build --java_runtime_version=roboriojdk_17
+build --tool_java_language_version=11
+build --tool_java_runtime_version=remotejdk_11
 
 # build --javacopt=-Werror
 # build --javacopt=-Xlint:all,-try,-serial
@@ -18,4 +20,4 @@ test --test_arg="--exclude-tag=ctre"
 test --test_arg="--exclude-tag=flaky"
 
 
-build --registry=https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/
+always --registry=https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/

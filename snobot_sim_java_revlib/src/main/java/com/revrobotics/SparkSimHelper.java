@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+@SuppressWarnings({"PMD.AvoidDuplicateLiterals", "PMD.TooManyMethods"})
 public class SparkSimHelper
 {
     private static final Logger LOGGER = Logger.getLogger(SparkSimHelper.class.getName());
@@ -92,6 +92,7 @@ public class SparkSimHelper
         }
     }
 
+    @SuppressWarnings("PMD.NullAssignment")
     public SparkSimHelper(SimDeviceSim deviceSim, CANSparkBase sparkMax, long sparkMaxHandle)
     {
         mSparkMaxHandle = sparkMaxHandle;

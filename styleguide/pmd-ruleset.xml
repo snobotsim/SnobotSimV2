@@ -84,7 +84,6 @@
         <!-- <exclude name="AvoidCatchingThrowable" /> -->
         <!-- <exclude name="AvoidDuplicateLiterals" /> -->
         <!-- <exclude name="AvoidLiteralsInIfCondition" /> -->
-        <exclude name="BeanMembersShouldSerialize" />
         <!-- <exclude name="ConstructorCallsOverridableMethod" /> -->
         <!-- <exclude name="DataflowAnomalyAnalysis" /> -->
         <!-- <exclude name="DoNotCallSystemExit" /> -->

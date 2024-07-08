@@ -65,11 +65,11 @@ public class LedSubsystem extends SubsystemBase implements AutoCloseable
     private void rainbow()
     {
         // For every pixel
-        for (var i = 0; i < mLedBuffer.getLength(); i++)
+        for (int i = 0; i < mLedBuffer.getLength(); i++)
         {
             // Calculate the hue - hue is easier for rainbows because the color
             // shape is a circle so only one value needs to precess
-            final var hue = (mRainbowFirstPixelHue + (i * 180 / mLedBuffer.getLength())) % 180;
+            final int hue = (mRainbowFirstPixelHue + (i * 180 / mLedBuffer.getLength())) % 180;
             // Set the value
             mLedBuffer.setHSV(i, hue, 255, 128);
         }

@@ -12,6 +12,8 @@ includeGuardRoots {
 
 generatedFileExclude {
     examples/project_files/standard/gradlew
+    BUILD.bazel
+    BUILD
 }
 
 # Used by unit tests

@@ -10,6 +10,7 @@ import org.snobotv2.module_wrappers.BaseMotorControllerWrapper;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings("PMD.TestClassWithoutTestCases")
 public class BaseUnitTest
 {
     protected static final double DEFAULT_EPSILON = 1e-3;

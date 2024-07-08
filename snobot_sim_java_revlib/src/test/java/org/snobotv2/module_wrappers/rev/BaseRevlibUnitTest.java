@@ -6,6 +6,7 @@ import org.snobotv2.test_utils.BaseUnitTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SuppressWarnings("PMD.TestClassWithoutTestCases")
 public class BaseRevlibUnitTest extends BaseUnitTest
 {
     @SafeVarargs
