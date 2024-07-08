@@ -64,7 +64,7 @@ public abstract class BaseRamseteCoordinateGuiCommand extends Command {
     @Override
     public void initialize() {
         m_prevTime = -1;
-        var initialState = m_trajectory.sample(0);
+        Trajectory.State initialState = m_trajectory.sample(0);
         m_prevSpeeds =
             m_kinematics.toWheelSpeeds(
                 new ChassisSpeeds(
@@ -90,7 +90,7 @@ public abstract class BaseRamseteCoordinateGuiCommand extends Command {
         double dt = curTime - m_prevTime;
         Pose2d pose = getPose();
 
-        var targetWheelSpeeds =
+        DifferentialDriveWheelSpeeds targetWheelSpeeds =
             m_kinematics.toWheelSpeeds(
                 m_follower.calculate(pose, m_trajectory.sample(curTime)));
 

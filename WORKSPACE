@@ -1,3 +1,4 @@
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("//build_scripts/bazel/deps:download_external_archives.bzl", "download_external_archives")
 
 download_external_archives()
@@ -33,3 +34,13 @@ setup_styleguide()
 load("@rules_wpi_styleguide//dependencies:load_pins.bzl", "load_styleguide_pins")
 
 load_styleguide_pins()
+
+http_archive(
+    name = "rules_bzlmodrio_jdk",
+    sha256 = "36cd468c867817ec460d76c28ec0ccd2d9fac4a2cf966af3935243a8a4a08108",
+    url = "https://github.com/bzlmodRio/rules_bzlmodRio_jdk/releases/download/17.0.8-7/rules_bzlmodRio_jdk-17.0.8-7.tar.gz",
+)
+
+load("@rules_bzlmodrio_jdk//:maven_deps.bzl", "setup_legacy_setup_jdk_dependencies")
+
+setup_legacy_setup_jdk_dependencies()

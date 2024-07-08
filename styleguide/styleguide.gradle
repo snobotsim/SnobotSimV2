@@ -17,23 +17,24 @@ jacocoTestReport {
 
 
 checkstyle {
-    toolVersion = "10.1"
+    toolVersion = "10.12.2"
     configDirectory = file("${project.rootDir}/styleguide")
     config = resources.text.fromFile(new File(configDirectory.get().getAsFile(), "checkstyle.xml"))
 }
 
 pmd {
-    toolVersion = '6.39.0'
+    toolVersion = '7.3.0'
     consoleOutput  = true
     reportsDir = file("${project.buildDir}/reports/pmd")
     ruleSetFiles = files(file("$rootDir/styleguide/pmd-ruleset.xml"))
     ruleSets = []
 }
 
+
 spotbugs {
     toolVersion = '4.7.3'
     excludeFilter = file("$rootDir/styleguide/findbugs_suppressions.xml")
-    effort = "max"
+    effort = spotbugsEffort
 }
 
 spotbugsMain {

@@ -1,5 +1,6 @@
 package org.snobotv2.examples.base;
 
+@SuppressWarnings("PMD.DataClass")
 public class BaseConstants
 {
     // PWM / CAN

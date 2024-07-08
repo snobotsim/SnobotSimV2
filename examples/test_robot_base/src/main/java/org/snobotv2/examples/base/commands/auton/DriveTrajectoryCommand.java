@@ -39,7 +39,7 @@ public final class DriveTrajectoryCommand
                         drivetrain);
 
 
-        Command runThenStop = ramseteCommand.andThen(() -> drivetrain.stop());
+        Command runThenStop = ramseteCommand.andThen(drivetrain::stop);
 
         if (resetOnStart)
         {
@@ -68,7 +68,7 @@ public final class DriveTrajectoryCommand
                         drivetrain);
 
 
-        Command runThenStop = ramseteCommand.andThen(() -> drivetrain.stop());
+        Command runThenStop = ramseteCommand.andThen(drivetrain::stop);
 
         if (resetOnStart)
         {

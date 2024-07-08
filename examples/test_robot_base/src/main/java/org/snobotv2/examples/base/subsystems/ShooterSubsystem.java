@@ -14,7 +14,7 @@ public interface ShooterSubsystem extends Subsystem, AutoCloseable
 
         public static FlywheelSim createSim()
         {
-            return new FlywheelSim(FlywheelSimConstants.kGearbox, FlywheelSimConstants.kGearing, FlywheelSimConstants.kInertia);
+            return new FlywheelSim(kGearbox, kGearing, kInertia);
         }
 
         private FlywheelSimConstants()

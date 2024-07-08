@@ -25,7 +25,7 @@ public class BaseCameraSimulator
     {
         Pose2d cameraPose = robotPose.transformBy(mCameraToRobot.inverse());
 
-        TreeMap<CameraToTargetDelta, TargetLocation> valid = new TreeMap<>();
+        TreeMap<CameraToTargetDelta, TargetLocation> valid = new TreeMap<>(); // NOPMD
 
         for (TargetLocation target : mTargets)
         {

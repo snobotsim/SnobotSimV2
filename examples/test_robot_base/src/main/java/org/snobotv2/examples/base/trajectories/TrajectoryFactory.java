@@ -15,6 +15,7 @@ import java.util.List;
 
 public final class TrajectoryFactory
 {
+    @SuppressWarnings("PMD.DataClass")
     public static final class AutoConstants
     {
         public static final double kMaxSpeedMetersPerSecond = 3;
@@ -95,7 +96,7 @@ public final class TrajectoryFactory
     public static TrajectoryConfig getTrajectoryConfig(DrivetrainSubsystem.DrivetrainConstants drivetrainConstants)
     {
         // Create a voltage constraint to ensure we don't accelerate too fast
-        var autoVoltageConstraint =
+        DifferentialDriveVoltageConstraint autoVoltageConstraint =
                 new DifferentialDriveVoltageConstraint(
                         new SimpleMotorFeedforward(
                                 drivetrainConstants.getKsVolts(),

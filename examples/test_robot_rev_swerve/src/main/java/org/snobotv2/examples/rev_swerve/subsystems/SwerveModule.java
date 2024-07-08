@@ -28,7 +28,7 @@ import org.snobotv2.sim_wrappers.SwerveModuleSimWrapper;
 
 public class SwerveModule implements BaseSwerveModule
 {
-    private static final double DRIVE_ENCODER_CONSTANT = (1.0 / DRIVE_GEAR_RATION) * DriveSubsystem.kWheelCircumfranceMeters;
+    private static final double DRIVE_ENCODER_CONSTANT = 1.0 / DRIVE_GEAR_RATION * DriveSubsystem.kWheelCircumfranceMeters;
 
     private static final double DEFAULT_FF = 0.34;
     private static final double DEFAULT_P = 0.001;
@@ -210,7 +210,7 @@ public class SwerveModule implements BaseSwerveModule
         builder.addDoubleProperty("MotorAngle", () -> getTurningMotorAngle().getDegrees(), null);
 
         builder.addDoubleProperty("TurnDegrees", mAzimuthEncoder::getPosition, null);
-        builder.addDoubleProperty("TurnGoalDegrees", () -> mDesiredState.angle.getDegrees(), null);
+        builder.addDoubleProperty("TurnGoalDegrees", mDesiredState.angle::getDegrees, null);
 
         builder.addDoubleProperty("DriveMps", mDriveEncoder::getVelocity, null);
         builder.addDoubleProperty("DriveGoalMps", () -> mDesiredState.speedMetersPerSecond, null);

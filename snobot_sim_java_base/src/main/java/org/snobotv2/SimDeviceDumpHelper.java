@@ -19,8 +19,7 @@ public final class SimDeviceDumpHelper
         builder.append("***************************************************\nDumping devices:\n");
         for (SimDeviceInfo deviceInfo : SimDeviceSim.enumerateDevices(""))
         {
-            builder.append("Got a device: \n");
-            builder.append("  ").append(deviceInfo.name).append('\n');
+            builder.append("Got a device: \n").append("  ").append(deviceInfo.name).append('\n');
             for (SimDeviceDataJNI.SimValueInfo valueInfo : SimDeviceDataJNI.enumerateSimValues(deviceInfo.handle))
             {
                 builder

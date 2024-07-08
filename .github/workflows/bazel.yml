@@ -8,12 +8,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { os: windows-latest, architecture: x64, config: "" }
-          - { os: windows-latest, architecture: x64, config: "--enable_bzlmod" }
-          - { os: macos-latest,   architecture: x64, config: "" }
-          - { os: macos-latest,   architecture: x64, config: "--enable_bzlmod" }
-          - { os: ubuntu-latest,  architecture: x64, config: "" }
-          - { os: ubuntu-latest,  architecture: x64, config: "--enable_bzlmod" }
+          - { os: windows-latest, architecture: x64, config: "--noenable_bzlmod" }
+          - { os: windows-latest, architecture: x64, config: "--enable_bzlmod"   }
+          - { os: macos-latest,   architecture: x64, config: "--noenable_bzlmod" }
+          - { os: macos-latest,   architecture: x64, config: "--enable_bzlmod"   }
+          - { os: ubuntu-latest,  architecture: x64, config: "--noenable_bzlmod" }
+          - { os: ubuntu-latest,  architecture: x64, config: "--enable_bzlmod"   }
     name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
     runs-on: ${{ matrix.os }}
     steps:
@@ -21,6 +21,12 @@ jobs:
         with:
           fetch-depth: 0
       - uses: bazelbuild/setup-bazelisk@v3
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 17
+          architecture: x64
 
       # Unix systems sometimes fail to create the symlink the first time around
       - name: Build (Allow failure)
@@ -36,7 +42,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { os: ubuntu-latest, architecture: x64, config: "--config=for-roborio" }
+          - { os: ubuntu-latest, architecture: x64, config: "--config=for-roborio --noenable_bzlmod" }
           - { os: ubuntu-latest, architecture: x64, config: "--config=for-roborio --enable_bzlmod" }
     name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
     runs-on: ${{ matrix.os }}
@@ -57,7 +63,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: bazelbuild/setup-bazelisk@v3
-      - run:  bazel run @unpinned_maven//:pin
+      - run:  bazel run @unpinned_maven//:pin --noenable_bzlmod
       - run:  git diff HEAD
       - uses: actions/upload-artifact@v4
         with:
