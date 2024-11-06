@@ -2,11 +2,13 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 def download_external_archives():
     # Download bzlmodRio <3
+    BZLMODRIO_COMMITISH = "5fc8b394699149fe870963e26ea672d2b00dfa37"
+    BZLMODRIO_SHA256 = "b09a5f93efb7231212f87038dfb30146d6ed9f26007349ba2a0c532d3976e675"
     http_archive(
         name = "bzlmodrio",
-        url = "https://github.com/bzlmodRio/bzlmodRio/archive/17983128beaeb12f184d22a426fecd8b536a5452.tar.gz",
-        sha256 = "aec41ceddbb412c32202ec84246ca5e65fa41325693f8bfc27e2c44c756f66a6",
-        strip_prefix = "bzlmodRio-17983128beaeb12f184d22a426fecd8b536a5452",
+        url = "https://github.com/bzlmodRio/bzlmodRio/archive/{}.tar.gz".format(BZLMODRIO_COMMITISH),
+        sha256 = BZLMODRIO_SHA256,
+        strip_prefix = "bzlmodRio-{}".format(BZLMODRIO_COMMITISH),
     )
     # native.local_repository(
     #     name = "bzlmodrio",

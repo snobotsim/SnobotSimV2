@@ -1,11 +1,12 @@
 package org.snobotv2.examples.catchall.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkLowLevel;
+import com.revrobotics.spark.SparkBase;
+import com.revrobotics.spark.SparkFlex;
+import com.revrobotics.spark.SparkLowLevel;
+import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.ADXL345_SPI;
 import edu.wpi.first.wpilibj.ADXL362;
@@ -86,9 +87,9 @@ public class CatchallSubsystem extends SubsystemBase
     protected final VictorSP mVictorSP;
 
     protected final AHRS mNavx;
-    protected final CANSparkMax mCanSparkMax;
+    protected final SparkMax mCanSparkMax;
+    protected final SparkFlex mCanSparkFlex;
     protected final WPI_TalonSRX mTalonSrx;
-    protected final WPI_TalonFX mTalonFx;
     protected final WPI_VictorSPX mVictorSpx;
 
     public CatchallSubsystem()
@@ -134,9 +135,9 @@ public class CatchallSubsystem extends SubsystemBase
         mPwmVictorSPX = new PWMVictorSPX(13);
         mSd540 = new SD540(14);
 
-        mCanSparkMax = new CANSparkMax(15, CANSparkLowLevel.MotorType.kBrushed);
+        mCanSparkMax = new SparkMax(15, SparkBase.MotorType.kBrushed);
+        mCanSparkFlex = new SparkFlex(17, SparkLowLevel.MotorType.kBrushed);
         mTalonSrx = new WPI_TalonSRX(16);
-        mTalonFx = new WPI_TalonFX(17);
         mVictorSpx = new WPI_VictorSPX(18);
 
         mNavx = new AHRS();
@@ -160,8 +161,8 @@ public class CatchallSubsystem extends SubsystemBase
         mSd540.set(0.4);
 
         mCanSparkMax.set(0.5);
+        mCanSparkFlex.set(0.5);
         mTalonSrx.set(0.6);
-        mTalonFx.set(0.7);
         mVictorSpx.set(0.8);
     }
 

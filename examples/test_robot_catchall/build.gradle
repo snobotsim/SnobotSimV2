@@ -19,7 +19,7 @@ dependencies {
     implementation wpilibTools.deps.wpilibJava("ntcore")
     implementation wpilibTools.deps.wpilibJava("wpilibNewCommands")
 
-    implementation "com.kauailabs.navx.frc:navx-frc-java:${navxVersion}"
+    implementation "com.kauailabs.navx.frc:navx_frc-java:${navxVersion}"
     implementation "com.ctre.phoenix:api-java:${phoenix5Version}"
     implementation "com.ctre.phoenix:wpiapi-java:${phoenix5Version}"
     implementation "com.revrobotics.frc:REVLib-java:${revVersion}"

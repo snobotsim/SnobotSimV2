@@ -5,8 +5,7 @@
 package org.snobotv2.examples.phoenix5_swerve.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.SensorInitializationStrategy;
 import com.ctre.phoenix.sensors.WPI_CANCoder;
@@ -37,8 +36,8 @@ public class SwerveModule implements BaseSwerveModule
 
     private final String mName;
 
-    private final WPI_TalonFX mDriveMotor;
-    private final WPI_TalonFX mAzimuthMotor;
+    private final WPI_TalonSRX mDriveMotor;
+    private final WPI_TalonSRX mAzimuthMotor;
     private final WPI_CANCoder mAbsoluteEncoder;
 
     private SwerveModuleState mCurrentState;
@@ -56,8 +55,8 @@ public class SwerveModule implements BaseSwerveModule
             double encoderOffset,
             String name)
     {
-        mDriveMotor = new WPI_TalonFX(driveMotorChannel);
-        mAzimuthMotor = new WPI_TalonFX(turningMotorChannel);
+        mDriveMotor = new WPI_TalonSRX(driveMotorChannel);
+        mAzimuthMotor = new WPI_TalonSRX(turningMotorChannel);
 
         mAbsoluteEncoder = new WPI_CANCoder(turningEncoderChannels);
 
@@ -70,7 +69,7 @@ public class SwerveModule implements BaseSwerveModule
         mAbsoluteEncoder.configSensorDirection(false);
         mAbsoluteEncoder.setPositionToAbsolute();
 
-        mAzimuthMotor.setInverted(TalonFXInvertType.CounterClockwise);
+        mAzimuthMotor.setInverted(true);
 
         mDriveMotor.configVoltageCompSaturation(10);
         mDriveMotor.configClosedloopRamp(0.5);

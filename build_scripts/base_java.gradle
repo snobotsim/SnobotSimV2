@@ -3,7 +3,7 @@ repositories {
     mavenLocal()
     maven { url "https://frcmaven.wpi.edu/artifactory/release/" }
     maven { url 'https://devsite.ctr-electronics.com/maven/release/' }
-    maven { url 'https://dev.studica.com/maven/release/2024/' }
+    maven { url 'https://dev.studica.com/maven/release/2025/' }
     maven { url 'https://maven.revrobotics.com/' }
 }
 
@@ -41,13 +41,13 @@ ext.getCurrentOs = {
 }
 
 ext {
-    wpiVersion = '2024.3.2'
+    wpiVersion = '2025.1.1-beta-1'
     opencvYear = '2024'
     opencvVersion = '4.8.0-1'
-    phoenix5Version = '5.33.1'
-    phoenix6Version = "24.3.0"
-    revVersion = '2024.2.4'
-    navxVersion = '2024.1.0'
+    phoenix5Version = '5.34.0-beta-2'
+    phoenix6Version = "25.0.0-beta-2"
+    revVersion = '2025.0.0-beta-1'
+    navxVersion = '2025.1.1-beta-1'
 
     nativeOs = getCurrentOs() + getCurrentArch()
 }
@@ -68,17 +68,15 @@ dependencies {
     nativeDesktopZip "edu.wpi.first.wpimath:wpimath-cpp:${wpiVersion}:${nativeOs}@zip"
     nativeDesktopZip "edu.wpi.first.thirdparty.frc${opencvYear}.opencv:opencv-cpp:${opencvVersion}:${nativeOs}@zip"
 
-    nativeDesktopZip "com.ctre.phoenix.sim:cci-sim:${phoenix5Version}:${nativeOs}@zip"
-
-    nativeDesktopZip "com.ctre.phoenix6.sim:tools-sim:${phoenix6Version}:${nativeOs}@zip"
-    nativeDesktopZip "com.ctre.phoenix6.sim:simTalonSRX:${phoenix6Version}:${nativeOs}@zip"
-    nativeDesktopZip "com.ctre.phoenix6.sim:simTalonFX:${phoenix6Version}:${nativeOs}@zip"
-    nativeDesktopZip "com.ctre.phoenix6.sim:simVictorSPX:${phoenix6Version}:${nativeOs}@zip"
-    nativeDesktopZip "com.ctre.phoenix6.sim:simPigeonIMU:${phoenix6Version}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix.sim:api-cpp-sim:${phoenix5Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simCANCoder:${phoenix6Version}:${nativeOs}@zip"
-    nativeDesktopZip "com.ctre.phoenix6.sim:simProTalonFX:${phoenix6Version}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix6.sim:simPigeonIMU:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simProCANcoder:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simProPigeon2:${phoenix6Version}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix6.sim:simProTalonFX:${phoenix6Version}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix6.sim:simTalonSRX:${phoenix6Version}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix6.sim:simVictorSPX:${phoenix6Version}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix6.sim:tools-sim:${phoenix6Version}:${nativeOs}@zip"
 
     nativeDesktopZip "com.revrobotics.frc:REVLib-driver:${revVersion}:${nativeOs}@zip"
 }

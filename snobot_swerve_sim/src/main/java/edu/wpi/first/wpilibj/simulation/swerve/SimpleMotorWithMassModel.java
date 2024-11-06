@@ -1,6 +1,9 @@
 package edu.wpi.first.wpilibj.simulation.swerve;
 
+import edu.wpi.first.math.numbers.N1;
+import edu.wpi.first.math.system.LinearSystem;
 import edu.wpi.first.math.system.plant.DCMotor;
+import edu.wpi.first.math.system.plant.LinearSystemId;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 
 
@@ -16,7 +19,9 @@ class SimpleMotorWithMassModel {
      * @param moi Moment of inertia of the controlled mass
      */
     SimpleMotorWithMassModel(DCMotor motor, double gearing, double moi) {
-        m_fwSim = new FlywheelSim(motor, gearing, moi);
+        LinearSystem<N1, N1, N1> plant =
+                LinearSystemId.createFlywheelSystem(motor, moi, gearing);
+        m_fwSim = new FlywheelSim(plant, motor);
     }
 
     void update(double motorVoltage, double dtSeconds) {
