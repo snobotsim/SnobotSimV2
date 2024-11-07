@@ -1,13 +1,15 @@
 package org.snobotv2.examples.rev.subsystems;
 
-//import com.kauailabs.navx.frc.AHRS;
-
 import com.kauailabs.navx.frc.AHRS;
-import com.revrobotics.CANSparkBase.ControlType;
-import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SimableCANSparkMax;
-import com.revrobotics.SparkPIDController;
+import com.revrobotics.spark.SparkBase.ControlType;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkClosedLoopController;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotBase;
@@ -24,17 +26,17 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
     private static final DrivetrainConstants DRIVETRAIN_CONSTANTS = new NeoDrivetrainConstants();
     private static final double ENCODER_CONSTANT = 1.0 / DRIVETRAIN_CONSTANTS.getGearing() * DRIVETRAIN_CONSTANTS.getkWheelDiameterMeters() * Math.PI;
 
-    private final SimableCANSparkMax mLeadLeft; // NOPMD
-    private final SimableCANSparkMax mFollowerLeft; // NOPMD
+    private final SparkMax mLeadLeft; // NOPMD
+    private final SparkMax mFollowerLeft; // NOPMD
 
-    private final SimableCANSparkMax mLeadRight; // NOPMD
-    private final SimableCANSparkMax mFollowerRight; // NOPMD
+    private final SparkMax mLeadRight; // NOPMD
+    private final SparkMax mFollowerRight; // NOPMD
 
     private final RelativeEncoder mRightEncoder;
     private final RelativeEncoder mLeftEncoder;
 
-    private final SparkPIDController mLeftPidController;
-    private final SparkPIDController mRightPidController;
+    private final SparkClosedLoopController mLeftPidController;
+    private final SparkClosedLoopController mRightPidController;
 
     private final AHRS mGyro;
 
@@ -53,40 +55,61 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
 
     public RevDrivetrain()
     {
-        mLeadLeft = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_LEFT_MOTOR_A, CANSparkLowLevel.MotorType.kBrushless);
-        mFollowerLeft = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_LEFT_MOTOR_B, CANSparkLowLevel.MotorType.kBrushless);
-        mLeadRight = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_A, CANSparkLowLevel.MotorType.kBrushless);
-        mFollowerRight = new SimableCANSparkMax(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_B, CANSparkLowLevel.MotorType.kBrushless);
+        SparkMaxConfig commonConfig = new SparkMaxConfig();
+        commonConfig.idleMode(IdleMode.kCoast);
+        commonConfig.smartCurrentLimit(80);
+        commonConfig.encoder.positionConversionFactor(ENCODER_CONSTANT);
+        commonConfig.encoder.velocityConversionFactor(ENCODER_CONSTANT / 60.0);
+        commonConfig.closedLoop.p(.03);
+        commonConfig.closedLoop.i(0);
+        commonConfig.closedLoop.d(0);
+        commonConfig.closedLoop.velocityFF(0.21);
+        commonConfig.closedLoop.maxMotion.maxVelocity(Units.inchesToMeters(144));
+        commonConfig.closedLoop.maxMotion.maxAcceleration(Units.inchesToMeters(144));
+
+        mLeadLeft = new SparkMax(BaseConstants.DRIVETRAIN_LEFT_MOTOR_A, MotorType.kBrushless);
+        mFollowerLeft = new SparkMax(BaseConstants.DRIVETRAIN_LEFT_MOTOR_B, MotorType.kBrushless);
+        mLeadRight = new SparkMax(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_A, MotorType.kBrushless);
+        mFollowerRight = new SparkMax(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_B, MotorType.kBrushless);
+
+        ResetMode resetMode = ResetMode.kResetSafeParameters;
+        PersistMode persistMode = PersistMode.kPersistParameters;
+
+        mLeadLeft.configure(
+                new SparkMaxConfig()
+                        .apply(commonConfig)
+                        .inverted(false),
+                resetMode, persistMode);
+        mFollowerLeft.configure(
+                new SparkMaxConfig()
+                    .apply(commonConfig)
+                    .inverted(false)
+                    .follow(mLeadLeft),
+                resetMode, persistMode);
+        mLeadRight.configure(
+                new SparkMaxConfig()
+                        .inverted(true)
+                        .apply(commonConfig),
+                resetMode, persistMode);
+        mFollowerRight.configure(
+                new SparkMaxConfig()
+                        .apply(commonConfig)
+                        .inverted(true)
+                        .follow(mLeadRight),
+                resetMode, persistMode);
 
         mRightEncoder = mLeadRight.getEncoder();
         mLeftEncoder = mLeadLeft.getEncoder();
 
-        mLeftEncoder.setPositionConversionFactor(ENCODER_CONSTANT);
-        mRightEncoder.setPositionConversionFactor(ENCODER_CONSTANT);
-
-        mLeftEncoder.setVelocityConversionFactor(ENCODER_CONSTANT / 60.0);
-        mRightEncoder.setVelocityConversionFactor(ENCODER_CONSTANT / 60.0);
-
-        mLeftPidController = mLeadLeft.getPIDController();
-        mRightPidController = mLeadRight.getPIDController();
+        mLeftPidController = mLeadLeft.getClosedLoopController();
+        mRightPidController = mLeadRight.getClosedLoopController();
 
         mLeftEncoder.setPosition(0);
         mRightEncoder.setPosition(0);
 
-        mLeadLeft.setInverted(false);
-        mLeadRight.setInverted(true);
-
-        mFollowerLeft.follow(mLeadLeft, false);
-        mFollowerRight.follow(mLeadRight, false);
-
         mGyro = new AHRS();
 
         mDrive = new DifferentialDrive(mLeadLeft, mLeadRight);
-
-        for (SparkPIDController pidController : new SparkPIDController[]{mLeftPidController, mRightPidController})
-        {
-            setupPidController(pidController, .02, 0, 0, 0.005_44, 144, 144);
-        }
 
         if (RobotBase.isSimulation())
         {
@@ -101,16 +124,6 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
             mSimulator.setLeftPdpChannels(BaseConstants.DRIVETRAIN_LEFT_MOTOR_A_PDP, BaseConstants.DRIVETRAIN_LEFT_MOTOR_B_PDP);
             mSimulator.setRightPdpChannels(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_A_PDP, BaseConstants.DRIVETRAIN_RIGHT_MOTOR_B_PDP);
         }
-    }
-
-    private void setupPidController(SparkPIDController pidController, double kp, double ki, double kd, double kff, double maxVelocity, double maxAcceleration)
-    {
-        pidController.setP(Units.metersToInches(kp));
-        pidController.setI(ki);
-        pidController.setD(kd);
-        pidController.setFF(Units.metersToInches(kff));
-        pidController.setSmartMotionMaxVelocity(Units.inchesToMeters(maxVelocity), 0);
-        pidController.setSmartMotionMaxAccel(Units.inchesToMeters(maxAcceleration), 0);
     }
 
     /////////////////////////////////////
@@ -180,8 +193,8 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
     @Override
     public void driveDistance(double leftPosition, double rightPosition)
     {
-        mLeftPidController.setReference(leftPosition, ControlType.kSmartMotion);
-        mRightPidController.setReference(rightPosition, ControlType.kSmartMotion);
+        mLeftPidController.setReference(leftPosition, ControlType.kMAXMotionPositionControl);
+        mRightPidController.setReference(rightPosition, ControlType.kMAXMotionPositionControl);
         mDrive.feed();
     }
 

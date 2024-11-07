@@ -5,12 +5,11 @@
 package org.snobotv2.examples.rev_swerve.subsystems;
 
 import com.revrobotics.AbsoluteEncoder;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SimableCANSparkMax;
-import com.revrobotics.SparkAbsoluteEncoder;
-import com.revrobotics.SparkPIDController;
+import com.revrobotics.spark.SparkBase;
+import com.revrobotics.spark.SparkClosedLoopController;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -37,12 +36,12 @@ public class SwerveModule implements BaseSwerveModule
 
     private final AbsoluteEncoder mAbsoluteEncoder;
 
-    private final SimableCANSparkMax mDriveMotor;
-    private final SparkPIDController mDriveController;
+    private final SparkMax mDriveMotor;
+    private final SparkClosedLoopController mDriveController;
     private final RelativeEncoder mDriveEncoder;
 
-    private final SimableCANSparkMax mAzimuthMotor;
-    private final SparkPIDController mAzimuthController;
+    private final SparkMax mAzimuthMotor;
+    private final SparkClosedLoopController mAzimuthController;
     private final RelativeEncoder mAzimuthEncoder;
 
     private SwerveModuleState mCurrentState;
@@ -50,6 +49,9 @@ public class SwerveModule implements BaseSwerveModule
     private SwerveModulePosition mCurrentPosition;
 
     private SwerveModuleSimWrapper mSimWrapper;
+
+    private final SparkMaxConfig mAzimuthConfig;
+    private final SparkMaxConfig mDriveConfig;
 
     @SuppressWarnings("PMD.UnusedFormalParameter")
     public SwerveModule(
@@ -59,23 +61,32 @@ public class SwerveModule implements BaseSwerveModule
             double encoderOffset,
             String name)
     {
-        mAzimuthMotor = new SimableCANSparkMax(turningMotorChannel, CANSparkLowLevel.MotorType.kBrushless);
+        mAzimuthConfig = new SparkMaxConfig();
+        mAzimuthConfig.inverted(false);
+        mAzimuthConfig.encoder.positionConversionFactor(360 / TURNING_GEAR_RATION);
+        mAzimuthConfig.encoder.velocityConversionFactor(360 / TURNING_GEAR_RATION / 60);
+        mAzimuthConfig.closedLoop.p(0.01);
+        mAzimuthConfig.closedLoop.d(0.0);
+
+        mAzimuthMotor = new SparkMax(turningMotorChannel, SparkBase.MotorType.kBrushless);
+        mAzimuthMotor.configure(mAzimuthConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
         mAzimuthMotor.setInverted(false);
         mAzimuthEncoder = mAzimuthMotor.getEncoder();
-        mAzimuthEncoder.setPositionConversionFactor(360 / TURNING_GEAR_RATION);
-        mAzimuthEncoder.setVelocityConversionFactor(360 / TURNING_GEAR_RATION / 60);
-        mAzimuthController = mAzimuthMotor.getPIDController();
-        mAzimuthController.setP(0.01);
-        mAzimuthController.setD(0.0);
+        mAzimuthController = mAzimuthMotor.getClosedLoopController();
 
-        mAbsoluteEncoder = mAzimuthMotor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle);
+        mAbsoluteEncoder = mAzimuthMotor.getAbsoluteEncoder();
 
-        mDriveMotor = new SimableCANSparkMax(driveMotorChannel, CANSparkLowLevel.MotorType.kBrushless);
-        mDriveMotor.setInverted(false);
+        mDriveConfig = new SparkMaxConfig();
+        mDriveConfig.inverted(false);
+        mDriveConfig.encoder.positionConversionFactor(DRIVE_ENCODER_CONSTANT);
+        mDriveConfig.encoder.velocityConversionFactor(DRIVE_ENCODER_CONSTANT / 60);
+        mDriveConfig.closedLoop.p(0.01);
+        mDriveConfig.closedLoop.d(0.0);
+
+        mDriveMotor = new SparkMax(driveMotorChannel, SparkBase.MotorType.kBrushless);
+        mDriveMotor.configure(mDriveConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
         mDriveEncoder = mDriveMotor.getEncoder();
-        mDriveEncoder.setPositionConversionFactor(DRIVE_ENCODER_CONSTANT);
-        mDriveEncoder.setVelocityConversionFactor(DRIVE_ENCODER_CONSTANT / 60);
-        mDriveController = mDriveMotor.getPIDController();
+        mDriveController = mDriveMotor.getClosedLoopController();
 
         mDesiredState = new SwerveModuleState(0, Rotation2d.fromDegrees(0));
         mCurrentState = new SwerveModuleState(0, Rotation2d.fromDegrees(0));
@@ -171,9 +182,9 @@ public class SwerveModule implements BaseSwerveModule
             mDriveMotor.set(mDesiredState.speedMetersPerSecond / DriveSubsystem.kMaxSpeedMetersPerSecond);
         } else
         {
-            mDriveController.setReference(mDesiredState.speedMetersPerSecond, CANSparkMax.ControlType.kVelocity);
+            mDriveController.setReference(mDesiredState.speedMetersPerSecond, SparkBase.ControlType.kVelocity);
         }
-        mAzimuthController.setReference(mDesiredState.angle.getDegrees(), CANSparkMax.ControlType.kPosition);
+        mAzimuthController.setReference(mDesiredState.angle.getDegrees(), SparkBase.ControlType.kPosition);
     }
 
     @Override
@@ -220,8 +231,9 @@ public class SwerveModule implements BaseSwerveModule
     @Override
     public void periodic()
     {
-        mDriveController.setFF(SmartDashboard.getNumber("FF", DEFAULT_FF));
-        mDriveController.setP(SmartDashboard.getNumber("P", DEFAULT_P));
+        mDriveConfig.closedLoop.velocityFF(SmartDashboard.getNumber("FF", DEFAULT_FF));
+        mDriveConfig.closedLoop.p(SmartDashboard.getNumber("P", DEFAULT_P));
+        mDriveMotor.configure(mDriveConfig, SparkBase.ResetMode.kNoResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
 
         mCurrentState = new SwerveModuleState(
                 getDriveSpeedMps(),

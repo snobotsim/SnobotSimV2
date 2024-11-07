@@ -4,7 +4,7 @@ snobot_sim_java_library(
     name = "rev_swerve",
     srcs = glob(["*.java"]),
     visibility = [
-        "//examples/test_robot_phoenix5_swerve:__subpackages__",
+        "//examples/test_robot_rev_swerve:__subpackages__",
     ],
     deps = [
         "//examples/test_robot_base_swerve/src/main/java/org/snobotv2/examples/base_swerve/commands",
