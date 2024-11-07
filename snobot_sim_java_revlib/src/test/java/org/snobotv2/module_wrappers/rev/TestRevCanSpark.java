@@ -1,11 +1,14 @@
 package org.snobotv2.module_wrappers.rev;
 
-import com.revrobotics.CANSparkBase;
-import com.revrobotics.CANSparkLowLevel;
-import com.revrobotics.SimableCANSparkFlex;
-import com.revrobotics.SimableCANSparkMax;
-import com.revrobotics.SimableRevDevice;
-import com.revrobotics.SparkPIDController;
+import com.revrobotics.spark.SparkBase;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkFlex;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkBaseConfig;
+import com.revrobotics.spark.config.SparkBaseConfigAccessor;
+import com.revrobotics.spark.config.SparkFlexConfig;
+import com.revrobotics.spark.config.SparkMaxConfig;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -17,54 +20,53 @@ public class TestRevCanSpark extends BaseRevlibUnitTest
     @Test
     public void testBasicMax()
     {
-        try (SimableCANSparkMax sparkMax = new SimableCANSparkMax(1, CANSparkLowLevel.MotorType.kBrushless);
-             SimableCANSparkMax follower = new SimableCANSparkMax(11, CANSparkLowLevel.MotorType.kBrushless))
+        try (SparkMax sparkMax = new SparkMax(1, SparkBase.MotorType.kBrushless);
+             SparkMax follower = new SparkMax(11, SparkBase.MotorType.kBrushless))
         {
-            runTest(sparkMax, follower);
+            runTest(sparkMax, follower, new SparkMaxConfig(), sparkMax.configAccessor);
         }
     }
 
     @Test
     public void testBasicFlex()
     {
-        try (SimableCANSparkFlex sparkFlex = new SimableCANSparkFlex(1, CANSparkLowLevel.MotorType.kBrushless);
-             SimableCANSparkFlex follower = new SimableCANSparkFlex(11, CANSparkLowLevel.MotorType.kBrushless))
+        try (SparkFlex sparkFlex = new SparkFlex(1, SparkBase.MotorType.kBrushless);
+             SparkFlex follower = new SparkFlex(11, SparkBase.MotorType.kBrushless))
         {
-            runTest(sparkFlex, follower);
+            runTest(sparkFlex, follower, new SparkFlexConfig(), sparkFlex.configAccessor);
         }
     }
 
-    private <T extends CANSparkBase & SimableRevDevice> void runTest(T sparkMax, T follower)
+    @SuppressWarnings({"PMD.GenericsNaming", "PMD.UnusedFormalParameter"})
+    private <MotorType extends SparkBase, ConfigType extends SparkBaseConfig, ConfigAccessor extends SparkBaseConfigAccessor> void runTest(
+            MotorType sparkMax, MotorType follower, ConfigType config, ConfigAccessor configAccessor)
     {
-        follower.follow(sparkMax);
+        config.closedLoop.p(.4);
+        config.closedLoop.i(.5);
+        config.closedLoop.d(.6);
+        config.closedLoop.velocityFF(.7);
+        config.closedLoop.maxMotion.maxAcceleration(.8);
+        config.closedLoop.maxMotion.maxVelocity(.9);
+        sparkMax.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-        SparkPIDController pidController = sparkMax.getPIDController();
+        assertEquals(.4, configAccessor.closedLoop.getP(), DEFAULT_EPSILON);
+        assertEquals(.5, configAccessor.closedLoop.getI(), DEFAULT_EPSILON);
+        assertEquals(.6, configAccessor.closedLoop.getD(), DEFAULT_EPSILON);
+        assertEquals(.7, configAccessor.closedLoop.getFF(), DEFAULT_EPSILON);
+        assertEquals(.8, configAccessor.closedLoop.maxMotion.getMaxAcceleration(), DEFAULT_EPSILON);
+        assertEquals(.9, configAccessor.closedLoop.maxMotion.getMaxVelocity(), DEFAULT_EPSILON);
 
-        pidController.setP(.4);
-        pidController.setI(.5);
-        pidController.setD(.6);
-        pidController.setFF(.7);
-        pidController.setSmartMotionMaxAccel(.8, 0);
-        pidController.setSmartMotionMaxVelocity(.9, 0);
-
-        assertEquals(.4, pidController.getP(), DEFAULT_EPSILON);
-        assertEquals(.5, pidController.getI(), DEFAULT_EPSILON);
-        assertEquals(.6, pidController.getD(), DEFAULT_EPSILON);
-        assertEquals(.7, pidController.getFF(), DEFAULT_EPSILON);
-        assertEquals(.8, pidController.getSmartMotionMaxAccel(0), DEFAULT_EPSILON);
-        assertEquals(.9, pidController.getSmartMotionMaxVelocity(0), DEFAULT_EPSILON);
-
-        RevMotorControllerSimWrapper talonWrapper = new RevMotorControllerSimWrapper(sparkMax);
+        RevMotorControllerSimWrapper leaderWrapper = new RevMotorControllerSimWrapper(sparkMax);
         RevMotorControllerSimWrapper followerWrapper = new RevMotorControllerSimWrapper(follower);
 
         sparkMax.set(.4);
-        talonWrapper.update();
-        testVoltagePercentage(.4, talonWrapper, followerWrapper);
+        leaderWrapper.update();
+        testVoltagePercentage(.4, leaderWrapper, followerWrapper);
         testVoltagePercentage(.4, sparkMax, follower);
 
         sparkMax.set(-.25);
-        talonWrapper.update();
-        testVoltagePercentage(-.25, talonWrapper, followerWrapper);
+        leaderWrapper.update();
+        testVoltagePercentage(-.25, leaderWrapper, followerWrapper);
         testVoltagePercentage(-.25, sparkMax, follower);
     }
 }

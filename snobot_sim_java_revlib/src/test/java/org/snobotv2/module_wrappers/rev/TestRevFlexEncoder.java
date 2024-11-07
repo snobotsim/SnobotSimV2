@@ -1,8 +1,8 @@
 package org.snobotv2.module_wrappers.rev;
 
-import com.revrobotics.CANSparkLowLevel;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SimableCANSparkFlex;
+import com.revrobotics.spark.SparkFlex;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 import org.junit.jupiter.api.Test;
 import org.snobotv2.sim_wrappers.InstantaneousMotorSim;
 
@@ -13,7 +13,7 @@ public class TestRevFlexEncoder
     @Test
     public void testEncoder()
     {
-        try (SimableCANSparkFlex sparkFlex = new SimableCANSparkFlex(1, CANSparkLowLevel.MotorType.kBrushless))
+        try (SparkFlex sparkFlex = new SparkFlex(1, MotorType.kBrushless))
         {
             RelativeEncoder encoder = sparkFlex.getEncoder();
 

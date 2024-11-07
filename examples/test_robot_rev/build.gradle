@@ -13,6 +13,7 @@ dependencies {
     implementation wpilibTools.deps.wpilibJava("hal")
     implementation wpilibTools.deps.wpilibJava("wpilibj")
     implementation wpilibTools.deps.wpilibJava("wpimath")
+    implementation wpilibTools.deps.wpilibJava("wpiunits")
     implementation wpilibTools.deps.wpilibJava("wpiutil")
     implementation wpilibTools.deps.wpilibJava("cscore")
     implementation wpilibTools.deps.wpilibJava("ntcore")
@@ -25,7 +26,7 @@ dependencies {
     implementation project(":examples:test_robot_base")
 
     implementation "com.revrobotics.frc:REVLib-java:${revVersion}"
-    implementation "com.kauailabs.navx.frc:navx-frc-java:${navxVersion}"
+    implementation "com.kauailabs.navx.frc:navx_frc-java:${navxVersion}"
 
     testImplementation project(":snobot_sim_java_test_utils")
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'

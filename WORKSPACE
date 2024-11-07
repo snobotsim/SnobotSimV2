@@ -1,6 +1,13 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("//build_scripts/bazel/deps:download_external_archives.bzl", "download_external_archives")
 
+http_archive(
+    name = "rules_bzlmodrio_jdk",
+    sha256 = "43a475e46852305ffc87f7499e772a42dc5343d7bfcc7631dbca83568712f44f",
+    strip_prefix = "rules_bzlmodrio_jdk-d5f0db20a611e4ec4b26f95d9c772e2436b69b55",
+    urls = ["https://github.com/wpilibsuite/rules_bzlmodRio_jdk/archive/d5f0db20a611e4ec4b26f95d9c772e2436b69b55.tar.gz"],
+)
+
 download_external_archives()
 
 load("//build_scripts/bazel/deps:setup_dependencies.bzl", "setup_dependencies")

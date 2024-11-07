@@ -1,26 +1,52 @@
 package org.snobotv2.module_wrappers.rev;
 
-import com.revrobotics.CANSparkBase;
-import edu.wpi.first.hal.SimDouble;
-import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
+import com.revrobotics.sim.SparkFlexSim;
+import com.revrobotics.sim.SparkMaxSim;
+import com.revrobotics.sim.SparkRelativeEncoderSim;
+import com.revrobotics.spark.SparkBase;
+import com.revrobotics.spark.SparkFlex;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkSim;
+import edu.wpi.first.math.system.plant.DCMotor;
 import org.snobotv2.module_wrappers.BaseEncoderWrapper;
 
 public final class RevEncoderSimWrapper extends BaseEncoderWrapper
 {
-    public static RevEncoderSimWrapper create(CANSparkBase motorController)
+    public static RevEncoderSimWrapper create(SparkBase spark)
     {
-        SimDeviceSim deviceSim = new SimDeviceSim("SPARK MAX [" + motorController.getDeviceId() + "]");
-        SimDouble position = deviceSim.getDouble("Position");
-        SimDouble velocity = deviceSim.getDouble("Velocity");
+        SparkSim sparkSim;
+        SparkRelativeEncoderSim encoderSim;
+        if (spark instanceof SparkMax)
+        {
+            sparkSim = new SparkMaxSim((SparkMax) spark, DCMotor.getNEO(1));
+            encoderSim = new SparkRelativeEncoderSim((SparkMax) spark);
+        }
+        else if (spark instanceof SparkFlex)
+        {
+            sparkSim = new SparkFlexSim((SparkFlex) spark, DCMotor.getNEO(1));
+            encoderSim = new SparkRelativeEncoderSim((SparkFlex) spark);
+        }
+        else
+        {
+            throw new IllegalArgumentException("The provided motor controller is not simmable!");
+        }
 
-        return new RevEncoderSimWrapper(position, velocity);
+        return new RevEncoderSimWrapper(sparkSim, encoderSim);
     }
 
-    private RevEncoderSimWrapper(SimDouble position, SimDouble velocity)
+    private RevEncoderSimWrapper(SparkSim sparkSim, SparkRelativeEncoderSim encoderSim)
     {
         super(
-                position::get,
-                position::set,
-                velocity::set);
+                sparkSim::getPosition,
+                pos ->
+                {
+                    sparkSim.setPosition(pos);
+                    encoderSim.setPosition(pos);
+                },
+                vel ->
+                {
+                    sparkSim.setVelocity(vel);
+                    encoderSim.setVelocity(vel);
+                });
     }
 }

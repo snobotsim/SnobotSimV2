@@ -1,10 +1,13 @@
 package org.snobotv2.examples.rev.subsystems;
 
-import com.revrobotics.CANSparkLowLevel;
-import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SimableCANSparkMax;
-import com.revrobotics.SparkPIDController;
+import com.revrobotics.spark.SparkBase.ControlType;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkClosedLoopController;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,23 +25,37 @@ public class RevElevatorSubsystem extends SubsystemBase implements ElevatorSubsy
     private static final int POSITION_SLOT = 0;
     private static final int SMART_MOTION_SLOT = 1;
 
-    private final SimableCANSparkMax mLeadMotor; // NOPMD
-    private final SimableCANSparkMax mFollowerMotor; // NOPMD
+    private final SparkMax mLeadMotor; // NOPMD
+    private final SparkMax mFollowerMotor; // NOPMD
     private final RelativeEncoder mEncoder;
-    private final SparkPIDController mPidController;
+    private final SparkClosedLoopController mPidController;
     private ISimWrapper mElevatorSim;
 
     public RevElevatorSubsystem()
     {
-        mLeadMotor = new SimableCANSparkMax(BaseConstants.ELEVATOR_MOTOR_A, CANSparkLowLevel.MotorType.kBrushless);
-        mFollowerMotor = new SimableCANSparkMax(BaseConstants.ELEVATOR_MOTOR_B, CANSparkLowLevel.MotorType.kBrushless);
-        mFollowerMotor.follow(mLeadMotor);
+        SparkMaxConfig commonConfig = new SparkMaxConfig();
+        commonConfig.encoder.positionConversionFactor(TICKS_PER_METER);
+        commonConfig.closedLoop.p(0.16);
+
+        ResetMode resetMode = ResetMode.kResetSafeParameters;
+        PersistMode persistMode = PersistMode.kPersistParameters;
+
+        mLeadMotor = new SparkMax(BaseConstants.ELEVATOR_MOTOR_A, MotorType.kBrushless);
+        mLeadMotor.configure(
+                new SparkMaxConfig()
+                        .apply(commonConfig),
+                resetMode, persistMode);
+
+        mFollowerMotor = new SparkMax(BaseConstants.ELEVATOR_MOTOR_B, MotorType.kBrushless);
+        mFollowerMotor.configure(
+                new SparkMaxConfig()
+                        .apply(commonConfig)
+                        .follow(mLeadMotor),
+                resetMode, persistMode);
+
         mEncoder = mLeadMotor.getEncoder();
-        mPidController = mLeadMotor.getPIDController();
+        mPidController = mLeadMotor.getClosedLoopController();
 
-        mEncoder.setPositionConversionFactor(TICKS_PER_METER);
-
-        mPidController.setP(0.16);
 
         if (RobotBase.isSimulation())
         {
@@ -65,14 +82,14 @@ public class RevElevatorSubsystem extends SubsystemBase implements ElevatorSubsy
     public void goToPosition(double inches)
     {
         double meters = Units.inchesToMeters(inches);
-        mPidController.setReference(meters, ControlType.kPosition, POSITION_SLOT, GRAVITY_COMPENSATION_VOLTS, SparkPIDController.ArbFFUnits.kVoltage);
+        mPidController.setReference(meters, ControlType.kPosition, POSITION_SLOT, GRAVITY_COMPENSATION_VOLTS, SparkClosedLoopController.ArbFFUnits.kVoltage);
     }
 
     @Override
     public void goToPositionMotionMagic(double inches)
     {
         double meters = Units.inchesToMeters(inches);
-        mPidController.setReference(meters, ControlType.kSmartMotion, SMART_MOTION_SLOT);
+        mPidController.setReference(meters, ControlType.kMAXMotionPositionControl, SMART_MOTION_SLOT);
     }
 
     @Override
