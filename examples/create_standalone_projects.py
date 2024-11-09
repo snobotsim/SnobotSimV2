@@ -1,7 +1,7 @@
-import shutil
-import distutils.dir_util
 import argparse
+import distutils.dir_util
 import os
+import shutil
 
 
 class ExampleConfig:
