@@ -115,8 +115,8 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
         {
             mSimulator = new DifferentialDrivetrainSimWrapper(
                     DRIVETRAIN_CONSTANTS.createSim(),
-                    new RevMotorControllerSimWrapper(mLeadLeft),
-                    new RevMotorControllerSimWrapper(mLeadRight),
+                    new RevMotorControllerSimWrapper(mLeadLeft, DRIVETRAIN_CONSTANTS.getMotor()),
+                    new RevMotorControllerSimWrapper(mLeadRight, DRIVETRAIN_CONSTANTS.getMotor()),
                     RevEncoderSimWrapper.create(mLeadLeft),
                     RevEncoderSimWrapper.create(mLeadRight),
                     new NavxWrapper().getYawGyro());

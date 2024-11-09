@@ -2,8 +2,8 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 def download_external_archives():
     # Download bzlmodRio <3
-    BZLMODRIO_COMMITISH = "c5af12728e5d28d455f1b3451bb1a11bd4e98d57"
-    BZLMODRIO_SHA256 = "13fe9597bc1a516d16d7aed6f39ba9413ef6241e7172d3e8551506503cd51fb4"
+    BZLMODRIO_COMMITISH = "7d8a344b5e139e51ff33c9d16c6bb02e2affe7a3"
+    BZLMODRIO_SHA256 = "fc1624bfd989071da9f01f91680916d88bd50f2f26ee1238391f1b76a71432ed"
     http_archive(
         name = "bzlmodrio",
         url = "https://github.com/bzlmodRio/bzlmodRio/archive/{}.tar.gz".format(BZLMODRIO_COMMITISH),

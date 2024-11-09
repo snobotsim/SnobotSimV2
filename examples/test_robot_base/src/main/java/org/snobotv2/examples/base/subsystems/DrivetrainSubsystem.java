@@ -58,6 +58,8 @@ public interface DrivetrainSubsystem extends Subsystem, AutoCloseable
         double getkWheelDiameterMeters();
 
         DifferentialDrivetrainSim createSim();
+
+        DCMotor getMotor();
     }
 
     final class CimDrivetrainConstants implements DrivetrainConstants
@@ -127,6 +129,12 @@ public interface DrivetrainSubsystem extends Subsystem, AutoCloseable
         public DifferentialDriveKinematics getKinematics()
         {
             return kDriveKinematics;
+        }
+
+        @Override
+        public DCMotor getMotor()
+        {
+            return kDriveGearbox;
         }
     }
 
@@ -199,6 +207,12 @@ public interface DrivetrainSubsystem extends Subsystem, AutoCloseable
         public DifferentialDriveKinematics getKinematics()
         {
             return kDriveKinematics;
+        }
+
+        @Override
+        public DCMotor getMotor()
+        {
+            return kDriveGearbox;
         }
     }
 }

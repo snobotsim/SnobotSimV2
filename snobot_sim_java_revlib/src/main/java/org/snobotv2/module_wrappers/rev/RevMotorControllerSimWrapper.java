@@ -9,10 +9,16 @@ public class RevMotorControllerSimWrapper extends BaseMotorControllerWrapper
 {
     private final SparkSimHelper mSim;
 
+    @Deprecated
     public RevMotorControllerSimWrapper(SparkBase motorController)
     {
+        this(motorController, DCMotor.getNEO(1));
+    }
+
+    public RevMotorControllerSimWrapper(SparkBase motorController, DCMotor gearbox)
+    {
         super(motorController.getDeviceId(), motorController::getAppliedOutput);
-        mSim = new SparkSimHelper(motorController, DCMotor.getNEO(1));
+        mSim = new SparkSimHelper(motorController, gearbox);
     }
 
     @Override
