@@ -3,6 +3,7 @@ package org.snobotv2.module_wrappers.rev;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkFlex;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+import edu.wpi.first.math.system.plant.DCMotor;
 import org.junit.jupiter.api.Test;
 import org.snobotv2.sim_wrappers.InstantaneousMotorSim;
 
@@ -18,7 +19,7 @@ public class TestRevFlexEncoder
             RelativeEncoder encoder = sparkFlex.getEncoder();
 
             InstantaneousMotorSim motorSim = new InstantaneousMotorSim(
-                    new RevMotorControllerSimWrapper(sparkFlex),
+                    new RevMotorControllerSimWrapper(sparkFlex, DCMotor.getNEO(1)),
                     RevEncoderSimWrapper.create(sparkFlex),
                     10);
 

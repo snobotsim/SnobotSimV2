@@ -46,7 +46,7 @@ ext {
     opencvVersion = '4.8.0-1'
     phoenix5Version = '5.34.0-beta-2'
     phoenix6Version = "25.0.0-beta-2"
-    revVersion = '2025.0.0-beta-1'
+    revVersion = '2025.0.0-beta-2'
     navxVersion = '2025.1.1-beta-1'
 
     nativeOs = getCurrentOs() + getCurrentArch()

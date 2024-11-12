@@ -8,7 +8,7 @@ bazel_dep(name = "bzlmodrio-allwpilib", version = "2025.1.1-beta-1")
 bazel_dep(name = "bzlmodrio-navx", version = "2025.1.1-beta-1")
 bazel_dep(name = "bzlmodrio-phoenix", version = "5.34.0-beta-2")
 bazel_dep(name = "bzlmodrio-phoenix6", version = "25.0.0-beta-2")
-bazel_dep(name = "bzlmodrio-revlib", version = "2025.0.0-beta-1")
+bazel_dep(name = "bzlmodrio-revlib", version = "2025.0.0-beta-2")
 
 archive_override(
     module_name = "rules_bzlmodrio_jdk",

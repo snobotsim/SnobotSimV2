@@ -51,7 +51,7 @@ public class RevShooterSubsystem extends SubsystemBase implements ShooterSubsyst
         if (RobotBase.isSimulation())
         {
             mSimulator = new FlywheelSimWrapper(FlywheelSimConstants.createSim(),
-                    new RevMotorControllerSimWrapper(mLeadMotor),
+                    new RevMotorControllerSimWrapper(mLeadMotor, FlywheelSimConstants.kGearbox),
                     RevEncoderSimWrapper.create(mLeadMotor));
         }
     }

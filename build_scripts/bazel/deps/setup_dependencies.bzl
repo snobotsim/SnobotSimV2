@@ -6,7 +6,7 @@ def setup_dependencies():
         allwpilib_version = "2025.1.1-beta-1",
         # ni_version = "2024.1.1",
         # opencv_version = "2024.4.8.0-1",
-        revlib_version = "2025.0.0-beta-1",
+        revlib_version = "2025.0.0-beta-2",
         phoenix_version = "5.34.0-beta-2",
         phoenix6_version = "25.0.0-beta-2",
         navx_version = "2025.1.1-beta-1",

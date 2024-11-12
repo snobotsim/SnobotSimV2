@@ -60,7 +60,7 @@ public class RevElevatorSubsystem extends SubsystemBase implements ElevatorSubsy
         if (RobotBase.isSimulation())
         {
             mElevatorSim = new ElevatorSimWrapper(ElevatorSimConstants.createSim(),
-                    new RevMotorControllerSimWrapper(mLeadMotor),
+                    new RevMotorControllerSimWrapper(mLeadMotor, ElevatorSimConstants.kElevatorGearbox),
                     RevEncoderSimWrapper.create(mLeadMotor));
         }
     }

@@ -9,6 +9,7 @@ import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkBaseConfigAccessor;
 import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import edu.wpi.first.math.system.plant.DCMotor;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -48,6 +49,7 @@ public class TestRevCanSpark extends BaseRevlibUnitTest
         config.closedLoop.maxMotion.maxAcceleration(.8);
         config.closedLoop.maxMotion.maxVelocity(.9);
         sparkMax.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        follower.configure(config.follow(sparkMax), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
         assertEquals(.4, configAccessor.closedLoop.getP(), DEFAULT_EPSILON);
         assertEquals(.5, configAccessor.closedLoop.getI(), DEFAULT_EPSILON);
@@ -56,11 +58,13 @@ public class TestRevCanSpark extends BaseRevlibUnitTest
         assertEquals(.8, configAccessor.closedLoop.maxMotion.getMaxAcceleration(), DEFAULT_EPSILON);
         assertEquals(.9, configAccessor.closedLoop.maxMotion.getMaxVelocity(), DEFAULT_EPSILON);
 
-        RevMotorControllerSimWrapper leaderWrapper = new RevMotorControllerSimWrapper(sparkMax);
-        RevMotorControllerSimWrapper followerWrapper = new RevMotorControllerSimWrapper(follower);
+        DCMotor gearbox = DCMotor.getNEO(1);
+        RevMotorControllerSimWrapper leaderWrapper = new RevMotorControllerSimWrapper(sparkMax, gearbox);
+        RevMotorControllerSimWrapper followerWrapper = new RevMotorControllerSimWrapper(follower, gearbox);
 
         sparkMax.set(.4);
         leaderWrapper.update();
+        followerWrapper.update();
         testVoltagePercentage(.4, leaderWrapper, followerWrapper);
         testVoltagePercentage(.4, sparkMax, follower);
 
