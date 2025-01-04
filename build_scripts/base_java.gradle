@@ -74,6 +74,7 @@ dependencies {
 
     nativeDesktopZip "com.ctre.phoenix6.sim:api-cpp-sim:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simCANCoder:${phoenix6Version}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix6.sim:simProCANrange:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simPigeonIMU:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simProCANcoder:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simProPigeon2:${phoenix6Version}:${nativeOs}@zip"
