@@ -16,6 +16,7 @@ archive_override(
     strip_prefix = "rules_bzlmodrio_jdk-4ecd4cbc97dfbfe2ceefa627de1228e2f2ca5773",
     urls = ["https://github.com/wpilibsuite/rules_bzlmodRio_jdk/archive/4ecd4cbc97dfbfe2ceefa627de1228e2f2ca5773.tar.gz"],
 )
+
 archive_override(
     module_name = "bzlmodrio-studica",
     integrity = "sha256-Uw+1yI3vh/6G20kcjmH+c/tUNTMPgx05cjs3mBd3etY=",
