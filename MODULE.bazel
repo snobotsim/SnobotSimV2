@@ -1,20 +1,27 @@
 bazel_dep(name = "rules_jvm_external", version = "6.1")
 bazel_dep(name = "rules_java", version = "7.6.5")
 bazel_dep(name = "rules_bazelrio", version = "0.0.14")
-bazel_dep(name = "rules_bzlmodrio_toolchains", version = "2024-1.bcr1")
-bazel_dep(name = "rules_bzlmodrio_jdk", version = "17.0.8.1-1")
+bazel_dep(name = "rules_bzlmodrio_toolchains", version = "2025-1.bcr1")
+bazel_dep(name = "rules_bzlmodrio_jdk", version = "17.0.12-7")
 bazel_dep(name = "rules_pmd", version = "7.2.0")
-bazel_dep(name = "bzlmodrio-allwpilib", version = "2025.1.1-beta-1")
-bazel_dep(name = "bzlmodrio-navx", version = "2025.1.1-beta-1")
-bazel_dep(name = "bzlmodrio-phoenix", version = "5.34.0-beta-2")
-bazel_dep(name = "bzlmodrio-phoenix6", version = "25.0.0-beta-2")
-bazel_dep(name = "bzlmodrio-revlib", version = "2025.0.0-beta-2")
+bazel_dep(name = "bzlmodrio-allwpilib", version = "2025.1.1")
+bazel_dep(name = "bzlmodrio-studica", version = "2025.1.1-beta-4")
+bazel_dep(name = "bzlmodrio-phoenix", version = "5.35.0")
+bazel_dep(name = "bzlmodrio-phoenix6", version = "25.1.0")
+bazel_dep(name = "bzlmodrio-revlib", version = "2025.0.0")
 
 archive_override(
     module_name = "rules_bzlmodrio_jdk",
-    integrity = "sha256-Q6R15GhSMF/8h/dJnncqQtxTQ9e/zHYx28qDVocS9E8=",
-    strip_prefix = "rules_bzlmodrio_jdk-d5f0db20a611e4ec4b26f95d9c772e2436b69b55",
-    urls = ["https://github.com/wpilibsuite/rules_bzlmodRio_jdk/archive/d5f0db20a611e4ec4b26f95d9c772e2436b69b55.tar.gz"],
+    integrity = "sha256-SrikyrF2v2lENdqn9aFC//d0TkIE620lR60yXTrWFTs=",
+    strip_prefix = "rules_bzlmodrio_jdk-4ecd4cbc97dfbfe2ceefa627de1228e2f2ca5773",
+    urls = ["https://github.com/wpilibsuite/rules_bzlmodRio_jdk/archive/4ecd4cbc97dfbfe2ceefa627de1228e2f2ca5773.tar.gz"],
+)
+
+archive_override(
+    module_name = "bzlmodrio-studica",
+    integrity = "sha256-Uw+1yI3vh/6G20kcjmH+c/tUNTMPgx05cjs3mBd3etY=",
+    strip_prefix = "bzlmodRio-studica-b190c1fcfaf6e2fd242e934c5109a1073ff84082",
+    urls = ["https://github.com/bzlmodrio/bzlmodRio-studica/archive/b190c1fcfaf6e2fd242e934c5109a1073ff84082.tar.gz"],
 )
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")

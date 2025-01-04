@@ -8,6 +8,13 @@ http_archive(
     urls = ["https://github.com/wpilibsuite/rules_bzlmodRio_jdk/archive/d5f0db20a611e4ec4b26f95d9c772e2436b69b55.tar.gz"],
 )
 
+http_archive(
+    name = "bzlmodrio-studica",
+    sha256 = "530fb5c88def87fe86db491c8e61fe73fb5435330f831d39723b379817777ad6",
+    strip_prefix = "bzlmodRio-studica-b190c1fcfaf6e2fd242e934c5109a1073ff84082",
+    urls = ["https://github.com/bzlmodrio/bzlmodRio-studica/archive/b190c1fcfaf6e2fd242e934c5109a1073ff84082.tar.gz"],
+)
+
 download_external_archives()
 
 load("//build_scripts/bazel/deps:setup_dependencies.bzl", "setup_dependencies")

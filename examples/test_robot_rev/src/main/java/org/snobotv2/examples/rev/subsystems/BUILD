@@ -18,7 +18,7 @@ snobot_sim_java_library(
         "@bzlmodrio-allwpilib//libraries/java/wpilibNewCommands",
         "@bzlmodrio-allwpilib//libraries/java/wpilibj",
         "@bzlmodrio-allwpilib//libraries/java/wpimath",
-        "@bzlmodrio-navx//libraries/java/navx",
         "@bzlmodrio-revlib//libraries/java/revlib-java",
+        "@bzlmodrio-studica//libraries/java/studica-java",
     ],
 )

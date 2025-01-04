@@ -1,6 +1,5 @@
 package org.snobotv2.examples.rev.subsystems;
 
-import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
@@ -10,6 +9,8 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import com.studica.frc.AHRS;
+import com.studica.frc.AHRS.NavXComType;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotBase;
@@ -107,7 +108,7 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
         mLeftEncoder.setPosition(0);
         mRightEncoder.setPosition(0);
 
-        mGyro = new AHRS();
+        mGyro = new AHRS(NavXComType.kMXP_SPI);
 
         mDrive = new DifferentialDrive(mLeadLeft, mLeadRight);
 
