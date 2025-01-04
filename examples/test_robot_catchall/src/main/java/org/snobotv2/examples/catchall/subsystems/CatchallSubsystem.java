@@ -2,11 +2,12 @@ package org.snobotv2.examples.catchall.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkFlex;
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
+import com.studica.frc.AHRS;
+import com.studica.frc.AHRS.NavXComType;
 import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.ADXL345_SPI;
 import edu.wpi.first.wpilibj.ADXL362;
@@ -140,7 +141,7 @@ public class CatchallSubsystem extends SubsystemBase
         mTalonSrx = new WPI_TalonSRX(16);
         mVictorSpx = new WPI_VictorSPX(18);
 
-        mNavx = new AHRS();
+        mNavx = new AHRS(NavXComType.kMXP_SPI);
     }
 
     public void simulationPeriodic()

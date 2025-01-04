@@ -26,7 +26,7 @@ dependencies {
     implementation project(":examples:test_robot_base")
 
     implementation "com.revrobotics.frc:REVLib-java:${revVersion}"
-    implementation "com.kauailabs.navx.frc:navx_frc-java:${navxVersion}"
+    implementation "com.studica.frc:Studica-java:${navxVersion}"
 
     testImplementation project(":snobot_sim_java_test_utils")
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'

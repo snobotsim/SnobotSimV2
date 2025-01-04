@@ -1,6 +1,7 @@
 package org.snobotv2.examples.rev.subsystems;
 
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
@@ -22,8 +23,8 @@ public class RevElevatorSubsystem extends SubsystemBase implements ElevatorSubsy
 {
     private static final double GRAVITY_COMPENSATION_VOLTS = 0.85;
     private static final double TICKS_PER_METER = 4096;
-    private static final int POSITION_SLOT = 0;
-    private static final int SMART_MOTION_SLOT = 1;
+    private static final ClosedLoopSlot POSITION_SLOT = ClosedLoopSlot.kSlot0;
+    private static final ClosedLoopSlot SMART_MOTION_SLOT = ClosedLoopSlot.kSlot1;
 
     private final SparkMax mLeadMotor; // NOPMD
     private final SparkMax mFollowerMotor; // NOPMD

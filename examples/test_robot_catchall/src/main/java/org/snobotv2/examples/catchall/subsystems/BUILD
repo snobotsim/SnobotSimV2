@@ -7,7 +7,7 @@ snobot_sim_java_library(
     deps = [
         "@bzlmodrio-allwpilib//libraries/java/wpilibNewCommands",
         "@bzlmodrio-allwpilib//libraries/java/wpilibj",
-        "@bzlmodrio-navx//libraries/java/navx",
+        "@bzlmodrio-studica//libraries/java/studica-java",
         "@bzlmodrio-phoenix//libraries/java/wpiapi-java",
         "@bzlmodrio-revlib//libraries/java/revlib-java",
     ],

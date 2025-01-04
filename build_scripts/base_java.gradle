@@ -41,13 +41,13 @@ ext.getCurrentOs = {
 }
 
 ext {
-    wpiVersion = '2025.1.1-beta-1'
-    opencvYear = '2024'
-    opencvVersion = '4.8.0-1'
-    phoenix5Version = '5.34.0-beta-2'
-    phoenix6Version = "25.0.0-beta-2"
-    revVersion = '2025.0.0-beta-2'
-    navxVersion = '2025.1.1-beta-1'
+    wpiVersion = '2025.1.1'
+    opencvYear = '2025'
+    opencvVersion = '4.10.0-3'
+    phoenix5Version = '5.35.0'
+    phoenix6Version = "25.1.0"
+    revVersion = '2025.0.0'
+    navxVersion = '2025.1.1-beta-4'
 
     nativeOs = getCurrentOs() + getCurrentArch()
 }
@@ -67,6 +67,8 @@ dependencies {
     nativeDesktopZip "edu.wpi.first.wpiutil:wpiutil-cpp:${wpiVersion}:${nativeOs}@zip"
     nativeDesktopZip "edu.wpi.first.wpimath:wpimath-cpp:${wpiVersion}:${nativeOs}@zip"
     nativeDesktopZip "edu.wpi.first.thirdparty.frc${opencvYear}.opencv:opencv-cpp:${opencvVersion}:${nativeOs}@zip"
+
+    nativeDesktopZip "com.studica.frc:Studica-driver:${navxVersion}:${nativeOs}@zip"
 
     nativeDesktopZip "com.ctre.phoenix.sim:cci-sim:${phoenix5Version}:${nativeOs}@zip"
 

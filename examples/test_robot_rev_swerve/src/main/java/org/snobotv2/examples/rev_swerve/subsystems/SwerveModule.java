@@ -70,7 +70,6 @@ public class SwerveModule implements BaseSwerveModule
 
         mAzimuthMotor = new SparkMax(turningMotorChannel, SparkBase.MotorType.kBrushless);
         mAzimuthMotor.configure(mAzimuthConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
-        mAzimuthMotor.setInverted(false);
         mAzimuthEncoder = mAzimuthMotor.getEncoder();
         mAzimuthController = mAzimuthMotor.getClosedLoopController();
 
