@@ -2,7 +2,6 @@ package org.snobotv2.module_wrappers.navx;
 
 import com.studica.frc.AHRS.NavXComType;
 import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
-import org.snobotv2.SimDeviceDumpHelper;
 import org.snobotv2.interfaces.IGyroWrapper;
 import org.snobotv2.module_wrappers.BaseGyroWrapper;
 
@@ -14,7 +13,6 @@ public class NavxWrapper
 
     public NavxWrapper(NavXComType comType)
     {
-        SimDeviceDumpHelper.dumpSimDevices();
         int id = 0;
         switch (comType)
         {

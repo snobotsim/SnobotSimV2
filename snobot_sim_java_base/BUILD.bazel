@@ -9,7 +9,6 @@ java_library(
         "//snobot_sim_java_base/src/main/java/org/snobotv2/camera",
         "//snobot_sim_java_base/src/main/java/org/snobotv2/camera/games:infinite_recharge",
         "//snobot_sim_java_base/src/main/java/org/snobotv2/camera/games:rapid_react",
-        "//snobot_sim_java_base/src/main/java/org/snobotv2/coordinate_gui",
         "//snobot_sim_java_base/src/main/java/org/snobotv2/interfaces",
         "//snobot_sim_java_base/src/main/java/org/snobotv2/module_wrappers",
         "//snobot_sim_java_base/src/main/java/org/snobotv2/module_wrappers/wpi",

@@ -8,5 +8,6 @@ snobot_sim_java_library(
         "//snobot_sim_java_base/src/main/java/org/snobotv2/interfaces",
         "//snobot_sim_java_base/src/main/java/org/snobotv2/module_wrappers",
         "@bzlmodrio-allwpilib//libraries/java/wpilibj",
+        "@bzlmodrio-studica//libraries/java/studica-java",
     ],
 )
