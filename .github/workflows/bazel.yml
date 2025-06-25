@@ -8,11 +8,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { os: windows-latest, architecture: x64, config: "--noenable_bzlmod" }
           - { os: windows-latest, architecture: x64, config: "--enable_bzlmod"   }
-          - { os: macos-latest,   architecture: x64, config: "--noenable_bzlmod" }
           - { os: macos-latest,   architecture: x64, config: "--enable_bzlmod"   }
-          - { os: ubuntu-latest,  architecture: x64, config: "--noenable_bzlmod" }
           - { os: ubuntu-latest,  architecture: x64, config: "--enable_bzlmod"   }
     name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
     runs-on: ${{ matrix.os }}

@@ -37,6 +37,8 @@
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/bzlmodrio-phoenix6/25.4.0/source.json": "9a2fc24ecd65ee1d81712cec6454b6dbb9819b507f02c868e25e32336fd416e7",
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/bzlmodrio-revlib/2025.0.3/MODULE.bazel": "0ae1f518e5ce28de41455b75d8ae528b1e7a32c971bcb4a23e04a93a955dc19f",
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/bzlmodrio-revlib/2025.0.3/source.json": "450dd9fee9a5125cff0f18fd78987532239309ba860a5af3a10321b11c98762b",
+    "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/bzlmodrio-studica/2025.0.0/MODULE.bazel": "9422756b02a9a5f75d1e39906ed8da2a0521540a320c0141491f74e457537e92",
+    "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/bzlmodrio-studica/2025.0.0/source.json": "72d4af87660b7e236485df1ae0db0cc944f352e849c441c71a0bc090c6111cdf",
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/googletest/1.11.0/MODULE.bazel": "3a83f095183f66345ca86aa13c58b59f9f94a2f81999c093d4eeaa2d262d12f4",
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/googletest/1.11.0/source.json": "c73d9ef4268c91bd0c1cd88f1f9dfa08e814b1dbe89b5f594a9f08ba0244d206",
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/platforms/0.0.10/MODULE.bazel": "8cb8efaf200bdeb2150d93e162c40f388529a25852b332cec879373771e48ed5",
@@ -6556,8 +6558,8 @@
     },
     "@@bzlmodrio-studica~//:maven_cpp_deps.bzl%setup_bzlmodrio_studica_cpp_dependencies": {
       "general": {
-        "bzlTransitiveDigest": "uK28pDc2umaxjWYA7ITVIGyHsbmdovW7iOVMrPFiLE0=",
-        "usagesDigest": "Qm1uguf52dqc+byJB8ClOrxgGlYHds8bot2+/7t234c=",
+        "bzlTransitiveDigest": "ndjd1yEDgIRG+hG3DnPsvfpHtzgb6iCv2HF40NBP27Y=",
+        "usagesDigest": "jpKJVh55yIQ/DhPZW/MM3Xg713Ckq9zOSuvPju0ZEPw=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -6566,8 +6568,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.1.1-beta-4/Studica-cpp-2025.1.1-beta-4-linuxathenastatic.zip",
-              "sha256": "0744d03799935d088df8425284cd2817d340be510feda7e5f3ab9fbbae0fe0f4",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.0.0/Studica-cpp-2025.0.0-linuxathenastatic.zip",
+              "sha256": "0bf37f6a9c4313541f51a942e698cbed911f2d60c15aeee3095b87aa718e3d2c",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-cpp:static.BUILD.bazel"
             }
           },
@@ -6575,8 +6577,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.1.1-beta-4/Studica-cpp-2025.1.1-beta-4-linuxx86-64static.zip",
-              "sha256": "8298964a85e7fbfc13cddf7d103aa15365c8bb37eb7a4e6b11138705f1d54daa",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.0.0/Studica-cpp-2025.0.0-linuxx86-64static.zip",
+              "sha256": "327296f67288b0d7f5dcee94b2255d653348941c383b6bca8be27d55db1c8b51",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-cpp:static.BUILD.bazel"
             }
           },
@@ -6584,8 +6586,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.1.1-beta-4/Studica-cpp-2025.1.1-beta-4-windowsx86-64.zip",
-              "sha256": "653d0994465e8975644eb2182451576390c2455ca3b385918e3c1eece1b02fbf",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.0.0/Studica-cpp-2025.0.0-windowsx86-64.zip",
+              "sha256": "335355269813c4a47854a61f2221994c90a32decc3c5ec038319e61e7da86f93",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-cpp:shared.BUILD.bazel"
             }
           },
@@ -6593,17 +6595,24 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.1.1-beta-4/Studica-driver-2025.1.1-beta-4-osxuniversal.zip",
-              "sha256": "c91fd4453fc660fbd2a37069540e8e100ce0e81cd90efaf3465fb2f38f9ef5aa",
-              "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-driver:shared.BUILD.bazel"
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.0.0/Studica-driver-2025.0.0-osxuniversal.zip",
+              "sha256": "646c13b597680537ee72cc69c3c2c5af1a159a455bad89ae4758825dcf86e7be",
+              "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-driver:shared.BUILD.bazel",
+              "patch_cmds": [
+                "install_name_tool -id @rpath/libStudicaDriver.dylib osx/universal/shared/libStudicaDriver.dylib",
+                "install_name_tool -change libwpiHal.dylib @rpath/libwpiHal.dylib osx/universal/shared/libStudicaDriver.dylib",
+                "install_name_tool -change libwpimath.dylib @rpath/libwpimath.dylib osx/universal/shared/libStudicaDriver.dylib",
+                "install_name_tool -change libwpinet.dylib @rpath/libwpinet.dylib osx/universal/shared/libStudicaDriver.dylib",
+                "install_name_tool -change libwpiutil.dylib @rpath/libwpiutil.dylib osx/universal/shared/libStudicaDriver.dylib"
+              ]
             }
           },
           "bazelrio_com_studica_frc_studica-driver_osxuniversalstatic": {
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.1.1-beta-4/Studica-driver-2025.1.1-beta-4-osxuniversalstatic.zip",
-              "sha256": "518a31fe3cf7bca749090f44152b1ebb764a8046e2f3b70fe64749e23e7d78a5",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.0.0/Studica-driver-2025.0.0-osxuniversalstatic.zip",
+              "sha256": "9978989c58c0a3a52f993a33320383a7c6a2070bcb9ea2f55f79fa5110875a51",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-driver:static.BUILD.bazel"
             }
           },
@@ -6611,8 +6620,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.1.1-beta-4/Studica-driver-2025.1.1-beta-4-linuxarm64.zip",
-              "sha256": "26957c5293a34b5b71fcc0fedb5d5feb926f297bae360fd01d1ea7c184c57d6d",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.0.0/Studica-driver-2025.0.0-linuxarm64.zip",
+              "sha256": "0a3cc9c84cc619aac5c9c24eb4f16b78350f791e6ac6561ba765ec2790a33c0b",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-driver:shared.BUILD.bazel"
             }
           },
@@ -6620,8 +6629,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.1.1-beta-4/Studica-cpp-2025.1.1-beta-4-linuxx86-64.zip",
-              "sha256": "10c6f2a5d2850a5dd5e8c1b45669b4c599fb2f0120860edf91d455bd8374bcae",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.0.0/Studica-cpp-2025.0.0-linuxx86-64.zip",
+              "sha256": "5e71a7ef99cc1c151364ff0c5abcc7cdb7f39ccc132cef0e26766fa8d10a837a",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-cpp:shared.BUILD.bazel"
             }
           },
@@ -6629,8 +6638,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.1.1-beta-4/Studica-driver-2025.1.1-beta-4-windowsx86-64static.zip",
-              "sha256": "2d314e85d1baecd01942d3c35e72010c4b821599901008626e3d99ae34f8d473",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.0.0/Studica-driver-2025.0.0-windowsx86-64static.zip",
+              "sha256": "8ca7b39b32917b21d4b3abd27a038c841c771df046b51a5673eb4f8fb73b00f1",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-driver:static.BUILD.bazel"
             }
           },
@@ -6638,8 +6647,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.1.1-beta-4/Studica-cpp-2025.1.1-beta-4-linuxarm32.zip",
-              "sha256": "0d52d61a370c835db0a18ec9fa1978bd40cb6f6d944d8f369532b7ec98ce279f",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.0.0/Studica-cpp-2025.0.0-linuxarm32.zip",
+              "sha256": "17706d9c9d202891d6ffb1a9c6a126ca0eeda2b56036ae19ac8d50a589ca7c19",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-cpp:shared.BUILD.bazel"
             }
           },
@@ -6647,8 +6656,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.1.1-beta-4/Studica-driver-2025.1.1-beta-4-linuxarm64static.zip",
-              "sha256": "08b7d5cb1b4dfdebef835bffd03d28b1ecccddaac4dc296580fffb0c70181a43",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.0.0/Studica-driver-2025.0.0-linuxarm64static.zip",
+              "sha256": "3cdfb3295e10c588cb6138b012bcbb5adcc239ac83b2f1bf846370d92d479cad",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-driver:static.BUILD.bazel"
             }
           },
@@ -6656,17 +6665,23 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.1.1-beta-4/Studica-cpp-2025.1.1-beta-4-osxuniversal.zip",
-              "sha256": "c2a4b5373c00ace6f6d10ad5f9f50275632aa089bf9f0f03ea4c0635020929be",
-              "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-cpp:shared.BUILD.bazel"
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.0.0/Studica-cpp-2025.0.0-osxuniversal.zip",
+              "sha256": "a666584947174390ee2cba944f572ef9545275f31d5cf514d70ed1631b8c3968",
+              "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-cpp:shared.BUILD.bazel",
+              "patch_cmds": [
+                "install_name_tool -id @rpath/libStudica.dylib osx/universal/shared/libStudica.dylib",
+                "install_name_tool -change libntcore.dylib @rpath/libntcore.dylib osx/universal/shared/libStudica.dylib",
+                "install_name_tool -change libwpinet.dylib @rpath/libwpinet.dylib osx/universal/shared/libStudica.dylib",
+                "install_name_tool -change libwpiutil.dylib @rpath/libwpiutil.dylib osx/universal/shared/libStudica.dylib"
+              ]
             }
           },
           "bazelrio_com_studica_frc_studica-driver_linuxx86-64static": {
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.1.1-beta-4/Studica-driver-2025.1.1-beta-4-linuxx86-64static.zip",
-              "sha256": "abbd0bb4159aad9108e39717c19b1bcfbfa4ccb4fc7207a05327b8649269f99d",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.0.0/Studica-driver-2025.0.0-linuxx86-64static.zip",
+              "sha256": "cf72705908820e91ff19e561254dace2a440937661760fe2ecfeb0ba1ee9ddca",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-driver:static.BUILD.bazel"
             }
           },
@@ -6674,8 +6689,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.1.1-beta-4/Studica-driver-2025.1.1-beta-4-linuxathena.zip",
-              "sha256": "76ada9f89077db3e7367889871218ed683d56f3ba36cdb43184f6a63fee911f7",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.0.0/Studica-driver-2025.0.0-linuxathena.zip",
+              "sha256": "4c0579efb96bba282db0bd0c9d864b079dd90945cbaf188b3afedc76cf592d7d",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-driver:shared.BUILD.bazel"
             }
           },
@@ -6683,8 +6698,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.1.1-beta-4/Studica-cpp-2025.1.1-beta-4-linuxathena.zip",
-              "sha256": "64bfd303a2f5ea00a30a61257c62cec4ee86525c3da66355baefe23bd787b46f",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.0.0/Studica-cpp-2025.0.0-linuxathena.zip",
+              "sha256": "2cd1d3cdcff1608fb15a1217ef57358a0d240f901395b425754f8a150bfeccaa",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-cpp:shared.BUILD.bazel"
             }
           },
@@ -6692,8 +6707,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.1.1-beta-4/Studica-driver-2025.1.1-beta-4-linuxarm32static.zip",
-              "sha256": "4ebb5920d9da93d40c14188cae641c0ca95f422aaca9aa848e57b62298b7a532",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.0.0/Studica-driver-2025.0.0-linuxarm32static.zip",
+              "sha256": "21b5d1cbf9edc0ea26f176eab1628925f30e8811b3d3bf0e886c4a0b87ecfd3e",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-driver:static.BUILD.bazel"
             }
           },
@@ -6701,8 +6716,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.1.1-beta-4/Studica-driver-2025.1.1-beta-4-linuxarm32.zip",
-              "sha256": "8a60deca2d86f11d7a85afab8e73bdafec95bf9b55bc3325b5312573193f1c46",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.0.0/Studica-driver-2025.0.0-linuxarm32.zip",
+              "sha256": "2a2ac3130141039110f06409f67f986696e1fc0946b88f91410302ae9d014d97",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-driver:shared.BUILD.bazel"
             }
           },
@@ -6710,8 +6725,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.1.1-beta-4/Studica-cpp-2025.1.1-beta-4-linuxarm64.zip",
-              "sha256": "0e666795fcf70b34a3c7bd5326b6932bc2b4baa5e2545b527e40da60f2eed85f",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.0.0/Studica-cpp-2025.0.0-linuxarm64.zip",
+              "sha256": "2ff07de7ed014096cbae3a4eeb8219945867d83da6de52fd23bfa4efd1d008c9",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-cpp:shared.BUILD.bazel"
             }
           },
@@ -6719,8 +6734,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.1.1-beta-4/Studica-driver-2025.1.1-beta-4-windowsx86-64.zip",
-              "sha256": "e13eb9975a969a9724b418677a9ba10616d293e8ea360db33541bd674040a8f1",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.0.0/Studica-driver-2025.0.0-windowsx86-64.zip",
+              "sha256": "d9e8cbacac31e9617e5d65e23313c0e595e9160845464da27ee78157205fd1e8",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-driver:shared.BUILD.bazel"
             }
           },
@@ -6728,8 +6743,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.1.1-beta-4/Studica-cpp-2025.1.1-beta-4-linuxarm64static.zip",
-              "sha256": "5a40ff70ca8b05d798caf2f265838767714dca7e5da7c4edbc4830735fd87698",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.0.0/Studica-cpp-2025.0.0-linuxarm64static.zip",
+              "sha256": "40af524487e25224e9d43eeb26533ceb8a3fbe4dcfaaf8d875b97b899494374c",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-cpp:static.BUILD.bazel"
             }
           },
@@ -6737,8 +6752,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.1.1-beta-4/Studica-cpp-2025.1.1-beta-4-osxuniversalstatic.zip",
-              "sha256": "276a2fcef1cac6af97728787f0ed9536094ac6ebf997331a3b4964f72ea9ba79",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.0.0/Studica-cpp-2025.0.0-osxuniversalstatic.zip",
+              "sha256": "7350e481c4c958b255c45b649b2170b8a784a4d1688ba36e76a7b89110b65d4a",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-cpp:static.BUILD.bazel"
             }
           },
@@ -6746,8 +6761,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.1.1-beta-4/Studica-cpp-2025.1.1-beta-4-headers.zip",
-              "sha256": "37b9a6a22a65f21c1fe6c389caa4590d32ff0f1347bf4d1c1c685eea1a00d1a7",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.0.0/Studica-cpp-2025.0.0-headers.zip",
+              "sha256": "8fe8108937ea15ce7aa5cdaa12d2ded3e03d421ce3161727f2fc54c491f609c1",
               "build_file_content": "cc_library(\n    name = \"headers\",\n    hdrs = glob([\"**\"]),\n    includes = [\".\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"header_files\",\n    srcs = glob([\"**\"]),\n    visibility = [\"//visibility:public\"],\n)\n"
             }
           },
@@ -6755,8 +6770,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.1.1-beta-4/Studica-driver-2025.1.1-beta-4-linuxx86-64.zip",
-              "sha256": "72754d090cef25aeb0931eeece2498550f3379c9d4adb5782ea1667c77ae4b18",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.0.0/Studica-driver-2025.0.0-linuxx86-64.zip",
+              "sha256": "13debc5bf01eae79829fc1bf24df76613699aece291b3e419e81041dbca12668",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-driver:shared.BUILD.bazel"
             }
           },
@@ -6764,8 +6779,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.1.1-beta-4/Studica-cpp-2025.1.1-beta-4-windowsx86-64static.zip",
-              "sha256": "02549c8bd73bf2bce34b0f7399b689e478c6405f792af473198af921561401ea",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.0.0/Studica-cpp-2025.0.0-windowsx86-64static.zip",
+              "sha256": "dc7d12f5e7b1bb6620146542ec5896ab068e8efe29b9bb5800c1d7f9f16e6111",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-cpp:static.BUILD.bazel"
             }
           },
@@ -6773,8 +6788,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.1.1-beta-4/Studica-driver-2025.1.1-beta-4-linuxathenastatic.zip",
-              "sha256": "f70fa2e594a55351282afbd7ec405f66226b786419e89fe779625060ae08ac2e",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.0.0/Studica-driver-2025.0.0-linuxathenastatic.zip",
+              "sha256": "cd1a6728b1936d59ed8a086d1d472682c6fe887a66d7088ceb7cf33cc79d7350",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-driver:static.BUILD.bazel"
             }
           },
@@ -6782,8 +6797,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.1.1-beta-4/Studica-driver-2025.1.1-beta-4-headers.zip",
-              "sha256": "4c7719852be9e007f710ad230beab3cfcf36653c9467a81b422b68b5d4e5150a",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-driver/2025.0.0/Studica-driver-2025.0.0-headers.zip",
+              "sha256": "74a8d761d91d606a50af08114e4de47cbf34f09825ccaeebfb439a847d526ee0",
               "build_file_content": "cc_library(\n    name = \"headers\",\n    hdrs = glob([\"**\"]),\n    includes = [\".\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"header_files\",\n    srcs = glob([\"**\"]),\n    visibility = [\"//visibility:public\"],\n)\n"
             }
           },
@@ -6791,8 +6806,8 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_archive",
             "attributes": {
-              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.1.1-beta-4/Studica-cpp-2025.1.1-beta-4-linuxarm32static.zip",
-              "sha256": "b2e336cdcf0a7201b4bfb10f1ce266c171f23a282b01cf4172c7fe14b049de28",
+              "url": "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-cpp/2025.0.0/Studica-cpp-2025.0.0-linuxarm32static.zip",
+              "sha256": "04c6a82fec8964607ed63ccda887c2f5c8ef81fd73438e1e02c16f06d63e0412",
               "build_file": "@@bzlmodrio-studica~//private/cpp/Studica-cpp:static.BUILD.bazel"
             }
           }
@@ -6808,8 +6823,8 @@
     },
     "@@bzlmodrio-studica~//:maven_java_deps.bzl%setup_bzlmodrio_studica_java_dependencies": {
       "general": {
-        "bzlTransitiveDigest": "lfh4XLNEUGBPuLZcQsrH10+9ZMTIwSBUGE74DmCuUa8=",
-        "usagesDigest": "i6MH9tJmLRcdE7qo2PLeK1qFd7/xLJYPnmD63qiSGBM=",
+        "bzlTransitiveDigest": "Ln1l2h5BVMt/yHxeb7uYLv8sFXZaGBvojtgssJgjNzk=",
+        "usagesDigest": "lKVCDdj7AeMrUpSnLIyIE6d6YvTVTYE4sZna+lUEpQU=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -6820,15 +6835,15 @@
             "attributes": {
               "generated_rule_name": "com_studica_frc_studica_java",
               "artifact_urls": [
-                "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-java/2025.1.1-beta-4/Studica-java-2025.1.1-beta-4.jar"
+                "https://dev.studica.com/maven/release/2025/com/studica/frc/Studica-java/2025.0.0/Studica-java-2025.0.0.jar"
               ],
               "srcjar_urls": [],
-              "canonical_id": "com.studica.frc:Studica-java:2025.1.1-beta-4",
+              "canonical_id": "com.studica.frc:Studica-java:2025.0.0",
               "rule_name": "java_import",
               "tags": [
-                "maven_coordinates=com.studica.frc:Studica-java:2025.1.1-beta-4"
+                "maven_coordinates=com.studica.frc:Studica-java:2025.0.0"
               ],
-              "artifact_sha256": "266be0cadcaaa2c41334020831493355cd004dbdb02967c4acefbaaf05f74c55"
+              "artifact_sha256": "781a93b242889b0da2bbbbf83fad26917f4c7a4b39610849f6136aa3798b7d8d"
             }
           }
         },

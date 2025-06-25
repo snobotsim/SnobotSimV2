@@ -17,13 +17,6 @@ archive_override(
     urls = ["https://github.com/wpilibsuite/rules_bzlmodRio_jdk/archive/4ecd4cbc97dfbfe2ceefa627de1228e2f2ca5773.tar.gz"],
 )
 
-archive_override(
-    module_name = "bzlmodrio-studica",
-    integrity = "sha256-Uw+1yI3vh/6G20kcjmH+c/tUNTMPgx05cjs3mBd3etY=",
-    strip_prefix = "bzlmodRio-studica-b190c1fcfaf6e2fd242e934c5109a1073ff84082",
-    urls = ["https://github.com/bzlmodrio/bzlmodRio-studica/archive/b190c1fcfaf6e2fd242e934c5109a1073ff84082.tar.gz"],
-)
-
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 maven.install(
     artifacts = [
