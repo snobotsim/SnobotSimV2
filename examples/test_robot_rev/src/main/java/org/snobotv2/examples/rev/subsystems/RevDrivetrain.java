@@ -108,7 +108,8 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
         mLeftEncoder.setPosition(0);
         mRightEncoder.setPosition(0);
 
-        mGyro = new AHRS(NavXComType.kMXP_SPI);
+        NavXComType navXComType = NavXComType.kI2C;
+        mGyro = new AHRS(navXComType);
 
         mDrive = new DifferentialDrive(mLeadLeft, mLeadRight);
 
@@ -120,7 +121,7 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
                     new RevMotorControllerSimWrapper(mLeadRight, DRIVETRAIN_CONSTANTS.getMotor()),
                     RevEncoderSimWrapper.create(mLeadLeft),
                     RevEncoderSimWrapper.create(mLeadRight),
-                    new NavxWrapper().getYawGyro());
+                    new NavxWrapper(navXComType).getYawGyro());
             mSimulator.setRightInverted(false);
             mSimulator.setLeftPdpChannels(BaseConstants.DRIVETRAIN_LEFT_MOTOR_A_PDP, BaseConstants.DRIVETRAIN_LEFT_MOTOR_B_PDP);
             mSimulator.setRightPdpChannels(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_A_PDP, BaseConstants.DRIVETRAIN_RIGHT_MOTOR_B_PDP);

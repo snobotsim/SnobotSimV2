@@ -25,6 +25,7 @@ dependencies {
     implementation wpilibTools.deps.wpilibJava("ntcore")
     implementation wpilibTools.deps.wpilibJava("wpilibNewCommands")
     implementation project(":snobot_sim_java_base")
+    implementation "com.studica.frc:Studica-java:${navxVersion}"
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'

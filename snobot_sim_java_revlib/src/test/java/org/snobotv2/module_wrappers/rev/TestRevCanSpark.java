@@ -65,12 +65,12 @@ public class TestRevCanSpark extends BaseRevlibUnitTest
         sparkMax.set(.4);
         leaderWrapper.update();
         followerWrapper.update();
-        testVoltagePercentage(.4, leaderWrapper, followerWrapper);
-        testVoltagePercentage(.4, sparkMax, follower);
+        testVoltagePercentage(.4, leaderWrapper);
+        testVoltagePercentage(.4, sparkMax);
 
         sparkMax.set(-.25);
         leaderWrapper.update();
-        testVoltagePercentage(-.25, leaderWrapper, followerWrapper);
-        testVoltagePercentage(-.25, sparkMax, follower);
+        testVoltagePercentage(-.25, leaderWrapper);
+        testVoltagePercentage(-.25, sparkMax);
     }
 }

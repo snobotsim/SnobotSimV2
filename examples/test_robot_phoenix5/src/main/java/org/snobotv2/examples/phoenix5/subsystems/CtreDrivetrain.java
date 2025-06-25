@@ -2,7 +2,7 @@ package org.snobotv2.examples.phoenix5.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import com.ctre.phoenix.sensors.WPI_PigeonIMU;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -11,7 +11,7 @@ import org.snobotv2.examples.base.BaseConstants;
 import org.snobotv2.examples.base.subsystems.BaseDrivetrainSubsystem;
 import org.snobotv2.module_wrappers.phoenix5.CtreEncoderSimWrapper;
 import org.snobotv2.module_wrappers.phoenix5.CtreMotorControllerSimWrapper;
-import org.snobotv2.module_wrappers.wpi.ADXRS450GyroWrapper;
+import org.snobotv2.module_wrappers.phoenix5.CtrePigeonImuWrapper;
 import org.snobotv2.sim_wrappers.DifferentialDrivetrainSimWrapper;
 
 public class CtreDrivetrain extends BaseDrivetrainSubsystem
@@ -27,7 +27,7 @@ public class CtreDrivetrain extends BaseDrivetrainSubsystem
     private final WPI_TalonSRX mRightFollower;
     private final DifferentialDrive mDrive;
 
-    private final ADXRS450_Gyro mGyro;
+    private final WPI_PigeonIMU mGyro;
 
     private DifferentialDrivetrainSimWrapper mSimulator;
 
@@ -44,7 +44,7 @@ public class CtreDrivetrain extends BaseDrivetrainSubsystem
 
         mDrive = new DifferentialDrive(mLeftLead, mRightLead);
 
-        mGyro = new ADXRS450_Gyro();
+        mGyro = new WPI_PigeonIMU(3);
 
         if (RobotBase.isSimulation())
         {
@@ -53,7 +53,7 @@ public class CtreDrivetrain extends BaseDrivetrainSubsystem
                     new CtreMotorControllerSimWrapper(mRightLead),
                     new CtreEncoderSimWrapper(mLeftLead, TICKS_TO_POSITION),
                     new CtreEncoderSimWrapper(mRightLead, TICKS_TO_POSITION),
-                    new ADXRS450GyroWrapper(mGyro));
+                    new CtrePigeonImuWrapper(mGyro));
             mSimulator.setRightInverted(false);
             mSimulator.setLeftPdpChannels(BaseConstants.DRIVETRAIN_LEFT_MOTOR_A_PDP, BaseConstants.DRIVETRAIN_LEFT_MOTOR_B_PDP);
             mSimulator.setRightPdpChannels(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_A_PDP, BaseConstants.DRIVETRAIN_RIGHT_MOTOR_B_PDP);

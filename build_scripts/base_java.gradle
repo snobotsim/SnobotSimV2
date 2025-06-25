@@ -41,13 +41,13 @@ ext.getCurrentOs = {
 }
 
 ext {
-    wpiVersion = '2025.1.1'
+    wpiVersion = '2025.3.2'
     opencvYear = '2025'
     opencvVersion = '4.10.0-3'
-    phoenix5Version = '5.35.0'
-    phoenix6Version = "25.1.0"
-    revVersion = '2025.0.0'
-    navxVersion = '2025.1.1-beta-4'
+    phoenix5Version = '5.35.1'
+    phoenix6Version = "25.4.0"
+    revVersion = '2025.0.3'
+    navxVersion = '2025.0.0'
 
     nativeOs = getCurrentOs() + getCurrentArch()
 }
@@ -74,11 +74,14 @@ dependencies {
 
     nativeDesktopZip "com.ctre.phoenix6.sim:api-cpp-sim:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simCANCoder:${phoenix6Version}:${nativeOs}@zip"
-    nativeDesktopZip "com.ctre.phoenix6.sim:simProCANrange:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simPigeonIMU:${phoenix6Version}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix6.sim:simProCANdi:${phoenix6Version}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix6.sim:simProCANrange:${phoenix6Version}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix6.sim:simProCANdle:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simProCANcoder:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simProPigeon2:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simProTalonFX:${phoenix6Version}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix6.sim:simProTalonFXS:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simTalonSRX:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simVictorSPX:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:tools-sim:${phoenix6Version}:${nativeOs}@zip"
