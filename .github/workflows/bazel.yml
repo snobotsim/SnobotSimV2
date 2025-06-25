@@ -39,7 +39,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { os: ubuntu-latest, architecture: x64, config: "--config=for-roborio --noenable_bzlmod" }
           - { os: ubuntu-latest, architecture: x64, config: "--config=for-roborio --enable_bzlmod" }
     name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
     runs-on: ${{ matrix.os }}
@@ -52,17 +51,3 @@ jobs:
       - name: Build
         run: bazel build ... --nojava_header_compilation -k ${{ matrix.config }}
         shell: bash
-
-  repin-maven:
-    strategy:
-      fail-fast: false
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: bazelbuild/setup-bazelisk@v3
-      - run:  bazel run @unpinned_maven//:pin --noenable_bzlmod
-      - run:  git diff HEAD
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Re-pinned maven
-          path: build_scripts/bazel/deps/maven_install.json
