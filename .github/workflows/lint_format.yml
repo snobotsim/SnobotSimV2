@@ -39,7 +39,7 @@ jobs:
       - name: Generate diff
         run: git diff HEAD > wpiformat-fixes.patch
         if: ${{ failure() }}
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: wpiformat fixes
           path: wpiformat-fixes.patch
@@ -71,7 +71,7 @@ jobs:
       - name: Generate diff
         run: git diff HEAD > buildifier-fixes.patch
         if: ${{ failure() }}
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: buildifier fixes
           path: buildifier-fixes.patch
@@ -94,7 +94,7 @@ jobs:
       - name: Generate diff
         run: git diff HEAD > spotless-fixes.patch
         if: ${{ failure() }}
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: spotless fixes
           path: spotless-fixes.patch
@@ -126,7 +126,7 @@ jobs:
       - name: Generate diff
         run: git diff HEAD > unused-deps-fixes.patch
         if: ${{ failure() }}
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: unused deps fixes
           path: unused-deps-fixes.patch
