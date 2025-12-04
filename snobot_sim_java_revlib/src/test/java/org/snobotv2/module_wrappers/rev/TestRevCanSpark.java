@@ -45,18 +45,18 @@ public class TestRevCanSpark extends BaseRevlibUnitTest
         config.closedLoop.p(.4);
         config.closedLoop.i(.5);
         config.closedLoop.d(.6);
-        config.closedLoop.velocityFF(.7);
+        config.closedLoop.feedForward.kV(.7);
         config.closedLoop.maxMotion.maxAcceleration(.8);
-        config.closedLoop.maxMotion.maxVelocity(.9);
+        config.closedLoop.maxMotion.cruiseVelocity(.9);
         sparkMax.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         follower.configure(config.follow(sparkMax), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
         assertEquals(.4, configAccessor.closedLoop.getP(), DEFAULT_EPSILON);
         assertEquals(.5, configAccessor.closedLoop.getI(), DEFAULT_EPSILON);
         assertEquals(.6, configAccessor.closedLoop.getD(), DEFAULT_EPSILON);
-        assertEquals(.7, configAccessor.closedLoop.getFF(), DEFAULT_EPSILON);
+        assertEquals(.7, configAccessor.closedLoop.feedForward.getkV(), DEFAULT_EPSILON);
         assertEquals(.8, configAccessor.closedLoop.maxMotion.getMaxAcceleration(), DEFAULT_EPSILON);
-        assertEquals(.9, configAccessor.closedLoop.maxMotion.getMaxVelocity(), DEFAULT_EPSILON);
+        assertEquals(.9, configAccessor.closedLoop.maxMotion.getCruiseVelocity(), DEFAULT_EPSILON);
 
         DCMotor gearbox = DCMotor.getNEO(1);
         RevMotorControllerSimWrapper leaderWrapper = new RevMotorControllerSimWrapper(sparkMax, gearbox);
@@ -65,12 +65,12 @@ public class TestRevCanSpark extends BaseRevlibUnitTest
         sparkMax.set(.4);
         leaderWrapper.update();
         followerWrapper.update();
-        testVoltagePercentage(.4, leaderWrapper, followerWrapper);
-        testVoltagePercentage(.4, sparkMax, follower);
+        testVoltagePercentage(.4, leaderWrapper);
+        testVoltagePercentage(.4, sparkMax);
 
         sparkMax.set(-.25);
         leaderWrapper.update();
-        testVoltagePercentage(-.25, leaderWrapper, followerWrapper);
-        testVoltagePercentage(-.25, sparkMax, follower);
+        testVoltagePercentage(-.25, leaderWrapper);
+        testVoltagePercentage(-.25, sparkMax);
     }
 }

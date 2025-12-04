@@ -29,7 +29,7 @@ public class RevShooterSubsystem extends SubsystemBase implements ShooterSubsyst
     {
         SparkMaxConfig commonConfig = new SparkMaxConfig();
         commonConfig.closedLoop.p(0.0005);
-        commonConfig.closedLoop.velocityFF(1.0 / 4700);
+        commonConfig.closedLoop.feedForward.kV(1.0 / 4700);
 
         ResetMode resetMode = ResetMode.kResetSafeParameters;
         PersistMode persistMode = PersistMode.kPersistParameters;
@@ -66,7 +66,7 @@ public class RevShooterSubsystem extends SubsystemBase implements ShooterSubsyst
     @Override
     public void spinAtRpm(double rpm)
     {
-        mPidController.setReference(rpm, ControlType.kVelocity);
+        mPidController.setSetpoint(rpm, ControlType.kVelocity);
     }
 
     @Override

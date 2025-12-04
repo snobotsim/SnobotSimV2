@@ -64,8 +64,8 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
         commonConfig.closedLoop.p(.03);
         commonConfig.closedLoop.i(0);
         commonConfig.closedLoop.d(0);
-        commonConfig.closedLoop.velocityFF(0.21);
-        commonConfig.closedLoop.maxMotion.maxVelocity(Units.inchesToMeters(144));
+        commonConfig.closedLoop.feedForward.kV(0.21);
+        commonConfig.closedLoop.maxMotion.cruiseVelocity(Units.inchesToMeters(144));
         commonConfig.closedLoop.maxMotion.maxAcceleration(Units.inchesToMeters(144));
 
         mLeadLeft = new SparkMax(BaseConstants.DRIVETRAIN_LEFT_MOTOR_A, MotorType.kBrushless);
@@ -120,7 +120,7 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
                     new RevMotorControllerSimWrapper(mLeadRight, DRIVETRAIN_CONSTANTS.getMotor()),
                     RevEncoderSimWrapper.create(mLeadLeft),
                     RevEncoderSimWrapper.create(mLeadRight),
-                    new NavxWrapper().getYawGyro());
+                    new NavxWrapper(mGyro).getYawGyro());
             mSimulator.setRightInverted(false);
             mSimulator.setLeftPdpChannels(BaseConstants.DRIVETRAIN_LEFT_MOTOR_A_PDP, BaseConstants.DRIVETRAIN_LEFT_MOTOR_B_PDP);
             mSimulator.setRightPdpChannels(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_A_PDP, BaseConstants.DRIVETRAIN_RIGHT_MOTOR_B_PDP);
@@ -186,16 +186,16 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
     @Override
     public void smartVelocityControlMetersPerSec(double leftVelocityMetersPerSec, double rightVelocityMetersPerSec)
     {
-        mLeftPidController.setReference(leftVelocityMetersPerSec, ControlType.kVelocity);
-        mRightPidController.setReference(rightVelocityMetersPerSec, ControlType.kVelocity);
+        mLeftPidController.setSetpoint(leftVelocityMetersPerSec, ControlType.kVelocity);
+        mRightPidController.setSetpoint(rightVelocityMetersPerSec, ControlType.kVelocity);
         mDrive.feed();
     }
 
     @Override
     public void driveDistance(double leftPosition, double rightPosition)
     {
-        mLeftPidController.setReference(leftPosition, ControlType.kMAXMotionPositionControl);
-        mRightPidController.setReference(rightPosition, ControlType.kMAXMotionPositionControl);
+        mLeftPidController.setSetpoint(leftPosition, ControlType.kMAXMotionPositionControl);
+        mRightPidController.setSetpoint(rightPosition, ControlType.kMAXMotionPositionControl);
         mDrive.feed();
     }
 

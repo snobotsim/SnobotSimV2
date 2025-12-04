@@ -27,14 +27,14 @@ public class TestPigeon2 extends BasePhoenix6UnitTest
     {
         IGyroWrapper wrapper = new Pigeon2Wrapper(pigeon);
 
-        assertEquals(0, pigeon.getAngle(), PIGEON_EPSILON);
+        assertEquals(0, pigeon.getRotation2d().getDegrees(), PIGEON_EPSILON);
 
         wrapper.setAngle(20);
         ctreSimLoop();
-        assertEquals(20, pigeon.getAngle(), PIGEON_EPSILON);
+        assertEquals(-20, pigeon.getRotation2d().getDegrees(), PIGEON_EPSILON);
 
         wrapper.setAngle(-43.2);
         ctreSimLoop();
-        assertEquals(-43.2, pigeon.getAngle(), PIGEON_EPSILON);
+        assertEquals(43.2, pigeon.getRotation2d().getDegrees(), PIGEON_EPSILON);
     }
 }

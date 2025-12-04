@@ -1,5 +1,6 @@
 package org.snobotv2.module_wrappers.navx;
 
+import com.studica.frc.AHRS;
 import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
 import org.snobotv2.interfaces.IGyroWrapper;
 import org.snobotv2.module_wrappers.BaseGyroWrapper;
@@ -10,9 +11,9 @@ public class NavxWrapper
     private final IGyroWrapper mPitchGyro;
     private final IGyroWrapper mRollGyro;
 
-    public NavxWrapper()
+    public NavxWrapper(AHRS gyro)
     {
-        SimDeviceSim deviceSim = new SimDeviceSim("navX-Sensor[0]");
+        SimDeviceSim deviceSim = new SimDeviceSim("navX-Sensor[" + gyro.getPort() + "]");
 
         mYawGyro = new BaseGyroWrapper(deviceSim.getDouble("Yaw"));
         mPitchGyro = new BaseGyroWrapper(deviceSim.getDouble("Pitch"));

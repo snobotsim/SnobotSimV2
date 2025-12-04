@@ -3,7 +3,7 @@ repositories {
     mavenLocal()
     maven { url "https://frcmaven.wpi.edu/artifactory/release/" }
     maven { url 'https://devsite.ctr-electronics.com/maven/release/' }
-    maven { url 'https://dev.studica.com/maven/release/2025/' }
+    maven { url 'https://dev.studica.com/maven/release/2026/' }
     maven { url 'https://maven.revrobotics.com/' }
 }
 
@@ -41,13 +41,15 @@ ext.getCurrentOs = {
 }
 
 ext {
-    wpiVersion = '2025.1.1'
+    wpiVersion = '2026.1.1-beta-1'
     opencvYear = '2025'
     opencvVersion = '4.10.0-3'
-    phoenix5Version = '5.35.0'
-    phoenix6Version = "25.1.0"
-    revVersion = '2025.0.0'
-    navxVersion = '2025.1.1-beta-4'
+    phoenix5Version = '5.36.0-beta-1'
+    phoenix6Version = "26.0.0-beta-1"
+    revVersion = '2026.0.0-beta-1'
+    navxVersion = '2026.0.0-beta'
+
+    jacksonVersion = '2.19.2'
 
     nativeOs = getCurrentOs() + getCurrentArch()
 }
@@ -59,6 +61,9 @@ configurations {
 }
 
 dependencies {
+    implementation group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: jacksonVersion
+    implementation group: "com.fasterxml.jackson.core", name: "jackson-core", version: jacksonVersion
+    implementation group: "com.fasterxml.jackson.core", name: "jackson-databind", version: jacksonVersion
 
     nativeDesktopZip "edu.wpi.first.hal:hal-cpp:${wpiVersion}:${nativeOs}@zip"
     nativeDesktopZip "edu.wpi.first.ntcore:ntcore-cpp:${wpiVersion}:${nativeOs}@zip"
@@ -73,17 +78,21 @@ dependencies {
     nativeDesktopZip "com.ctre.phoenix.sim:cci-sim:${phoenix5Version}:${nativeOs}@zip"
 
     nativeDesktopZip "com.ctre.phoenix6.sim:api-cpp-sim:${phoenix6Version}:${nativeOs}@zip"
-    nativeDesktopZip "com.ctre.phoenix6.sim:simCANCoder:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simProCANrange:${phoenix6Version}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix6.sim:simProCANdi:${phoenix6Version}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix6.sim:simProCANdle:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simPigeonIMU:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simProCANcoder:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simProPigeon2:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simProTalonFX:${phoenix6Version}:${nativeOs}@zip"
+    nativeDesktopZip "com.ctre.phoenix6.sim:simProTalonFXS:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simTalonSRX:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simVictorSPX:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:tools-sim:${phoenix6Version}:${nativeOs}@zip"
 
     nativeDesktopZip "com.revrobotics.frc:REVLib-driver:${revVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.revrobotics.frc:RevLibBackendDriver:${revVersion}:${nativeOs}@zip"
+    nativeDesktopZip "com.revrobotics.frc:RevLibWpiBackendDriver:${revVersion}:${nativeOs}@zip"
 }
 
 tasks.withType(JavaCompile) {
