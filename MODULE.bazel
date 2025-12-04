@@ -1,27 +1,20 @@
-bazel_dep(name = "rules_jvm_external", version = "6.1")
-bazel_dep(name = "rules_java", version = "7.6.5")
+bazel_dep(name = "rules_jvm_external", version = "6.3")
+bazel_dep(name = "rules_java", version = "8.14.0")
 bazel_dep(name = "rules_bazelrio", version = "0.0.14")
-bazel_dep(name = "rules_bzlmodrio_toolchains", version = "2025-1.bcr1")
-bazel_dep(name = "rules_bzlmodrio_jdk", version = "17.0.12-7")
-bazel_dep(name = "rules_pmd", version = "7.2.0")
-bazel_dep(name = "bzlmodrio-allwpilib", version = "2025.1.1")
-bazel_dep(name = "bzlmodrio-studica", version = "2025.1.1-beta-4")
-bazel_dep(name = "bzlmodrio-phoenix", version = "5.35.0")
-bazel_dep(name = "bzlmodrio-phoenix6", version = "25.1.0")
-bazel_dep(name = "bzlmodrio-revlib", version = "2025.0.0")
+bazel_dep(name = "rules_bzlmodrio_toolchains", version = "2025-1.bcr6")
+bazel_dep(name = "rules_bzlmodrio_jdk", version = "17.0.12-7.bcr1")
+bazel_dep(name = "rules_pmd", version = "7.2.0.bcr1")
+bazel_dep(name = "bzlmodrio-allwpilib", version = "2026.1.1-beta-1")
+bazel_dep(name = "bzlmodrio-studica", version = "2026.0.0-beta")
+bazel_dep(name = "bzlmodrio-phoenix", version = "5.36.0-beta-1")
+bazel_dep(name = "bzlmodrio-phoenix6", version = "26.0.0-beta-1")
+bazel_dep(name = "bzlmodrio-revlib", version = "2026.0.0-beta-1")
 
 archive_override(
     module_name = "rules_bzlmodrio_jdk",
     integrity = "sha256-SrikyrF2v2lENdqn9aFC//d0TkIE620lR60yXTrWFTs=",
     strip_prefix = "rules_bzlmodrio_jdk-4ecd4cbc97dfbfe2ceefa627de1228e2f2ca5773",
     urls = ["https://github.com/wpilibsuite/rules_bzlmodRio_jdk/archive/4ecd4cbc97dfbfe2ceefa627de1228e2f2ca5773.tar.gz"],
-)
-
-archive_override(
-    module_name = "bzlmodrio-studica",
-    integrity = "sha256-Uw+1yI3vh/6G20kcjmH+c/tUNTMPgx05cjs3mBd3etY=",
-    strip_prefix = "bzlmodRio-studica-b190c1fcfaf6e2fd242e934c5109a1073ff84082",
-    urls = ["https://github.com/bzlmodrio/bzlmodRio-studica/archive/b190c1fcfaf6e2fd242e934c5109a1073ff84082.tar.gz"],
 )
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")

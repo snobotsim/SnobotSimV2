@@ -8,12 +8,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { os: windows-latest, architecture: x64, config: "--noenable_bzlmod" }
-          - { os: windows-latest, architecture: x64, config: "--enable_bzlmod"   }
-          - { os: macos-latest,   architecture: x64, config: "--noenable_bzlmod" }
-          - { os: macos-latest,   architecture: x64, config: "--enable_bzlmod"   }
-          - { os: ubuntu-latest,  architecture: x64, config: "--noenable_bzlmod" }
-          - { os: ubuntu-latest,  architecture: x64, config: "--enable_bzlmod"   }
+          - { os: windows-latest, architecture: x64, config: "" }
+          - { os: macos-latest,   architecture: x64, config: "" }
+          - { os: ubuntu-latest,  architecture: x64, config: "" }
     name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
     runs-on: ${{ matrix.os }}
     steps:
@@ -42,8 +39,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { os: ubuntu-latest, architecture: x64, config: "--config=for-roborio --noenable_bzlmod" }
-          - { os: ubuntu-latest, architecture: x64, config: "--config=for-roborio --enable_bzlmod" }
+          - { os: ubuntu-latest, architecture: x64, config: "--config=for-roborio" }
     name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
     runs-on: ${{ matrix.os }}
     steps:
@@ -63,7 +59,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: bazelbuild/setup-bazelisk@v3
-      - run:  bazel run @unpinned_maven//:pin --noenable_bzlmod
+      - run:  bazel run @unpinned_maven//:pin
       - run:  git diff HEAD
       - uses: actions/upload-artifact@v4
         with:
