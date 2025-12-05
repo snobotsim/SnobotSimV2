@@ -33,14 +33,6 @@ def run():
     )
     projects.append(
         ExampleConfig(
-            "phoenix5_swerve",
-            "Phoenix5Swerve",
-            ["Phoenix.json"],
-            "test_robot_base_swerve",
-        )
-    )
-    projects.append(
-        ExampleConfig(
             "rev_swerve",
             "RevSwerve",
             ["REVLib.json", "Phoenix.json"],
