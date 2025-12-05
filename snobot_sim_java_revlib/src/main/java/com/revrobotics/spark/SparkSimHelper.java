@@ -124,8 +124,6 @@ public class SparkSimHelper
             break;
         case kMAXMotionVelocityControl:
         case kCurrent:
-        case kSmartVelocity:
-        case kSmartMotion:
         default:
             throw new IllegalArgumentException("Unsupported control type " + controlType);
         }
@@ -169,7 +167,7 @@ public class SparkSimHelper
             double kp = accessor.getP(slotId);
             double ki = accessor.getI(slotId);
             double kd = accessor.getD(slotId);
-            mF = accessor.getFF(slotId);
+            mF = accessor.feedForward.getkV(slotId);
 
             mBasicPidController.setP(kp);
             mProfiledPidController.setP(kp);
@@ -180,7 +178,7 @@ public class SparkSimHelper
             mBasicPidController.setD(kd);
             mProfiledPidController.setD(kd);
 
-            mMaxVelocity = accessor.maxMotion.getMaxVelocity(slotId);
+            mMaxVelocity = accessor.maxMotion.getCruiseVelocity(slotId);
             mMaxAcceleration = accessor.maxMotion.getMaxAcceleration(slotId);
             mConstraints = new Constraints(mMaxVelocity, mMaxAcceleration);
             mProfiledPidController.setConstraints(mConstraints);

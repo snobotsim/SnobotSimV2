@@ -83,14 +83,14 @@ public class RevElevatorSubsystem extends SubsystemBase implements ElevatorSubsy
     public void goToPosition(double inches)
     {
         double meters = Units.inchesToMeters(inches);
-        mPidController.setReference(meters, ControlType.kPosition, POSITION_SLOT, GRAVITY_COMPENSATION_VOLTS, SparkClosedLoopController.ArbFFUnits.kVoltage);
+        mPidController.setSetpoint(meters, ControlType.kPosition, POSITION_SLOT, GRAVITY_COMPENSATION_VOLTS, SparkClosedLoopController.ArbFFUnits.kVoltage);
     }
 
     @Override
     public void goToPositionMotionMagic(double inches)
     {
         double meters = Units.inchesToMeters(inches);
-        mPidController.setReference(meters, ControlType.kMAXMotionPositionControl, SMART_MOTION_SLOT);
+        mPidController.setSetpoint(meters, ControlType.kMAXMotionPositionControl, SMART_MOTION_SLOT);
     }
 
     @Override

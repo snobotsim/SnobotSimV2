@@ -181,9 +181,9 @@ public class SwerveModule implements BaseSwerveModule
             mDriveMotor.set(mDesiredState.speedMetersPerSecond / DriveSubsystem.kMaxSpeedMetersPerSecond);
         } else
         {
-            mDriveController.setReference(mDesiredState.speedMetersPerSecond, SparkBase.ControlType.kVelocity);
+            mDriveController.setSetpoint(mDesiredState.speedMetersPerSecond, SparkBase.ControlType.kVelocity);
         }
-        mAzimuthController.setReference(mDesiredState.angle.getDegrees(), SparkBase.ControlType.kPosition);
+        mAzimuthController.setSetpoint(mDesiredState.angle.getDegrees(), SparkBase.ControlType.kPosition);
     }
 
     @Override
@@ -230,7 +230,7 @@ public class SwerveModule implements BaseSwerveModule
     @Override
     public void periodic()
     {
-        mDriveConfig.closedLoop.velocityFF(SmartDashboard.getNumber("FF", DEFAULT_FF));
+        mDriveConfig.closedLoop.feedForward.kV(SmartDashboard.getNumber("FF", DEFAULT_FF));
         mDriveConfig.closedLoop.p(SmartDashboard.getNumber("P", DEFAULT_P));
         mDriveMotor.configure(mDriveConfig, SparkBase.ResetMode.kNoResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
 
