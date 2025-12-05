@@ -30,6 +30,7 @@ maven.install(
         "org.junit.platform:junit-platform-suite-api:1.6.1",
     ],
     repositories = ["https://repo1.maven.org/maven2"],
+    lock_file = "//build_scripts/bazel/deps:maven_install.json",
 )
 use_repo(
     maven,

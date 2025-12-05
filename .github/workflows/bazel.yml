@@ -59,7 +59,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: bazelbuild/setup-bazelisk@v3
-      - run:  bazel run @unpinned_maven//:pin
+      - run:  REPIN=1 bazel run @maven//:pin
       - run:  git diff HEAD
       - uses: actions/upload-artifact@v4
         with:
