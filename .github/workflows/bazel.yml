@@ -14,7 +14,7 @@ jobs:
     name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - uses: bazelbuild/setup-bazelisk@v3
@@ -43,7 +43,7 @@ jobs:
     name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - uses: bazelbuild/setup-bazelisk@v3
@@ -57,7 +57,7 @@ jobs:
       fail-fast: false
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: bazelbuild/setup-bazelisk@v3
       - run:  REPIN=1 bazel run @maven//:pin
       - run:  git diff HEAD
