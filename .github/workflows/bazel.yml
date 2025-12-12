@@ -61,7 +61,7 @@ jobs:
       - uses: bazelbuild/setup-bazelisk@v3
       - run:  REPIN=1 bazel run @maven//:pin
       - run:  git diff HEAD
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: Re-pinned maven
           path: build_scripts/bazel/deps/maven_install.json
