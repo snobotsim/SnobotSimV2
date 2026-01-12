@@ -5,7 +5,9 @@
 package org.snobotv2.examples.rev_swerve.subsystems;
 
 import com.revrobotics.AbsoluteEncoder;
+import com.revrobotics.PersistMode;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
@@ -69,7 +71,7 @@ public class SwerveModule implements BaseSwerveModule
         mAzimuthConfig.closedLoop.d(0.0);
 
         mAzimuthMotor = new SparkMax(turningMotorChannel, SparkBase.MotorType.kBrushless);
-        mAzimuthMotor.configure(mAzimuthConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
+        mAzimuthMotor.configure(mAzimuthConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         mAzimuthEncoder = mAzimuthMotor.getEncoder();
         mAzimuthController = mAzimuthMotor.getClosedLoopController();
 
@@ -83,7 +85,7 @@ public class SwerveModule implements BaseSwerveModule
         mDriveConfig.closedLoop.d(0.0);
 
         mDriveMotor = new SparkMax(driveMotorChannel, SparkBase.MotorType.kBrushless);
-        mDriveMotor.configure(mDriveConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
+        mDriveMotor.configure(mDriveConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         mDriveEncoder = mDriveMotor.getEncoder();
         mDriveController = mDriveMotor.getClosedLoopController();
 
@@ -232,7 +234,7 @@ public class SwerveModule implements BaseSwerveModule
     {
         mDriveConfig.closedLoop.feedForward.kV(SmartDashboard.getNumber("FF", DEFAULT_FF));
         mDriveConfig.closedLoop.p(SmartDashboard.getNumber("P", DEFAULT_P));
-        mDriveMotor.configure(mDriveConfig, SparkBase.ResetMode.kNoResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
+        mDriveMotor.configure(mDriveConfig, ResetMode.kNoResetSafeParameters, PersistMode.kPersistParameters);
 
         mCurrentState = new SwerveModuleState(
                 getDriveSpeedMps(),

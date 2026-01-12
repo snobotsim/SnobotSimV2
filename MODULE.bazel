@@ -4,11 +4,11 @@ bazel_dep(name = "rules_bazelrio", version = "0.0.14")
 bazel_dep(name = "rules_bzlmodrio_toolchains", version = "2025-1.bcr6")
 bazel_dep(name = "rules_bzlmodrio_jdk", version = "17.0.12-7.bcr1")
 bazel_dep(name = "rules_pmd", version = "7.2.0.bcr1")
-bazel_dep(name = "bzlmodrio-allwpilib", version = "2026.1.1-beta-1")
+bazel_dep(name = "bzlmodrio-allwpilib", version = "2026.1.1")
 bazel_dep(name = "bzlmodrio-studica", version = "2026.0.0-beta")
-bazel_dep(name = "bzlmodrio-phoenix", version = "5.36.0-beta-1")
-bazel_dep(name = "bzlmodrio-phoenix6", version = "26.0.0-beta-1")
-bazel_dep(name = "bzlmodrio-revlib", version = "2026.0.0-beta-1")
+bazel_dep(name = "bzlmodrio-phoenix", version = "5.36.0")
+bazel_dep(name = "bzlmodrio-phoenix6", version = "26.1.0")
+bazel_dep(name = "bzlmodrio-revlib", version = "2026.0.0")
 
 archive_override(
     module_name = "rules_bzlmodrio_jdk",

@@ -41,12 +41,12 @@ ext.getCurrentOs = {
 }
 
 ext {
-    wpiVersion = '2026.1.1-beta-1'
+    wpiVersion = '2026.1.1'
     opencvYear = '2025'
     opencvVersion = '4.10.0-3'
-    phoenix5Version = '5.36.0-beta-1'
-    phoenix6Version = "26.0.0-beta-1"
-    revVersion = '2026.0.0-beta-1'
+    phoenix5Version = '5.36.0'
+    phoenix6Version = "26.1.0"
+    revVersion = '2026.0.0'
     navxVersion = '2026.0.0-beta'
 
     jacksonVersion = '2.19.2'
