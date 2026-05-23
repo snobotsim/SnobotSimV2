@@ -26,9 +26,7 @@ def run():
     projects.append(ExampleConfig("rev", "Rev", ["REVLib.json"]))
     projects.append(ExampleConfig("wpi", "Wpi", []))
     projects.append(
-        ExampleConfig(
-            "catchall", "Catchall", ["REVLib.json", "Phoenix.json"]
-        )
+        ExampleConfig("catchall", "Catchall", ["REVLib.json", "Phoenix.json"])
     )
 
     this_dir = os.path.dirname(os.path.abspath(__file__))
