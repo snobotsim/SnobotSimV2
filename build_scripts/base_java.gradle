@@ -3,7 +3,6 @@ repositories {
     mavenLocal()
     maven { url "https://frcmaven.wpi.edu/artifactory/release/" }
     maven { url 'https://devsite.ctr-electronics.com/maven/release/' }
-    maven { url 'https://dev.studica.com/maven/release/2026/' }
     maven { url 'https://maven.revrobotics.com/' }
 }
 
@@ -47,9 +46,10 @@ ext {
     phoenix5Version = '5.36.0'
     phoenix6Version = "26.1.0"
     revVersion = '2026.0.0'
-    navxVersion = '2026.0.0-beta'
 
     jacksonVersion = '2.19.2'
+    ejmlVersion = '0.44.0'
+    quickbufVersion = '1.4'
 
     nativeOs = getCurrentOs() + getCurrentArch()
 }
@@ -61,9 +61,11 @@ configurations {
 }
 
 dependencies {
-    implementation group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: jacksonVersion
-    implementation group: "com.fasterxml.jackson.core", name: "jackson-core", version: jacksonVersion
-    implementation group: "com.fasterxml.jackson.core", name: "jackson-databind", version: jacksonVersion
+    implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+    implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+    implementation "org.ejml:ejml-simple:$ejmlVersion"
+    implementation "us.hebi.quickbuf:quickbuf-runtime:$quickbufVersion"
 
     nativeDesktopZip "edu.wpi.first.hal:hal-cpp:${wpiVersion}:${nativeOs}@zip"
     nativeDesktopZip "edu.wpi.first.ntcore:ntcore-cpp:${wpiVersion}:${nativeOs}@zip"
@@ -72,8 +74,6 @@ dependencies {
     nativeDesktopZip "edu.wpi.first.wpiutil:wpiutil-cpp:${wpiVersion}:${nativeOs}@zip"
     nativeDesktopZip "edu.wpi.first.wpimath:wpimath-cpp:${wpiVersion}:${nativeOs}@zip"
     nativeDesktopZip "edu.wpi.first.thirdparty.frc${opencvYear}.opencv:opencv-cpp:${opencvVersion}:${nativeOs}@zip"
-
-    nativeDesktopZip "com.studica.frc:Studica-driver:${navxVersion}:${nativeOs}@zip"
 
     nativeDesktopZip "com.ctre.phoenix.sim:cci-sim:${phoenix5Version}:${nativeOs}@zip"
 
