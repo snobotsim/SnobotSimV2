@@ -9,17 +9,16 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
-import com.studica.frc.AHRS;
-import com.studica.frc.AHRS.NavXComType;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import org.snobotv2.examples.base.BaseConstants;
 import org.snobotv2.examples.base.subsystems.BaseDrivetrainSubsystem;
-import org.snobotv2.module_wrappers.navx.NavxWrapper;
 import org.snobotv2.module_wrappers.rev.RevEncoderSimWrapper;
 import org.snobotv2.module_wrappers.rev.RevMotorControllerSimWrapper;
+import org.snobotv2.module_wrappers.wpi.ADXRS450GyroWrapper;
 import org.snobotv2.sim_wrappers.DifferentialDrivetrainSimWrapper;
 
 public class RevDrivetrain extends BaseDrivetrainSubsystem
@@ -39,7 +38,7 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
     private final SparkClosedLoopController mLeftPidController;
     private final SparkClosedLoopController mRightPidController;
 
-    private final AHRS mGyro;
+    private final ADXRS450_Gyro mGyro;
 
     private final DifferentialDrive mDrive;
 
@@ -108,7 +107,7 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
         mLeftEncoder.setPosition(0);
         mRightEncoder.setPosition(0);
 
-        mGyro = new AHRS(NavXComType.kMXP_SPI);
+        mGyro = new ADXRS450_Gyro();
 
         mDrive = new DifferentialDrive(mLeadLeft, mLeadRight);
 
@@ -120,7 +119,7 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
                     new RevMotorControllerSimWrapper(mLeadRight, DRIVETRAIN_CONSTANTS.getMotor()),
                     RevEncoderSimWrapper.create(mLeadLeft),
                     RevEncoderSimWrapper.create(mLeadRight),
-                    new NavxWrapper(mGyro).getYawGyro());
+                    new ADXRS450GyroWrapper(mGyro));
             mSimulator.setRightInverted(false);
             mSimulator.setLeftPdpChannels(BaseConstants.DRIVETRAIN_LEFT_MOTOR_A_PDP, BaseConstants.DRIVETRAIN_LEFT_MOTOR_B_PDP);
             mSimulator.setRightPdpChannels(BaseConstants.DRIVETRAIN_RIGHT_MOTOR_A_PDP, BaseConstants.DRIVETRAIN_RIGHT_MOTOR_B_PDP);
@@ -157,7 +156,7 @@ public class RevDrivetrain extends BaseDrivetrainSubsystem
     @Override
     public double getHeadingDegrees()
     {
-        return mGyro.getYaw();
+        return mGyro.getAngle();
     }
 
     @Override
