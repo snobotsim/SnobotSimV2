@@ -9,6 +9,5 @@ snobot_sim_java_library(
         "@bzlmodrio-allwpilib//libraries/java/wpilibj",
         "@bzlmodrio-phoenix//libraries/java/wpiapi-java",
         "@bzlmodrio-revlib//libraries/java/revlib-java",
-        "@bzlmodrio-studica//libraries/java/studica-java",
     ],
 )

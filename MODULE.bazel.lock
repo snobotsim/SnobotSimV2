@@ -1,5 +1,5 @@
 {
-  "lockFileVersion": 24,
+  "lockFileVersion": 18,
   "registryFileHashes": {
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/bazel_registry.json": "8a28e4aff06ee60aed2a8c281907fb8bcbf3b753c91fb5a5c57da3215d5b3497",
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/abseil-cpp/20210324.2/MODULE.bazel": "7cd0312e064fde87c8d1cd79ba06c876bd23630c83466e9500321be55c96ace2",
@@ -35,7 +35,6 @@
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/bazel_skylib/1.7.1/source.json": "f121b43eeefc7c29efbd51b83d08631e2347297c95aac9764a701f2a6a2bb953",
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/buildozer/7.1.2/MODULE.bazel": "2e8dd40ede9c454042645fd8d8d0cd1527966aa5c919de86661e62953cd73d84",
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/buildozer/7.1.2/source.json": "c9028a501d2db85793a6996205c8de120944f50a0d570438fcae0457a5f9d1f8",
-    "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/bzlmodrio-allwpilib/2026.1.1-beta-1/MODULE.bazel": "9cf636146e4e0587eb2c5443a329e1a8f219e537bdc515f51207c7fc173f1741",
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/bzlmodrio-allwpilib/2026.1.1/MODULE.bazel": "71a817e0a62687bc20ffba8df30c287ddf615843cdc794bf053c354cfa0d7e97",
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/bzlmodrio-allwpilib/2026.1.1/source.json": "a884a53f7fdef18fce563bbfe30e0cee4028f4619a0623567b4293aa29705e2e",
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/bzlmodrio-ni/2026.1.0/MODULE.bazel": "cdc16d019219fde6a4d8c895e51664198df455cd6afe7c022a869d3c3e446171",
@@ -48,8 +47,6 @@
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/bzlmodrio-phoenix6/26.1.0/source.json": "9c56002b15a471ae41f561697c6a865d244dd8870698e837ec697cf6118c5c81",
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/bzlmodrio-revlib/2026.0.0/MODULE.bazel": "89fb5cb26c173bd6a9ce4514264119b770db36bcad5f455c3c5216d49641089e",
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/bzlmodrio-revlib/2026.0.0/source.json": "ebf42918c3e10a68ef343c011521539d2a1f3d1184a9635d519ef833caedd4ba",
-    "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/bzlmodrio-studica/2026.0.0-beta/MODULE.bazel": "7c8d41494b681926742296215fe78f13f6e3efc4752560f4769fa5f25ac8de26",
-    "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/bzlmodrio-studica/2026.0.0-beta/source.json": "b496250a458e8930ac125b7399b17c967d0557392dd5c4f7d87fd5423d02bc38",
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/google_benchmark/1.8.2/MODULE.bazel": "a70cf1bba851000ba93b58ae2f6d76490a9feb74192e57ab8e8ff13c34ec50cb",
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/googletest/1.11.0/MODULE.bazel": "3a83f095183f66345ca86aa13c58b59f9f94a2f81999c093d4eeaa2d262d12f4",
     "https://raw.githubusercontent.com/pjreiniger/bazel-central-registry/bzlmodrio/modules/googletest/1.14.0.bcr.1/MODULE.bazel": "22c31a561553727960057361aa33bf20fb2e98584bc4fec007906e27053f80c6",
@@ -169,7 +166,7 @@
   "moduleExtensions": {
     "@@bzlmodrio-allwpilib+//:maven_cpp_deps.bzl%setup_bzlmodrio_allwpilib_cpp_dependencies": {
       "general": {
-        "bzlTransitiveDigest": "cXojBM+sEY/46Zz1+Fu7lBhbPnXTVwRqmCOmBN8f1EM=",
+        "bzlTransitiveDigest": "p8pljil429fytdpEnvRaYDLGFtaddIHAB9faEVi2vuk=",
         "usagesDigest": "XeJ8GwwCoam1/ixPaLsLTgLOx7l0l4VR1pgqIQZusKs=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -4428,7 +4425,7 @@
     },
     "@@bzlmodrio-allwpilib+//:maven_java_deps.bzl%setup_bzlmodrio_allwpilib_java_dependencies": {
       "general": {
-        "bzlTransitiveDigest": "U1GVhaZphRkyaL5A2bNfK2/lJX2MsT4McEAHhOH/EQE=",
+        "bzlTransitiveDigest": "IKM1iGq6wnrsrpuTbBNdTk0vgbL5V1MTsWSgC2ecXd4=",
         "usagesDigest": "qkGx6LtcVjky5+dHB5C0H1AW6DZJ5hognI9LQNvlCxI=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -4702,7 +4699,7 @@
     },
     "@@bzlmodrio-opencv+//:maven_cpp_deps.bzl%setup_bzlmodrio_opencv_cpp_dependencies": {
       "general": {
-        "bzlTransitiveDigest": "msQD/CRWcqBP5KGb5q6EP/uu9WjTaSgdoDKf5537pnA=",
+        "bzlTransitiveDigest": "5N3JdlHAWNyQ0uEIyfTjZGQgxD0prsgyvR8cBtNNhmg=",
         "usagesDigest": "PogDUHhIU2rcv9GK0RbjtSyXbhxInCA1To602PCvTII=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -5088,7 +5085,7 @@
     },
     "@@bzlmodrio-opencv+//:maven_java_deps.bzl%setup_bzlmodrio_opencv_java_dependencies": {
       "general": {
-        "bzlTransitiveDigest": "tYiGTX3oPNeQmlAiJXuwlfglJYJKPIL71GLH3vFc8tY=",
+        "bzlTransitiveDigest": "XijuK3v6Az8DB80cp/CKN2SNHBqjwGecZG6uhKDkZHw=",
         "usagesDigest": "0xn6hvPaPLZvM95llqO6sYcHGpJK3gE1nUtdzVK9Yxo=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -5122,7 +5119,7 @@
     },
     "@@bzlmodrio-phoenix+//:maven_cpp_deps.bzl%setup_bzlmodrio_phoenix_cpp_dependencies": {
       "general": {
-        "bzlTransitiveDigest": "9R2N7iIUzJe0sA+XofO7X+DDWmjGvLIVXhN4Y27WsjM=",
+        "bzlTransitiveDigest": "XPhF7I7VIfKvvHyflvQeN9aJiqAc3L8JH7T4nMxBVvc=",
         "usagesDigest": "YbnolvqLlf1hXONp9MMulcJdk56Ix0sOjBCBzcHbLww=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -5425,7 +5422,7 @@
     },
     "@@bzlmodrio-phoenix+//:maven_java_deps.bzl%setup_bzlmodrio_phoenix_java_dependencies": {
       "general": {
-        "bzlTransitiveDigest": "N9/4zh37ztWN3vZik+i1tbSLD5/5L0x8m2s2ewCiafs=",
+        "bzlTransitiveDigest": "pm4uJYCvhPbExqyIXWLrun6BBgmnt67dqD2NQmskKFI=",
         "usagesDigest": "t06RzbWdPjbkJLqxUAoAcmlu3DrZFBpQBIECyMi2L30=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -5475,7 +5472,7 @@
     },
     "@@bzlmodrio-phoenix6+//:maven_cpp_deps.bzl%setup_bzlmodrio_phoenix6_cpp_dependencies": {
       "general": {
-        "bzlTransitiveDigest": "NWozu3lThoWCV1oDo99njFqOrO83igTzmcoiCPfC668=",
+        "bzlTransitiveDigest": "je5cUF31db0ZOB1NzRSlqLxI4+NaQl3pxBmPeAdXk1c=",
         "usagesDigest": "D6itGbax+AJjHjMI9a07xJvkZZb4VCFM0dKt+6XAfKs=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -6176,7 +6173,7 @@
     },
     "@@bzlmodrio-phoenix6+//:maven_java_deps.bzl%setup_bzlmodrio_phoenix6_java_dependencies": {
       "general": {
-        "bzlTransitiveDigest": "Rsk8I3HW/ee52VSi4ZGYa1ZUAMHhhR0RjctUx+8EKOw=",
+        "bzlTransitiveDigest": "CYgYuFgtOjkt2sNB3GD7cGJP+OAu0/fSLgplM+w4o8M=",
         "usagesDigest": "HQESmoN0chRLC2YYcUO+dueIzQWmtWK8YHSIX6H0tHg=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -6210,7 +6207,7 @@
     },
     "@@bzlmodrio-revlib+//:maven_cpp_deps.bzl%setup_bzlmodrio_revlib_cpp_dependencies": {
       "general": {
-        "bzlTransitiveDigest": "wN8exZ7zEJfXOrUw3f5nZf2v3/QQX7wCBk07wuicioU=",
+        "bzlTransitiveDigest": "dG6ETpI8zAqkpZ+Pi/V5+zfgHSpmEZG3a1MkyR02J5w=",
         "usagesDigest": "EYxYna/bnn77KqkSoJuz6eQGYn+pnQVXm5zES10u5nA=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -6650,7 +6647,7 @@
     },
     "@@bzlmodrio-revlib+//:maven_java_deps.bzl%setup_bzlmodrio_revlib_java_dependencies": {
       "general": {
-        "bzlTransitiveDigest": "A8ECdykZ8wfQztrXzllMK9R9Zo6PnZrRIUmo3dIFRys=",
+        "bzlTransitiveDigest": "aLY+tjMeGiAizDkfGRq+I3gxLrFG3/ZYTJZlTnLXlwc=",
         "usagesDigest": "dY4W3fgtP7Hmbwlkv2zagWbtGSntEvcSdYgr19NKwBw=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -6682,282 +6679,9 @@
         ]
       }
     },
-    "@@bzlmodrio-studica+//:maven_cpp_deps.bzl%setup_bzlmodrio_studica_cpp_dependencies": {
-      "general": {
-        "bzlTransitiveDigest": "WOzrxolY+Jf2JcGWL1lSoZGxwIDuDf55OdN2UcKJJnQ=",
-        "usagesDigest": "Hc34+i4ft17SnNcXNwvL3K3MB7PEZx9xV+HiLvG75Lc=",
-        "recordedFileInputs": {},
-        "recordedDirentsInputs": {},
-        "envVariables": {},
-        "generatedRepoSpecs": {
-          "bazelrio_com_studica_frc_studica-cpp_headers": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-cpp/2026.0.0-beta/Studica-cpp-2026.0.0-beta-headers.zip",
-              "sha256": "bebf441979484ee699a330f82ab402b5363edc4a05522485a653e07263ae826a",
-              "build_file_content": "cc_library(\n    name = \"headers\",\n    hdrs = glob([\"**\"]),\n    includes = [\".\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"header_files\",\n    srcs = glob([\"**\"]),\n    visibility = [\"//visibility:public\"],\n)\n"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-cpp_windowsx86-64": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-cpp/2026.0.0-beta/Studica-cpp-2026.0.0-beta-windowsx86-64.zip",
-              "sha256": "84c9ac6284c7b7ad02a64b24598a4173211e918613647ef721d091666f67e002",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-cpp:shared.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-cpp_windowsx86-64static": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-cpp/2026.0.0-beta/Studica-cpp-2026.0.0-beta-windowsx86-64static.zip",
-              "sha256": "cfebec9aff50d3eebd69487ced6efe1234844829daac4ea22ecdb56894930312",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-cpp:static.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-cpp_linuxarm64": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-cpp/2026.0.0-beta/Studica-cpp-2026.0.0-beta-linuxarm64.zip",
-              "sha256": "0f3c3dcb02d173aa9d4d25db57cef4e4b00e87288c70b8e38f204b7c50e0e7bb",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-cpp:shared.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-cpp_linuxarm64static": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-cpp/2026.0.0-beta/Studica-cpp-2026.0.0-beta-linuxarm64static.zip",
-              "sha256": "72ca1c0d9f8dc00a8612f22bc584d3c385e6b41f3578ded615113928d46f5b5c",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-cpp:static.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-cpp_linuxx86-64": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-cpp/2026.0.0-beta/Studica-cpp-2026.0.0-beta-linuxx86-64.zip",
-              "sha256": "c1d71e47b63867679d09bc232aafce8f17e9e1d5e23940ed74cebef3a01d99a1",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-cpp:shared.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-cpp_linuxx86-64static": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-cpp/2026.0.0-beta/Studica-cpp-2026.0.0-beta-linuxx86-64static.zip",
-              "sha256": "a79272ea6969f1b7a4905ac5ecd2f2ee02c3353e3bcdc27446db98931fd1dd4e",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-cpp:static.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-cpp_linuxathena": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-cpp/2026.0.0-beta/Studica-cpp-2026.0.0-beta-linuxathena.zip",
-              "sha256": "f77e0da8314c61b35fcd443f396a7004d03ea0c049eb582400107186f2d7a6d6",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-cpp:shared.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-cpp_linuxathenastatic": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-cpp/2026.0.0-beta/Studica-cpp-2026.0.0-beta-linuxathenastatic.zip",
-              "sha256": "02c264ec3c8c763d50741b577125f9dc09acb403a1ce6898bf22efa8d712496d",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-cpp:static.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-cpp_linuxarm32": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-cpp/2026.0.0-beta/Studica-cpp-2026.0.0-beta-linuxarm32.zip",
-              "sha256": "0736d333e5263cea524a6a5f13872d73e4a73ab5b3586f2e3961936266c64133",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-cpp:shared.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-cpp_linuxarm32static": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-cpp/2026.0.0-beta/Studica-cpp-2026.0.0-beta-linuxarm32static.zip",
-              "sha256": "de0e66759f8a84956456f99561bd96b56a666312c7fc0f944fba1e829ecd33bd",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-cpp:static.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-cpp_osxuniversal": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-cpp/2026.0.0-beta/Studica-cpp-2026.0.0-beta-osxuniversal.zip",
-              "sha256": "fa254a296da85a1a49130c40453b6bfd8718f3acc5d55702abc3aa5a99d9e575",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-cpp:shared.BUILD.bazel",
-              "patch_cmds": [
-                "install_name_tool -id @rpath/libStudica.dylib osx/universal/shared/libStudica.dylib",
-                "install_name_tool -change libntcore.dylib @rpath/libntcore.dylib osx/universal/shared/libStudica.dylib",
-                "install_name_tool -change libwpinet.dylib @rpath/libwpinet.dylib osx/universal/shared/libStudica.dylib",
-                "install_name_tool -change libwpiutil.dylib @rpath/libwpiutil.dylib osx/universal/shared/libStudica.dylib"
-              ]
-            }
-          },
-          "bazelrio_com_studica_frc_studica-cpp_osxuniversalstatic": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-cpp/2026.0.0-beta/Studica-cpp-2026.0.0-beta-osxuniversalstatic.zip",
-              "sha256": "076e970d675c2c4c3c9a198da4c38401bd2d9830e3cc5775dc066499ef478cfd",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-cpp:static.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-driver_headers": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-driver/2026.0.0-beta/Studica-driver-2026.0.0-beta-headers.zip",
-              "sha256": "6542a526cadbacdc75495ac8a531d70d463dd7072e39aefe9c39d4d7a8d04d5d",
-              "build_file_content": "cc_library(\n    name = \"headers\",\n    hdrs = glob([\"**\"]),\n    includes = [\".\"],\n    visibility = [\"//visibility:public\"],\n)\n\nfilegroup(\n    name = \"header_files\",\n    srcs = glob([\"**\"]),\n    visibility = [\"//visibility:public\"],\n)\n"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-driver_windowsx86-64": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-driver/2026.0.0-beta/Studica-driver-2026.0.0-beta-windowsx86-64.zip",
-              "sha256": "1c54c1822670ab1d5de09203679b1106d49bc9368eda1938edc8e0efeb0dbeb3",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-driver:shared.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-driver_windowsx86-64static": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-driver/2026.0.0-beta/Studica-driver-2026.0.0-beta-windowsx86-64static.zip",
-              "sha256": "d1628fee50b951045d353fddc16c8cc7bed4f7b78cd3d5a004ca93e2702e0952",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-driver:static.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-driver_linuxarm64": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-driver/2026.0.0-beta/Studica-driver-2026.0.0-beta-linuxarm64.zip",
-              "sha256": "0c03ab9d616b3d93857af024b3bac7aaf27f67b74efaaad5ac002001abba010c",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-driver:shared.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-driver_linuxarm64static": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-driver/2026.0.0-beta/Studica-driver-2026.0.0-beta-linuxarm64static.zip",
-              "sha256": "f06756dfb6a9ea9538939e3d8fdac029d4279238451c0e7dd5deac88339458cb",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-driver:static.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-driver_linuxx86-64": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-driver/2026.0.0-beta/Studica-driver-2026.0.0-beta-linuxx86-64.zip",
-              "sha256": "d24fe5ace924627af057a58667b68c2ea26c1695d3f90b443ab4014eb850dfd7",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-driver:shared.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-driver_linuxx86-64static": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-driver/2026.0.0-beta/Studica-driver-2026.0.0-beta-linuxx86-64static.zip",
-              "sha256": "5772388d66c617811744b1eefd94169e646dda78b5f675d5af894113a84f6d3d",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-driver:static.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-driver_linuxathena": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-driver/2026.0.0-beta/Studica-driver-2026.0.0-beta-linuxathena.zip",
-              "sha256": "5ba2a0511ff4699e8a156fe82d541a4c2a402b21eaf2c6d59daa14acee338090",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-driver:shared.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-driver_linuxathenastatic": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-driver/2026.0.0-beta/Studica-driver-2026.0.0-beta-linuxathenastatic.zip",
-              "sha256": "4132e09c8a92833d7ed6114f214dbfa047749f5fe72aebaf32ff6264b0a155f0",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-driver:static.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-driver_linuxarm32": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-driver/2026.0.0-beta/Studica-driver-2026.0.0-beta-linuxarm32.zip",
-              "sha256": "1ca3cd953de40bdfeb850bf7db5e9edca5cb99e7a1d1c22031ab6b51f0577430",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-driver:shared.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-driver_linuxarm32static": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-driver/2026.0.0-beta/Studica-driver-2026.0.0-beta-linuxarm32static.zip",
-              "sha256": "ac7d07c1017edbc7a5f1f8630918b289eaf5d77d705b11c541d5eaf30981b25b",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-driver:static.BUILD.bazel"
-            }
-          },
-          "bazelrio_com_studica_frc_studica-driver_osxuniversal": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-driver/2026.0.0-beta/Studica-driver-2026.0.0-beta-osxuniversal.zip",
-              "sha256": "b62d8eee7c88945463aec1b83cbb0733170be99e640558634d71c3a47ae8b2c7",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-driver:shared.BUILD.bazel",
-              "patch_cmds": [
-                "install_name_tool -id @rpath/libStudicaDriver.dylib osx/universal/shared/libStudicaDriver.dylib",
-                "install_name_tool -change libwpiHal.dylib @rpath/libwpiHal.dylib osx/universal/shared/libStudicaDriver.dylib",
-                "install_name_tool -change libwpimath.dylib @rpath/libwpimath.dylib osx/universal/shared/libStudicaDriver.dylib",
-                "install_name_tool -change libwpinet.dylib @rpath/libwpinet.dylib osx/universal/shared/libStudicaDriver.dylib",
-                "install_name_tool -change libwpiutil.dylib @rpath/libwpiutil.dylib osx/universal/shared/libStudicaDriver.dylib"
-              ]
-            }
-          },
-          "bazelrio_com_studica_frc_studica-driver_osxuniversalstatic": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:http.bzl%http_archive",
-            "attributes": {
-              "url": "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-driver/2026.0.0-beta/Studica-driver-2026.0.0-beta-osxuniversalstatic.zip",
-              "sha256": "6713e473a1a7525b9f8ccd140674d82dc917bc4501edae4992c5c13bf3a3e398",
-              "build_file": "@@bzlmodrio-studica+//private/cpp/Studica-driver:static.BUILD.bazel"
-            }
-          }
-        },
-        "recordedRepoMappingEntries": [
-          [
-            "bzlmodrio-studica+",
-            "bazel_tools",
-            "bazel_tools"
-          ]
-        ]
-      }
-    },
-    "@@bzlmodrio-studica+//:maven_java_deps.bzl%setup_bzlmodrio_studica_java_dependencies": {
-      "general": {
-        "bzlTransitiveDigest": "U93R6bEj/8BSRVviDVcMlv8ZBEF4gzkYeUBSE1fmiBs=",
-        "usagesDigest": "fZIhcam6NQxHU5an1jhMpDURBcss2z9cW7xUoTa1g5Q=",
-        "recordedFileInputs": {},
-        "recordedDirentsInputs": {},
-        "envVariables": {},
-        "generatedRepoSpecs": {
-          "com_studica_frc_studica_java": {
-            "repoRuleId": "@@bazel_tools//tools/build_defs/repo:jvm.bzl%jvm_import_external",
-            "attributes": {
-              "generated_rule_name": "com_studica_frc_studica_java",
-              "artifact_urls": [
-                "https://dev.studica.com/maven/release/2026/com/studica/frc/Studica-java/2026.0.0-beta/Studica-java-2026.0.0-beta.jar"
-              ],
-              "srcjar_urls": [],
-              "canonical_id": "com.studica.frc:Studica-java:2026.0.0-beta",
-              "rule_name": "java_import",
-              "tags": [
-                "maven_coordinates=com.studica.frc:Studica-java:2026.0.0-beta"
-              ],
-              "artifact_sha256": "9d9ca9f6d4a527aca32727045031cb2732b71a50152133655d719e406d961f0f"
-            }
-          }
-        },
-        "recordedRepoMappingEntries": [
-          [
-            "bzlmodrio-studica+",
-            "bazel_tools",
-            "bazel_tools"
-          ]
-        ]
-      }
-    },
     "@@rules_bzlmodrio_jdk+//:maven_deps.bzl%deps": {
       "general": {
-        "bzlTransitiveDigest": "zV/mgXZYXXkWQN65A7vNJGv5KHH6f3SVD0HxMuRa+NE=",
+        "bzlTransitiveDigest": "Abngv/n7aBm8TDDCoNMMke9sICJvz3qyhHEggrNmTuM=",
         "usagesDigest": "077bD25ReoYwcXi/YMRPYj+3pT1wG/BoL1QL3mUFYFE=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -7162,7 +6886,7 @@
     },
     "@@rules_kotlin+//src/main/starlark/core/repositories:bzlmod_setup.bzl%rules_kotlin_extensions": {
       "general": {
-        "bzlTransitiveDigest": "rL/34P1aFDq2GqVC2zCFgQ8nTuOC6ziogocpvG50Qz8=",
+        "bzlTransitiveDigest": "OlvsB0HsvxbR8ZN+J9Vf00X/+WVz/Y/5Xrq2LgcVfdo=",
         "usagesDigest": "QI2z8ZUR+mqtbwsf2fLqYdJAkPOHdOV+tF2yVAUgRzw=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -7224,6 +6948,5 @@
         ]
       }
     }
-  },
-  "facts": {}
+  }
 }

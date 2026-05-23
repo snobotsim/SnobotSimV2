@@ -23,21 +23,10 @@ def run():
     default_vendor_props = ["SnobotSim.json", "WPILibNewCommands.json"]
 
     projects = []
-    projects.append(ExampleConfig("rev", "Rev", ["navx_frc.json", "REVLib.json"]))
-    projects.append(ExampleConfig("phoenix5", "Phoenix5", ["Phoenix.json"]))
+    projects.append(ExampleConfig("rev", "Rev", ["REVLib.json"]))
     projects.append(ExampleConfig("wpi", "Wpi", []))
     projects.append(
-        ExampleConfig(
-            "catchall", "Catchall", ["navx_frc.json", "REVLib.json", "Phoenix.json"]
-        )
-    )
-    projects.append(
-        ExampleConfig(
-            "rev_swerve",
-            "RevSwerve",
-            ["REVLib.json", "Phoenix.json"],
-            "test_robot_base_swerve",
-        )
+        ExampleConfig("catchall", "Catchall", ["REVLib.json", "Phoenix.json"])
     )
 
     this_dir = os.path.dirname(os.path.abspath(__file__))

@@ -6,8 +6,6 @@ import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkFlex;
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
-import com.studica.frc.AHRS;
-import com.studica.frc.AHRS.NavXComType;
 import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.ADXL345_SPI;
 import edu.wpi.first.wpilibj.ADXL362;
@@ -77,7 +75,6 @@ public class CatchallSubsystem extends SubsystemBase
     protected final Ultrasonic mUltrasonic;
     protected final VictorSP mVictorSP;
 
-    protected final AHRS mNavx;
     protected final SparkMax mCanSparkMax;
     protected final SparkFlex mCanSparkFlex;
     protected final WPI_TalonSRX mTalonSrx;
@@ -125,8 +122,6 @@ public class CatchallSubsystem extends SubsystemBase
         mCanSparkFlex = new SparkFlex(17, SparkLowLevel.MotorType.kBrushed);
         mTalonSrx = new WPI_TalonSRX(16);
         mVictorSpx = new WPI_VictorSPX(18);
-
-        mNavx = new AHRS(NavXComType.kMXP_SPI);
     }
 
     public void simulationPeriodic()
