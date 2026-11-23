@@ -1,9 +1,9 @@
 package org.snobotv2.sim_wrappers;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
+import org.wpilib.hardware.rotation.Encoder;
+import org.wpilib.system.RobotController;
+import org.wpilib.hardware.motor.MotorController;
+import org.wpilib.simulation.SingleJointedArmSim;
 import org.snobotv2.interfaces.IDigitalWrapper;
 import org.snobotv2.interfaces.IEncoderWrapper;
 import org.snobotv2.interfaces.IMotorControllerWrapper;
@@ -58,8 +58,8 @@ public class SingleJointedArmSimWrapper extends BaseSingleGearboxSimWrapper
 
 
         // Finally, we set our simulated encoder's readings and simulated battery voltage
-        double position = mArmSim.getAngleRads();
-        double velocity = mArmSim.getVelocityRadPerSec();
+        double position = mArmSim.getAngle();
+        double velocity = mArmSim.getVelocity();
         if (mUseDegrees)
         {
             position = Math.toDegrees(position);
@@ -69,8 +69,8 @@ public class SingleJointedArmSimWrapper extends BaseSingleGearboxSimWrapper
         mEncoderWrapper.setDistance(position);
         mEncoderWrapper.setVelocity(velocity);
 
-        mMotor.setCurrent(mArmSim.getCurrentDrawAmps());
-        mPdpSlots.update(mPdpModule, mArmSim.getCurrentDrawAmps());
+        mMotor.setCurrent(mArmSim.getCurrentDraw());
+        mPdpSlots.update(mPdpModule, mArmSim.getCurrentDraw());
 
         if (mLowerLimitSwitch != null)
         {

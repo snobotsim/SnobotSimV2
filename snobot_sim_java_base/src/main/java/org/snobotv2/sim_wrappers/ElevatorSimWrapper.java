@@ -1,9 +1,9 @@
 package org.snobotv2.sim_wrappers;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj.simulation.ElevatorSim;
+import org.wpilib.hardware.rotation.Encoder;
+import org.wpilib.system.RobotController;
+import org.wpilib.hardware.motor.MotorController;
+import org.wpilib.simulation.ElevatorSim;
 import org.snobotv2.interfaces.IDigitalWrapper;
 import org.snobotv2.interfaces.IEncoderWrapper;
 import org.snobotv2.interfaces.IMotorControllerWrapper;
@@ -54,14 +54,14 @@ public class ElevatorSimWrapper extends BaseSingleGearboxSimWrapper
         mElevatorSim.update(mUpdatePeriod);
 
         // Finally, we set our simulated encoder's readings and simulated battery voltage
-        mEncoderWrapper.setDistance(mElevatorSim.getPositionMeters());
-        mEncoderWrapper.setVelocity(mElevatorSim.getVelocityMetersPerSecond());
+        mEncoderWrapper.setDistance(mElevatorSim.getPosition());
+        mEncoderWrapper.setVelocity(mElevatorSim.getVelocity());
 
-        mMotor.setCurrent(mElevatorSim.getCurrentDrawAmps());
-        mPdpSlots.update(mPdpModule, mElevatorSim.getCurrentDrawAmps());
+        mMotor.setCurrent(mElevatorSim.getCurrentDraw());
+        mPdpSlots.update(mPdpModule, mElevatorSim.getCurrentDraw());
 
-        boolean atLowerLimit = mElevatorSim.wouldHitLowerLimit(mElevatorSim.getPositionMeters() - LIMIT_SWITCH_HEIGHT_DIFF);
-        boolean atUpperLimit = mElevatorSim.wouldHitUpperLimit(mElevatorSim.getPositionMeters() + LIMIT_SWITCH_HEIGHT_DIFF);
+        boolean atLowerLimit = mElevatorSim.wouldHitLowerLimit(mElevatorSim.getPosition() - LIMIT_SWITCH_HEIGHT_DIFF);
+        boolean atUpperLimit = mElevatorSim.wouldHitUpperLimit(mElevatorSim.getPosition() + LIMIT_SWITCH_HEIGHT_DIFF);
 
         if (mLowerLimitSwitch != null)
         {

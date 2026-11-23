@@ -1,15 +1,17 @@
 package org.snobotv2.module_wrappers.rev;
 
+import org.wpilib.hardware.bus.CANPort;
 import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkFlex;
+import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkBaseConfigAccessor;
 import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
-import edu.wpi.first.math.system.plant.DCMotor;
+import org.wpilib.math.system.DCMotor;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -21,8 +23,8 @@ public class TestRevCanSpark extends BaseRevlibUnitTest
     @Test
     public void testBasicMax()
     {
-        try (SparkMax sparkMax = new SparkMax(1, SparkBase.MotorType.kBrushless);
-             SparkMax follower = new SparkMax(11, SparkBase.MotorType.kBrushless))
+        try (SparkMax sparkMax = new SparkMax(CANPort.CAN_S0, 1, SparkLowLevel.MotorType.kBrushless);
+             SparkMax follower = new SparkMax(CANPort.CAN_S0, 11, SparkLowLevel.MotorType.kBrushless))
         {
             runTest(sparkMax, follower, new SparkMaxConfig(), sparkMax.configAccessor);
         }
@@ -31,14 +33,14 @@ public class TestRevCanSpark extends BaseRevlibUnitTest
     @Test
     public void testBasicFlex()
     {
-        try (SparkFlex sparkFlex = new SparkFlex(1, SparkBase.MotorType.kBrushless);
-             SparkFlex follower = new SparkFlex(11, SparkBase.MotorType.kBrushless))
+        try (SparkFlex sparkFlex = new SparkFlex(CANPort.CAN_S0, 1, SparkLowLevel.MotorType.kBrushless);
+             SparkFlex follower = new SparkFlex(CANPort.CAN_S0, 11, SparkLowLevel.MotorType.kBrushless))
         {
             runTest(sparkFlex, follower, new SparkFlexConfig(), sparkFlex.configAccessor);
         }
     }
 
-    @SuppressWarnings({"PMD.GenericsNaming", "PMD.UnusedFormalParameter"})
+    @SuppressWarnings({"PMD.TypeParameterNamingConventions", "PMD.UnusedFormalParameter"})
     private <MotorType extends SparkBase, ConfigType extends SparkBaseConfig, ConfigAccessor extends SparkBaseConfigAccessor> void runTest(
             MotorType sparkMax, MotorType follower, ConfigType config, ConfigAccessor configAccessor)
     {
@@ -62,13 +64,13 @@ public class TestRevCanSpark extends BaseRevlibUnitTest
         RevMotorControllerSimWrapper leaderWrapper = new RevMotorControllerSimWrapper(sparkMax, gearbox);
         RevMotorControllerSimWrapper followerWrapper = new RevMotorControllerSimWrapper(follower, gearbox);
 
-        sparkMax.set(.4);
+        sparkMax.setThrottle(.4);
         leaderWrapper.update();
         followerWrapper.update();
         testVoltagePercentage(.4, leaderWrapper);
         testVoltagePercentage(.4, sparkMax);
 
-        sparkMax.set(-.25);
+        sparkMax.setThrottle(-.25);
         leaderWrapper.update();
         testVoltagePercentage(-.25, leaderWrapper);
         testVoltagePercentage(-.25, sparkMax);

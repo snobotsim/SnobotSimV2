@@ -1,7 +1,7 @@
 package org.snobotv2.module_wrappers.wpi;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.simulation.EncoderSim;
+import org.wpilib.hardware.rotation.Encoder;
+import org.wpilib.simulation.EncoderSim;
 import org.snobotv2.module_wrappers.BaseEncoderWrapper;
 
 public class WpiEncoderWrapper extends BaseEncoderWrapper

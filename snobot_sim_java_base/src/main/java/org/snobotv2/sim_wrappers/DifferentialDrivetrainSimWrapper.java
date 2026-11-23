@@ -1,10 +1,10 @@
 package org.snobotv2.sim_wrappers;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
+import org.wpilib.hardware.rotation.Encoder;
+import org.wpilib.system.RobotController;
+import org.wpilib.hardware.motor.MotorController;
+import org.wpilib.math.geometry.Pose2d;
+import org.wpilib.simulation.DifferentialDrivetrainSim;
 import org.snobotv2.interfaces.IEncoderWrapper;
 import org.snobotv2.interfaces.IGyroWrapper;
 import org.snobotv2.interfaces.IMotorControllerWrapper;
@@ -77,16 +77,17 @@ public class DifferentialDrivetrainSimWrapper extends BaseSimWrapper
             mRightMultiplier * mRightMotor.getVoltagePercentage() * RobotController.getBatteryVoltage());
         mDrivetrainSim.update(mUpdatePeriod);
 
-        mLeftEncoderSim.setDistance(mDrivetrainSim.getLeftPositionMeters());
-        mLeftEncoderSim.setVelocity(mDrivetrainSim.getLeftVelocityMetersPerSecond());
-        mRightEncoderSim.setDistance(mDrivetrainSim.getRightPositionMeters());
-        mRightEncoderSim.setVelocity(mDrivetrainSim.getRightVelocityMetersPerSecond());
-        mGyroWrapper.setAngle(-mDrivetrainSim.getHeading().getDegrees());
+        mLeftEncoderSim.setDistance(mDrivetrainSim.getLeftPosition());
+        mLeftEncoderSim.setVelocity(mDrivetrainSim.getLeftVelocity());
+        mRightEncoderSim.setDistance(mDrivetrainSim.getRightPosition());
+        mRightEncoderSim.setVelocity(mDrivetrainSim.getRightVelocity());
+        // Use the continuous heading state, like a real gyro, rather than the wrapped Rotation2d
+        mGyroWrapper.setAngle(-Math.toDegrees(mDrivetrainSim.getState(DifferentialDrivetrainSim.State.HEADING)));
 
-        mLeftMotor.setCurrent(mDrivetrainSim.getLeftCurrentDrawAmps());
-        mRightMotor.setCurrent(mDrivetrainSim.getRightCurrentDrawAmps());
-        mLeftPdpSlots.update(mPdpModule, mDrivetrainSim.getLeftCurrentDrawAmps());
-        mRightPdpSlots.update(mPdpModule, mDrivetrainSim.getRightCurrentDrawAmps());
+        mLeftMotor.setCurrent(mDrivetrainSim.getLeftCurrentDraw());
+        mRightMotor.setCurrent(mDrivetrainSim.getRightCurrentDraw());
+        mLeftPdpSlots.update(mPdpModule, mDrivetrainSim.getLeftCurrentDraw());
+        mRightPdpSlots.update(mPdpModule, mDrivetrainSim.getRightCurrentDraw());
     }
 
     public void resetOdometry(Pose2d pose)

@@ -1,9 +1,10 @@
 package org.snobotv2.sim_wrappers;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj.simulation.FlywheelSim;
+import org.wpilib.hardware.rotation.Encoder;
+import org.wpilib.math.util.Units;
+import org.wpilib.system.RobotController;
+import org.wpilib.hardware.motor.MotorController;
+import org.wpilib.simulation.FlywheelSim;
 import org.snobotv2.interfaces.IEncoderWrapper;
 import org.snobotv2.interfaces.IMotorControllerWrapper;
 import org.snobotv2.module_wrappers.wpi.WpiEncoderWrapper;
@@ -37,9 +38,9 @@ public class FlywheelSimWrapper extends BaseSingleGearboxSimWrapper
         mFlywheelSim.update(mUpdatePeriod);
 
         // Finally, we set our simulated encoder's readings and simulated battery voltage
-        mEncoderWrapper.setVelocity(mFlywheelSim.getAngularVelocityRPM());
+        mEncoderWrapper.setVelocity(Units.radiansPerSecondToRotationsPerMinute(mFlywheelSim.getAngularVelocity()));
 
-        mMotor.setCurrent(mFlywheelSim.getCurrentDrawAmps());
-        mPdpSlots.update(mPdpModule, mFlywheelSim.getCurrentDrawAmps());
+        mMotor.setCurrent(mFlywheelSim.getCurrentDraw());
+        mPdpSlots.update(mPdpModule, mFlywheelSim.getCurrentDraw());
     }
 }

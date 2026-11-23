@@ -17,21 +17,16 @@ jobs:
           git branch -f master origin/master
 
       # Setup dependencies
-      - name: Set up Python 3.8
+      - name: Set up Python 3.12
         uses: actions/setup-python@v6
         with:
-          python-version: 3.8
-      - name: Install clang-format
-        run: |
-          wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
-          sudo sh -c "echo 'deb http://apt.llvm.org/focal/ llvm-toolchain-focal-14 main' >> /etc/apt/sources.list.d/proposed-repositories.list"
-          sudo apt-get update -q
-          sudo apt-get install -y clang-format-14
+          python-version: 3.12
+      # wpiformat bundles its own clang-format, so it doesn't need to be installed separately
       - name: Install wpiformat
-        run: pip3 install wpiformat
+        run: pip3 install wpiformat==2026.76
 
       - name: Run wpiformat
-        run: wpiformat -clang 14
+        run: wpiformat
 
       # Check the diff
       - name: Check Output
@@ -45,37 +40,38 @@ jobs:
           path: wpiformat-fixes.patch
         if: ${{ failure() }}
 
-  buildifier:
-    name: "buildifier"
-    runs-on: ubuntu-latest
-    steps:
-
-      - uses: actions/checkout@v6
-
-      - name: Set up Go 1.15.x
-        uses: actions/setup-go@v6
-        with:
-          go-version: 1.15.x
-        id: go
-      - name: Install Buildifier
-        run: |
-          cd $(mktemp -d)
-          GO111MODULE=on go get github.com/bazelbuild/buildtools/buildifier@4.0.1
-
-      - name: Run buildifier
-        run: buildifier --lint=fix -r .
-
-    # Check the diff
-      - name: Check Output
-        run: git --no-pager diff --exit-code HEAD
-      - name: Generate diff
-        run: git diff HEAD > buildifier-fixes.patch
-        if: ${{ failure() }}
-      - uses: actions/upload-artifact@v6
-        with:
-          name: buildifier fixes
-          path: buildifier-fixes.patch
-        if: ${{ failure() }}
+  # Bazel is disabled while porting to the 2027 alpha.
+#  buildifier:
+#    name: "buildifier"
+#    runs-on: ubuntu-latest
+#    steps:
+#
+#      - uses: actions/checkout@v6
+#
+#      - name: Set up Go 1.15.x
+#        uses: actions/setup-go@v6
+#        with:
+#          go-version: 1.15.x
+#        id: go
+#      - name: Install Buildifier
+#        run: |
+#          cd $(mktemp -d)
+#          GO111MODULE=on go get github.com/bazelbuild/buildtools/buildifier@4.0.1
+#
+#      - name: Run buildifier
+#        run: buildifier --lint=fix -r .
+#
+#    # Check the diff
+#      - name: Check Output
+#        run: git --no-pager diff --exit-code HEAD
+#      - name: Generate diff
+#        run: git diff HEAD > buildifier-fixes.patch
+#        if: ${{ failure() }}
+#      - uses: actions/upload-artifact@v6
+#        with:
+#          name: buildifier fixes
+#          path: buildifier-fixes.patch
+#        if: ${{ failure() }}
 
   spotless:
     name: "spotless"
@@ -83,6 +79,12 @@ jobs:
     steps:
 
       - uses: actions/checkout@v6
+
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: 25
 
       # Run formatters
       - name: Run Spotless
@@ -100,34 +102,35 @@ jobs:
           path: spotless-fixes.patch
         if: ${{ failure() }}
 
-  unused_deps:
-    name: "unused deps"
-    runs-on: ubuntu-latest
-    steps:
-
-      - uses: actions/checkout@v6
-
-      - name: Set up Go 1.15.x
-        uses: actions/setup-go@v6
-        with:
-          go-version: 1.15.x
-        id: go
-      - name: Install Unused Deps
-        run: |
-          cd $(mktemp -d)
-          GO111MODULE=on go get github.com/bazelbuild/buildtools/unused_deps@4.0.1
-
-      - name: Run unused deps
-        run: unused_deps //...
-
-      # Check the diff
-      - name: Check Output
-        run: git --no-pager diff --exit-code HEAD
-      - name: Generate diff
-        run: git diff HEAD > unused-deps-fixes.patch
-        if: ${{ failure() }}
-      - uses: actions/upload-artifact@v6
-        with:
-          name: unused deps fixes
-          path: unused-deps-fixes.patch
-        if: ${{ failure() }}
+  # Bazel is disabled while porting to the 2027 alpha.
+#  unused_deps:
+#    name: "unused deps"
+#    runs-on: ubuntu-latest
+#    steps:
+#
+#      - uses: actions/checkout@v6
+#
+#      - name: Set up Go 1.15.x
+#        uses: actions/setup-go@v6
+#        with:
+#          go-version: 1.15.x
+#        id: go
+#      - name: Install Unused Deps
+#        run: |
+#          cd $(mktemp -d)
+#          GO111MODULE=on go get github.com/bazelbuild/buildtools/unused_deps@4.0.1
+#
+#      - name: Run unused deps
+#        run: unused_deps //...
+#
+#      # Check the diff
+#      - name: Check Output
+#        run: git --no-pager diff --exit-code HEAD
+#      - name: Generate diff
+#        run: git diff HEAD > unused-deps-fixes.patch
+#        if: ${{ failure() }}
+#      - uses: actions/upload-artifact@v6
+#        with:
+#          name: unused deps fixes
+#          path: unused-deps-fixes.patch
+#        if: ${{ failure() }}

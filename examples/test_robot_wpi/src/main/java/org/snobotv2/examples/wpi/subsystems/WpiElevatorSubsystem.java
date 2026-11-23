@@ -1,11 +1,11 @@
 package org.snobotv2.examples.wpi.subsystems;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.wpilib.hardware.rotation.Encoder;
+import org.wpilib.drivers.motor.PWMVictorSPX;
+import org.wpilib.framework.RobotBase;
+import org.wpilib.math.controller.PIDController;
+import org.wpilib.math.util.Units;
+import org.wpilib.command2.SubsystemBase;
 import org.snobotv2.examples.base.BaseConstants;
 import org.snobotv2.examples.base.subsystems.ElevatorSubsystem;
 import org.snobotv2.sim_wrappers.ElevatorSimWrapper;
@@ -41,13 +41,12 @@ public class WpiElevatorSubsystem extends SubsystemBase implements ElevatorSubsy
     {
         mMotor.close();
         mEncoder.close();
-        mController.close();
     }
 
     @Override
     public void moveManually(double speed)
     {
-        mMotor.set(speed);
+        mMotor.setThrottle(speed);
     }
 
     @Override
@@ -87,7 +86,7 @@ public class WpiElevatorSubsystem extends SubsystemBase implements ElevatorSubsy
     @Override
     public void stop()
     {
-        mMotor.set(0);
+        mMotor.setThrottle(0);
     }
 
     @Override

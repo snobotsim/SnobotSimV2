@@ -1,15 +1,15 @@
 package org.snobotv2.examples.base.subsystems;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
-import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
-import edu.wpi.first.math.system.LinearSystem;
-import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.math.system.plant.LinearSystemId;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj2.command.Subsystem;
-import edu.wpi.first.math.numbers.N2;
+import org.wpilib.math.geometry.Pose2d;
+import org.wpilib.math.kinematics.DifferentialDriveKinematics;
+import org.wpilib.math.kinematics.DifferentialDriveWheelVelocities;
+import org.wpilib.simulation.DifferentialDrivetrainSim;
+import org.wpilib.math.system.LinearSystem;
+import org.wpilib.math.system.DCMotor;
+import org.wpilib.math.system.Models;
+import org.wpilib.math.util.Units;
+import org.wpilib.command2.Subsystem;
+import org.wpilib.math.numbers.N2;
 
 public interface DrivetrainSubsystem extends Subsystem, AutoCloseable
 {
@@ -33,7 +33,7 @@ public interface DrivetrainSubsystem extends Subsystem, AutoCloseable
 
     Pose2d getPose();
 
-    DifferentialDriveWheelSpeeds getWheelSpeeds();
+    DifferentialDriveWheelVelocities getWheelSpeeds();
 
     void tankDriveVolts(double left, double right);
 
@@ -71,7 +71,7 @@ public interface DrivetrainSubsystem extends Subsystem, AutoCloseable
         private static final double kaVoltSecondsSquaredPerRadian = 0.3;
 
         public static final LinearSystem<N2, N2, N2> kDrivetrainPlant =
-                LinearSystemId.identifyDrivetrainSystem(kvVoltSecondsPerMeter, kaVoltSecondsSquaredPerMeter,
+                Models.differentialDriveFromSysId(kvVoltSecondsPerMeter, kaVoltSecondsSquaredPerMeter,
                         kvVoltSecondsPerRadian, kaVoltSecondsSquaredPerRadian);
 
         public static final DCMotor kDriveGearbox = DCMotor.getCIM(2);
@@ -148,7 +148,7 @@ public interface DrivetrainSubsystem extends Subsystem, AutoCloseable
         private static final double kaVoltSecondsSquaredPerRadian = 0.3;
 
         public static final LinearSystem<N2, N2, N2> kDrivetrainPlant =
-                LinearSystemId.identifyDrivetrainSystem(kvVoltSecondsPerMeter, kaVoltSecondsSquaredPerMeter,
+                Models.differentialDriveFromSysId(kvVoltSecondsPerMeter, kaVoltSecondsSquaredPerMeter,
                         kvVoltSecondsPerRadian, kaVoltSecondsSquaredPerRadian);
 
         public static final DCMotor kDriveGearbox = DCMotor.getNEO(2);

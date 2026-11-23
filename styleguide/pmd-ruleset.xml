@@ -12,10 +12,12 @@
 
     <rule ref="category/java/bestpractices.xml">
         <exclude name="GuardLogStatement" />
-        <exclude name="JUnitTestsShouldIncludeAssert" />
-        <exclude name="JUnitAssertionsShouldIncludeMessage" />
-        <exclude name="JUnitTestContainsTooManyAsserts" />
+        <exclude name="UnitTestShouldIncludeAssert" />
+        <exclude name="UnitTestAssertionsShouldIncludeMessage" />
+        <exclude name="UnitTestContainsTooManyAsserts" />
         <exclude name="JUnit5TestShouldBePackagePrivate" />
+        <!-- Added in newer PMD versions. Lots of the existing suppressions are for other tools -->
+        <exclude name="UnnecessaryWarningSuppression" />
     </rule>
 
     <rule ref="category/java/codestyle.xml/FieldNamingConventions">

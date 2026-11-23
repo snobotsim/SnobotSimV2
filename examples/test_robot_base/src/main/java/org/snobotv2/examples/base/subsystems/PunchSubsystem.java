@@ -1,9 +1,10 @@
 package org.snobotv2.examples.base.subsystems;
 
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.wpilib.hardware.discrete.AnalogInput;
+import org.wpilib.hardware.bus.CANPort;
+import org.wpilib.hardware.pneumatic.DoubleSolenoid;
+import org.wpilib.hardware.pneumatic.PneumaticsModuleType;
+import org.wpilib.command2.SubsystemBase;
 
 public class PunchSubsystem extends SubsystemBase implements AutoCloseable
 {
@@ -12,18 +13,18 @@ public class PunchSubsystem extends SubsystemBase implements AutoCloseable
 
     public PunchSubsystem()
     {
-        mSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
+        mSolenoid = new DoubleSolenoid(CANPort.CAN_S0, PneumaticsModuleType.CTRE_PCM, 0, 1);
         mPressureSensor = new AnalogInput(0);
     }
 
     public void extend()
     {
-        mSolenoid.set(DoubleSolenoid.Value.kForward);
+        mSolenoid.set(DoubleSolenoid.Value.FORWARD);
     }
 
     public void retract()
     {
-        mSolenoid.set(DoubleSolenoid.Value.kReverse);
+        mSolenoid.set(DoubleSolenoid.Value.REVERSE);
     }
 
     public double getPressure()

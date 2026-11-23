@@ -1,12 +1,12 @@
 package org.snobotv2.camera;
 
-import edu.wpi.first.math.geometry.Transform2d;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.util.Units;
+import org.wpilib.math.geometry.Transform2d;
+import org.wpilib.networktables.NetworkTable;
+import org.wpilib.networktables.NetworkTableEntry;
+import org.wpilib.networktables.NetworkTableInstance;
+import org.wpilib.math.geometry.Pose2d;
+import org.wpilib.math.geometry.Rotation2d;
+import org.wpilib.math.util.Units;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

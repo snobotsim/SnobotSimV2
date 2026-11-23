@@ -1,5 +1,6 @@
 package org.snobotv2.interfaces;
 
+@FunctionalInterface
 public interface IMotorControllerWrapper
 {
     double getVoltagePercentage();

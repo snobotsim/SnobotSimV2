@@ -1,65 +1,91 @@
 package org.snobotv2.examples.base.subsystems;
 
-import edu.wpi.first.wpilibj.AddressableLED;
-import edu.wpi.first.wpilibj.AddressableLEDBuffer;
-import edu.wpi.first.wpilibj.AnalogOutput;
-import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.wpilib.command2.SubsystemBase;
+import org.wpilib.hardware.led.AddressableLED;
+import org.wpilib.hardware.led.AddressableLEDBuffer;
 
 public class LedSubsystem extends SubsystemBase implements AutoCloseable
 {
-    private final Relay mRelay;
-    private final AnalogOutput mVariableBrightnessLeds;
+    private enum Mode
+    {
+        RAINBOW(0, 0, 0),
+        RED_AND_BLUE(255, 0, 255),
+        RED(255, 0, 0),
+        BLUE(0, 0, 255),
+        OFF(0, 0, 0);
+
+        private final int mRed;
+        private final int mGreen;
+        private final int mBlue;
+
+        Mode(int red, int green, int blue)
+        {
+            mRed = red;
+            mGreen = green;
+            mBlue = blue;
+        }
+    }
+
     private final AddressableLED mAddressableLeds;
     private final AddressableLEDBuffer mLedBuffer;
     private int mRainbowFirstPixelHue;
+    private Mode mMode;
 
     public LedSubsystem()
     {
-        mRelay = new Relay(0);
-        mVariableBrightnessLeds = new AnalogOutput(0);
-
         mAddressableLeds = new AddressableLED(0);
         mLedBuffer = new AddressableLEDBuffer(60);
         mAddressableLeds.setLength(mLedBuffer.getLength());
         mAddressableLeds.setData(mLedBuffer);
-        mAddressableLeds.start();
+        mMode = Mode.RAINBOW;
     }
 
     @Override
     public void close()
     {
-        mRelay.close();
-        mVariableBrightnessLeds.close();
         mAddressableLeds.close();
     }
 
     public void turnOnRedAndBlue()
     {
-        mRelay.set(Relay.Value.kOn);
+        mMode = Mode.RED_AND_BLUE;
     }
 
     public void turnOnRed()
     {
-        mRelay.set(Relay.Value.kReverse);
+        mMode = Mode.RED;
     }
 
     public void turnOnBlue()
     {
-        mRelay.set(Relay.Value.kForward);
+        mMode = Mode.BLUE;
     }
 
     public void turnAllOff()
     {
-        mRelay.set(Relay.Value.kOff);
+        mMode = Mode.OFF;
     }
 
     @Override
     public void periodic()
     {
-        rainbow();
+        if (mMode == Mode.RAINBOW)
+        {
+            rainbow();
+        }
+        else
+        {
+            fill(mMode.mRed, mMode.mGreen, mMode.mBlue);
+        }
         mAddressableLeds.setData(mLedBuffer);
-        mVariableBrightnessLeds.setVoltage(mRainbowFirstPixelHue / 180.0 * 4.5);
+    }
+
+    private void fill(int red, int green, int blue)
+    {
+        for (int i = 0; i < mLedBuffer.getLength(); i++)
+        {
+            mLedBuffer.setRGB(i, red, green, blue);
+        }
     }
 
     private void rainbow()

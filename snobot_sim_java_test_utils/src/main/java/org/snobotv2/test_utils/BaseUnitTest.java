@@ -1,8 +1,8 @@
 package org.snobotv2.test_utils;
 
-import edu.wpi.first.hal.HAL;
-import edu.wpi.first.hal.simulation.SimulatorJNI;
-import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
+import org.wpilib.hardware.hal.HAL;
+import org.wpilib.hardware.hal.simulation.SimulatorJNI;
+import org.wpilib.simulation.SimDeviceSim;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.snobotv2.module_wrappers.BaseMotorControllerWrapper;
@@ -22,7 +22,7 @@ public class BaseUnitTest
         System.setProperty("java.util.logging.SimpleFormatter.format",
             "[%1$tF %1$tT] [%4$-7s] %5$s %n");
 
-        HAL.initialize(0, 0);
+        HAL.initialize();
         SimulatorJNI.resetHandles();
         SimDeviceSim.resetData();
     }

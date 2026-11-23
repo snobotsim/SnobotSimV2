@@ -1,15 +1,15 @@
 package org.snobotv2.examples.wpi.subsystems;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.math.geometry.Pose2d;
+import org.wpilib.hardware.imu.OnboardIMU;
+import org.wpilib.hardware.rotation.Encoder;
+import org.wpilib.hardware.motor.MotorController;
+import org.wpilib.drivers.motor.PWMVictorSPX;
+import org.wpilib.framework.RobotBase;
+import org.wpilib.drive.DifferentialDrive;
+import org.wpilib.math.geometry.Pose2d;
 import org.snobotv2.examples.base.BaseConstants;
 import org.snobotv2.examples.base.subsystems.BaseDrivetrainSubsystem;
-import org.snobotv2.module_wrappers.wpi.ADXRS450GyroWrapper;
+import org.snobotv2.module_wrappers.wpi.OnboardIMUWrapper;
 import org.snobotv2.sim_wrappers.DifferentialDrivetrainSimWrapper;
 
 public class WpiDrivetrain extends BaseDrivetrainSubsystem
@@ -26,7 +26,7 @@ public class WpiDrivetrain extends BaseDrivetrainSubsystem
 
     private final Encoder mLeftEncoder;
     private final Encoder mRightEncoder;
-    private final ADXRS450_Gyro mGyro;
+    private final OnboardIMU mGyro;
 
     private DifferentialDrivetrainSimWrapper mSimulator;
 
@@ -45,7 +45,7 @@ public class WpiDrivetrain extends BaseDrivetrainSubsystem
 
         mLeftEncoder = new Encoder(BaseConstants.DRIVETRAIN_LEFT_ENCODER_A, BaseConstants.DRIVETRAIN_LEFT_ENCODER_B, false);
         mRightEncoder = new Encoder(BaseConstants.DRIVETRAIN_RIGHT_ENCODER_A, BaseConstants.DRIVETRAIN_RIGHT_ENCODER_B, true);
-        mGyro = new ADXRS450_Gyro();
+        mGyro = new OnboardIMU(OnboardIMU.MountOrientation.FLAT);
 
         double distancePerPulse = DRIVETRAIN_CONSTANTS.getkWheelDiameterMeters() * Math.PI / 1024.;
         mLeftEncoder.setDistancePerPulse(distancePerPulse);
@@ -56,7 +56,7 @@ public class WpiDrivetrain extends BaseDrivetrainSubsystem
             mSimulator = new DifferentialDrivetrainSimWrapper(DRIVETRAIN_CONSTANTS.createSim(),
                     mLeftMotors, mDriveRightA,
                     mLeftEncoder, mRightEncoder,
-                    new ADXRS450GyroWrapper(mGyro));
+                    new OnboardIMUWrapper(mGyro));
         }
     }
 
@@ -69,7 +69,6 @@ public class WpiDrivetrain extends BaseDrivetrainSubsystem
         mDriveRightB.close();
         mLeftEncoder.close();
         mRightEncoder.close();
-        mGyro.close();
     }
 
     @Override
@@ -99,7 +98,7 @@ public class WpiDrivetrain extends BaseDrivetrainSubsystem
     @Override
     public double getHeadingDegrees()
     {
-        return mGyro.getAngle();
+        return -Math.toDegrees(mGyro.getYawRadians());
     }
 
     @Override

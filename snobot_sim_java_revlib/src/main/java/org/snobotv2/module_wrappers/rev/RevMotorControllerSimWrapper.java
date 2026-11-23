@@ -2,7 +2,7 @@ package org.snobotv2.module_wrappers.rev;
 
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkSimHelper;
-import edu.wpi.first.math.system.plant.DCMotor;
+import org.wpilib.math.system.DCMotor;
 import org.snobotv2.module_wrappers.BaseMotorControllerWrapper;
 
 public class RevMotorControllerSimWrapper extends BaseMotorControllerWrapper
@@ -17,7 +17,7 @@ public class RevMotorControllerSimWrapper extends BaseMotorControllerWrapper
 
     public RevMotorControllerSimWrapper(SparkBase motorController, DCMotor gearbox)
     {
-        super(motorController.getDeviceId(), motorController::getAppliedOutput);
+        super(motorController.getDeviceId(), () -> motorController.getAppliedOutput().get());
         mSim = new SparkSimHelper(motorController, gearbox);
     }
 

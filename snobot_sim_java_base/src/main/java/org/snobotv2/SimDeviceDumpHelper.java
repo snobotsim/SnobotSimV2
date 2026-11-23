@@ -1,9 +1,9 @@
 package org.snobotv2;
 
-import edu.wpi.first.hal.HALValue;
-import edu.wpi.first.hal.simulation.SimDeviceDataJNI;
-import edu.wpi.first.hal.simulation.SimDeviceDataJNI.SimDeviceInfo;
-import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
+import org.wpilib.hardware.hal.HALValue;
+import org.wpilib.hardware.hal.simulation.SimDeviceDataJNI;
+import org.wpilib.hardware.hal.simulation.SimDeviceDataJNI.SimDeviceInfo;
+import org.wpilib.simulation.SimDeviceSim;
 
 public final class SimDeviceDumpHelper
 {
@@ -44,19 +44,19 @@ public final class SimDeviceDumpHelper
         String output;
         switch (valueInfo.value.getType())
         {
-        case HALValue.kBoolean:
+        case HALValue.BOOLEAN:
             output = String.valueOf(valueInfo.value.getBoolean());
             break;
-        case HALValue.kDouble:
+        case HALValue.DOUBLE:
             output = String.valueOf(valueInfo.value.getDouble());
             break;
-        case HALValue.kEnum:
+        case HALValue.ENUM:
             output = "(enum) " + valueInfo.value.getNativeLong();
             break;
-        case HALValue.kInt:
+        case HALValue.INT:
             output = String.valueOf((int) valueInfo.value.getLong());
             break;
-        case HALValue.kLong:
+        case HALValue.LONG:
             output = String.valueOf(valueInfo.value.getLong());
             break;
         default:

@@ -1,7 +1,7 @@
 package org.snobotv2.examples.base.auton_modes;
 
-import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import org.wpilib.math.trajectory.DrivetrainSplineTrajectory;
+import org.wpilib.command2.SequentialCommandGroup;
 import org.snobotv2.examples.base.trajectories.TrajectoryFactory;
 import org.snobotv2.examples.base.commands.auton.DriveTrajectoryCommand;
 import org.snobotv2.examples.base.subsystems.DrivetrainSubsystem;
@@ -10,9 +10,9 @@ public class SixBallTrench extends SequentialCommandGroup
 {
     public SixBallTrench(DrivetrainSubsystem drivetrain, boolean useVoltage)
     {
-        Trajectory driveToTrench = TrajectoryFactory.createDriveToTrench(drivetrain.getConstants());
-        Trajectory grabTrenchBalls = TrajectoryFactory.createGrabTrenchBalls(drivetrain.getConstants());
-        Trajectory controlPanelToSecondShot = TrajectoryFactory.createControlPanelToSecondShot(drivetrain.getConstants());
+        DrivetrainSplineTrajectory driveToTrench = TrajectoryFactory.createDriveToTrench(drivetrain.getConstants());
+        DrivetrainSplineTrajectory grabTrenchBalls = TrajectoryFactory.createGrabTrenchBalls(drivetrain.getConstants());
+        DrivetrainSplineTrajectory controlPanelToSecondShot = TrajectoryFactory.createControlPanelToSecondShot(drivetrain.getConstants());
 
         if (useVoltage)
         {

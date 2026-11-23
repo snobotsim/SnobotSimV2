@@ -1,11 +1,11 @@
 package org.snobotv2.examples.base.subsystems;
 
-import edu.wpi.first.math.numbers.N1;
-import edu.wpi.first.math.system.LinearSystem;
-import edu.wpi.first.math.system.plant.LinearSystemId;
-import edu.wpi.first.wpilibj.simulation.FlywheelSim;
-import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import org.wpilib.math.numbers.N1;
+import org.wpilib.math.system.LinearSystem;
+import org.wpilib.math.system.Models;
+import org.wpilib.simulation.FlywheelSim;
+import org.wpilib.math.system.DCMotor;
+import org.wpilib.command2.Subsystem;
 
 public interface ShooterSubsystem extends Subsystem, AutoCloseable
 {
@@ -18,7 +18,7 @@ public interface ShooterSubsystem extends Subsystem, AutoCloseable
         public static FlywheelSim createSim()
         {
             LinearSystem<N1, N1, N1> plant =
-                    LinearSystemId.createFlywheelSystem(kGearbox, kInertia, kGearing);
+                    Models.flywheelFromPhysicalConstants(kGearbox, kInertia, kGearing);
             return new FlywheelSim(plant, kGearbox);
         }
 

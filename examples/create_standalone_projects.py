@@ -1,5 +1,4 @@
 import argparse
-import distutils.dir_util
 import os
 import shutil
 
@@ -20,14 +19,12 @@ def run():
 
     args = parser.parse_args()
 
-    default_vendor_props = ["SnobotSim.json", "WPILibNewCommands.json"]
+    default_vendor_props = ["SnobotSim.json", "CommandsV2.json"]
 
     projects = []
     projects.append(ExampleConfig("rev", "Rev", ["REVLib.json"]))
     projects.append(ExampleConfig("wpi", "Wpi", []))
-    projects.append(
-        ExampleConfig("catchall", "Catchall", ["REVLib.json", "Phoenix.json"])
-    )
+    projects.append(ExampleConfig("catchall", "Catchall", ["REVLib.json"]))
 
     this_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -42,8 +39,8 @@ def run():
         print(f"  {base_project}\n  {local_project}\n  to\n  {output_project}")
 
         # Copy the standard WPILib / Gradle files
-        distutils.dir_util.copy_tree(
-            this_dir + "/project_files/standard", output_project
+        shutil.copytree(
+            this_dir + "/project_files/standard", output_project, dirs_exist_ok=True
         )
 
         # Generate the build file
@@ -56,8 +53,12 @@ def run():
                 of.write(template_contents.replace("$(SIMTYPE)", config.package_name))
 
         # Copy the source from this project and the base
-        distutils.dir_util.copy_tree(local_project + "/src", output_project + "/src")
-        distutils.dir_util.copy_tree(base_project + "/src", output_project + "/src")
+        shutil.copytree(
+            local_project + "/src", output_project + "/src", dirs_exist_ok=True
+        )
+        shutil.copytree(
+            base_project + "/src", output_project + "/src", dirs_exist_ok=True
+        )
 
         # Copy the vendor deps for this project
         dest_vendordeps = os.path.join(output_project, "vendordeps")
