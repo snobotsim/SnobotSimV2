@@ -1,6 +1,6 @@
 package org.snobotv2.sim_wrappers;
 
-import edu.wpi.first.hal.simulation.PowerDistributionDataJNI;
+import org.wpilib.hardware.hal.simulation.PowerDistributionDataJNI;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,15 +1,16 @@
 package org.snobotv2.examples.rev.subsystems;
 
+import org.wpilib.hardware.bus.CANPort;
 import com.revrobotics.PersistMode;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.ResetMode;
-import com.revrobotics.spark.SparkBase.ControlType;
+import com.revrobotics.spark.SparkLowLevel.ControlType;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.wpilib.framework.RobotBase;
+import org.wpilib.command2.SubsystemBase;
 import org.snobotv2.examples.base.BaseConstants;
 import org.snobotv2.examples.base.subsystems.ShooterSubsystem;
 import org.snobotv2.module_wrappers.rev.RevEncoderSimWrapper;
@@ -34,12 +35,12 @@ public class RevShooterSubsystem extends SubsystemBase implements ShooterSubsyst
         ResetMode resetMode = ResetMode.kResetSafeParameters;
         PersistMode persistMode = PersistMode.kPersistParameters;
 
-        mLeadMotor = new SparkMax(BaseConstants.SHOOTER_MOTOR_A, MotorType.kBrushless);
+        mLeadMotor = new SparkMax(CANPort.CAN_S0, BaseConstants.SHOOTER_MOTOR_A, MotorType.kBrushless);
         mLeadMotor.configure(new SparkMaxConfig()
                 .apply(commonConfig),
                 resetMode, persistMode);
 
-        mFollower = new SparkMax(BaseConstants.SHOOTER_MOTOR_B, MotorType.kBrushless);
+        mFollower = new SparkMax(CANPort.CAN_S0, BaseConstants.SHOOTER_MOTOR_B, MotorType.kBrushless);
         mFollower.configure(new SparkMaxConfig()
                         .apply(commonConfig)
                         .follow(mLeadMotor),
@@ -72,7 +73,7 @@ public class RevShooterSubsystem extends SubsystemBase implements ShooterSubsyst
     @Override
     public double getRPM()
     {
-        return mEncoder.getVelocity();
+        return mEncoder.getVelocity().get();
     }
 
     @Override
@@ -84,6 +85,6 @@ public class RevShooterSubsystem extends SubsystemBase implements ShooterSubsyst
     @Override
     public void stop()
     {
-        mLeadMotor.set(0);
+        mLeadMotor.setThrottle(0);
     }
 }

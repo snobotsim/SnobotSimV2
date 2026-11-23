@@ -2,20 +2,22 @@
 apply plugin: 'maven-publish'
 
 
-task javadoc(type: Javadoc, overwrite: true) {
+javadoc {
     source = sourceSets.main.allJava
 
-    javadoc.options.links("http://docs.oracle.com/javase/8/docs/api/")
+    options.links("https://docs.oracle.com/en/java/javase/25/docs/api/")
     options.addStringOption "tag", "pre:a:Pre-Condition"
     options.addStringOption('Xdoclint:accessibility,syntax,reference,html', '-quiet')
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
+tasks.register('javadocJar', Jar) {
+    dependsOn javadoc
     archiveClassifier = 'javadoc'
     from javadoc.destinationDir
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
+tasks.register('sourcesJar', Jar) {
+    dependsOn classes
     archiveClassifier = 'sources'
     from sourceSets.main.allSource
 }
@@ -24,15 +26,15 @@ publishing {
 
     repositories {
         maven {
-            url "${rootDir}/build/maven_output"
+            url = "${rootDir}/build/maven_output"
         }
     }
 
     publications {
 
         snobot_sim_java(MavenPublication) {
-            groupId 'org.snobotv2'
-            version "${project.version}"
+            groupId = 'org.snobotv2'
+            version = "${project.version}"
 
             artifact jar
             artifact javadocJar

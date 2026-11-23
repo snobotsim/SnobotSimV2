@@ -1,58 +1,42 @@
 package org.snobotv2.examples.catchall.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkFlex;
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
-import edu.wpi.first.wpilibj.ADXL345_I2C;
-import edu.wpi.first.wpilibj.ADXL345_SPI;
-import edu.wpi.first.wpilibj.ADXL362;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.AddressableLED;
-import edu.wpi.first.wpilibj.AnalogAccelerometer;
-import edu.wpi.first.wpilibj.AnalogEncoder;
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.AnalogOutput;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DigitalOutput;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.I2C;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
-import edu.wpi.first.wpilibj.motorcontrol.PWMTalonFX;
-import edu.wpi.first.wpilibj.motorcontrol.PWMTalonSRX;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVenom;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
-import edu.wpi.first.wpilibj.PowerDistribution;
-import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
-import edu.wpi.first.wpilibj.motorcontrol.Talon;
-import edu.wpi.first.wpilibj.Ultrasonic;
-import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.wpilib.hardware.accelerometer.ADXL345_I2C;
+import org.wpilib.hardware.led.AddressableLED;
+import org.wpilib.hardware.accelerometer.AnalogAccelerometer;
+import org.wpilib.hardware.rotation.AnalogEncoder;
+import org.wpilib.hardware.discrete.AnalogInput;
+import org.wpilib.hardware.imu.OnboardIMU;
+import org.wpilib.hardware.rotation.AnalogPotentiometer;
+import org.wpilib.hardware.pneumatic.Compressor;
+import org.wpilib.hardware.pneumatic.PneumaticsModuleType;
+import org.wpilib.hardware.discrete.DigitalInput;
+import org.wpilib.hardware.discrete.DigitalOutput;
+import org.wpilib.hardware.pneumatic.DoubleSolenoid;
+import org.wpilib.hardware.rotation.Encoder;
+import org.wpilib.hardware.bus.CANPort;
+import org.wpilib.hardware.bus.I2C;
+import org.wpilib.drivers.motor.PWMSparkMax;
+import org.wpilib.drivers.motor.PWMTalonFX;
+import org.wpilib.drivers.motor.PWMTalonSRX;
+import org.wpilib.drivers.motor.PWMVenom;
+import org.wpilib.drivers.motor.PWMVictorSPX;
+import org.wpilib.hardware.power.PowerDistribution;
+import org.wpilib.hardware.pneumatic.Solenoid;
+import org.wpilib.drivers.motor.Spark;
+import org.wpilib.command2.SubsystemBase;
 
 @SuppressWarnings({"PMD", "removal"})
 public class CatchallSubsystem extends SubsystemBase
 {
     protected final ADXL345_I2C mI2cAccelerometer;
-    protected final ADXL345_SPI mSpiAccelerometer;
-    protected final ADXL362 mM362Accelerometer;
-    protected final ADXRS450_Gyro mAdxGyro;
     protected final AddressableLED mLeds;
     protected final AnalogAccelerometer mAnalogAccelerometer;
     protected final AnalogEncoder mAnalogEncoder;
-    protected final AnalogGyro mAnalogGyro;
     protected final AnalogInput mAnalogInput;
-    protected final AnalogOutput mAnalogOutput;
+    protected final OnboardIMU mOnboardImu;
     protected final AnalogPotentiometer mAnalogPotentiometer;
     protected final Compressor mCompressor;
     protected final DigitalInput mDigitalInput;
@@ -66,80 +50,55 @@ public class CatchallSubsystem extends SubsystemBase
     protected final PWMTalonSRX mPwmTalonSRX;
     protected final PWMVenom mVenom;
     protected final PWMVictorSPX mPwmVictorSPX;
-    protected final Relay mRelay;
-    protected final Servo mServo;
     protected final Solenoid mSolenoid;
     protected final Spark mSpark;
-    protected final SPI mCustomSpi;
-    protected final Talon mTalon;
-    protected final Ultrasonic mUltrasonic;
-    protected final VictorSP mVictorSP;
 
     protected final SparkMax mCanSparkMax;
     protected final SparkFlex mCanSparkFlex;
-    protected final WPI_TalonSRX mTalonSrx;
-    protected final WPI_VictorSPX mVictorSpx;
 
     public CatchallSubsystem()
     {
-        mI2cAccelerometer = new ADXL345_I2C(I2C.Port.kMXP, ADXL345_I2C.Range.k2G);
-        mSpiAccelerometer = new ADXL345_SPI(SPI.Port.kMXP, ADXL345_SPI.Range.k2G);
-        mM362Accelerometer = new ADXL362(SPI.Port.kMXP, ADXL362.Range.k2G);
-        mAdxGyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS3);
-        mCustomSpi = new SPI(SPI.Port.kOnboardCS3);
-        mCustomI2c = new I2C(I2C.Port.kOnboard, 0x20);
+        mI2cAccelerometer = new ADXL345_I2C(I2C.Port.PORT_1, 2);
+        mCustomI2c = new I2C(I2C.Port.PORT_0, 0x20);
 
-        mAnalogGyro = new AnalogGyro(1);
         mAnalogInput = new AnalogInput(2);
+        mOnboardImu = new OnboardIMU(OnboardIMU.MountOrientation.FLAT);
         mAnalogAccelerometer = new AnalogAccelerometer(3);
         mAnalogEncoder = new AnalogEncoder(new AnalogInput(4));
         mAnalogPotentiometer = new AnalogPotentiometer(5);
-        mAnalogOutput = new AnalogOutput(1);
 
         mDigitalInput = new DigitalInput(9);
         mDigitalOutput = new DigitalOutput(10);
         mEncoder =  new Encoder(0, 1);
-        mUltrasonic = new Ultrasonic(3, 4);
 
-        mCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
-        mSolenoid = new Solenoid(1, PneumaticsModuleType.CTREPCM, 0);
-        mDoubleSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 1, 2);
-        mPdp = new PowerDistribution(1, PowerDistribution.ModuleType.kCTRE);
-        mRelay = new Relay(3);
+        mCompressor = new Compressor(CANPort.CAN_S0, 0, PneumaticsModuleType.CTRE_PCM);
+        mSolenoid = new Solenoid(CANPort.CAN_S0, 1, PneumaticsModuleType.CTRE_PCM, 0);
+        mDoubleSolenoid = new DoubleSolenoid(CANPort.CAN_S0, PneumaticsModuleType.CTRE_PCM, 1, 2);
+        mPdp = new PowerDistribution(CANPort.CAN_S0, 1, PowerDistribution.ModuleType.CTRE);
 
         mLeds = new AddressableLED(0);
-        mServo = new Servo(1);
         mSpark = new Spark(2);
-        mTalon = new Talon(3);
-        mVictorSP = new VictorSP(5);
         mPwmSparkMax = new PWMSparkMax(7);
         mPwmTalonFx = new PWMTalonFX(8);
         mPwmTalonSRX = new PWMTalonSRX(9);
         mVenom = new PWMVenom(12);
         mPwmVictorSPX = new PWMVictorSPX(13);
 
-        mCanSparkMax = new SparkMax(15, SparkBase.MotorType.kBrushed);
-        mCanSparkFlex = new SparkFlex(17, SparkLowLevel.MotorType.kBrushed);
-        mTalonSrx = new WPI_TalonSRX(16);
-        mVictorSpx = new WPI_VictorSPX(18);
+        mCanSparkMax = new SparkMax(CANPort.CAN_S0, 15, SparkLowLevel.MotorType.kBrushed);
+        mCanSparkFlex = new SparkFlex(CANPort.CAN_S0, 17, SparkLowLevel.MotorType.kBrushed);
     }
 
     public void simulationPeriodic()
     {
-        mServo.set(.25);
-        mSpark.set(-0.9);
-        mTalon.set(-0.8);
-        mVictorSP.set(-0.6);
-        mPwmSparkMax.set(-0.4);
-        mPwmTalonFx.set(-0.3);
-        mPwmTalonSRX.set(-0.2);
-        mVenom.set(0.2);
-        mPwmVictorSPX.set(0.3);
+        mSpark.setThrottle(-0.9);
+        mPwmSparkMax.setThrottle(-0.4);
+        mPwmTalonFx.setThrottle(-0.3);
+        mPwmTalonSRX.setThrottle(-0.2);
+        mVenom.setThrottle(0.2);
+        mPwmVictorSPX.setThrottle(0.3);
 
-        mCanSparkMax.set(0.5);
-        mCanSparkFlex.set(0.5);
-        mTalonSrx.set(0.6);
-        mVictorSpx.set(0.8);
+        mCanSparkMax.setThrottle(0.5);
+        mCanSparkFlex.setThrottle(0.5);
     }
 
 }

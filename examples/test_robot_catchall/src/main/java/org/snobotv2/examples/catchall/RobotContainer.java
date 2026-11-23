@@ -1,7 +1,7 @@
 package org.snobotv2.examples.catchall;
 
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj2.command.Command;
+import org.wpilib.vision.stream.CameraServer;
+import org.wpilib.command2.Command;
 import org.snobotv2.examples.catchall.subsystems.CatchallSubsystem;
 
 public class RobotContainer

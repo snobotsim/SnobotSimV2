@@ -1,7 +1,7 @@
 package org.snobotv2.examples.base;
 
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import org.wpilib.driverstation.XboxController;
+import org.wpilib.command2.button.JoystickButton;
 import org.snobotv2.examples.base.commands.DriveWithHaloJoysticksCommand;
 import org.snobotv2.examples.base.commands.ElevatorGoToPositionCommand;
 import org.snobotv2.examples.base.commands.ElevatorManuallyMoveCommand;

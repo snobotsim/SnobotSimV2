@@ -2,21 +2,20 @@ package com.revrobotics.spark;
 
 import com.revrobotics.sim.SparkFlexSim;
 import com.revrobotics.sim.SparkMaxSim;
-import com.revrobotics.spark.SparkBase.ControlType;
+import com.revrobotics.spark.SparkLowLevel.ControlType;
 import com.revrobotics.spark.SparkClosedLoopController.ArbFFUnits;
 import com.revrobotics.spark.SparkLowLevel.SparkModel;
 import com.revrobotics.spark.config.ClosedLoopConfigAccessor;
 import com.revrobotics.spark.config.SparkBaseConfigAccessor;
-import edu.wpi.first.hal.SimDouble;
-import edu.wpi.first.hal.SimInt;
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
-import edu.wpi.first.math.trajectory.TrapezoidProfile.State;
-import edu.wpi.first.util.sendable.SendableRegistry;
-import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.simulation.SimDeviceSim;
+import org.wpilib.hardware.hal.SimDouble;
+import org.wpilib.hardware.hal.SimInt;
+import org.wpilib.math.controller.PIDController;
+import org.wpilib.math.controller.ProfiledPIDController;
+import org.wpilib.math.system.DCMotor;
+import org.wpilib.math.trajectory.TrapezoidProfile.Constraints;
+import org.wpilib.math.trajectory.TrapezoidProfile.State;
+import org.wpilib.system.RobotController;
+import org.wpilib.simulation.SimDeviceSim;
 
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -25,7 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @SuppressWarnings({"PMD.AvoidDuplicateLiterals", "PMD.CouplingBetweenObjects"})
-public class SparkSimHelper
+public final class SparkSimHelper
 {
     private static final Logger LOGGER = Logger.getLogger(SparkSimHelper.class.getName());
     private static final Map<Integer, ControlType> CONTROL_TYPE_LOOKUP;
@@ -84,7 +83,7 @@ public class SparkSimHelper
             deviceType = "SPARK MAX";
         }
 
-        String deviceName = deviceType + " [" + spark.getDeviceId() + "]";
+        String deviceName = deviceType + " [" + spark.getCanPort().value + "," + spark.getDeviceId() + "]";
         SimDeviceSim sparkSim = new SimDeviceSim(deviceName);
 
         mControlMode = sparkSim.getInt("Control Mode");
@@ -104,34 +103,20 @@ public class SparkSimHelper
 
         ControlType controlType = CONTROL_TYPE_LOOKUP.get(controlTypeInt);
 
-        double voltagePercentage = 0;
-        switch (controlType)
+        double voltagePercentage = switch (controlType)
         {
-        case kDutyCycle:
-            voltagePercentage = mSim.getSetpoint();
-            break;
-        case kVelocity:
-            voltagePercentage = calculateSpeedControl();
-            break;
-        case kPosition:
-            voltagePercentage = calculatePositionControl();
-            break;
-        case kMAXMotionPositionControl:
-            voltagePercentage = calculateSmartMotionOutput();
-            break;
-        case kVoltage:
-            voltagePercentage = mSim.getSetpoint() / RobotController.getBatteryVoltage();
-            break;
-        case kMAXMotionVelocityControl:
-        case kCurrent:
-        default:
-            throw new IllegalArgumentException("Unsupported control type " + controlType);
-        }
+        case kDutyCycle -> mSim.getSetpoint();
+        case kVelocity -> calculateSpeedControl();
+        case kPosition -> calculatePositionControl();
+        case kMAXMotionPositionControl -> calculateSmartMotionOutput();
+        case kVoltage -> mSim.getSetpoint() / RobotController.getBatteryVoltage();
+        case kMAXMotionVelocityControl, kCurrent -> throw new IllegalArgumentException("Unsupported control type " + controlType);
+        };
 
         mSim.setAppliedOutput(voltagePercentage);
     }
 
-    protected void log(Level level, String message)
+    private void log(Level level, String message)
     {
         LOGGER.log(level, "REV Sim [" + mSpark.getDeviceId() + "] - " + message);
     }
@@ -151,13 +136,12 @@ public class SparkSimHelper
         private double mMaxVelocity;
         private double mMaxAcceleration;
 
-        public PIDFConstants(ClosedLoopSlot slot)
+        public PIDFConstants()
         {
-            mConstraints = new Constraints(0, 0);
+            // WPILib requires positive constraints. The real values are read from the config before they are used
+            mConstraints = new Constraints(1, 1);
             mBasicPidController = new PIDController(0, 0, 0);
             mProfiledPidController = new ProfiledPIDController(0, 0, 0, mConstraints);
-            SendableRegistry.setName(mBasicPidController, "RevSim[" + slot.value + "] Basic PID");
-            SendableRegistry.setName(mProfiledPidController, "RevSim[" + slot.value + "] Profiled PID");
             mF = 0;
         }
 
@@ -180,8 +164,11 @@ public class SparkSimHelper
 
             mMaxVelocity = accessor.maxMotion.getCruiseVelocity(slotId);
             mMaxAcceleration = accessor.maxMotion.getMaxAcceleration(slotId);
-            mConstraints = new Constraints(mMaxVelocity, mMaxAcceleration);
-            mProfiledPidController.setConstraints(mConstraints);
+            if (mMaxVelocity > 0 && mMaxAcceleration > 0)
+            {
+                mConstraints = new Constraints(mMaxVelocity, mMaxAcceleration);
+                mProfiledPidController.setConstraints(mConstraints);
+            }
         }
 
         public void reset()
@@ -224,7 +211,7 @@ public class SparkSimHelper
         ClosedLoopSlot activeSlot = mSim.getClosedLoopSlot();
         if (!mPidConstants.containsKey(activeSlot))
         {
-            mPidConstants.put(activeSlot, new PIDFConstants(activeSlot));
+            mPidConstants.put(activeSlot, new PIDFConstants());
         }
 
         PIDFConstants constants = mPidConstants.get(activeSlot);

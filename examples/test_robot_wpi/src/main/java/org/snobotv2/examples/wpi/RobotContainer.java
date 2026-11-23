@@ -1,7 +1,7 @@
 package org.snobotv2.examples.wpi;
 
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj2.command.Command;
+import org.wpilib.vision.stream.CameraServer;
+import org.wpilib.command2.Command;
 import org.snobotv2.examples.base.auton_modes.AutonomousFactory;
 import org.snobotv2.examples.base.ButtonMapping;
 import org.snobotv2.examples.base.subsystems.DrivetrainSubsystem;

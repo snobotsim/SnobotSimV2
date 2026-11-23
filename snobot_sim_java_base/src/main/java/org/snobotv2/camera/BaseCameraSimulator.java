@@ -1,7 +1,7 @@
 package org.snobotv2.camera;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Transform2d;
+import org.wpilib.math.geometry.Pose2d;
+import org.wpilib.math.geometry.Transform2d;
 
 import java.util.List;
 import java.util.TreeMap;

@@ -1,6 +1,6 @@
 package org.snobotv2.module_wrappers;
 
-import edu.wpi.first.hal.SimDouble;
+import org.wpilib.hardware.hal.SimDouble;
 import org.snobotv2.interfaces.IGyroWrapper;
 
 import java.util.function.DoubleConsumer;

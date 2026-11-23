@@ -1,8 +1,7 @@
 plugins {
     id 'java'
-    id 'edu.wpi.first.wpilib.repositories.WPILibRepositoriesPlugin' version '2020.2'
-    id 'com.github.spotbugs' version '6.0.2' apply false
-    id 'com.diffplug.spotless' version '6.20.0' apply false
+    id 'com.github.spotbugs' version '6.4.12' apply false
+    id 'com.diffplug.spotless' version '8.4.0' apply false
 }
 
 import com.github.spotbugs.snom.Effort
@@ -13,5 +12,5 @@ repositories {
 }
 
 wrapper {
-    gradleVersion = '8.4'
+    gradleVersion = '9.4.1'
 }

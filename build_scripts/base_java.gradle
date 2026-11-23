@@ -1,14 +1,16 @@
 repositories {
     mavenCentral()
     mavenLocal()
-    maven { url "https://frcmaven.wpi.edu/artifactory/release/" }
-    maven { url 'https://devsite.ctr-electronics.com/maven/release/' }
-    maven { url 'https://maven.revrobotics.com/' }
+    maven { url = "https://frcmaven.wpi.edu/artifactory/release/" }
+    maven { url = 'https://maven.ctr-electronics.com/release/' }
+    maven { url = 'https://maven.revrobotics.com/' }
 }
 
-
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
 
 ext.getCurrentArch = {
     OperatingSystem os = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.currentOperatingSystem;
@@ -40,42 +42,52 @@ ext.getCurrentOs = {
 }
 
 ext {
-    wpiVersion = '2026.1.1'
-    opencvYear = '2025'
-    opencvVersion = '4.10.0-3'
-    phoenix5Version = '5.36.0'
-    phoenix6Version = "26.1.0"
-    revVersion = '2026.0.0'
+    wpiVersion = '2027.0.0-alpha-8'
+    opencvVersion = '2027-4.13.0-4'
+    phoenix6Version = "26.70.0-alpha-2"
+    revVersion = '2027.0.0-alpha-9'
 
-    jacksonVersion = '2.19.2'
-    ejmlVersion = '0.44.0'
+    avajeVersion = '3.14'
+    ejmlVersion = '0.46.0'
     quickbufVersion = '1.4'
+    junitVersion = '5.13.4'
+    junitLauncherVersion = '1.13.4'
 
     nativeOs = getCurrentOs() + getCurrentArch()
 }
 
-wpilibTools.deps.wpilibVersion = project.wpiVersion
+ext.wpilibJava = { String name ->
+    return "org.wpilib.${name}:${name}-java:${wpiVersion}"
+}
 
 configurations {
     nativeDesktopZip
 }
 
 dependencies {
-    implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
-    implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
-    implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
-    implementation "org.ejml:ejml-simple:$ejmlVersion"
+    implementation "io.avaje:avaje-jsonb:$avajeVersion"
+    implementation "org.ejml:ejml-java9module:$ejmlVersion"
     implementation "us.hebi.quickbuf:quickbuf-runtime:$quickbufVersion"
 
-    nativeDesktopZip "edu.wpi.first.hal:hal-cpp:${wpiVersion}:${nativeOs}@zip"
-    nativeDesktopZip "edu.wpi.first.ntcore:ntcore-cpp:${wpiVersion}:${nativeOs}@zip"
-    nativeDesktopZip "edu.wpi.first.wpinet:wpinet-cpp:${wpiVersion}:${nativeOs}@zip"
-    nativeDesktopZip "edu.wpi.first.cscore:cscore-cpp:${wpiVersion}:${nativeOs}@zip"
-    nativeDesktopZip "edu.wpi.first.wpiutil:wpiutil-cpp:${wpiVersion}:${nativeOs}@zip"
-    nativeDesktopZip "edu.wpi.first.wpimath:wpimath-cpp:${wpiVersion}:${nativeOs}@zip"
-    nativeDesktopZip "edu.wpi.first.thirdparty.frc${opencvYear}.opencv:opencv-cpp:${opencvVersion}:${nativeOs}@zip"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher:$junitLauncherVersion"
 
-    nativeDesktopZip "com.ctre.phoenix.sim:cci-sim:${phoenix5Version}:${nativeOs}@zip"
+    for (String lib : [
+        "hal",
+        "ntcore",
+        "wpinet",
+        "wpiutil",
+        "wpimath",
+        "cscore",
+        "cameraserver",
+        "datalog",
+        "telemetry",
+        "tunables",
+        "drivers",
+        "commandsv2"
+    ]) {
+        nativeDesktopZip "org.wpilib.${lib}:${lib}-cpp:${wpiVersion}:${nativeOs}@zip"
+    }
+    nativeDesktopZip "org.wpilib.thirdparty.opencv:opencv-cpp:${opencvVersion}:${nativeOs}@zip"
 
     nativeDesktopZip "com.ctre.phoenix6.sim:api-cpp-sim:${phoenix6Version}:${nativeOs}@zip"
     nativeDesktopZip "com.ctre.phoenix6.sim:simProCANrange:${phoenix6Version}:${nativeOs}@zip"
@@ -99,45 +111,17 @@ tasks.withType(JavaCompile) {
     options.deprecation = true
 }
 
-task extractJniLibraries() {
-    def nativeZips = project.configurations.getByName('nativeDesktopZip')
-    FileCollection extractedFiles = null as FileCollection
-
-    nativeZips.dependencies
-            .matching { Dependency dep -> dep != null && nativeZips.files(dep).size() > 0 }
-            .all { Dependency dep ->
-                def ziptree = project.zipTree(nativeZips.files(dep).first())
-                [
-                        "**/*.so*",
-                        "**/*.so",
-                        "**/*.dll",
-                        "**/*.dylib"
-                ].collect { String pattern ->
-                    def fc = ziptree.matching { PatternFilterable pat -> pat.include(pattern) }
-                    if (extractedFiles == null) extractedFiles = fc
-                    else extractedFiles += fc
-                }
-            }
-
-    File dir = new File(project.buildDir, "snobotSimFiles")
-
-    if (!dir.exists()) {
-        dir.parentFile.mkdirs()
+def extractJniLibraries = tasks.register('extractJniLibraries', Sync) {
+    def nativeZips = configurations.nativeDesktopZip
+    from({ nativeZips.collect { zipTree(it) } }) {
+        include '**/*.so*'
+        include '**/*.dll'
+        include '**/*.dylib'
+        eachFile { FileCopyDetails details -> details.path = details.name }
     }
-
-    def tree = fileTree("${dir}")
-    tree.include '**/*.so*'
-    tree.include '**/*.so'
-    tree.include '**/*.dll'
-    tree.include '**/*.dylib'
-    tree.each { it.delete() }
-
-    if (extractedFiles != null) {
-        project.copy { CopySpec s ->
-            s.from(project.files { extractedFiles.files })
-            s.into(dir)
-        }
-    }
+    includeEmptyDirs = false
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    into layout.buildDirectory.dir("snobotSimFiles")
 }
 
 

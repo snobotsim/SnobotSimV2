@@ -1,9 +1,9 @@
 package org.snobotv2.examples.base.subsystems;
 
-import edu.wpi.first.wpilibj.simulation.ElevatorSim;
-import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import org.wpilib.simulation.ElevatorSim;
+import org.wpilib.math.system.DCMotor;
+import org.wpilib.math.util.Units;
+import org.wpilib.command2.Subsystem;
 
 public interface ElevatorSubsystem extends Subsystem, AutoCloseable
 {

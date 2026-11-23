@@ -1,13 +1,14 @@
 package org.snobotv2;
 
-import edu.wpi.first.hal.simulation.PowerDistributionDataJNI;
-import edu.wpi.first.wpilibj.PowerDistribution;
-import edu.wpi.first.wpilibj.simulation.BatterySim;
-import edu.wpi.first.wpilibj.simulation.RoboRioSim;
+import org.wpilib.hardware.hal.simulation.PowerDistributionDataJNI;
+import org.wpilib.hardware.bus.CANPort;
+import org.wpilib.hardware.power.PowerDistribution;
+import org.wpilib.simulation.BatterySim;
+import org.wpilib.simulation.RoboRioSim;
 
 public final class SnobotSim
 {
-    private static final PowerDistribution PDP = new PowerDistribution();
+    private static final PowerDistribution PDP = new PowerDistribution(CANPort.CAN_S0);
 
     private SnobotSim()
     {

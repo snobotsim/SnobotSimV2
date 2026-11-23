@@ -1,6 +1,6 @@
 package org.snobotv2.examples.base.commands.auton;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import org.wpilib.command2.Command;
 import org.snobotv2.examples.base.subsystems.DrivetrainSubsystem;
 
 public final class DriveStraightTimedCommand extends Command

@@ -1,7 +1,9 @@
 package org.snobotv2.module_wrappers.phoenix6;
 
+import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import org.junit.jupiter.api.Test;
+import org.wpilib.hardware.bus.CANPort;
 import org.snobotv2.interfaces.IGyroWrapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +16,7 @@ public class TestPigeon2 extends BasePhoenix6UnitTest
     @Test
     public void testBasicInline()
     {
-        try (Pigeon2 pigeon = new Pigeon2(3))
+        try (Pigeon2 pigeon = new Pigeon2(3, new CANBus(CANPort.CAN_S0)))
         {
             pigeon.reset();
             ctreSimLoop();

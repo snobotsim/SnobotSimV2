@@ -1,12 +1,12 @@
 package org.snobotv2.examples.base.subsystems;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
-import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.wpilibj.smartdashboard.Field2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.wpilib.math.geometry.Pose2d;
+import org.wpilib.math.geometry.Rotation2d;
+import org.wpilib.math.kinematics.DifferentialDriveOdometry;
+import org.wpilib.math.kinematics.DifferentialDriveWheelVelocities;
+import org.wpilib.smartdashboard.Field2d;
+import org.wpilib.command2.SubsystemBase;
+import org.wpilib.telemetry.Telemetry;
 
 public abstract class BaseDrivetrainSubsystem extends SubsystemBase implements DrivetrainSubsystem
 {
@@ -17,7 +17,6 @@ public abstract class BaseDrivetrainSubsystem extends SubsystemBase implements D
     {
         mOdometry = new DifferentialDriveOdometry(new Rotation2d(), 0, 0);
         mField = new Field2d();
-        SmartDashboard.putData(mField);
     }
 
     public double getPositionError(double leftGoal, double rightGoal)
@@ -35,7 +34,8 @@ public abstract class BaseDrivetrainSubsystem extends SubsystemBase implements D
                 getRotation2d(),
                 getLeftDistance(),
                getRightDistance());
-        mField.setRobotPose(mOdometry.getPoseMeters());
+        mField.setRobotPose(mOdometry.getPose());
+        Telemetry.log("Field", mField);
     }
 
     public Rotation2d getRotation2d()
@@ -51,7 +51,7 @@ public abstract class BaseDrivetrainSubsystem extends SubsystemBase implements D
     @Override
     public Pose2d getPose()
     {
-        return mOdometry.getPoseMeters();
+        return mOdometry.getPose();
     }
 
     /**
@@ -60,9 +60,9 @@ public abstract class BaseDrivetrainSubsystem extends SubsystemBase implements D
      * @return The current wheel speeds.
      */
     @Override
-    public DifferentialDriveWheelSpeeds getWheelSpeeds()
+    public DifferentialDriveWheelVelocities getWheelSpeeds()
     {
-        return new DifferentialDriveWheelSpeeds(getLeftRate(), getRightRate());
+        return new DifferentialDriveWheelVelocities(getLeftRate(), getRightRate());
     }
 
     /**

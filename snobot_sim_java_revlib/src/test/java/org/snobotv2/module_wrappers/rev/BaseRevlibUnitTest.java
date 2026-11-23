@@ -13,7 +13,7 @@ public class BaseRevlibUnitTest extends BaseUnitTest
     {
         for (T motorController : motorControllers) // NOPMD
         {
-            assertEquals(expected, motorController.getAppliedOutput(), DEFAULT_EPSILON, () -> "For " + motorController.getDeviceId());
+            assertEquals(expected, motorController.getAppliedOutput().get(), DEFAULT_EPSILON, () -> "For " + motorController.getDeviceId());
         }
     }
 }

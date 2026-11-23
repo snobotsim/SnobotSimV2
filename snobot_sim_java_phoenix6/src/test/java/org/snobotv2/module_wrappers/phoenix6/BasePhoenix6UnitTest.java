@@ -1,6 +1,6 @@
 package org.snobotv2.module_wrappers.phoenix6;
 
-import edu.wpi.first.hal.HAL;
+import org.wpilib.hardware.hal.HAL;
 import org.snobotv2.test_utils.BaseUnitTest;
 
 @SuppressWarnings("PMD.TestClassWithoutTestCases")
