@@ -17,21 +17,16 @@ jobs:
           git branch -f master origin/master
 
       # Setup dependencies
-      - name: Set up Python 3.8
+      - name: Set up Python 3.12
         uses: actions/setup-python@v6
         with:
-          python-version: 3.8
-      - name: Install clang-format
-        run: |
-          wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
-          sudo sh -c "echo 'deb http://apt.llvm.org/focal/ llvm-toolchain-focal-14 main' >> /etc/apt/sources.list.d/proposed-repositories.list"
-          sudo apt-get update -q
-          sudo apt-get install -y clang-format-14
+          python-version: 3.12
+      # wpiformat bundles its own clang-format, so it doesn't need to be installed separately
       - name: Install wpiformat
-        run: pip3 install wpiformat
+        run: pip3 install wpiformat==2026.76
 
       - name: Run wpiformat
-        run: wpiformat -clang 14
+        run: wpiformat
 
       # Check the diff
       - name: Check Output
