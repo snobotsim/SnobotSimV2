@@ -15,7 +15,7 @@ snobot_sim_java_library(
         "//snobot_sim_java_base/src/main/java/org/snobotv2/sim_wrappers",
         "//snobot_sim_java_revlib/src/main/java/com/revrobotics/spark:simmable_rev",
         "//snobot_sim_java_revlib/src/main/java/org/snobotv2/module_wrappers/rev",
-        "@bzlmodrio-allwpilib//libraries/java/wpilibNewCommands",
+        "@bzlmodrio-allwpilib//libraries/java/commandsv2",
         "@bzlmodrio-allwpilib//libraries/java/wpilibj",
         "@bzlmodrio-allwpilib//libraries/java/wpimath",
         "@bzlmodrio-revlib//libraries/java/revlib-java",

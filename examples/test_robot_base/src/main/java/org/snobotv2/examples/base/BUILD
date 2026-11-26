@@ -7,7 +7,7 @@ snobot_sim_java_library(
     deps = [
         "//examples/test_robot_base/src/main/java/org/snobotv2/examples/base/commands",
         "//examples/test_robot_base/src/main/java/org/snobotv2/examples/base/subsystems",
-        "@bzlmodrio-allwpilib//libraries/java/wpilibNewCommands",
+        "@bzlmodrio-allwpilib//libraries/java/commandsv2",
         "@bzlmodrio-allwpilib//libraries/java/wpilibj",
     ],
 )

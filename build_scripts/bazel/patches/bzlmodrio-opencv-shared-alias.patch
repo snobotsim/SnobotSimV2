@@ -1,0 +1,13 @@
+--- a/libraries/cpp/opencv/BUILD.bazel
++++ b/libraries/cpp/opencv/BUILD.bazel
+@@ -15,3 +15,10 @@
+     actual = "@bzlmodrio-opencv//private/cpp/opencv:jni",
+     visibility = ["//visibility:public"],
+ )
++
++# bzlmodrio-allwpilib 2027.0.0-alpha-8 depends on this target, but no bzlmodrio-opencv release provides it yet.
++alias(
++    name = "shared",
++    actual = "@bzlmodrio-opencv//private/cpp/opencv",
++    visibility = ["//visibility:public"],
++)

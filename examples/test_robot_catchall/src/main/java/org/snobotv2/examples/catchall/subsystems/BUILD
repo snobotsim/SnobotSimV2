@@ -5,9 +5,9 @@ snobot_sim_java_library(
     srcs = glob(["*.java"]),
     visibility = ["//examples/test_robot_catchall:__subpackages__"],
     deps = [
-        "@bzlmodrio-allwpilib//libraries/java/wpilibNewCommands",
+        "@bzlmodrio-allwpilib//libraries/java/commandsv2",
+        "@bzlmodrio-allwpilib//libraries/java/drivers",
         "@bzlmodrio-allwpilib//libraries/java/wpilibj",
-        "@bzlmodrio-phoenix//libraries/java/wpiapi-java",
         "@bzlmodrio-revlib//libraries/java/revlib-java",
     ],
 )

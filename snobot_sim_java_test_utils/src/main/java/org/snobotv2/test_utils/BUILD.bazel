@@ -9,8 +9,6 @@ snobot_sim_java_library(
         "//snobot_sim_java_base/src/main/java/org/snobotv2/module_wrappers",
         "@bzlmodrio-allwpilib//libraries/java/hal",
         "@bzlmodrio-allwpilib//libraries/java/wpilibj",
-        "@bzlmodrio-phoenix//libraries/java/api-java",
-        "@bzlmodrio-phoenix//libraries/java/wpiapi-java",
         "@bzlmodrio-revlib//libraries/java/revlib-java",
         "@maven//:org_junit_jupiter_junit_jupiter_api",
         "@maven//:org_junit_jupiter_junit_jupiter_params",

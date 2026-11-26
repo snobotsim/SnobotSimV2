@@ -13,7 +13,7 @@ snobot_sim_java_library(
         "//examples/test_robot_base/src/main/java/org/snobotv2/examples/base/subsystems",
         "//examples/test_robot_wpi/src/main/java/org/snobotv2/examples/wpi/subsystems",
         "@bzlmodrio-allwpilib//libraries/java/cameraserver",
-        "@bzlmodrio-allwpilib//libraries/java/wpilibNewCommands",
+        "@bzlmodrio-allwpilib//libraries/java/commandsv2",
         "@bzlmodrio-allwpilib//libraries/java/wpilibj",
     ],
 )
