@@ -35,7 +35,11 @@ def snobot_sim_java_test(name, srcs, deps = [], runtime_deps = [], disable_pmd =
         "@maven//:org_junit_platform_junit_platform_launcher",
         "@maven//:org_junit_platform_junit_platform_suite_api",
     ]
-    print("Tests are currently disbled for bazel ")
+    # rules_bazelrio symlinks the native libraries into "<name>.runfiles/_main/", which is
+    # only the runfiles root when running unsandboxed. Inside a sandbox those files are
+    # staged at "<package>/<name>.runfiles/_main/" relative to the runfiles root, so
+    # search both locations.
+    native_dir = native.package_name() + "/" + name + ".runfiles/_main"
 
     bazelrio_java_test(
         name = name,
@@ -48,13 +52,19 @@ def snobot_sim_java_test(name, srcs, deps = [], runtime_deps = [], disable_pmd =
             "--select-package",
             "org",
         ],
-        env = {
-            "LD_LIBRARY_PATH": ".",
-            "PATH": ".",
-        },  # TODO fishy
-        jvm_flags = [
-            "-Djava.library.path=.",
-        ],
+        env = select({
+            # Windows resolves dependent DLLs via PATH. Don't override PATH elsewhere,
+            # the test wrapper needs to find bash.
+            "@bazel_tools//src/conditions:windows": {"PATH": "."},
+            "//conditions:default": {
+                "LD_LIBRARY_PATH": ".:" + native_dir,
+                "DYLD_LIBRARY_PATH": ".:" + native_dir,
+            },
+        }),
+        jvm_flags = select({
+            "@bazel_tools//src/conditions:windows": ["-Djava.library.path=."],
+            "//conditions:default": ["-Djava.library.path=.:" + native_dir],
+        }),
         **kwargs
     )
 
