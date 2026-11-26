@@ -1,34 +1,36 @@
-bazel_dep(name = "rules_jvm_external", version = "6.3")
-bazel_dep(name = "rules_java", version = "8.14.0")
+bazel_dep(name = "rules_jvm_external", version = "6.8")
+bazel_dep(name = "rules_java", version = "8.16.1")
 bazel_dep(name = "rules_bazelrio", version = "0.0.14")
-bazel_dep(name = "rules_bzlmodrio_toolchains", version = "2025-1.bcr6")
-bazel_dep(name = "rules_bzlmodrio_jdk", version = "17.0.12-7.bcr1")
 bazel_dep(name = "rules_pmd", version = "7.2.0.bcr1")
-bazel_dep(name = "bzlmodrio-allwpilib", version = "2026.1.1")
-bazel_dep(name = "bzlmodrio-phoenix", version = "5.36.0")
-bazel_dep(name = "bzlmodrio-phoenix6", version = "26.1.0")
-bazel_dep(name = "bzlmodrio-revlib", version = "2026.0.0")
+bazel_dep(name = "bzlmodrio-allwpilib", version = "2027.0.0-alpha-8")
+bazel_dep(name = "bzlmodrio-opencv", version = "2027.4.13.0-4")
+bazel_dep(name = "bzlmodrio-phoenix6", version = "26.70.0-alpha-2")
+bazel_dep(name = "bzlmodrio-revlib", version = "2027.0.0-alpha-9")
 
-archive_override(
-    module_name = "rules_bzlmodrio_jdk",
-    integrity = "sha256-SrikyrF2v2lENdqn9aFC//d0TkIE620lR60yXTrWFTs=",
-    strip_prefix = "rules_bzlmodrio_jdk-4ecd4cbc97dfbfe2ceefa627de1228e2f2ca5773",
-    urls = ["https://github.com/wpilibsuite/rules_bzlmodRio_jdk/archive/4ecd4cbc97dfbfe2ceefa627de1228e2f2ca5773.tar.gz"],
+# bzlmodrio-allwpilib 2027.0.0-alpha-8 references @bzlmodrio-opencv//libraries/cpp/opencv:shared,
+# which no published bzlmodrio-opencv provides. Remove this once upstream is fixed.
+single_version_override(
+    module_name = "bzlmodrio-opencv",
+    patch_strip = 1,
+    patches = ["//build_scripts/bazel/patches:bzlmodrio-opencv-shared-alias.patch"],
 )
 
 maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
 maven.install(
     artifacts = [
-        "org.junit.jupiter:junit-jupiter-api:5.8.2",
-        "org.junit.jupiter:junit-jupiter-params:5.8.2",
-        "org.junit.jupiter:junit-jupiter-engine:5.8.2",
-        "org.junit.platform:junit-platform-commons:1.6.1",
-        "org.junit.platform:junit-platform-console:1.6.1",
-        "org.junit.platform:junit-platform-engine:1.6.1",
-        "org.junit.platform:junit-platform-launcher:1.6.1",
-        "org.junit.platform:junit-platform-suite-api:1.6.1",
+        "org.junit.jupiter:junit-jupiter-api:5.13.4",
+        "org.junit.jupiter:junit-jupiter-params:5.13.4",
+        "org.junit.jupiter:junit-jupiter-engine:5.13.4",
+        "org.junit.platform:junit-platform-commons:1.13.4",
+        "org.junit.platform:junit-platform-console:1.13.4",
+        "org.junit.platform:junit-platform-engine:1.13.4",
+        "org.junit.platform:junit-platform-launcher:1.13.4",
+        "org.junit.platform:junit-platform-suite-api:1.13.4",
     ],
-    repositories = ["https://repo1.maven.org/maven2"],
+    repositories = [
+        "https://repo1.maven.org/maven2",
+        "https://frcmaven.wpi.edu/release",
+    ],
     lock_file = "//build_scripts/bazel/deps:maven_install.json",
 )
 use_repo(

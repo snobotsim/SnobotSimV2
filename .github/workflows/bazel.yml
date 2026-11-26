@@ -1,69 +1,47 @@
-# Bazel is disabled while porting to the 2027 alpha. Gradle is the only supported build for now.
+name: Bazel
 
-# name: Bazel
-#
-# on: [pull_request, push]
-#
-# jobs:
-#   build-native:
-#     strategy:
-#       fail-fast: false
-#       matrix:
-#         include:
-#           - { os: windows-latest, architecture: x64, config: "" }
-#           - { os: macos-latest,   architecture: x64, config: "" }
-#           - { os: ubuntu-latest,  architecture: x64, config: "" }
-#     name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
-#     runs-on: ${{ matrix.os }}
-#     steps:
-#       - uses: actions/checkout@v6
-#         with:
-#           fetch-depth: 0
-#       - uses: bazelbuild/setup-bazelisk@v3
-#
-#       - uses: actions/setup-java@v5
-#         with:
-#           distribution: 'zulu'
-#           java-version: 17
-#           architecture: x64
-#
-#       # Unix systems sometimes fail to create the symlink the first time around
-#       - name: Build (Allow failure)
-#         run: bazel build ... --nojava_header_compilation -k ${{ matrix.config }} || true
-#         shell: bash
-#
-#       - name: Build
-#         run: bazel build ... -k ${{ matrix.config }}
-#         shell: bash
-#
-#   build-native-testless:
-#     strategy:
-#       fail-fast: false
-#       matrix:
-#         include:
-#           - { os: ubuntu-latest, architecture: x64, config: "--config=for-roborio" }
-#     name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
-#     runs-on: ${{ matrix.os }}
-#     steps:
-#       - uses: actions/checkout@v6
-#         with:
-#           fetch-depth: 0
-#       - uses: bazelbuild/setup-bazelisk@v3
-#
-#       - name: Build
-#         run: bazel build ... --nojava_header_compilation -k ${{ matrix.config }}
-#         shell: bash
-#
-#   repin-maven:
-#     strategy:
-#       fail-fast: false
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v6
-#       - uses: bazelbuild/setup-bazelisk@v3
-#       - run:  REPIN=1 bazel run @maven//:pin
-#       - run:  git diff HEAD
-#       - uses: actions/upload-artifact@v6
-#         with:
-#           name: Re-pinned maven
-#           path: build_scripts/bazel/deps/maven_install.json
+on: [pull_request, push]
+
+jobs:
+  build-native:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: windows-latest, architecture: x64, config: "" }
+          - { os: macos-latest,   architecture: x64, config: "" }
+          - { os: ubuntu-latest,  architecture: x64, config: "" }
+    name: "Build - ${{ matrix.os }} ${{ matrix.architecture }} ${{ matrix.config }}"
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: bazelbuild/setup-bazelisk@v3
+
+      # The rules_bazelrio native library symlinks collide with the runfiles tree the first time around
+      - name: Build (Allow failure)
+        run: bazel build ... --nojava_header_compilation -k ${{ matrix.config }} || true
+        shell: bash
+
+      - name: Build
+        run: bazel build ... -k ${{ matrix.config }}
+        shell: bash
+
+      - name: Test
+        run: bazel test ... -k ${{ matrix.config }}
+        shell: bash
+
+  repin-maven:
+    strategy:
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: bazelbuild/setup-bazelisk@v3
+      - run:  RULES_JVM_EXTERNAL_REPIN=1 bazel run @maven//:pin
+      - run:  git diff HEAD
+      - uses: actions/upload-artifact@v6
+        with:
+          name: Re-pinned maven
+          path: build_scripts/bazel/deps/maven_install.json
